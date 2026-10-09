@@ -28,5 +28,10 @@ jobs:
         run: |
           cd .output
           sha256sum *-chrome.zip > SHA256SUMS.txt
-          gh release create "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt \
-            --repo "$GITHUB_REPOSITORY" --title "FreeKeep $GITHUB_REF_NAME" --generate-notes
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            # Release written by hand in the web UI: keep its notes, attach the build and checksums.
+            gh release upload "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt \
+              --repo "$GITHUB_REPOSITORY" --title "FreeKeep for Steam $GITHUB_REF_NAME" --generate-notes
+          fi
