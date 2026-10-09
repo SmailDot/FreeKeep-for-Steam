@@ -53,13 +53,18 @@ FreeKeep 會在背景用你瀏覽器裡現有的 Steam 登入，自動幫你領�
 原始碼：https://github.com/SmailDot/FreeKeep-for-Steam
 ```
 
-**Graphics**
+**Graphics** – generate them all with `npm run build && npm run store-assets` (needs Playwright);
+they land in `.output/store/`, rendered from the real popup with fictional games.
 
-| Asset | Size | Source |
-|---|---|---|
-| Icon | 128×128 | `public/icon/128.png` |
-| Screenshots (1–5) | 1280×800 | frames from `docs/assets/demo-*.mp4`, or real popup screenshots |
-| Small promo tile | 440×280 | optional |
+| Asset | Size | Required | File |
+|---|---|---|---|
+| Store icon | 128×128 PNG, 96 px artwork + 16 px transparent padding | yes | `icon-128.png` |
+| Screenshots | 1280×800, 24-bit PNG, 1–5 per language | yes | `screenshot-<lang>-*.png` |
+| Small promo tile | 440×280, 24-bit PNG | yes | `small-tile-440x280.png` |
+| Marquee promo tile | 1400×560, 24-bit PNG | no (used if featured) | `marquee-1400x560.png` |
+| Promo video | YouTube URL | no | – |
+
+Promo tiles can't be localized; screenshots can (upload `screenshot-zh_TW-*` under 中文（台灣）).
 
 ## Privacy practices tab
 
