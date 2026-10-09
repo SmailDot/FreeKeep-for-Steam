@@ -23,7 +23,9 @@
     "compile": "tsc --noEmit",
     "test": "vitest run",
     "postinstall": "wxt prepare",
-    "demo": "node scripts/demo/record.mjs"
+    "demo": "node scripts/demo/record.mjs",
+    "store-assets": "node scripts/demo/store-assets.mjs",
+    "icons": "node scripts/render-icons.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

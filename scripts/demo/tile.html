@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        color: #f4f2ff;
+      }
+      body {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        background:
+          radial-gradient(70% 90% at 12% 0%, #5b3fd6 0%, transparent 62%),
+          radial-gradient(60% 80% at 100% 100%, #0f766e 0%, transparent 60%),
+          #120f24;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .brand strong {
+        display: block;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .brand span {
+        opacity: 0.7;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        background: rgb(34 197 94 / 0.16);
+        border: 1px solid rgb(74 222 128 / 0.5);
+        color: #bbf7d0;
+        font-weight: 600;
+      }
+      .pill svg {
+        color: #4ade80;
+      }
+      em {
+        font-style: normal;
+        background: linear-gradient(90deg, #a78bfa, #34d399);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      /* 440×280 small tile: readable at thumbnail size, so only brand + one line + privacy */
+      body.small {
+        width: 440px;
+        height: 280px;
+        padding: 0 34px;
+      }
+      .small .brand img {
+        width: 84px;
+        height: 84px;
+      }
+      .small .brand strong {
+        font-size: 40px;
+        line-height: 1;
+      }
+      .small .brand span {
+        font-size: 19px;
+      }
+      .small p {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 22px 0 16px;
+      }
+      .small .pill {
+        font-size: 15px;
+        padding: 7px 14px;
+      }
+
+      /* 1400×560 marquee: copy on the left, the real popup on the right */
+      body.marquee {
+        width: 1400px;
+        height: 560px;
+        padding: 0 110px;
+        justify-content: space-between;
+      }
+      .marquee .brand img {
+        width: 60px;
+        height: 60px;
+      }
+      .marquee .brand strong {
+        display: inline;
+        font-size: 26px;
+      }
+      .marquee .brand span {
+        font-size: 26px;
+        margin-left: 8px;
+      }
+      .marquee h1 {
+        font-size: 58px;
+        line-height: 1.06;
+        letter-spacing: -0.02em;
+        margin: 26px 0 28px;
+      }
+      .marquee .pill {
+        font-size: 20px;
+        padding: 11px 20px;
+      }
+      .window {
+        width: 342px;
+        height: 500px;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow:
+          0 30px 80px rgb(0 0 0 / 0.55),
+          0 0 0 1px rgb(255 255 255 / 0.08);
+        flex: none;
+      }
+      .window iframe {
+        width: 380px;
+        height: 556px;
+        border: 0;
+        transform: scale(0.9);
+        transform-origin: 0 0;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const kind = new URLSearchParams(location.search).get('kind') ?? 'small';
+      document.body.className = kind;
+      const shield =
+        '<svg viewBox="0 0 24 24" width="1.2em" height="1.2em" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/></svg>';
+      document.body.innerHTML =
+        kind === 'marquee'
+          ? `<section>
+               <div class="brand"><img src="/icon/128.png" alt="" /><div><strong>FreeKeep</strong><span>for Steam</span></div></div>
+               <h1>Never miss a<br><em>free Steam game</em> again.</h1>
+               <div class="pill">${shield}Your credentials never leave your computer</div>
+             </section>
+             <div class="window"><iframe src="/popup.html"></iframe></div>`
+          : `<section>
+               <div class="brand"><img src="/icon/128.png" alt="" /><div><strong>FreeKeep</strong><span>for Steam</span></div></div>
+               <p>Never miss a <em>free Steam game</em></p>
+               <div class="pill">${shield}100% local · no passwords</div>
+             </section>`;
+    </script>
+  </body>
+</html>
