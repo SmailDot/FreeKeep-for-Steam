@@ -117,6 +117,28 @@
       li:nth-child(3) {
         animation-delay: 1.2s;
       }
+      /* The demo recorder switches the copy to the Epic scene at the end (window.showScene). */
+      .copy {
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      body.swap .copy {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      body.swapped li {
+        animation-duration: 0.4s;
+      }
+      body.swapped li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      body.swapped li:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      body.swapped li:nth-child(3) {
+        animation-delay: 0.4s;
+      }
       li b {
         display: grid;
         place-items: center;
@@ -216,11 +238,22 @@
           ],
         },
       };
-      const copy = (params.get('scene') === 'epic' ? epic : steam)[lang];
-      document.getElementById('headline').innerHTML = copy.headline;
-      document.getElementById('privacyTitle').textContent = copy.privacyTitle;
-      document.getElementById('privacyBody').textContent = copy.privacyBody;
-      document.getElementById('points').innerHTML = copy.points.map(([i, s]) => `<li><b>${i}</b>${s}</li>`).join('');
+      function render(scene) {
+        const copy = (scene === 'epic' ? epic : steam)[lang];
+        document.getElementById('headline').innerHTML = copy.headline;
+        document.getElementById('privacyTitle').textContent = copy.privacyTitle;
+        document.getElementById('privacyBody').textContent = copy.privacyBody;
+        document.getElementById('points').innerHTML = copy.points.map(([i, s]) => `<li><b>${i}</b>${s}</li>`).join('');
+      }
+      render(params.get('scene'));
+      window.showScene = (scene) => {
+        document.body.classList.add('swap');
+        setTimeout(() => {
+          render(scene);
+          document.body.classList.add('swapped');
+          document.body.classList.remove('swap');
+        }, 320);
+      };
     </script>
   </body>
 </html>
