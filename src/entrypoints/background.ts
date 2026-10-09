@@ -1,5 +1,6 @@
 import { browser } from 'wxt/browser';
-import { claimNow, runCheck, skip, type Deps, type MessageKey } from '@/core/engine';
+import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient } from '@/core/epic';
+import { claimNow, runCheck, setEpicStatus, skip, type Deps, type MessageKey } from '@/core/engine';
 import { SteamClient } from '@/core/steam';
 import type { RunReason } from '@/core/types';
 import { t } from '@/lib/i18n';
@@ -28,6 +29,17 @@ const deps: Deps = {
       await browser.action.setBadgeBackgroundColor({ color: kind === 'warn' ? '#d97706' : '#16a34a' });
     },
     t: (key: MessageKey, subs?: string[]) => t(key, subs),
+    formatDate: (ms) =>
+      new Intl.DateTimeFormat(browser.i18n.getUILanguage(), {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+      }).format(ms),
+  },
+  epic: {
+    api: new EpicClient(),
+    allowed: () => browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
   },
 };
 
@@ -68,7 +80,8 @@ export default defineBackground(() => {
 
   browser.notifications.onClicked.addListener((id) => {
     void browser.notifications.clear(id);
-    void browser.tabs.create({ url: browser.runtime.getURL('/popup.html') });
+    const url = id.startsWith('freekeep-epic-') ? EPIC_FREE_GAMES : browser.runtime.getURL('/popup.html');
+    void browser.tabs.create({ url });
   });
 
   browser.runtime.onMessage.addListener((message: Command, _sender, sendResponse) => {
@@ -82,6 +95,9 @@ export default defineBackground(() => {
           return { ok: true };
         case 'skip':
           await skip(deps, message.subid);
+          return { ok: true };
+        case 'epic':
+          await setEpicStatus(deps, message.id, message.status);
           return { ok: true };
         default:
           return { ok: false, error: 'unknown command' };

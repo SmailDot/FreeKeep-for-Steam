@@ -193,7 +193,7 @@
     "message": "저장됨"
   },
   "optPrivacy": {
-    "message": "FreeKeep은 이 브라우저에 이미 로그인된 Steam 계정을 사용해 store.steampowered.com과만 통신합니다. 비밀번호를 볼 수 없으며 다른 곳으로 아무것도 보내지 않습니다."
+    "message": "FreeKeep은 이 브라우저에 이미 로그인된 Steam 계정을 사용해 store.steampowered.com과만 통신합니다(Epic 알림을 켜면 Epic의 공개 무료 게임 목록도 읽습니다). 비밀번호를 볼 수 없으며 사용자 데이터를 어디에도 보내지 않습니다."
   },
   "popupUntil": {
     "message": "$DATE$까지 무료",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "100% 로컬 실행 · 비밀번호와 로그인 쿠키를 볼 수 없음"
+  },
+  "notifyEpicTitle": {
+    "message": "Epic Games Store 무료 배포"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — $DATE$까지 무료. 클릭하면 상점이 열립니다.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "알림 전용 · Epic 사이트에서 받으세요"
+  },
+  "epicGet": {
+    "message": "Epic에서 받기"
+  },
+  "epicHide": {
+    "message": "숨기기"
+  },
+  "epicOpened": {
+    "message": "열었음"
+  },
+  "epicNext": {
+    "message": "다음: $NAMES$ · $DATE$부터",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "FreeKeep이 Epic의 공개 무료 게임 목록을 읽도록 허용하세요."
+  },
+  "epicAllow": {
+    "message": "설정 열기"
+  },
+  "epicError": {
+    "message": "Epic 목록을 불러오지 못했습니다. 다음 확인 때 다시 시도합니다."
+  },
+  "epicNone": {
+    "message": "지금은 Epic 무료 게임이 없습니다."
+  },
+  "kind_bundle": {
+    "message": "번들"
+  },
+  "optEpic": {
+    "message": "Epic Games Store 무료 게임 알림 받기"
+  },
+  "optEpicHint": {
+    "message": "선택 기능입니다. Epic 게임은 자동으로 받을 수 없으므로 FreeKeep이 무료 게임을 알려 주고 상점 페이지를 열어 줍니다. 켜면 Epic의 공개 무료 게임 목록을 읽을 권한을 요청합니다. Epic 계정이나 로그인은 사용하지 않습니다."
+  },
+  "optEpicDenied": {
+    "message": "권한이 허용되지 않아 Epic 알림이 꺼진 상태로 유지됩니다."
   }
 }

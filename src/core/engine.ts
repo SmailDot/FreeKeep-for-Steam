@@ -1,6 +1,6 @@
 import { decide } from './policy';
 import type { ClaimOutcome, Owned, Session } from './steam';
-import type { FreeSub, PromoMap, PromoState, RunInfo, RunReason, Settings } from './types';
+import type { EpicMap, EpicOffer, EpicState, EpicStatus, FreeSub, PromoMap, PromoState, RunInfo, RunReason, Settings } from './types';
 
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
@@ -18,6 +18,10 @@ export interface SteamApi {
   endsText(appid: number, cc: string): Promise<string | null>;
   owned(): Promise<Owned>;
   claim(subid: number, sessionid: string): Promise<ClaimOutcome>;
+}
+
+export interface EpicApi {
+  freeGames(now: number): Promise<{ current: EpicOffer[]; upcoming: EpicOffer[] }>;
 }
 
 export interface Meta {
@@ -47,6 +51,8 @@ export interface Store {
   setMeta(meta: Meta): Promise<void>;
   addRun(run: RunInfo): Promise<void>;
   setRunning(running: boolean): Promise<void>;
+  getEpic(): Promise<EpicMap>;
+  setEpic(epic: EpicMap): Promise<void>;
 }
 
 export type MessageKey =
@@ -57,12 +63,16 @@ export type MessageKey =
   | 'notifyLoginTitle'
   | 'notifyLoginBody'
   | 'notifyFailedTitle'
-  | 'notifyFailedBody';
+  | 'notifyFailedBody'
+  | 'notifyEpicTitle'
+  | 'notifyEpicBody';
 
 export interface Ui {
   notify(id: string, title: string, message: string): Promise<void>;
   setBadge(text: string, kind: 'info' | 'warn'): Promise<void>;
   t(key: MessageKey, subs?: string[]): string;
+  /** A short local date and time, e.g. "Oct 15, 23:00". */
+  formatDate(ms: number): string;
 }
 
 export interface Deps {
@@ -71,6 +81,8 @@ export interface Deps {
   ui: Ui;
   now(): number;
   sleep(ms: number): Promise<void>;
+  /** Optional Epic reminders: only used when enabled in settings and the host permission is granted. */
+  epic?: { api: EpicApi; allowed(): Promise<boolean> };
 }
 
 /** Statuses that are never changed again by automatic runs. */
@@ -297,6 +309,42 @@ class Engine {
   }
 }
 
+/**
+ * Epic giveaways can't be claimed automatically, so FreeKeep only reminds: each giveaway is announced
+ * once, when it is live. Announced ("upcoming") ones are kept for the popup without a notification.
+ */
+async function checkEpic(d: Deps, settings: Settings): Promise<RunInfo['epic']> {
+  if (!settings.epic || !d.epic) {
+    // Switched off: forget the Epic list too, so nothing about it stays on the device.
+    if (Object.keys(await d.store.getEpic()).length) await d.store.setEpic({});
+    return undefined;
+  }
+  if (!(await d.epic.allowed())) return 'no_permission';
+
+  const now = d.now();
+  const { current, upcoming } = await d.epic.api.freeGames(now);
+  const state = await d.store.getEpic();
+  for (const offer of [...current, ...upcoming]) {
+    const prev = state[offer.id];
+    state[offer.id] = prev ? { ...prev, ...offer, lastSeen: now } : { ...offer, status: 'new', firstSeen: now, lastSeen: now };
+  }
+
+  const announce = current.map((o) => state[o.id]!).filter((o) => o.status === 'new');
+  if (announce.length) {
+    for (const o of announce) o.status = 'notified';
+    if (settings.notifications) {
+      const until = d.ui.formatDate(Math.min(...announce.map((o) => o.end)));
+      await d.ui.notify(`freekeep-epic-${now}`, d.ui.t('notifyEpicTitle'), d.ui.t('notifyEpicBody', [announce.map((o) => o.title).join(', '), until]));
+    }
+  }
+
+  for (const [id, o] of Object.entries(state)) {
+    if (now > o.end + DAY || now - o.lastSeen > 14 * DAY) delete state[id];
+  }
+  await d.store.setEpic(state);
+  return current.length;
+}
+
 /** One scheduled or manual check: detect → decide → claim (auto mode) → notify. */
 export function runCheck(d: Deps, reason: RunReason): Promise<RunInfo> {
   return exclusive(async () => {
@@ -326,6 +374,9 @@ export function runCheck(d: Deps, reason: RunReason): Promise<RunInfo> {
     } finally {
       Object.assign(run, engine.state);
       await engine.save();
+      // Epic is independent: its failures never affect the Steam result and vice versa.
+      const epic = await checkEpic(d, await d.store.getSettings()).catch((): RunInfo['epic'] => 'error');
+      if (epic !== undefined) run.epic = epic;
       await d.store.addRun(run);
       await d.store.setRunning(false);
     }
@@ -350,5 +401,16 @@ export function skip(d: Deps, subid: number): Promise<void> {
     const engine = await Engine.load(d);
     engine.skip(subid);
     await engine.save();
+  });
+}
+
+/** Records what the user did with an Epic giveaway in the popup. */
+export function setEpicStatus(d: Deps, id: string, status: Extract<EpicStatus, 'opened' | 'hidden'>): Promise<void> {
+  return exclusive(async () => {
+    const state = await d.store.getEpic();
+    const offer: EpicState | undefined = state[id];
+    if (!offer) return;
+    offer.status = status;
+    await d.store.setEpic(state);
   });
 }

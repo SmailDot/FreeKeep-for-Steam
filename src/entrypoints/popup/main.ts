@@ -3,7 +3,7 @@ import './style.css';
 import './fx.css';
 import { browser } from 'wxt/browser';
 import { STORE } from '@/core/steam';
-import type { PromoState, PromoStatus } from '@/core/types';
+import type { EpicState, PromoState, PromoStatus } from '@/core/types';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
 import type { Command, CommandResult } from '@/lib/messages';
@@ -93,6 +93,81 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
   ]);
 }
 
+function formatDate(ms: number): string {
+  return new Intl.DateTimeFormat(browser.i18n.getUILanguage(), {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  }).format(ms);
+}
+
+function epicCard(o: EpicState): HTMLElement {
+  const get = el('a', { className: 'button primary', href: o.url, target: '_blank', rel: 'noreferrer', textContent: t('epicGet') });
+  get.addEventListener('click', () => void send({ type: 'epic', id: o.id, status: 'opened' }));
+  const actions = el('div', { className: 'actions' }, [get, actionButton(t('epicHide'), { type: 'epic', id: o.id, status: 'hidden' })]);
+
+  const kind = o.kind === 'addon' ? 'dlc' : o.kind;
+  const meta = el('div', { className: 'meta' }, [el('span', { className: 'chip', textContent: t(`kind_${kind}`) })]);
+  if (o.status === 'opened') meta.append(el('span', { className: 'chip st st-claimed', textContent: t('epicOpened') }));
+  const info = el('div', { className: 'info' }, [
+    el('div', { className: 'name', textContent: o.title, title: o.title }),
+    meta,
+    el('div', { className: 'sub', textContent: t('popupUntil', [formatDate(o.end)]) }),
+  ]);
+  const capsule = o.image
+    ? el('img', { className: 'capsule', src: o.image, alt: '', loading: 'lazy' })
+    : el('div', { className: 'capsule placeholder' });
+  return el('article', { className: 'card is-epic' }, [el('div', { className: 'capsule-wrap' }, [capsule]), info, actions]);
+}
+
+type Tab = 'steam' | 'epic';
+/** Set once the user picks a tab; until then the popup opens on whichever side has something. */
+let chosenTab: Tab | null = null;
+
+function showTab(tab: Tab): void {
+  const epic = tab === 'epic';
+  $('tabSteam').setAttribute('aria-selected', String(!epic));
+  $('tabEpic').setAttribute('aria-selected', String(epic));
+  $('steamPanel').hidden = epic;
+  $('epicWrap').hidden = !epic;
+}
+
+function setCount(id: string, n: number): void {
+  $(id).textContent = n ? String(n) : '';
+}
+
+/** Returns how many Epic giveaways are live, or -1 when Epic reminders are off. */
+function renderEpic(s: Snapshot): number {
+  if (!s.settings.epic) return -1;
+
+  const now = Date.now();
+  const status = s.runs.find((r) => r.epic !== undefined)?.epic;
+  const offers = Object.values(s.epic).filter((o) => o.status !== 'hidden' && o.end > now);
+  const live = offers.filter((o) => !o.upcoming || o.start <= now).sort((a, b) => a.end - b.end);
+  const next = offers.filter((o) => o.upcoming && o.start > now).sort((a, b) => a.start - b.start);
+
+  const notice = $('epicNotice');
+  notice.hidden = false;
+  if (status === 'no_permission') {
+    const open = el('button', { type: 'button', className: 'link', textContent: t('epicAllow') });
+    open.addEventListener('click', () => void browser.runtime.openOptionsPage());
+    notice.replaceChildren(t('epicNoPermission'), ' ', open);
+  } else if (status === 'error') {
+    notice.textContent = t('epicError');
+  } else if (live.length === 0 && status !== undefined) {
+    notice.textContent = t('epicNone');
+  } else {
+    notice.hidden = true;
+  }
+
+  $('epicList').replaceChildren(...live.map(epicCard));
+  const nextLine = $('epicNext');
+  nextLine.hidden = next.length === 0;
+  if (next.length) nextLine.textContent = t('epicNext', [next.map((o) => o.title).join(', '), formatDate(next[0]!.start)]);
+  return live.length;
+}
+
 /** Cards are reused while their content is unchanged so running animations aren't cut off. */
 const cards = new Map<number, { el: HTMLElement; signature: string; status: PromoStatus; attempts: number }>();
 let firstRender = true;
@@ -141,6 +216,10 @@ function syncCards(current: PromoState[], loggedIn: boolean | null, seenAt: numb
   const list = $('list');
   const same = next.length === list.children.length && next.every((n, i) => list.children[i] === n);
   if (!same) list.replaceChildren(...next);
+  if (effects.length && chosenTab === 'epic') {
+    chosenTab = 'steam'; // a claim result is more important than the Epic list
+    showTab('steam');
+  }
   // Wait a frame so the cards are laid out before measuring them for confetti.
   requestAnimationFrame(() => effects.forEach((run) => run()));
 }
@@ -175,6 +254,18 @@ function render(s: Snapshot, seenAt: number): void {
     .sort((a, b) => b.updatedAt - a.updatedAt)
     .slice(0, 5);
 
+  const epicLive = renderEpic(s);
+  const tabs = epicLive >= 0;
+  $('tabs').hidden = !tabs;
+  if (tabs) {
+    // Count what the user can act on: unhandled Steam games and Epic giveaways running now.
+    setCount('countSteam', current.filter((p) => p.status === 'pending' || p.status === 'failed').length);
+    setCount('countEpic', epicLive);
+    showTab(chosenTab ?? (current.length === 0 && epicLive > 0 ? 'epic' : 'steam'));
+  } else {
+    showTab('steam');
+  }
+
   syncCards(current, s.meta.loggedIn, seenAt);
   firstRender = false;
 
@@ -193,6 +284,12 @@ async function main(): Promise<void> {
   $('settings').title = t('popupSettings');
   $('settings').addEventListener('click', () => void browser.runtime.openOptionsPage());
   $('checkNow').addEventListener('click', () => void send({ type: 'checkNow' }));
+  for (const [id, tab] of [['tabSteam', 'steam'], ['tabEpic', 'epic']] as const) {
+    $(id).addEventListener('click', () => {
+      chosenTab = tab;
+      showTab(tab);
+    });
+  }
   $('diagnostics').addEventListener('click', async () => {
     const report = buildDiagnostics(await readSnapshot());
     await navigator.clipboard.writeText(JSON.stringify(report, null, 2));

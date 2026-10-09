@@ -2,12 +2,14 @@
 
 FreeKeep is a Manifest V3 extension built with [WXT](https://wxt.dev) and TypeScript. It has no
 runtime dependencies and no server: everything runs in the user's browser against
-`store.steampowered.com`.
+`store.steampowered.com`, plus Epic's public giveaway list when the user turns on the optional
+[Epic reminders](#epic-games-store-reminders-optional).
 
 ```
 src/
 ├─ core/                  pure logic, no browser APIs (unit tested)
 │  ├─ steam.ts            Steam endpoints + response parsers
+│  ├─ epic.ts             Epic giveaway feed parser (reminders only)
 │  ├─ policy.ts           owned / needs base game / skipped / eligible
 │  ├─ engine.ts           detect → decide → claim → notify, state machine
 │  └─ types.ts
@@ -16,9 +18,9 @@ src/
    ├─ background.ts       alarms, startup, commands from the popup
    ├─ popup/              status, promo list, claim feedback effects
    └─ options/            settings page
-public/_locales/          en, zh_TW, zh_CN
-tests/                    vitest + fixtures captured from real Steam responses
-scripts/demo/             renders the README GIF from the real popup
+public/_locales/          12 languages, English is the reference
+tests/                    vitest + fixtures captured from real Steam and Epic responses
+scripts/demo/             renders the README GIF and store images from the real popup
 ```
 
 ## Steam endpoints
@@ -52,6 +54,38 @@ Notes from the proof of concept (October 2026):
 - Steam cookies are `SameSite=None`, so the service worker's `fetch` carries the login. Origin is
   not checked: a POST from the service worker behaves exactly like one from a store tab. No tabs,
   content scripts or `cookies` permission are needed.
+
+## Epic Games Store reminders (optional)
+
+Epic can't be claimed with a single request: getting a game goes through Epic's checkout page.
+Automating that would mean scripting Epic's site or handling the user's Epic login, so FreeKeep
+only **reminds**. The feature is off by default.
+
+| Purpose | Request | Login |
+|---|---|---|
+| Current and upcoming giveaways | `GET https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US` | no, `credentials: 'omit'` |
+
+- The feed sends no CORS headers, so reading it needs host access. It is declared under
+  `optional_host_permissions` and requested with `permissions.request()` when the user ticks the
+  option; unticking calls `permissions.remove()`. Without the permission the check records
+  `no_permission` and the popup links to the settings.
+- No country is sent. The feed is the same for everyone; regional exceptions are rare and the
+  store page has the final word.
+- A giveaway is an element with a promotional offer at `discountPercentage: 0`. Both the current
+  and the upcoming groups are checked against the date, because right after the weekly switch the
+  cached feed can still list this week's games as upcoming. Items Epic lists twice during the
+  changeover are merged by id and title.
+- Store links use the `productHome` page mapping, then `offerMappings`, then `productSlug`
+  (cut at the first `/`, since some end in `/home`). Bundles use `/bundle/`. Without any slug the
+  link falls back to `https://store.epicgames.com/free-games`.
+- Key art can be a multi-megabyte PNG; images on `*.epicgames.com` get
+  `?resize=1&w=360&quality=medium` (a ~15 KB JPEG).
+
+The Epic check runs at the end of every `runCheck`, after the Steam work is saved, so an Epic
+failure never affects Steam. Each giveaway goes `new → notified` (one notification per batch of
+new games) `→ opened` (user clicked *Get on Epic*) or `hidden` (user dismissed it). Entries are
+forgotten a day after they end or after 14 days unseen. The run summary's `epic` field holds the
+number of live giveaways, `no_permission` or `error`.
 
 ## Engine
 
@@ -93,8 +127,9 @@ This is what prevents re-claiming loops.
 
 | Key | Content |
 |---|---|
-| `settings` | interval, mode, DLC, notifications |
+| `settings` | interval, mode, DLC, notifications, Epic reminders |
 | `promos` | per-subid state (public store data + status) |
+| `epic` | per-offer Epic giveaway state (public feed data + status), only with Epic reminders on |
 | `meta` | login state, country, timestamps, app cache |
 | `runs` | last 20 run summaries |
 | `runningSince` | spinner state for the popup |
@@ -106,5 +141,7 @@ No session ids, cookies, account ids or names are stored.
 
 - `tests/steam.test.ts` – parsers against trimmed real responses in `tests/fixtures/`.
 - `tests/engine.test.ts` – the state machine with a fake Steam client: auto/ask modes, DLC rules,
-  retries, login loss, pruning, and no re-claiming across runs.
+  retries, login loss, pruning, and no re-claiming across runs; Epic reminders with a fake feed.
+- `tests/epic.test.ts` – the Epic parser against a trimmed real feed, plus changeover, bundle,
+  missing slug and image edge cases.
 - `tests/locales.test.ts` – every locale has the same keys and placeholders as English.

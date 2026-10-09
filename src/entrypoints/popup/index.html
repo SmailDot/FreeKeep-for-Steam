@@ -36,17 +36,35 @@
     <div id="toasts" class="toasts" aria-live="polite"></div>
     <div id="fx" class="fx" aria-hidden="true"></div>
 
-    <main id="list"></main>
+    <nav id="tabs" class="tabs" role="tablist" hidden>
+      <button id="tabSteam" type="button" role="tab" aria-controls="steamPanel" aria-selected="true">
+        Steam <span id="countSteam" class="count"></span>
+      </button>
+      <button id="tabEpic" type="button" role="tab" aria-controls="epicWrap" aria-selected="false">
+        Epic Games <span id="countEpic" class="count"></span>
+      </button>
+    </nav>
 
-    <section id="empty" class="empty" hidden>
-      <img src="/icon/96.png" alt="" />
-      <strong data-i18n="popupEmptyTitle"></strong>
-      <p id="emptyBody"></p>
-    </section>
+    <div id="steamPanel" role="tabpanel" aria-labelledby="tabSteam">
+      <main id="list"></main>
 
-    <section id="recentWrap" hidden>
-      <h2 data-i18n="popupRecent"></h2>
-      <ul id="recent"></ul>
+      <section id="empty" class="empty" hidden>
+        <img src="/icon/96.png" alt="" />
+        <strong data-i18n="popupEmptyTitle"></strong>
+        <p id="emptyBody"></p>
+      </section>
+
+      <section id="recentWrap" hidden>
+        <h2 data-i18n="popupRecent"></h2>
+        <ul id="recent"></ul>
+      </section>
+    </div>
+
+    <section id="epicWrap" class="epic" role="tabpanel" aria-labelledby="tabEpic" hidden>
+      <p class="epic-lead" data-i18n="epicReminderOnly"></p>
+      <p id="epicNotice" class="epic-notice" hidden></p>
+      <div id="epicList"></div>
+      <p id="epicNext" class="epic-next" hidden></p>
     </section>
 
     <p class="privacy">

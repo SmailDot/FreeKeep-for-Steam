@@ -193,7 +193,7 @@
     "message": "保存しました"
   },
   "optPrivacy": {
-    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います。パスワードを見ることはなく、他の場所へ何も送信しません。"
+    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います（Epicの通知を有効にした場合は、Epicの公開無料ゲームリストも読み取ります）。パスワードを見ることはなく、あなたのデータをどこにも送信しません。"
   },
   "popupUntil": {
     "message": "$DATE$ まで無料",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "完全ローカル動作・パスワードやログインCookieは見えません"
+  },
+  "notifyEpicTitle": {
+    "message": "Epic Games Storeで無料配布中"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — $DATE$まで無料。クリックでストアを開きます。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "通知のみ・Epicのサイトで受け取ってください"
+  },
+  "epicGet": {
+    "message": "Epicで受け取る"
+  },
+  "epicHide": {
+    "message": "非表示"
+  },
+  "epicOpened": {
+    "message": "開いた"
+  },
+  "epicNext": {
+    "message": "次回：$NAMES$・$DATE$から",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "Epicの公開無料ゲームリストの読み取りをFreeKeepに許可してください。"
+  },
+  "epicAllow": {
+    "message": "設定を開く"
+  },
+  "epicError": {
+    "message": "Epicのリストを読み込めませんでした。次回の確認時に再試行します。"
+  },
+  "epicNone": {
+    "message": "現在、Epicの無料配布はありません。"
+  },
+  "kind_bundle": {
+    "message": "バンドル"
+  },
+  "optEpic": {
+    "message": "Epic Games Storeの無料ゲームを通知する"
+  },
+  "optEpicHint": {
+    "message": "任意機能。Epicのゲームは自動では受け取れないため、FreeKeepは無料のゲームを知らせてストアページを開きます。有効にすると、Epicの公開無料ゲームリストを読み取る権限を求めます。Epicのアカウントやログインは使用しません。"
+  },
+  "optEpicDenied": {
+    "message": "権限が許可されなかったため、Epicの通知はオフのままです。"
   }
 }

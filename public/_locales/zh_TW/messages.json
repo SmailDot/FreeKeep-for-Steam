@@ -193,7 +193,7 @@
     "message": "已儲存"
   },
   "optPrivacy": {
-    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入。它看不到你的密碼，也不會把任何資料傳到其他地方。"
+    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入（開啟 Epic 提醒時，另外讀取 Epic 公開的免費遊戲清單）。它看不到你的密碼，也不會把你的任何資料傳到任何地方。"
   },
   "popupUntil": {
     "message": "$DATE$ 前免費",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "全程在你的電腦執行・看不到你的密碼和登入 Cookie"
+  },
+  "notifyEpicTitle": {
+    "message": "Epic 商店限時免費"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — $DATE$ 前免費，點一下打開商店。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "僅提醒・請到 Epic 網站領取"
+  },
+  "epicGet": {
+    "message": "到 Epic 領取"
+  },
+  "epicHide": {
+    "message": "隱藏"
+  },
+  "epicOpened": {
+    "message": "已開啟"
+  },
+  "epicNext": {
+    "message": "下一波：$NAMES$・$DATE$ 起",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "允許 FreeKeep 讀取 Epic 公開的免費遊戲清單。"
+  },
+  "epicAllow": {
+    "message": "前往設定"
+  },
+  "epicError": {
+    "message": "無法讀取 Epic 清單，下次檢查時會再試。"
+  },
+  "epicNone": {
+    "message": "Epic 目前沒有免費遊戲。"
+  },
+  "kind_bundle": {
+    "message": "組合包"
+  },
+  "optEpic": {
+    "message": "提醒我 Epic Games Store 的免費遊戲"
+  },
+  "optEpicHint": {
+    "message": "選用功能。Epic 的遊戲無法自動領取，FreeKeep 會告訴你哪些免費，並幫你打開商店頁。開啟時會請求讀取 Epic 公開免費遊戲清單的權限，不會用到任何 Epic 帳號或登入。"
+  },
+  "optEpicDenied": {
+    "message": "沒有取得權限，Epic 提醒維持關閉。"
   }
 }

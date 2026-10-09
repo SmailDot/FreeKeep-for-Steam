@@ -248,6 +248,90 @@ body {
   margin: 4px 0 0;
 }
 
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 14px 10px;
+  padding: 3px;
+  border-radius: var(--radius);
+  background: var(--chip-bg);
+}
+
+.tabs button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 5px 8px;
+}
+
+.tabs button[aria-selected='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+}
+
+.tabs .count {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.tabs .count:empty {
+  display: none;
+}
+
+.epic {
+  padding: 0 14px 12px;
+}
+
+.epic-lead {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+#epicList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.epic-notice,
+.epic-next {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.epic-next {
+  margin: 8px 0 0;
+}
+
+a.button {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+}
+
+a.button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
 #recentWrap {
   padding: 0 14px 10px;
 }

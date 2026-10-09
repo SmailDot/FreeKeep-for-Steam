@@ -27,9 +27,12 @@ and lets the browser attach the login it already has, exactly like when you open
 | Asks for your password, token or cookies | Usually | **Never** |
 | Runs on | A bot, a server or an always-on machine | **Your own browser** |
 | Your Steam login | Copied into their config | **Stays in your browser, untouched** |
-| Talks to | Their server, Discord, third-party APIs | **Only `store.steampowered.com`** |
+| Talks to | Their server, Discord, third-party APIs | **Only `store.steampowered.com`**¹ |
 | Collects data | Varies | **Nothing. No server, no analytics** |
-| Auditable | Varies | **~35 KB of TypeScript, open source** |
+| Auditable | Varies | **~40 KB of code, open source** |
+
+¹ Plus Epic's public list of free games, only if you turn on the optional
+[Epic reminders](#epic-games-store-reminders). That request carries no login and no cookies.
 
 Read the [privacy policy](PRIVACY.md) and the [architecture notes](docs/ARCHITECTURE.md).
 
@@ -45,7 +48,9 @@ Read the [privacy policy](PRIVACY.md) and the [architecture notes](docs/ARCHITEC
 - **Your schedule.** Check every 1, 3, 6, 12 or 24 hours, plus once when the browser starts.
   Missed checks run when your computer wakes up.
 - **Auto or ask.** Claim instantly, or get a notification and decide yourself.
-- **Tiny and auditable.** About 35 KB of code, zero runtime dependencies, TypeScript, 38 unit tests.
+- **Optional Epic Games Store reminders.** Get told when Epic gives a game away, with a link to
+  claim it yourself. Off by default; [details below](#epic-games-store-reminders).
+- **Tiny and auditable.** About 40 KB of code, zero runtime dependencies, TypeScript, unit-tested.
 - **12 languages.** English, 繁體中文, 简体中文, Русский, Español, Português, Deutsch, 日本語, Français,
   Polski, 한국어, Türkçe. [Help translate](CONTRIBUTING.md#translations).
 
@@ -77,6 +82,18 @@ That last request is the same one Steam's own **Add to Account** button sends. S
 result code that FreeKeep understands (`9` already owned, `24` base game required). Failed claims are
 retried up to three times. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for details.
 
+### Epic Games Store reminders
+
+In the settings, turn on **Remind me of free games on the Epic Games Store** and FreeKeep also watches Epic's weekly
+giveaways. It **only reminds you**: a notification when a new free game starts, a list in the popup
+with a **Get on Epic** button, and a heads-up for next week's games. You claim them on Epic's site.
+
+- Epic's list is public, so FreeKeep reads it anonymously, with no Epic account, no login and no
+  cookies. Your country and Steam data are not sent.
+- Turning it on asks your browser for one extra permission, to read
+  `store-site-backend-static-ipv4.ak.epicgames.com`. Turning it off gives the permission back.
+- If you never turn it on, FreeKeep never contacts Epic.
+
 ### Permissions
 
 | Permission | Why |
@@ -85,6 +102,7 @@ retried up to three times. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for 
 | `storage` | Remember settings and which promotions were handled, on your device only |
 | `alarms` | Run the periodic check |
 | `notifications` | Tell you when something was claimed or needs attention |
+| `store-site-backend-static-ipv4.ak.epicgames.com` (optional) | Read Epic's public list of free games, only after you turn on Epic reminders |
 
 No `tabs`, no `scripting`, no `cookies`, no access to any other site.
 
@@ -99,6 +117,11 @@ The code is small enough to read in one sitting.
 gentle pace. Still, it is unofficial automation: use it at your own risk. Not affiliated with Valve.
 
 **Does it work on new or limited accounts?** Yes, it was tested on a brand-new account.
+
+**Why doesn't it claim Epic games automatically?** On Steam, a free license is one request, the same
+one the *Add to Account* button sends. On Epic, getting a game goes through its checkout page.
+Automating that would mean scripting Epic's website or handling your Epic login, which breaks
+FreeKeep's rule of never touching your credentials. So for Epic, FreeKeep reminds you instead.
 
 **Why wasn't a DLC claimed?** Steam only lets you claim a DLC if you own its base game. FreeKeep shows
 those as *Needs base game* and claims them automatically if you get the base game while the promo

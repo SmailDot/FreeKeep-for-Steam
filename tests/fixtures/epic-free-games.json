@@ -1,0 +1,862 @@
+{
+ "data": {
+  "Catalog": {
+   "searchStore": {
+    "elements": [
+     {
+      "title": "Them's Fightin' Herds",
+      "id": "1f723b00df58467998c4984ca39915ad",
+      "namespace": "a567c32599bf4d4fb609e424f3691b39",
+      "offerType": "BASE_GAME",
+      "productSlug": "thems-fightin-herds/home",
+      "urlSlug": "thems-fightin-herds",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "thems-fightin-herds",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "thems-fightin-herds",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       },
+       {
+        "path": "applications"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/offer/a567c32599bf4d4fb609e424f3691b39/EGS_ThemsFightinHerds_Mane6Inc_S1_2560x1440-da3a940faafe30c602d3966d2c295825"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/offer/a567c32599bf4d4fb609e424f3691b39/EGS_ThemsFightinHerds_Mane6Inc_S2_1200x1600-9793ee024c43026c5c2b1612c7a487d0_1200x1600-9793ee024c43026c5c2b1612c7a487d0"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1999,
+        "discountPrice": 1999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": null
+     },
+     {
+      "title": "Model Builder: Complete Edition",
+      "id": "d3e5b556640144bfa5de2d5d3b283d68",
+      "namespace": "23499f64e5304139b514c3e674c5c0d6",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "3f18c54a6e00424ba6e8f4422167cac7",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "model-builder-complete-edition-f9b456",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "model-builder-complete-edition-f9b456",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/7472ec268e344e77a85e95976c0ffc6d/model-builder-1vfgr.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/7472ec268e344e77a85e95976c0ffc6d/model-builder-1ca62.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1999,
+        "discountPrice": 1999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": null
+     },
+     {
+      "title": "Eternal Threads",
+      "id": "921e40c4c69f4d728914ca2a4f0aa407",
+      "namespace": "35eda4ff87f94a7491dc28175b8f3b4f",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "a9152a8924cc4e438f0e61106ec02f7d",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "eternal-threads-197169",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "eternal-threads-197169",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/08813e055af64315b8a55b2e521f4e04/eternal-threads-1vm6i.jpg"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/08813e055af64315b8a55b2e521f4e04/eternal-threads-1v92y.jpg"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1999,
+        "discountPrice": 1999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": null
+     },
+     {
+      "title": "Ghostrunner 2",
+      "id": "be5600439b434624802764f704755cde",
+      "namespace": "708f57aaa04b42ef885be16c8288f0ac",
+      "offerType": "BASE_GAME",
+      "productSlug": "ghostrunner-2",
+      "urlSlug": "ghostrunner-2",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "ghostrunner-2",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "ghostrunner-2",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       },
+       {
+        "path": "applications"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/offer/708f57aaa04b42ef885be16c8288f0ac/EGS_Ghostrunner2_OneMoreLevel_S1_2560x1440-15845148fae1d0cfd7f3e98c9b3ba6ba"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/offer/708f57aaa04b42ef885be16c8288f0ac/EGS_Ghostrunner2_OneMoreLevel_S2_1200x1600-12ae7597b946ad94ac75680eb735be07"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 3999,
+        "discountPrice": 3999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-12-10T17:00:00.000Z",
+           "endDate": "2027-01-07T23:59:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 20
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Lost Castle: The Old Ones Awaken",
+      "id": "4a88d0dc64114b20b67339c74543f859",
+      "namespace": "ab29925a0a9a49598adba45d108ceb3e",
+      "offerType": "ADD_ON",
+      "productSlug": null,
+      "urlSlug": "lost-castle-the-old-ones-awaken",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "lost-castle-abb2e2",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "lost-castle-lost-castle-the-old-ones-awaken-db1545",
+        "pageType": "offer"
+       }
+      ],
+      "categories": [
+       {
+        "path": "addons"
+       },
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "addons/durable"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/a6d76157ad884f2c9aa470b30da9e2ff/lost-castle-r390n.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/a6d76157ad884f2c9aa470b30da9e2ff/lost-castle-1qvy6.jpg"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 399,
+        "discountPrice": 399,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": null
+     },
+     {
+      "title": "LISA: The Definitive Edition",
+      "id": "944b5b5d646d46bc92bc33edfe983d26",
+      "namespace": "ca3a9d16d131478c97fd56c138a6511a",
+      "offerType": "BUNDLE",
+      "productSlug": "lisa-the-definitive-edition",
+      "urlSlug": "lisa-the-definitive-edition",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "lisa-the-definitive-edition",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "lisa-the-definitive-edition",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "bundles"
+       },
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "bundles/games"
+       },
+       {
+        "path": "applications"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/offer/ca3a9d16d131478c97fd56c138a6511a/EGS_LISATheDefinitiveEdition_DingalingProductions_Bundles_S2_1200x1600-4a9b4fc6e06e8aff136c1a3cf18292ae"
+       },
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn2.unrealengine.com/egs-lisathedefinitiveedition-dingalingproductions-bundles-s1-2560x1440-5be18c558828.jpg"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 2499,
+        "discountPrice": 2499,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-12-10T16:00:00.000Z",
+           "endDate": "2027-01-07T16:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 55
+           }
+          },
+          {
+           "startDate": "2026-11-01T06:00:00.000Z",
+           "endDate": "2026-11-10T06:59:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 60
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Castlevania Anniversary Collection",
+      "id": "8f80897c0b6e4e678fed08da169d44be",
+      "namespace": "247d4d4b4e424afd9b474334fe450a43",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "32b3e0adbe0c4399be1874958194f97f",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "castlevania-anniversary-collection-a61f94",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "castlevania-anniversary-collection-a61f94",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/1ff2f74ba0ef4019b6905d8abe268819/castlevania-anniversary-collection-yex6f.jpg"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/1ff2f74ba0ef4019b6905d8abe268819/castlevania-anniversary-collection-z3ev6.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1999,
+        "discountPrice": 1999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-10-19T15:00:00.000Z",
+           "endDate": "2026-11-02T16:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 40
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Out of Sight",
+      "id": "cb733f3432db46bca94965b422c33ede",
+      "namespace": "436099305a2249a8bbe4d9113fc41d53",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "f350878fcb5242d6851cfe2fa1316e76",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "out-of-sight-b96ca8",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "out-of-sight-b96ca8",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/6e1bf54cfa6344c89d41e4e7af036ac9/out-of-sight-1l12n.jpg"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/6e1bf54cfa6344c89d41e4e7af036ac9/out-of-sight-tfgmv.jpg"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1499,
+        "discountPrice": 0,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-10-08T15:00:00.000Z",
+           "endDate": "2026-10-15T15:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 0
+           }
+          }
+         ]
+        }
+       ],
+       "upcomingPromotionalOffers": []
+      }
+     },
+     {
+      "title": "Monument Valley",
+      "id": "f967cff9761c4198b4e972cfd71e40d7",
+      "namespace": "e236e73a294b462d85715f5ba23a6346",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "monument-valley-02",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "monument-valley-1d99d3",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "monument-valley-1d99d3",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/e56a7411805046d3b5b7253a6e4e0faa/monument-valley-1gys5.jpg"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/e56a7411805046d3b5b7253a6e4e0faa/monument-valley-bp09k.jpg"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 799,
+        "discountPrice": 799,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-12-10T16:00:00.000Z",
+           "endDate": "2027-01-07T16:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 35
+           }
+          },
+          {
+           "startDate": "2026-10-19T15:00:00.000Z",
+           "endDate": "2026-11-02T16:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 35
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Bad Cheese",
+      "id": "6a846880836044a2adad614ac771f487",
+      "namespace": "a0c80bf673a548bc97b4bb25abfaf2b4",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "ae5d8fc5541f42eea105f64121dba382",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "bad-cheese-4256d9",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "bad-cheese-4256d9",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games/edition/base"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/6cbb0e3805c4436bafd028cafff48307/bad-cheese-16hj0.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/6cbb0e3805c4436bafd028cafff48307/bad-cheese-kcgyv.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1299,
+        "discountPrice": 1299,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-10-15T15:00:00.000Z",
+           "endDate": "2026-10-22T15:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 0
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Agent A: A puzzle in disguise",
+      "id": "db1202a30c5541dd99cdf54c918a9348",
+      "namespace": "45f125178d8c4bc18e1827a307bcc5c0",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "agent-a-a-puzzle-in-disguise",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "agent-a-a-puzzle-in-disguise-42fe5f",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "agent-a-a-puzzle-in-disguise-42fe5f",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games/edition/base"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/45db4fbe68fe43f4b025dec2014d42e7/agent-a-a-puzzle-in-disguise-3cppl.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/45db4fbe68fe43f4b025dec2014d42e7/agent-a-a-puzzle-in-disguise-gqv76.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1999,
+        "discountPrice": 1999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [],
+       "upcomingPromotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-10-15T15:00:00.000Z",
+           "endDate": "2026-10-22T15:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 0
+           }
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "title": "Luftrausers",
+      "id": "c76046dddcdb43619c33ce0395941033",
+      "namespace": "639daf403b554ee9b02eee5eedafc302",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "luftrausers",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "luftrausers-51e5e9",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "luftrausers-51e5e9",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/85ddeeec9d4243b3a2d78aab87bfae7f/luftrausers-1mxb1.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/85ddeeec9d4243b3a2d78aab87bfae7f/luftrausers-11phb.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 999,
+        "discountPrice": 999,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": null
+     },
+     {
+      "title": "TerraScape",
+      "id": "af6b823b8698465f9aedc3bddf2e8686",
+      "namespace": "bfb80547289b477193ce3b14d83cd292",
+      "offerType": "BASE_GAME",
+      "productSlug": null,
+      "urlSlug": "f229ed53ddba40788e0ab62978e9eaf9",
+      "catalogNs": {
+       "mappings": [
+        {
+         "pageSlug": "terrascape-2b12b1",
+         "pageType": "productHome"
+        }
+       ]
+      },
+      "offerMappings": [
+       {
+        "pageSlug": "terrascape-2b12b1",
+        "pageType": "productHome"
+       }
+      ],
+      "categories": [
+       {
+        "path": "freegames"
+       },
+       {
+        "path": "games"
+       },
+       {
+        "path": "games/edition"
+       },
+       {
+        "path": "games/edition/base"
+       }
+      ],
+      "keyImages": [
+       {
+        "type": "OfferImageWide",
+        "url": "https://cdn1.epicgames.com/spt-assets/a740a2eed807469f88b9dff17e7cd3a3/terrascape-j7p8d.png"
+       },
+       {
+        "type": "Thumbnail",
+        "url": "https://cdn1.epicgames.com/spt-assets/a740a2eed807469f88b9dff17e7cd3a3/terrascape-x908b.png"
+       }
+      ],
+      "price": {
+       "totalPrice": {
+        "originalPrice": 1699,
+        "discountPrice": 0,
+        "currencyCode": "USD"
+       }
+      },
+      "promotions": {
+       "promotionalOffers": [
+        {
+         "promotionalOffers": [
+          {
+           "startDate": "2026-10-08T15:00:00.000Z",
+           "endDate": "2026-10-15T15:00:00.000Z",
+           "discountSetting": {
+            "discountType": "PERCENTAGE",
+            "discountPercentage": 0
+           }
+          }
+         ]
+        }
+       ],
+       "upcomingPromotionalOffers": []
+      }
+     }
+    ]
+   }
+  }
+ }
+}

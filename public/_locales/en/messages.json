@@ -193,7 +193,7 @@
     "message": "Saved"
   },
   "optPrivacy": {
-    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login. It never sees your password and sends nothing anywhere else."
+    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login (plus Epic's public list of free games, if you turn on Epic reminders). It never sees your password and never sends your data anywhere."
   },
   "popupUntil": {
     "message": "Free until $DATE$",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "100% local · can't see your password or login cookie"
+  },
+  "notifyEpicTitle": {
+    "message": "Free on the Epic Games Store"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — free until $DATE$. Click to open the store.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "Reminder only · claim it on Epic's site"
+  },
+  "epicGet": {
+    "message": "Get on Epic"
+  },
+  "epicHide": {
+    "message": "Hide"
+  },
+  "epicOpened": {
+    "message": "Opened"
+  },
+  "epicNext": {
+    "message": "Next: $NAMES$ · from $DATE$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "Allow FreeKeep to read Epic's public list of free games."
+  },
+  "epicAllow": {
+    "message": "Open settings"
+  },
+  "epicError": {
+    "message": "Couldn't load Epic's list. FreeKeep will retry on the next check."
+  },
+  "epicNone": {
+    "message": "Nothing free on Epic right now."
+  },
+  "kind_bundle": {
+    "message": "Bundle"
+  },
+  "optEpic": {
+    "message": "Remind me of free games on the Epic Games Store"
+  },
+  "optEpicHint": {
+    "message": "Optional. Epic games can't be claimed automatically, so FreeKeep tells you what's free and opens the store page. Turning this on asks for permission to read Epic's public list of free games; no Epic account or login is used."
+  },
+  "optEpicDenied": {
+    "message": "Permission wasn't granted, so Epic reminders stay off."
   }
 }

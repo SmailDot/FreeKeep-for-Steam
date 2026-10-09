@@ -193,7 +193,7 @@
     "message": "Kaydedildi"
   },
   "optPrivacy": {
-    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar. Şifrenizi asla görmez ve başka hiçbir yere veri göndermez."
+    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar (Epic hatırlatmalarını açarsanız Epic'in herkese açık ücretsiz oyun listesini de okur). Şifrenizi asla görmez ve verilerinizi hiçbir yere göndermez."
   },
   "popupUntil": {
     "message": "$DATE$ tarihine kadar ücretsiz",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "%100 yerel · şifrenizi ve oturum çerezinizi göremez"
+  },
+  "notifyEpicTitle": {
+    "message": "Epic Games Store'da ücretsiz"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — $DATE$ tarihine kadar ücretsiz. Mağazayı açmak için tıklayın.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "Yalnızca hatırlatma · Epic sitesinden alın"
+  },
+  "epicGet": {
+    "message": "Epic'te al"
+  },
+  "epicHide": {
+    "message": "Gizle"
+  },
+  "epicOpened": {
+    "message": "Açıldı"
+  },
+  "epicNext": {
+    "message": "Sıradaki: $NAMES$ · $DATE$ itibarıyla",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "FreeKeep'in Epic'in herkese açık ücretsiz oyun listesini okumasına izin verin."
+  },
+  "epicAllow": {
+    "message": "Ayarları aç"
+  },
+  "epicError": {
+    "message": "Epic listesi yüklenemedi. FreeKeep bir sonraki kontrolde yeniden deneyecek."
+  },
+  "epicNone": {
+    "message": "Şu an Epic'te ücretsiz oyun yok."
+  },
+  "kind_bundle": {
+    "message": "Paket"
+  },
+  "optEpic": {
+    "message": "Epic Games Store'daki ücretsiz oyunları hatırlat"
+  },
+  "optEpicHint": {
+    "message": "İsteğe bağlı. Epic oyunları otomatik alınamaz; FreeKeep neyin ücretsiz olduğunu söyler ve mağaza sayfasını açar. Açtığınızda Epic'in herkese açık ücretsiz oyun listesini okuma izni istenir; Epic hesabı veya girişi kullanılmaz."
+  },
+  "optEpicDenied": {
+    "message": "İzin verilmedi, Epic hatırlatmaları kapalı kalır."
   }
 }

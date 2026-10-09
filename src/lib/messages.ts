@@ -2,7 +2,8 @@
 export type Command =
   | { type: 'checkNow' }
   | { type: 'claim'; subid: number }
-  | { type: 'skip'; subid: number };
+  | { type: 'skip'; subid: number }
+  | { type: 'epic'; id: string; status: 'opened' | 'hidden' };
 
 export interface CommandResult {
   ok: boolean;
