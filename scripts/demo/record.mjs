@@ -5,11 +5,14 @@
 //
 // Needs Playwright with Chromium (`npm i -D playwright && npx playwright install chromium`)
 // and ffmpeg on PATH. Writes docs/assets/demo-<lang>.gif and .mp4.
+//
+// Story: Epic reminders are on, so the popup has Steam / Epic tabs. Steam finds three promotions and
+// claims them (one fails, then succeeds on retry); at the end the demo flips to the Epic tab.
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { chromium, demoPromos, demoSeed, mockExtension, root, startServer } from './shared.mjs';
+import { chromium, demoEpic, demoPromos, demoSeed, mockExtension, root, startServer } from './shared.mjs';
 
 const lang = process.argv[2] ?? 'en';
 const WIDTH = 1200;
@@ -24,12 +27,18 @@ const context = await browser.newContext({
   recordVideo: { dir: videoDir, size: { width: WIDTH, height: HEIGHT } },
   locale: lang.replace('_', '-'),
 });
-await mockExtension(context, lang, demoSeed(T));
+const seed = demoSeed(T);
+// Epic reminders on, but its list arrives after the Steam tab is picked (see below).
+await mockExtension(context, lang, { ...seed, settings: { ...seed.settings, epic: true } });
 
 const page = await context.newPage();
 await page.goto(`${server.origin}/stage.html?lang=${lang}`);
 const frame = page.frame({ url: /popup\.html/ });
 await frame.waitForSelector('#checkNow');
+// With Steam empty and Epic giveaways listed, the popup would open on the Epic tab. Pick Steam first,
+// then hand it the Epic list, so the story starts on Steam with an "Epic Games 2" badge.
+await frame.click('#tabSteam');
+await frame.evaluate((p) => window.__demo.set(p), { epic: demoEpic(T), runs: [{ ...seed.runs[0], epic: 2 }] });
 
 const wait = (ms) => page.waitForTimeout(ms);
 const set = (patch) => frame.evaluate((p) => window.__demo.set(p), patch);
@@ -60,13 +69,18 @@ await update(2, { status: 'failed', attempts: 3, lastError: 'http_502' });
 await wait(900);
 await set({
   runningSince: 0,
-  runs: [{ at: now(), reason: 'manual', ok: true, loggedIn: true, country: 'TW', found: 3, claimed: 1, error: null }],
+  runs: [{ at: now(), reason: 'manual', ok: true, loggedIn: true, country: 'TW', found: 3, claimed: 1, error: null, epic: 2 }],
 });
 await wait(1200);
 await frame.click('.card.is-failed button.primary');
 await wait(1100);
 await update(2, { status: 'claimed', attempts: 0, lastError: null });
-await wait(2600);
+await wait(2000);
+// Epic: the copy on the left changes, then the popup switches tabs.
+await page.evaluate(() => window.showScene('epic'));
+await wait(600);
+await frame.click('#tabEpic');
+await wait(3600);
 
 const video = await page.video().path();
 await context.close();
