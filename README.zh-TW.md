@@ -82,6 +82,8 @@
 新的限免開始時通知你一次、popup 裡列出清單並附上「**到 Epic 領取**」按鈕，也會預告下週的遊戲。
 領取要在 Epic 網站上自己完成。
 
+<p align="center"><img src="docs/assets/epic-zh_TW.png" width="320" alt="popup 的 Epic Games 分頁：本週限免遊戲與「到 Epic 領取」按鈕，下方預告下週遊戲" /></p>
+
 - Epic 的清單是公開的，FreeKeep 以匿名方式讀取：不需要 Epic 帳號、不帶登入、不帶 Cookie，
   只帶上瀏覽器語言（讓遊戲名稱跟 Epic 官網一致），不會送出你的國家或 Steam 資料
 - 開啟時，瀏覽器會詢問一項額外權限：讀取 `store-site-backend-static-ipv4.ak.epicgames.com`；
@@ -133,7 +135,7 @@ npm run zip        # 打包成可上架的 zip
 ```
 
 上面的示範動畫是用真實的 popup 錄製的：`npm run build && node scripts/demo/record.mjs zh_TW`
-（需要 Playwright 和 ffmpeg）。
+（需要 Playwright 和 ffmpeg）。Epic 分頁的截圖則由 `npm run epic-shot` 產生。
 
 ### 翻譯
 

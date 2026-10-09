@@ -124,7 +124,7 @@ Tick all three certifications (not sold, not used for unrelated purposes, not us
 
 ## Updating the listing for 0.2.0 (Epic reminders)
 
-Upload 0.2.0 only after 0.1.0 has been approved. Then, in the same submission:
+If an older version is still in review, cancel that review first, then in one submission:
 
 1. **Privacy practices** – replace *Single purpose*, the `notifications` justification and the
    host permission justification with the texts above. Data usage answers stay the same.
