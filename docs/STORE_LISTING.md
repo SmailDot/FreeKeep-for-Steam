@@ -16,7 +16,7 @@ unrelated brand names.
 
 **Description** – one file per language in [`docs/store/`](store/), ready to paste. In the dashboard,
 add each language under *Store listing* and paste its file; languages without a description fall back
-to English. The first lines say what it does and why it's safe in plain words, because they show
+to English. The first lines say what it does and why it's safe, because they show
 before "Read more".
 
 | Language | File | | Language | File |

@@ -1,6 +1,6 @@
 Récupère automatiquement, en arrière-plan, les jeux et DLC Steam gratuits pour une durée limitée, avec la connexion Steam déjà présente dans votre navigateur. Sans mot de passe, sans cookies, sans serveur.
 
-🔒 POURQUOI C'EST SÛR, EN TERMES SIMPLES
+🔒 POURQUOI C'EST SÛR
 • Votre navigateur sait déjà que vous êtes connecté à Steam. Il joint lui-même cette connexion aux requêtes vers store.steampowered.com, comme quand vous parcourez le magasin. FreeKeep lui demande seulement d'envoyer la même requête que le bouton « Ajouter au compte » de Steam.
 • FreeKeep ne peut pas voir votre connexion. Steam la garde dans un cookie verrouillé (HttpOnly) qu'aucune extension ne peut lire, et FreeKeep n'a même pas l'autorisation d'accéder aux cookies.
 • Il n'y a pas de serveur FreeKeep. Rien n'est envoyé, donc rien ne peut fuiter.
@@ -15,6 +15,7 @@ BEAUCOUP D'OUTILS DE RÉCUPÉRATION vs FREEKEEP
 CE QU'IL FAIT
 • Récupère uniquement les vraies promotions gratuites à durée limitée (free to keep), jamais les démos, playtests ou jeux free-to-play
 • Ignore les jeux que vous possédez déjà et ne récupère un DLC que si vous avez le jeu de base
+• Utilise la région de votre propre magasin Steam : il ne récupère que ce qui est gratuit chez vous
 • Vérifie toutes les 1, 3, 6, 12 ou 24 heures, et une fois au démarrage du navigateur
 • Récupère automatiquement, ou vous prévient d'abord pour que vous décidiez
 • Une notification discrète quand un jeu est récupéré ou qu'il a besoin de vous

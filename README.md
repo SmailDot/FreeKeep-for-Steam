@@ -10,13 +10,13 @@ plus optional reminders for Epic Games Store giveaways.
 
 🔒 **No password. No cookies. No server. Your login never leaves your browser.**
 
-[繁體中文](README.zh-TW.md) · [Why it's safe](#-why-its-safe-in-plain-words) · [Install](#install) · [How it works](#how-it-works) · [Privacy](PRIVACY.md)
+[繁體中文](README.zh-TW.md) · [Why it's safe](#-why-its-safe) · [Install](#install) · [How it works](#how-it-works) · [Privacy](PRIVACY.md)
 
 ![FreeKeep demo](docs/assets/demo-en.gif)
 
 </div>
 
-## 🔒 Why it's safe, in plain words
+## 🔒 Why it's safe
 
 An auto-claimer that wants your password or cookies is a risk, so FreeKeep is built to never need
 them:
@@ -57,6 +57,8 @@ Read the [privacy policy](PRIVACY.md) and the [architecture notes](docs/ARCHITEC
   sent anywhere except `store.steampowered.com`.
 - **Knows your library.** Skips games you own, and claims DLC only when you own the base game
   (Steam would reject it otherwise).
+- **Your region.** Checks the Steam store in your own region, so it only claims what's free where
+  you are.
 - **Quiet by default.** One notification when something was claimed, or when it needs you.
 - **Your schedule.** Check every 1, 3, 6, 12 or 24 hours, plus once when the browser starts.
   Missed checks run when your computer wakes up.
@@ -141,6 +143,13 @@ gentle pace. Still, it is unofficial automation: use it at your own risk. Not af
 one the *Add to Account* button sends. On Epic, getting a game goes through its checkout page.
 Automating that would mean scripting Epic's website or handling your Epic login, which breaks
 FreeKeep's rule of never touching your credentials. So for Epic, FreeKeep reminds you instead.
+
+**Someone else got a free game that FreeKeep didn't find for me. Why?** Usually one of two reasons.
+FreeKeep checks the Steam store in your own region, and some promotions only run in certain
+countries. Or the game isn't a Steam promotion at all: some developers list a new game as
+*Free to Play* for its first days and only write "add it now and keep it forever" in the
+description. Steam has no free-to-keep offer to claim for those, so add them yourself from the store
+page.
 
 **Why wasn't a DLC claimed?** Steam only lets you claim a DLC if you own its base game. FreeKeep shows
 those as *Needs base game* and claims them automatically if you get the base game while the promo

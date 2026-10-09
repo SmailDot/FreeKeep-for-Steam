@@ -1,6 +1,6 @@
 Reclama automáticamente en segundo plano los juegos y DLC gratis por tiempo limitado de Steam, usando la sesión de Steam que ya tiene tu navegador. Sin contraseña, sin cookies, sin servidor.
 
-🔒 POR QUÉ ES SEGURO, EN PALABRAS SENCILLAS
+🔒 POR QUÉ ES SEGURO
 • Tu navegador ya sabe que tienes la sesión iniciada en Steam. Añade esa sesión por sí solo a las peticiones a store.steampowered.com, igual que cuando navegas por la tienda. FreeKeep solo le pide que envíe la misma petición que el botón «Añadir a la cuenta» de Steam.
 • FreeKeep no puede ver tu sesión. Steam la guarda en una cookie bloqueada (HttpOnly) que ninguna extensión puede leer, y FreeKeep ni siquiera tiene el permiso de cookies.
 • No existe un servidor de FreeKeep. No se sube nada, así que nada puede filtrarse.
@@ -15,6 +15,7 @@ MUCHOS RECLAMADORES AUTOMÁTICOS vs FREEKEEP
 QUÉ HACE
 • Solo reclama promociones reales gratis por tiempo limitado (free to keep), nunca demos, playtests ni juegos free-to-play
 • Omite los juegos que ya tienes y reclama DLC solo si tienes el juego base
+• Usa la región de tu propia tienda de Steam, así que solo reclama lo que es gratis donde estás
 • Revisa cada 1, 3, 6, 12 o 24 horas, y una vez al iniciar el navegador
 • Reclama automáticamente o te avisa primero para que decidas tú
 • Una notificación discreta cuando reclama algo o te necesita
