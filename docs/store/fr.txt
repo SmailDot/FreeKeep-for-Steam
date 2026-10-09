@@ -1,28 +1,28 @@
-Récupère automatiquement, en arrière-plan, les jeux et DLC Steam gratuits pour une durée limitée, avec la connexion Steam déjà présente dans votre navigateur. Sans mot de passe, sans cookies, sans serveur.
+Récupère automatiquement, en arrière-plan, les jeux et DLC Steam gratuits pour une durée limitée, grâce à la session Steam déjà ouverte dans votre navigateur. Sans mot de passe, sans accès à vos cookies de connexion, sans serveur.
 
 🔒 POURQUOI C'EST SÛR
-• Votre navigateur sait déjà que vous êtes connecté à Steam. Il joint lui-même cette connexion aux requêtes vers store.steampowered.com, comme quand vous parcourez le magasin. FreeKeep lui demande seulement d'envoyer la même requête que le bouton « Ajouter au compte » de Steam.
-• FreeKeep ne peut pas voir votre connexion. Steam la garde dans un cookie verrouillé (HttpOnly) qu'aucune extension ne peut lire, et FreeKeep n'a même pas l'autorisation d'accéder aux cookies.
-• Il n'y a pas de serveur FreeKeep. Rien n'est envoyé, donc rien ne peut fuiter.
-• Vérifiez par vous-même : chrome://extensions → FreeKeep → « Détails » n'affiche que les notifications et store.steampowered.com. Le code est open source.
+• Utilise la session du navigateur : si vous êtes connecté à Steam, le navigateur joint automatiquement votre session aux requêtes vers le magasin Steam. FreeKeep envoie uniquement la même requête que le bouton « Ajouter au compte ».
+• Aucun accès à vos identifiants : Steam protège son cookie de connexion avec l'attribut HttpOnly, si bien qu'aucune extension ne peut le lire. FreeKeep ne demande pas non plus l'autorisation d'accès aux cookies.
+• Aucun serveur : FreeKeep n'a pas de backend et n'envoie ni ne collecte aucune donnée.
+• Vérifiable : la page de détails de l'extension dans Chrome n'affiche que les notifications et l'accès au magasin Steam. Le code source est public.
 
 BEAUCOUP D'OUTILS DE RÉCUPÉRATION vs FREEKEEP
-❌ Demandent votre mot de passe, jeton ou cookies → ✅ Jamais
-❌ Ouvrent un onglet du magasin par jeu et cliquent à votre place → ✅ Une seule requête discrète en arrière-plan, aucun onglet
+❌ Exigent votre mot de passe ou vos cookies de connexion → ✅ Aucun besoin
+❌ Ouvrent un onglet du magasin pour chaque jeu → ✅ Une seule requête en arrière-plan, aucun onglet
 ❌ Tournent sur un serveur ou un bot → ✅ Fonctionne uniquement dans votre navigateur
-❌ Envoient des données à leur serveur → ✅ Aucun serveur, aucune analyse, aucun pistage
+❌ Envoient des données au serveur du développeur → ✅ Aucun serveur, aucune analyse, aucun pistage
 
-CE QU'IL FAIT
-• Récupère uniquement les vraies promotions gratuites à durée limitée (free to keep), jamais les démos, playtests ou jeux free-to-play
-• Ignore les jeux que vous possédez déjà et ne récupère un DLC que si vous avez le jeu de base
-• Utilise la région de votre propre magasin Steam : il ne récupère que ce qui est gratuit chez vous
-• Vérifie toutes les 1, 3, 6, 12 ou 24 heures, et une fois au démarrage du navigateur
-• Récupère automatiquement, ou vous prévient d'abord pour que vous décidiez
-• Une notification discrète quand un jeu est récupéré ou qu'il a besoin de vous
-• Rappels Epic Games Store facultatifs : soyez prévenu quand Epic offre un jeu, puis récupérez-le vous-même sur le site d'Epic. Désactivé par défaut ; lit la liste publique d'Epic sans connexion
+FONCTIONNALITÉS
+• Récupère uniquement les véritables promotions gratuites à durée limitée (free to keep) ; démos, playtests et jeux free-to-play exclus
+• Ignore les jeux que vous possédez déjà et ne récupère un DLC que si vous possédez le jeu de base
+• Utilise la région de votre magasin Steam et ne récupère que ce qui est gratuit dans votre région
+• Vérifie toutes les 1, 3, 6, 12 ou 24 heures, ainsi qu'au démarrage du navigateur
+• Récupère automatiquement, ou vous demande d'abord
+• Vous notifie uniquement lorsqu'un jeu est récupéré ou qu'une action est nécessaire
+• Rappels Epic Games Store facultatifs : vous informe des jeux gratuits d'Epic, à récupérer sur le site d'Epic. Désactivé par défaut ; la liste publique est lue sans connexion
 • 12 langues, environ 40 Ko de code, aucune dépendance
 
-Connectez-vous au magasin Steam dans ce navigateur et FreeKeep s'occupe du reste.
+Connectez-vous au magasin Steam dans ce navigateur, et FreeKeep fonctionne automatiquement.
 
 Non affilié à Valve Corporation ni à Epic Games. Steam est une marque de Valve Corporation.
 Code source et politique de confidentialité : https://github.com/SmailDot/FreeKeep-for-Steam

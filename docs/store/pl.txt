@@ -1,28 +1,28 @@
-Automatycznie odbiera w tle darmowe gry i DLC na Steam dostępne przez ograniczony czas, korzystając z logowania do Steam, które ma już Twoja przeglądarka. Bez hasła, bez ciasteczek, bez serwera.
+Automatycznie odbiera w tle darmowe gry i DLC na Steam dostępne przez ograniczony czas, korzystając z sesji Steam, która jest już w Twojej przeglądarce. Bez hasła, bez dostępu do ciasteczek logowania, bez serwera.
 
 🔒 DLACZEGO TO BEZPIECZNE
-• Twoja przeglądarka już wie, że jesteś zalogowany do Steam. Sama dołącza to logowanie do zapytań do store.steampowered.com, tak jak podczas przeglądania sklepu. FreeKeep tylko prosi ją o wysłanie tego samego zapytania, które wysyła przycisk Steam „Dodaj do konta”.
-• FreeKeep nie widzi Twojego logowania. Steam trzyma je w zablokowanym ciasteczku (HttpOnly), którego nie może odczytać żadne rozszerzenie, a FreeKeep nie ma nawet uprawnienia do ciasteczek.
-• Nie ma serwera FreeKeep. Nic nie jest wysyłane, więc nic nie może wyciec.
-• Sprawdź sam: chrome://extensions → FreeKeep → „Szczegóły” pokazuje tylko powiadomienia i store.steampowered.com. Kod jest otwarty.
+• Korzysta z sesji przeglądarki: gdy jesteś zalogowany do Steam, przeglądarka automatycznie dołącza sesję do zapytań do sklepu Steam. FreeKeep wysyła tylko to samo zapytanie co przycisk „Dodaj do konta”.
+• Nie odczyta Twoich danych logowania: Steam chroni ciasteczko logowania atrybutem HttpOnly, więc żadne rozszerzenie nie może go odczytać. FreeKeep nie prosi też o uprawnienie do ciasteczek.
+• Bez serwera: FreeKeep nie ma backendu i nie wysyła ani nie zbiera żadnych danych.
+• Możliwość weryfikacji: strona szczegółów rozszerzenia w Chrome pokazuje tylko powiadomienia i dostęp do sklepu Steam. Kod źródłowy jest publiczny.
 
-WIELE AUTO-ODBIERACZY vs FREEKEEP
-❌ Proszą o hasło, token lub ciasteczka → ✅ Nigdy
-❌ Otwierają kartę sklepu dla każdej gry i klikają za Ciebie → ✅ Jedno ciche zapytanie w tle, bez kart
-❌ Działają na serwerze lub bocie → ✅ Działa tylko w Twojej przeglądarce
-❌ Wysyłają dane na swój serwer → ✅ Bez serwera, bez analityki, bez śledzenia
+WIELE NARZĘDZI DO ODBIERANIA vs FREEKEEP
+❌ Wymagają hasła lub ciasteczek logowania → ✅ Niepotrzebne
+❌ Otwierają kartę sklepu dla każdej gry → ✅ Jedno zapytanie w tle, bez kart
+❌ Działają na serwerze lub bocie → ✅ Działa wyłącznie w Twojej przeglądarce
+❌ Wysyłają dane na serwer twórcy → ✅ Bez serwera, bez analityki, bez śledzenia
 
-CO ROBI
-• Odbiera tylko prawdziwe, ograniczone czasowo promocje „free to keep”, nigdy dema, playtesty ani gry free-to-play
+FUNKCJE
+• Odbiera wyłącznie prawdziwe, ograniczone czasowo promocje „free to keep”; bez dem, playtestów i gier free-to-play
 • Pomija gry, które już masz, a DLC odbiera tylko wtedy, gdy masz grę podstawową
-• Korzysta z regionu Twojego sklepu Steam, więc odbiera tylko to, co jest darmowe tam, gdzie jesteś
-• Sprawdza co 1, 3, 6, 12 lub 24 godziny oraz raz przy starcie przeglądarki
-• Odbiera automatycznie albo najpierw Cię powiadamia, żebyś zdecydował
-• Jedno dyskretne powiadomienie, gdy coś odebrano lub potrzebna jest Twoja reakcja
-• Opcjonalne przypomnienia o Epic Games Store: dowiesz się, gdy Epic rozdaje grę, a odbierzesz ją sam na stronie Epic. Domyślnie wyłączone; czyta publiczną listę Epic bez logowania
-• 12 języków, około 40 KB kodu, zero zależności
+• Korzysta z regionu Twojego sklepu Steam i odbiera tylko to, co jest darmowe w Twoim regionie
+• Sprawdza co 1, 3, 6, 12 lub 24 godziny oraz przy uruchomieniu przeglądarki
+• Odbiera automatycznie lub najpierw pyta o zgodę
+• Powiadamia tylko wtedy, gdy gra została odebrana lub potrzebna jest Twoja reakcja
+• Opcjonalne przypomnienia o Epic Games Store: informuje o darmowych grach w Epic, które odbierasz na stronie Epic. Domyślnie wyłączone; publiczna lista jest pobierana bez logowania
+• 12 języków, około 40 KB kodu, bez zależności
 
-Zaloguj się do sklepu Steam w tej przeglądarce, a resztą zajmie się FreeKeep.
+Zaloguj się do sklepu Steam w tej przeglądarce, a FreeKeep zacznie działać automatycznie.
 
 Niepowiązane z Valve Corporation ani Epic Games. Steam jest znakiem towarowym Valve Corporation.
 Kod źródłowy i polityka prywatności: https://github.com/SmailDot/FreeKeep-for-Steam
