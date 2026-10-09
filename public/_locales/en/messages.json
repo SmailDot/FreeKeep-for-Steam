@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: Auto-Claim Free Steam Games"
   },
   "extDescription": {
-    "message": "Auto-claims Steam free-to-keep games with your existing browser login. No passwords, no tabs, minimal permissions."
+    "message": "Auto-claim free Steam games in the background. No password, no cookies: it uses the login your browser already has. 100% local."
   },
   "notifyClaimedTitle": {
     "message": "Free games claimed"

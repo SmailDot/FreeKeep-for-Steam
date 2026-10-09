@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep：Steam無料ゲームを自動で受け取り"
   },
   "extDescription": {
-    "message": "ブラウザのSteamログインを使い、無料配布ゲームを自動で受け取ります。パスワード不要、タブも開かず、権限は最小限。"
+    "message": "Steamの無料配布ゲームをバックグラウンドで自動受け取り。パスワードもCookieも不要、ブラウザの既存ログインを使い、すべてローカルで動作。"
   },
   "notifyClaimedTitle": {
     "message": "無料ゲームを受け取りました"

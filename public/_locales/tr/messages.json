@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: ücretsiz Steam oyunlarını otomatik al"
   },
   "extDescription": {
-    "message": "Tarayıcınızdaki Steam oturumuyla ücretsiz oyunları otomatik alır. Şifre yok, sekme yok, minimum izin."
+    "message": "Ücretsiz Steam oyunlarını arka planda otomatik alır. Şifre ve çerez gerekmez: tarayıcınızdaki oturumu kullanır. %100 yerel."
   },
   "notifyClaimedTitle": {
     "message": "Ücretsiz oyunlar alındı"

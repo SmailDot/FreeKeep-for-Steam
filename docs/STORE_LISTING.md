@@ -5,55 +5,30 @@ Upload `.output/freekeep-for-steam-<version>-chrome.zip` (from `npm run zip` or 
 
 ## Store listing
 
-**Name / short name** – from the manifest: `FreeKeep for Steam` / `FreeKeep`.
+**Name** – from `extName` in `public/_locales/<lang>/messages.json`, so every language gets its own
+store title: the brand plus what it does, e.g. `FreeKeep: Auto-Claim Free Steam Games`. Short name:
+`FreeKeep`. Keep it descriptive and honest: the store's spam policy forbids keyword stuffing and
+unrelated brand names.
 
-**Summary** – from `extDescription` in `public/_locales/*/messages.json` (localized automatically).
+**Summary** – from `extDescription` in the same files (max 132 characters), localized automatically.
 
 **Category** – Productivity (or Fun).
 
-**Description (en)**
+**Description** – one file per language in [`docs/store/`](store/), ready to paste. In the dashboard,
+add each language under *Store listing* and paste its file; languages without a description fall back
+to English. The first lines say what it does and why it's safe in plain words, because they show
+before "Read more".
 
-```
-FreeKeep claims Steam's limited-time free-to-keep games for you, in the background, using the Steam login your browser already has.
+| Language | File | | Language | File |
+|---|---|---|---|---|
+| English | [`en.txt`](store/en.txt) | | Polski | [`pl.txt`](store/pl.txt) |
+| 中文（台灣） | [`zh_TW.txt`](store/zh_TW.txt) | | Português (Brasil) | [`pt_BR.txt`](store/pt_BR.txt) |
+| 中文（中國） | [`zh_CN.txt`](store/zh_CN.txt) | | Русский | [`ru.txt`](store/ru.txt) |
+| 日本語 | [`ja.txt`](store/ja.txt) | | Español | [`es.txt`](store/es.txt) |
+| 한국어 | [`ko.txt`](store/ko.txt) | | Français | [`fr.txt`](store/fr.txt) |
+| Deutsch | [`de.txt`](store/de.txt) | | Türkçe | [`tr.txt`](store/tr.txt) |
 
-🔒 Your credentials never leave your computer: FreeKeep never asks for or stores your password, tokens or cookies, and it can't even read your login cookie. It runs 100% locally, with no server and no data collection.
-
-• Only real free-to-keep promotions: never demos, playtests or free-to-play games
-• Skips games you own; claims DLC only when you own the base game
-• No password, no tabs, no server: it only talks to store.steampowered.com
-• Check every 1–24 hours, plus once when the browser starts
-• Claim automatically, or get notified and decide yourself
-• One quiet notification when something is claimed or needs you
-• Optional Epic Games Store reminders: get told when Epic gives a game away, then claim it on Epic's site. Off by default; it reads Epic's public list anonymously, with no Epic login
-• Tiny: about 40 KB of code, zero dependencies, open source
-
-Log in to the Steam store in this browser and FreeKeep does the rest.
-
-Not affiliated with Valve. Steam is a trademark of Valve Corporation.
-Source code: https://github.com/SmailDot/FreeKeep-for-Steam
-```
-
-**Description (zh_TW)**
-
-```
-FreeKeep 會在背景用你瀏覽器裡現有的 Steam 登入，自動幫你領取 Steam 限時免費遊戲。
-
-🔒 你的帳號憑證永遠不會離開你的電腦：FreeKeep 從不要求或儲存你的密碼、Token 或 Cookie，而且根本讀不到你的登入 Cookie。全程在本機執行，沒有伺服器，也不蒐集任何資料。
-
-• 只領真正的限時免費，不會亂領試玩版、Playtest 或免費遊玩遊戲
-• 已擁有的會跳過；DLC 只在你擁有本體時才領
-• 不用密碼、不開分頁、不需伺服器：只連線到 store.steampowered.com
-• 每 1–24 小時檢查一次，瀏覽器啟動時也會檢查
-• 可自動領取，或先通知你再決定
-• 只在領到遊戲或需要你處理時安靜地通知一次
-• 選用的 Epic Games Store 限免提醒：Epic 送遊戲時提醒你，再到 Epic 網站自己領。預設關閉，以匿名方式讀取 Epic 公開清單，不需登入 Epic
-• 輕巧：程式碼約 40 KB、零依賴、開放原始碼
-
-在這個瀏覽器登入 Steam 商店，剩下的交給 FreeKeep。
-
-與 Valve 無關。Steam 是 Valve Corporation 的商標。
-原始碼：https://github.com/SmailDot/FreeKeep-for-Steam
-```
+Like the UI, the non-English texts are machine-assisted; native speakers are welcome to improve them.
 
 **Graphics** – generate them all with `npm run build && npm run store-assets` (needs Playwright);
 they land in `.output/store/`, rendered from the real popup with fictional games.
@@ -122,13 +97,14 @@ Tick all three certifications (not sold, not used for unrelated purposes, not us
 
 **Support** – email `smaildot@aidot.me`, site `https://github.com/SmailDot/FreeKeep-for-Steam/issues`
 
-## Updating the listing for 0.2.0 (Epic reminders)
+## Updating the listing for 0.2.x (Epic reminders, new store titles)
 
 If an older version is still in review, cancel that review first, then in one submission:
 
 1. **Privacy practices** – replace *Single purpose*, the `notifications` justification and the
    host permission justification with the texts above. Data usage answers stay the same.
-2. **Store listing** – replace both descriptions, and add `screenshot-en-3-epic.png` (English) and
+2. **Store listing** – paste the descriptions from `docs/store/` (add the other languages too), and
+   add `screenshot-en-3-epic.png` (English) and
    `screenshot-zh_TW-3-epic.png` (中文（台灣）).
 3. **Privacy policy** – merge to `main` first, so the URL above already describes Epic reminders.
 

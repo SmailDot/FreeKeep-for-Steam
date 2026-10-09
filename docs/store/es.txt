@@ -1,0 +1,27 @@
+Reclama automáticamente en segundo plano los juegos y DLC gratis por tiempo limitado de Steam, usando la sesión de Steam que ya tiene tu navegador. Sin contraseña, sin cookies, sin servidor.
+
+🔒 POR QUÉ ES SEGURO, EN PALABRAS SENCILLAS
+• Tu navegador ya sabe que tienes la sesión iniciada en Steam. Añade esa sesión por sí solo a las peticiones a store.steampowered.com, igual que cuando navegas por la tienda. FreeKeep solo le pide que envíe la misma petición que el botón «Añadir a la cuenta» de Steam.
+• FreeKeep no puede ver tu sesión. Steam la guarda en una cookie bloqueada (HttpOnly) que ninguna extensión puede leer, y FreeKeep ni siquiera tiene el permiso de cookies.
+• No existe un servidor de FreeKeep. No se sube nada, así que nada puede filtrarse.
+• Compruébalo tú mismo: chrome://extensions → FreeKeep → «Detalles» solo muestra notificaciones y store.steampowered.com. El código es de código abierto.
+
+MUCHOS RECLAMADORES AUTOMÁTICOS vs FREEKEEP
+❌ Piden tu contraseña, token o cookies → ✅ Nunca
+❌ Abren una pestaña de la tienda por juego y hacen clic por ti → ✅ Una petición silenciosa en segundo plano, sin pestañas
+❌ Funcionan en un servidor o bot → ✅ Funciona solo en tu propio navegador
+❌ Envían datos a su servidor → ✅ Sin servidor, sin analíticas, sin rastreo
+
+QUÉ HACE
+• Solo reclama promociones reales gratis por tiempo limitado (free to keep), nunca demos, playtests ni juegos free-to-play
+• Omite los juegos que ya tienes y reclama DLC solo si tienes el juego base
+• Revisa cada 1, 3, 6, 12 o 24 horas, y una vez al iniciar el navegador
+• Reclama automáticamente o te avisa primero para que decidas tú
+• Una notificación discreta cuando reclama algo o te necesita
+• Avisos opcionales de Epic Games Store: te avisa cuando Epic regala un juego y lo reclamas tú en la web de Epic. Desactivado por defecto; lee la lista pública de Epic sin iniciar sesión
+• 12 idiomas, unos 40 KB de código, sin dependencias
+
+Inicia sesión en la tienda de Steam en este navegador y FreeKeep hará el resto.
+
+No está afiliado a Valve Corporation ni a Epic Games. Steam es una marca de Valve Corporation.
+Código fuente y política de privacidad: https://github.com/SmailDot/FreeKeep-for-Steam

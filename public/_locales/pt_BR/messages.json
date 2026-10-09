@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: resgate jogos grátis da Steam"
   },
   "extDescription": {
-    "message": "Resgata jogos grátis da Steam sozinho, com o login do seu navegador. Sem senhas, sem abas, permissões mínimas."
+    "message": "Resgata jogos grátis da Steam em segundo plano. Sem senha nem cookies: usa o login que seu navegador já tem. 100% local."
   },
   "notifyClaimedTitle": {
     "message": "Jogos grátis resgatados"

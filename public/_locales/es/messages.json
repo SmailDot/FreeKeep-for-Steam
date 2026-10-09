@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: reclama juegos gratis de Steam"
   },
   "extDescription": {
-    "message": "Reclama solo los juegos gratis de Steam con la sesión de tu navegador. Sin contraseñas, sin pestañas, permisos mínimos."
+    "message": "Reclama juegos gratis de Steam en segundo plano. Sin contraseña ni cookies: usa la sesión que ya tiene tu navegador. 100 % local."
   },
   "notifyClaimedTitle": {
     "message": "Juegos gratis reclamados"

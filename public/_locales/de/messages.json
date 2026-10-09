@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: Gratis-Steam-Spiele automatisch sichern"
   },
   "extDescription": {
-    "message": "Sichert dir Steam-Gratisspiele automatisch über deinen Browser-Login. Keine Passwörter, keine Tabs, minimale Berechtigungen."
+    "message": "Sichert Gratis-Steam-Spiele automatisch im Hintergrund. Ohne Passwort und Cookies: nutzt deinen Browser-Login. 100 % lokal."
   },
   "notifyClaimedTitle": {
     "message": "Gratisspiele gesichert"

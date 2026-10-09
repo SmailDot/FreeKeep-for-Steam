@@ -1,0 +1,27 @@
+Resgata automaticamente, em segundo plano, jogos e DLCs grátis por tempo limitado da Steam, usando o login da Steam que seu navegador já tem. Sem senha, sem cookies, sem servidor.
+
+🔒 POR QUE É SEGURO, EM PALAVRAS SIMPLES
+• Seu navegador já sabe que você está logado na Steam. Ele mesmo anexa esse login às requisições para store.steampowered.com, igual quando você navega pela loja. O FreeKeep só pede que ele envie a mesma requisição do botão "Adicionar à conta" da própria Steam.
+• O FreeKeep não consegue ver seu login. A Steam o guarda em um cookie trancado (HttpOnly) que nenhuma extensão consegue ler, e o FreeKeep nem tem a permissão de cookies.
+• Não existe servidor do FreeKeep. Nada é enviado, então nada pode vazar.
+• Confira você mesmo: chrome://extensions → FreeKeep → "Detalhes" mostra só notificações e store.steampowered.com. O código é aberto.
+
+MUITOS RESGATADORES AUTOMÁTICOS vs FREEKEEP
+❌ Pedem sua senha, token ou cookies → ✅ Nunca
+❌ Abrem uma aba da loja para cada jogo e clicam por você → ✅ Uma requisição silenciosa em segundo plano, sem abas
+❌ Rodam em um servidor ou bot → ✅ Roda só no seu próprio navegador
+❌ Enviam dados para o servidor deles → ✅ Sem servidor, sem análises, sem rastreamento
+
+O QUE ELE FAZ
+• Resgata só promoções reais grátis por tempo limitado (free to keep), nunca demos, playtests ou jogos free-to-play
+• Pula jogos que você já tem e resgata DLC só quando você tem o jogo base
+• Verifica a cada 1, 3, 6, 12 ou 24 horas, e uma vez ao abrir o navegador
+• Resgata automaticamente ou avisa antes para você decidir
+• Uma notificação discreta quando algo é resgatado ou precisa de você
+• Lembretes opcionais da Epic Games Store: saiba quando a Epic dá um jogo e resgate você mesmo no site da Epic. Desativado por padrão; lê a lista pública da Epic sem login
+• 12 idiomas, cerca de 40 KB de código, zero dependências
+
+Faça login na loja da Steam neste navegador e o FreeKeep faz o resto.
+
+Não é afiliado à Valve Corporation nem à Epic Games. Steam é uma marca da Valve Corporation.
+Código-fonte e política de privacidade: https://github.com/SmailDot/FreeKeep-for-Steam
