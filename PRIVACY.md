@@ -54,7 +54,9 @@ game names match Epic's site; it includes nothing about you, your Steam account 
 popup shows the games' cover images, which your browser loads from Epic's image server
 (`cdn1.epicgames.com`) like any web page would. FreeKeep never claims anything on Epic and never
 opens Epic pages by itself; it only opens the store page when you click **Get on Epic** or the
-notification. Turning the feature off removes the permission again.
+notification. Turning the feature off removes the permission again (Chrome's extension page may
+still list the site, because Chrome remembers that you allowed it once, but FreeKeep can no longer
+reach it).
 
 These requests are governed by [Epic's privacy policy](https://www.epicgames.com/site/privacypolicy).
 
@@ -95,7 +97,8 @@ FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的 Epic
 不含任何關於你、你的 Steam 帳號或國家的資料。
 popup 顯示的封面圖由瀏覽器從 Epic 圖片伺服器（`cdn1.epicgames.com`）載入，就像一般網頁一樣。
 FreeKeep 不會在 Epic 上領取任何東西，也不會自己開啟 Epic 頁面，只有在你按下「到 Epic 領取」或通知時才會開啟商店頁。
-清單中的公開資料（名稱、圖片連結、商店連結、日期）以及你是否已開啟或隱藏，只存在你的裝置上；關閉功能時會一併移除權限。
+清單中的公開資料（名稱、圖片連結、商店連結、日期）以及你是否已開啟或隱藏，只存在你的裝置上；關閉功能時會一併移除權限
+（Chrome 的擴充功能頁面可能仍列出該網址，那是 Chrome 記得你允許過，但 FreeKeep 已經連不到它）。
 
 「複製診斷報告」只會複製到你的剪貼簿，
 內容不含帳號資料，只有你自己貼出去才會被分享。

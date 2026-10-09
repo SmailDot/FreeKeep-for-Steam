@@ -5,12 +5,14 @@ import type { Snapshot } from './storage';
  * A report users can paste into a GitHub issue. Everything in it is either public store data
  * or FreeKeep's own state: no session ids, cookies, account ids or account names are ever stored.
  */
-export function buildDiagnostics(s: Snapshot) {
+export function buildDiagnostics(s: Snapshot, epicAccess: boolean) {
   return {
     version: browser.runtime.getManifest().version,
     userAgent: navigator.userAgent,
     language: browser.i18n.getUILanguage(),
     settings: s.settings,
+    /** Whether FreeKeep can currently read Epic's list (the optional host permission is active). */
+    epicAccess,
     session: {
       loggedIn: s.meta.loggedIn,
       country: s.meta.country,

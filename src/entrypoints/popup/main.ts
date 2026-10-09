@@ -2,6 +2,7 @@ import '@/assets/theme.css';
 import './style.css';
 import './fx.css';
 import { browser } from 'wxt/browser';
+import { EPIC_ORIGIN } from '@/core/epic';
 import { STORE } from '@/core/steam';
 import type { EpicState, PromoState, PromoStatus } from '@/core/types';
 import { buildDiagnostics } from '@/lib/diagnostics';
@@ -291,7 +292,8 @@ async function main(): Promise<void> {
     });
   }
   $('diagnostics').addEventListener('click', async () => {
-    const report = buildDiagnostics(await readSnapshot());
+    const epicAccess = await browser.permissions.contains({ origins: [EPIC_ORIGIN] });
+    const report = buildDiagnostics(await readSnapshot(), epicAccess);
     await navigator.clipboard.writeText(JSON.stringify(report, null, 2));
     $('diagnostics').textContent = t('popupCopied');
     setTimeout(() => ($('diagnostics').textContent = t('popupDiagnostics')), 1500);
