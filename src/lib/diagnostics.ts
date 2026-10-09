@@ -31,6 +31,14 @@ export function buildDiagnostics(s: Snapshot) {
       firstSeen: iso(p.firstSeen),
       lastSeen: iso(p.lastSeen),
     })),
+    epic: Object.values(s.epic).map((o) => ({
+      title: o.title,
+      kind: o.kind,
+      status: o.status,
+      upcoming: o.upcoming,
+      start: iso(o.start),
+      end: iso(o.end),
+    })),
   };
 }
 

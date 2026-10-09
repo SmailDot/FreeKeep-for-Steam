@@ -21,6 +21,9 @@ Thanks for testing FreeKeep! It takes about five minutes. (English below.)
 | 4 | 登出 Steam 後按「立即檢查」 | popup 顯示請登入的提示，圖示出現橘色「!」，只通知一次 |
 | 5 | 設定頁改成「先問我」 | 新的限免只會通知，popup 出現「領取」「略過」按鈕 |
 | 6 | 關掉瀏覽器再打開，等約 1 分鐘 | 自動跑一次檢查（popup 的「上次檢查」時間會更新） |
+| 7 | 設定頁勾選「提醒我 Epic Games Store 的免費遊戲」 | Chrome 跳出權限詢問；允許後 popup 出現「Steam ／ Epic Games」分頁，Epic 分頁列出本週限免並通知一次 |
+| 8 | Epic 分頁按「到 Epic 領取」/「隱藏」 | 開啟該遊戲的 Epic 商店頁並標示「已開啟」/ 該遊戲從清單消失 |
+| 9 | 取消勾選 Epic 提醒 | 分頁消失；`chrome://extensions` 的詳細資料裡，Epic 網站權限已被移除 |
 
 ## 回報問題
 
@@ -48,6 +51,9 @@ popup 底部按「複製診斷報告」，連同你看到的狀況貼到 [Issues
 | 4 | Log out of Steam, click **Check now** | Login banner in the popup, orange `!` on the icon, notified once |
 | 5 | Settings → **Ask me first** | New promotions only notify; the popup shows **Claim** / **Skip** |
 | 6 | Restart the browser, wait about a minute | A check runs on its own ("Last check" updates) |
+| 7 | Settings → tick **Remind me of free games on the Epic Games Store** | Chrome asks for permission; once allowed, the popup gets **Steam / Epic Games** tabs, the Epic tab lists this week's giveaways, and one notification appears |
+| 8 | On the Epic tab, click **Get on Epic** / **Hide** | The game's Epic store page opens and it is marked **Opened** / the game disappears from the list |
+| 9 | Untick Epic reminders | The tabs disappear; in `chrome://extensions` → Details, the Epic site access is gone |
 
 ## Report a problem
 

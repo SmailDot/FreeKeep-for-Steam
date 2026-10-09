@@ -193,7 +193,7 @@
     "message": "Gespeichert"
   },
   "optPrivacy": {
-    "message": "FreeKeep kommuniziert nur mit store.steampowered.com und nutzt dazu den vorhandenen Steam-Login dieses Browsers. Es sieht nie dein Passwort und sendet nichts an andere Stellen."
+    "message": "FreeKeep kommuniziert nur mit store.steampowered.com und nutzt dazu den vorhandenen Steam-Login dieses Browsers (dazu Epics öffentliche Gratisspiel-Liste, wenn du Epic-Erinnerungen einschaltest). Es sieht nie dein Passwort und sendet deine Daten nirgendwohin."
   },
   "popupUntil": {
     "message": "Gratis bis $DATE$",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "100 % lokal · sieht weder Passwort noch Login-Cookie"
+  },
+  "notifyEpicTitle": {
+    "message": "Gratis im Epic Games Store"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ – gratis bis $DATE$. Klicken, um den Shop zu öffnen.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "Nur Erinnerung · auf der Epic-Seite holen"
+  },
+  "epicGet": {
+    "message": "Bei Epic holen"
+  },
+  "epicHide": {
+    "message": "Ausblenden"
+  },
+  "epicOpened": {
+    "message": "Geöffnet"
+  },
+  "epicNext": {
+    "message": "Als Nächstes: $NAMES$ · ab $DATE$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "Erlaube FreeKeep, Epics öffentliche Liste der Gratisspiele zu lesen."
+  },
+  "epicAllow": {
+    "message": "Einstellungen öffnen"
+  },
+  "epicError": {
+    "message": "Epics Liste konnte nicht geladen werden. FreeKeep versucht es bei der nächsten Prüfung erneut."
+  },
+  "epicNone": {
+    "message": "Gerade nichts gratis bei Epic."
+  },
+  "kind_bundle": {
+    "message": "Paket"
+  },
+  "optEpic": {
+    "message": "An Gratisspiele im Epic Games Store erinnern"
+  },
+  "optEpicHint": {
+    "message": "Optional. Epic-Spiele lassen sich nicht automatisch sichern, daher zeigt FreeKeep, was gratis ist, und öffnet die Shopseite. Beim Einschalten wird die Berechtigung angefragt, Epics öffentliche Gratisspiel-Liste zu lesen; ein Epic-Konto oder Login wird nicht verwendet."
+  },
+  "optEpicDenied": {
+    "message": "Die Berechtigung wurde nicht erteilt, Epic-Erinnerungen bleiben aus."
   }
 }

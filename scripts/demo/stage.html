@@ -170,7 +170,31 @@
     </section>
     <div class="window"><iframe id="popup" src="/popup.html"></iframe></div>
     <script>
-      const copy = {
+      const params = new URLSearchParams(location.search);
+      const lang = params.get('lang') ?? 'en';
+      const epic = {
+        en: {
+          headline: 'Plus <em>Epic Games</em> giveaway reminders.',
+          privacyTitle: 'Optional, anonymous, off by default',
+          privacyBody: "FreeKeep reads Epic's public list of free games without any login and reminds you. You claim them on Epic's site.",
+          points: [
+            ['🔔', 'One notification when a new Epic giveaway starts'],
+            ['🗓️', "See next week's free games early"],
+            ['🧩', 'Steam and Epic side by side, in separate tabs'],
+          ],
+        },
+        zh_TW: {
+          headline: '還能提醒你<br><em>Epic 限免遊戲</em>',
+          privacyTitle: '選用、匿名、預設關閉',
+          privacyBody: '不登入 Epic、不帶 Cookie，只讀取 Epic 公開的限免清單來提醒你；領取在 Epic 網站自己完成。',
+          points: [
+            ['🔔', 'Epic 新限免開始時通知你一次'],
+            ['🗓️', '提前知道下週的免費遊戲'],
+            ['🧩', 'Steam 與 Epic 分頁並列，一目了然'],
+          ],
+        },
+      };
+      const steam = {
         en: {
           headline: 'Never miss a <em>free Steam game</em> again.',
           privacyTitle: 'Your credentials never leave your computer',
@@ -191,7 +215,8 @@
             ['🪶', '零依賴、完全開源，程式碼人人可查'],
           ],
         },
-      }[new URLSearchParams(location.search).get('lang') ?? 'en'];
+      };
+      const copy = (params.get('scene') === 'epic' ? epic : steam)[lang];
       document.getElementById('headline').innerHTML = copy.headline;
       document.getElementById('privacyTitle').textContent = copy.privacyTitle;
       document.getElementById('privacyBody').textContent = copy.privacyBody;

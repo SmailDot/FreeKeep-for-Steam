@@ -26,9 +26,12 @@
 | 要你的密碼、Token 或 Cookie | 通常要 | **從不** |
 | 在哪裡執行 | 機器人、伺服器或常駐主機 | **你自己的瀏覽器** |
 | 你的 Steam 登入 | 被複製到它們的設定裡 | **留在你的瀏覽器，完全不碰** |
-| 連線對象 | 它們的伺服器、Discord、第三方 API | **只有 `store.steampowered.com`** |
+| 連線對象 | 它們的伺服器、Discord、第三方 API | **只有 `store.steampowered.com`**¹ |
 | 蒐集資料 | 不一定 | **完全不蒐集，沒有伺服器、沒有分析** |
-| 可否審查 | 不一定 | **約 35 KB 的 TypeScript，完全開源** |
+| 可否審查 | 不一定 | **程式碼約 40 KB，完全開源** |
+
+¹ 只有在你開啟選用的 [Epic 限免提醒](#epic-games-store-限免提醒)時，才會另外讀取 Epic 公開的限免清單，
+而且那個請求不帶任何登入狀態或 Cookie。
 
 詳見[隱私權政策](PRIVACY.md)與[架構說明](docs/ARCHITECTURE.md)。
 
@@ -42,7 +45,9 @@
 - **預設很安靜**：只有領到東西、或需要你處理時才通知一次
 - **自訂頻率**：每 1 / 3 / 6 / 12 / 24 小時檢查一次，瀏覽器啟動時也會檢查；電腦睡眠錯過的檢查會在醒來後補跑
 - **自動或詢問**：可以立即自動領，或先通知你再自己決定
-- **輕巧、可審查**：程式碼約 35 KB、零執行期依賴、TypeScript、38 個單元測試
+- **選用的 Epic Games Store 限免提醒**：Epic 送遊戲時提醒你，附上連結讓你自己去領；預設關閉，
+  [詳見下方](#epic-games-store-限免提醒)
+- **輕巧、可審查**：程式碼約 40 KB、零執行期依賴、TypeScript、有完整單元測試
 - **12 種語言**：English、繁體中文、简体中文、Русский、Español、Português、Deutsch、日本語、Français、
   Polski、한국어、Türkçe，[歡迎協助翻譯](CONTRIBUTING.md#translations)
 
@@ -71,6 +76,18 @@
 最後那個請求，就是 Steam 商店頁「加入帳戶」按鈕送出的同一個請求。Steam 會回傳 FreeKeep 看得懂的結果碼
 （`9` 已擁有、`24` 需要本體）。失敗會重試最多三次。細節請看 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
 
+### Epic Games Store 限免提醒
+
+在設定裡開啟「**提醒我 Epic Games Store 的免費遊戲**」，FreeKeep 也會幫你盯 Epic 每週送的遊戲。它**只負責提醒**：
+新的限免開始時通知你一次、popup 裡列出清單並附上「**到 Epic 領取**」按鈕，也會預告下週的遊戲。
+領取要在 Epic 網站上自己完成。
+
+- Epic 的清單是公開的，FreeKeep 以匿名方式讀取：不需要 Epic 帳號、不帶登入、不帶 Cookie，
+  也不會送出你的國家或 Steam 資料
+- 開啟時，瀏覽器會詢問一項額外權限：讀取 `store-site-backend-static-ipv4.ak.epicgames.com`；
+  關閉時會把權限交還
+- 只要你沒開，FreeKeep 就完全不會連到 Epic
+
 ### 權限
 
 | 權限 | 用途 |
@@ -79,6 +96,7 @@
 | `storage` | 只在你的裝置上記住設定和處理過的限免 |
 | `alarms` | 定時檢查 |
 | `notifications` | 領到遊戲或需要你處理時通知你 |
+| `store-site-backend-static-ipv4.ak.epicgames.com`（選用） | 開啟 Epic 提醒後，讀取 Epic 公開的限免清單 |
 
 沒有 `tabs`、`scripting`、`cookies`，也不能存取任何其他網站。
 
@@ -92,6 +110,10 @@
 請自行評估風險。本專案與 Valve 無關。
 
 **新帳號或受限帳號能用嗎？** 可以，已在全新帳號上實測成功。
+
+**為什麼 Epic 的遊戲不能自動領？** Steam 的免費授權只要一個請求，跟「加入帳戶」按鈕送出的一樣；
+Epic 則要走它的結帳頁面。要自動化就得操控 Epic 網站或處理你的 Epic 登入，這違反 FreeKeep
+「絕不碰你的憑證」的原則，所以 Epic 這邊改成提醒你。
 
 **為什麼 DLC 沒有被領？** Steam 只允許擁有本體的人領取 DLC。FreeKeep 會標示「缺少本體」，
 如果限免期間你買了本體，它會自動補領。

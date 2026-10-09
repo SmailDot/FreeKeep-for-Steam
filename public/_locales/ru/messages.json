@@ -193,7 +193,7 @@
     "message": "Сохранено"
   },
   "optPrivacy": {
-    "message": "FreeKeep обращается только к store.steampowered.com, используя уже выполненный в этом браузере вход в Steam. Он никогда не видит ваш пароль и ничего никуда не отправляет."
+    "message": "FreeKeep обращается только к store.steampowered.com, используя уже выполненный в этом браузере вход в Steam (и к публичному списку бесплатных игр Epic, если вы включите напоминания Epic). Он никогда не видит ваш пароль и никуда не отправляет ваши данные."
   },
   "popupUntil": {
     "message": "Бесплатно до $DATE$",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "100% локально · не видит ваш пароль и cookie входа"
+  },
+  "notifyEpicTitle": {
+    "message": "Бесплатно в Epic Games Store"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — бесплатно до $DATE$. Нажмите, чтобы открыть магазин.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "Только напоминание · заберите на сайте Epic"
+  },
+  "epicGet": {
+    "message": "Забрать в Epic"
+  },
+  "epicHide": {
+    "message": "Скрыть"
+  },
+  "epicOpened": {
+    "message": "Открыто"
+  },
+  "epicNext": {
+    "message": "Далее: $NAMES$ · с $DATE$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "Разрешите FreeKeep читать публичный список бесплатных игр Epic."
+  },
+  "epicAllow": {
+    "message": "Открыть настройки"
+  },
+  "epicError": {
+    "message": "Не удалось загрузить список Epic. FreeKeep повторит при следующей проверке."
+  },
+  "epicNone": {
+    "message": "Сейчас в Epic нет бесплатных игр."
+  },
+  "kind_bundle": {
+    "message": "Набор"
+  },
+  "optEpic": {
+    "message": "Напоминать о бесплатных играх в Epic Games Store"
+  },
+  "optEpicHint": {
+    "message": "Необязательно. Игры Epic нельзя забрать автоматически, поэтому FreeKeep сообщает, что бесплатно, и открывает страницу магазина. При включении запрашивается доступ к публичному списку бесплатных игр Epic; аккаунт Epic и вход не используются."
+  },
+  "optEpicDenied": {
+    "message": "Доступ не предоставлен, напоминания Epic остаются выключенными."
   }
 }

@@ -66,6 +66,10 @@ select {
   margin: 8px 0 0;
 }
 
+.hint.denied {
+  color: var(--warn);
+}
+
 .saved {
   color: var(--ok);
   font-weight: 600;

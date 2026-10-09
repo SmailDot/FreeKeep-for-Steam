@@ -193,7 +193,7 @@
     "message": "Zapisano"
   },
   "optPrivacy": {
-    "message": "FreeKeep łączy się wyłącznie ze store.steampowered.com, korzystając z istniejącego logowania do Steam w tej przeglądarce. Nigdy nie widzi twojego hasła i niczego nigdzie nie wysyła."
+    "message": "FreeKeep łączy się wyłącznie ze store.steampowered.com, korzystając z istniejącego logowania do Steam w tej przeglądarce (oraz z publiczną listą darmowych gier Epic, jeśli włączysz przypomnienia Epic). Nigdy nie widzi twojego hasła i nigdzie nie wysyła twoich danych."
   },
   "popupUntil": {
     "message": "Za darmo do $DATE$",
@@ -243,5 +243,66 @@
   },
   "popupPrivacy": {
     "message": "100% lokalnie · nie widzi hasła ani ciasteczka logowania"
+  },
+  "notifyEpicTitle": {
+    "message": "Za darmo w Epic Games Store"
+  },
+  "notifyEpicBody": {
+    "message": "$NAMES$ — za darmo do $DATE$. Kliknij, aby otworzyć sklep.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicReminderOnly": {
+    "message": "Tylko przypomnienie · odbierz na stronie Epic"
+  },
+  "epicGet": {
+    "message": "Odbierz w Epic"
+  },
+  "epicHide": {
+    "message": "Ukryj"
+  },
+  "epicOpened": {
+    "message": "Otwarto"
+  },
+  "epicNext": {
+    "message": "Następne: $NAMES$ · od $DATE$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "epicNoPermission": {
+    "message": "Zezwól FreeKeep na odczyt publicznej listy darmowych gier Epic."
+  },
+  "epicAllow": {
+    "message": "Otwórz ustawienia"
+  },
+  "epicError": {
+    "message": "Nie udało się wczytać listy Epic. FreeKeep spróbuje ponownie przy następnym sprawdzeniu."
+  },
+  "epicNone": {
+    "message": "Teraz nic za darmo w Epic."
+  },
+  "kind_bundle": {
+    "message": "Pakiet"
+  },
+  "optEpic": {
+    "message": "Przypominaj o darmowych grach w Epic Games Store"
+  },
+  "optEpicHint": {
+    "message": "Opcjonalne. Gier Epic nie da się odebrać automatycznie, więc FreeKeep informuje, co jest za darmo, i otwiera stronę sklepu. Włączenie wymaga zgody na odczyt publicznej listy darmowych gier Epic; konto ani logowanie Epic nie są używane."
+  },
+  "optEpicDenied": {
+    "message": "Nie udzielono uprawnienia, przypomnienia Epic pozostają wyłączone."
   }
 }

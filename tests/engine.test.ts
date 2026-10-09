@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { DEFAULT_META, claimNow, runCheck, skip, type Deps, type Meta, type SteamApi } from '@/core/engine';
+import { DEFAULT_META, claimNow, runCheck, setEpicStatus, skip, type Deps, type EpicApi, type Meta, type SteamApi } from '@/core/engine';
 import type { ClaimOutcome, Session } from '@/core/steam';
-import { DEFAULT_SETTINGS, type FreeSub, type PromoMap, type RunInfo, type Settings } from '@/core/types';
+import { DEFAULT_SETTINGS, type EpicMap, type EpicOffer, type FreeSub, type PromoMap, type RunInfo, type Settings } from '@/core/types';
 
 const GAME: FreeSub = { subid: 100, appid: 10, name: 'Game A', kind: 'game', baseAppid: null, baseName: null, capsule: null };
 const DLC: FreeSub = { subid: 200, appid: 20, name: 'DLC B', kind: 'dlc', baseAppid: 99, baseName: 'Base', capsule: null };
@@ -48,6 +48,7 @@ function setup(settings: Partial<Settings> = {}) {
     promos: {} as PromoMap,
     meta: { ...DEFAULT_META } as Meta,
     runs: [] as RunInfo[],
+    epic: {} as EpicMap,
   };
   const notes: { title: string; message: string }[] = [];
   let badge = '';
@@ -62,11 +63,14 @@ function setup(settings: Partial<Settings> = {}) {
       setMeta: async (m) => void (db.meta = structuredClone(m)),
       addRun: async (r) => void db.runs.unshift(r),
       setRunning: async () => {},
+      getEpic: async () => structuredClone(db.epic),
+      setEpic: async (e) => void (db.epic = structuredClone(e)),
     },
     ui: {
       notify: async (_id, title, message) => void notes.push({ title, message }),
       setBadge: async (text) => void (badge = text),
       t: (key, subs) => `${key}${subs ? `(${subs.join('|')})` : ''}`,
+      formatDate: (ms) => new Date(ms).toISOString().slice(0, 10),
     },
     now: () => clock,
     sleep: async () => {},
@@ -226,5 +230,106 @@ describe('manual retry', () => {
 
     await claimNow(t.deps, [100]);
     expect(t.status(100)).toBe('claimed');
+  });
+});
+
+const DAYMS = 24 * 3_600_000;
+
+function epicOffer(id: string, title: string, start: number, end: number, upcoming = false): EpicOffer {
+  return { id, title, kind: 'game', url: `https://store.epicgames.com/p/${id}`, image: null, start, end, upcoming };
+}
+
+describe('Epic reminders', () => {
+  function withEpic(settings: Partial<Settings> = {}) {
+    const t = setup({ epic: true, ...settings });
+    const now = 1_000_000;
+    const feed = {
+      current: [epicOffer('a', 'Alpha', now - DAYMS, now + 6 * DAYMS)],
+      upcoming: [epicOffer('b', 'Beta', now + 6 * DAYMS, now + 13 * DAYMS, true)],
+    };
+    let allowed = true;
+    let calls = 0;
+    const api: EpicApi = {
+      freeGames: async () => {
+        calls++;
+        return structuredClone(feed);
+      },
+    };
+    t.deps.epic = { api, allowed: async () => allowed };
+    t.steam.promos = [];
+    return { t, feed, calls: () => calls, deny: () => void (allowed = false) };
+  }
+
+  it('does nothing while switched off', async () => {
+    const { t, calls } = withEpic({ epic: false });
+    const run = await runCheck(t.deps, 'alarm');
+    expect(calls()).toBe(0);
+    expect(run.epic).toBeUndefined();
+  });
+
+  it('forgets the Epic list once switched off', async () => {
+    const { t } = withEpic();
+    await runCheck(t.deps, 'alarm');
+    expect(Object.keys(t.db.epic)).not.toHaveLength(0);
+    t.db.settings = { ...t.db.settings, epic: false };
+    await runCheck(t.deps, 'alarm');
+    expect(t.db.epic).toEqual({});
+  });
+
+  it('never fetches without the optional permission', async () => {
+    const { t, calls, deny } = withEpic();
+    deny();
+    const run = await runCheck(t.deps, 'alarm');
+    expect(calls()).toBe(0);
+    expect(run.epic).toBe('no_permission');
+  });
+
+  it('announces a live giveaway once and keeps upcoming ones quiet', async () => {
+    const { t } = withEpic();
+    const run = await runCheck(t.deps, 'alarm');
+    await runCheck(t.deps, 'alarm');
+    expect(run.epic).toBe(1);
+    expect(t.notes).toEqual([{ title: 'notifyEpicTitle', message: `notifyEpicBody(Alpha|${new Date(1_000_000 + 6 * DAYMS).toISOString().slice(0, 10)})` }]);
+    expect(t.db.epic['a']!.status).toBe('notified');
+    expect(t.db.epic['b']).toMatchObject({ status: 'new', upcoming: true });
+  });
+
+  it('announces an upcoming giveaway when its week starts', async () => {
+    const { t, feed } = withEpic();
+    await runCheck(t.deps, 'alarm');
+    t.advance(6 * DAYMS);
+    feed.current = [{ ...feed.upcoming[0]!, upcoming: false }];
+    feed.upcoming = [];
+    await runCheck(t.deps, 'alarm');
+    expect(t.notes.map((n) => n.message)).toEqual([expect.stringContaining('Alpha'), expect.stringContaining('Beta')]);
+  });
+
+  it('respects a hidden giveaway and the notification setting', async () => {
+    const { t } = withEpic({ notifications: false });
+    await runCheck(t.deps, 'alarm');
+    await setEpicStatus(t.deps, 'b', 'hidden');
+    expect(t.notes).toEqual([]);
+    expect(t.db.epic['a']!.status).toBe('notified');
+    expect(t.db.epic['b']!.status).toBe('hidden');
+  });
+
+  it('forgets giveaways a day after they end', async () => {
+    const { t, feed } = withEpic();
+    await runCheck(t.deps, 'alarm');
+    feed.current = [];
+    feed.upcoming = [];
+    t.advance(15 * DAYMS);
+    await runCheck(t.deps, 'alarm');
+    expect(t.db.epic).toEqual({});
+  });
+
+  it('keeps Steam results when Epic fails', async () => {
+    const { t } = withEpic();
+    t.steam.promos = [GAME];
+    t.deps.epic!.api.freeGames = async () => {
+      throw new Error('Epic HTTP 503');
+    };
+    const run = await runCheck(t.deps, 'alarm');
+    expect(run).toMatchObject({ ok: true, claimed: 1, epic: 'error' });
   });
 });

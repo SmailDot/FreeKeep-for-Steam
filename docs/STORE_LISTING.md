@@ -24,7 +24,8 @@ FreeKeep claims Steam's limited-time free-to-keep games for you, in the backgrou
 • Check every 1–24 hours, plus once when the browser starts
 • Claim automatically, or get notified and decide yourself
 • One quiet notification when something is claimed or needs you
-• Tiny: about 35 KB of code, zero dependencies, open source
+• Optional Epic Games Store reminders: get told when Epic gives a game away, then claim it on Epic's site. Off by default; it reads Epic's public list anonymously, with no Epic login
+• Tiny: about 40 KB of code, zero dependencies, open source
 
 Log in to the Steam store in this browser and FreeKeep does the rest.
 
@@ -45,7 +46,8 @@ FreeKeep 會在背景用你瀏覽器裡現有的 Steam 登入，自動幫你領�
 • 每 1–24 小時檢查一次，瀏覽器啟動時也會檢查
 • 可自動領取，或先通知你再決定
 • 只在領到遊戲或需要你處理時安靜地通知一次
-• 輕巧：程式碼約 35 KB、零依賴、開放原始碼
+• 選用的 Epic Games Store 限免提醒：Epic 送遊戲時提醒你，再到 Epic 網站自己領。預設關閉，以匿名方式讀取 Epic 公開清單，不需登入 Epic
+• 輕巧：程式碼約 40 KB、零依賴、開放原始碼
 
 在這個瀏覽器登入 Steam 商店，剩下的交給 FreeKeep。
 
@@ -65,6 +67,7 @@ they land in `.output/store/`, rendered from the real popup with fictional games
 | Promo video | YouTube URL | no | – |
 
 Promo tiles can't be localized; screenshots can (upload `screenshot-zh_TW-*` under 中文（台灣）).
+`screenshot-<lang>-3-epic.png` shows the optional Epic tab; upload it from version 0.2.0 on.
 
 ## Privacy practices tab
 
@@ -73,7 +76,7 @@ Answer in English; the form goes to the review team.
 **Single purpose**
 
 ```
-FreeKeep automatically claims limited-time free-to-keep games on the Steam store for the user, using the Steam store login that already exists in their browser. It does nothing else.
+FreeKeep helps the user keep free games: it automatically claims limited-time free-to-keep promotions on the Steam store, using the Steam store login that already exists in their browser. As an optional, off-by-default extra, it can also remind the user when the Epic Games Store gives a game away (reminder only; the user claims it on Epic's site). It does nothing else.
 ```
 
 **Permission justifications**
@@ -90,23 +93,25 @@ Runs the check for new free promotions in the background at the interval the use
 
 `notifications`
 ```
-Shows a system notification only when a game was claimed, a claim failed, or the user needs to log in to the Steam store. Users can turn notifications off on the options page.
+Shows a system notification only when a game was claimed, a claim failed, the user needs to log in to the Steam store, or (only if the user turned on Epic reminders) a new free game starts on the Epic Games Store. Users can turn notifications off on the options page.
 ```
 
-Host permission `https://store.steampowered.com/*`
+Host permissions (one field in the dashboard; it covers the required Steam host and the optional Epic one)
 ```
-The single purpose requires talking to the Steam store, and only to it. FreeKeep searches the store for 100%-off promotions (/search/results, /api/appdetails), reads which games the user already owns (/dynamicstore/userdata), reads the store region and the store's anti-forgery token (sessionid) from a store page, and claims a promotion with the same request the store's own "Add to Account" button sends (POST /freelicense/addfreelicense). It has no access to any other site and uses no content scripts, tabs, scripting or cookies permissions; the login cookie is HttpOnly and never read.
+https://store.steampowered.com/* (required): the single purpose requires talking to the Steam store. FreeKeep searches the store for 100%-off promotions (/search/results, /api/appdetails), reads which games the user already owns (/dynamicstore/userdata), reads the store region and the store's anti-forgery token (sessionid) from a store page, and claims a promotion with the same request the store's own "Add to Account" button sends (POST /freelicense/addfreelicense). It uses no content scripts, tabs, scripting or cookies permissions; the login cookie is HttpOnly and never read.
+
+https://store-site-backend-static-ipv4.ak.epicgames.com/* (optional, declared in optional_host_permissions): requested with permissions.request() only when the user turns on Epic Games Store reminders in the options page, and removed when they turn it off. FreeKeep uses it for one anonymous GET of Epic's public free-games feed (/freeGamesPromotions), with credentials omitted. The feed sends no CORS headers, so the extension cannot read it without this permission. No Epic account, login or cookies are involved, and nothing is ever sent to Epic.
 ```
 
 **Remote code** – *No, I am not using remote code.* All JavaScript is in the package; the popup only
-loads game images from Steam's CDN.
+loads game images from Steam's CDN (and Epic's, when Epic reminders are on).
 
 **Data usage** – the store asks for anything the extension *handles*, even if it never leaves the
 device:
 
 | Category | Tick? | Why |
 |---|---|---|
-| Website content | ✅ | Reads Steam store pages/JSON, including which games the account owns |
+| Website content | ✅ | Reads Steam store pages/JSON, including which games the account owns, and (optional) Epic's public giveaway feed |
 | Location | ✅ | Reads the Steam store region (country code) to query regional promotions |
 | Authentication information | – | Never reads or stores the password or login cookie; the anti-forgery token is sent back to Steam only, as explained in the host permission justification and privacy policy |
 | Everything else | – | Not handled |
@@ -116,6 +121,19 @@ Tick all three certifications (not sold, not used for unrelated purposes, not us
 **Privacy policy URL** – `https://github.com/SmailDot/FreeKeep-for-Steam/blob/main/PRIVACY.md`
 
 **Support** – email `smaildot@aidot.me`, site `https://github.com/SmailDot/FreeKeep-for-Steam/issues`
+
+## Updating the listing for 0.2.0 (Epic reminders)
+
+Upload 0.2.0 only after 0.1.0 has been approved. Then, in the same submission:
+
+1. **Privacy practices** – replace *Single purpose*, the `notifications` justification and the
+   host permission justification with the texts above. Data usage answers stay the same.
+2. **Store listing** – replace both descriptions, and add `screenshot-en-3-epic.png` (English) and
+   `screenshot-zh_TW-3-epic.png` (中文（台灣）).
+3. **Privacy policy** – merge to `main` first, so the URL above already describes Epic reminders.
+
+The optional permission doesn't trigger a permission warning on update, since it is only requested
+when the user turns the feature on.
 
 ## Before each release
 

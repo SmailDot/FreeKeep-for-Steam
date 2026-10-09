@@ -2,7 +2,7 @@
   "name": "freekeep-for-steam",
   "description": "Automatically claims Steam free-to-keep promotions using your existing browser login.",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "license": "MIT",
   "author": "SmailDot <smaildot@aidot.me> (https://github.com/SmailDot)",

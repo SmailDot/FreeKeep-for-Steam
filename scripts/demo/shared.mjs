@@ -50,6 +50,33 @@ export function demoPromos(T) {
   };
 }
 
+/** Fictional Epic giveaways: two running now, two announced for next week. */
+export function demoEpic(T) {
+  const day = 86_400_000;
+  // Weekly giveaways switch at the same hour: this week's started two days ago at 17:00.
+  const start = new Date(T - 2 * day).setHours(17, 0, 0, 0);
+  const next = start + 7 * day;
+  const offer = (id, title, from, to, start, upcoming, status) => ({
+    id: `demo:${id}`,
+    title,
+    kind: 'game',
+    url: 'https://store.epicgames.com/free-games',
+    image: capsule(title.toUpperCase(), from, to),
+    start,
+    end: start + 7 * day,
+    upcoming,
+    status,
+    firstSeen: T,
+    lastSeen: T,
+  });
+  return {
+    'demo:1': offer(1, 'Lumen Tides', '#14b8a6', '#1e3a8a', start, false, 'notified'),
+    'demo:2': offer(2, 'Paper Knights', '#a3e635', '#15803d', start, false, 'opened'),
+    'demo:3': offer(3, 'Moss Runner', '#84cc16', '#365314', next, true, 'new'),
+    'demo:4': offer(4, 'Quiet Harbor', '#38bdf8', '#0c4a6e', next, true, 'new'),
+  };
+}
+
 /** Extension storage as the popup sees it: logged in, last checked six hours ago, nothing found yet. */
 export function demoSeed(T) {
   return {

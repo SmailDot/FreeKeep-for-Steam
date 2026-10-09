@@ -43,6 +43,8 @@ export interface Settings {
   /** Also claim DLC whose base game is owned. */
   includeDlc: boolean;
   notifications: boolean;
+  /** Remind about Epic Games Store giveaways (needs the optional Epic host permission). */
+  epic: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -50,6 +52,7 @@ export const DEFAULT_SETTINGS: Settings = {
   mode: 'auto',
   includeDlc: true,
   notifications: true,
+  epic: false,
 };
 
 export type RunReason = 'alarm' | 'startup' | 'installed' | 'manual';
@@ -64,4 +67,31 @@ export interface RunInfo {
   found: number;
   claimed: number;
   error: string | null;
+  /** Epic offers found, or why the Epic check didn't run; absent when Epic is off. */
+  epic?: number | 'no_permission' | 'error';
 }
+
+export type EpicKind = 'game' | 'addon' | 'bundle' | 'other';
+
+/** An Epic Games Store giveaway, current or announced. Epic can't be claimed automatically. */
+export interface EpicOffer {
+  /** `${namespace}:${id}` */
+  id: string;
+  title: string;
+  kind: EpicKind;
+  url: string;
+  image: string | null;
+  start: number;
+  end: number;
+  upcoming: boolean;
+}
+
+export type EpicStatus = 'new' | 'notified' | 'opened' | 'hidden';
+
+export interface EpicState extends EpicOffer {
+  status: EpicStatus;
+  firstSeen: number;
+  lastSeen: number;
+}
+
+export type EpicMap = Record<string, EpicState>;
