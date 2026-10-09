@@ -89,7 +89,8 @@ giveaways. It **only reminds you**: a notification when a new free game starts, 
 with a **Get on Epic** button, and a heads-up for next week's games. You claim them on Epic's site.
 
 - Epic's list is public, so FreeKeep reads it anonymously, with no Epic account, no login and no
-  cookies. Your country and Steam data are not sent.
+  cookies. Only your browser's language is sent, so game names match Epic's site; your country and
+  Steam data are not.
 - Turning it on asks your browser for one extra permission, to read
   `store-site-backend-static-ipv4.ak.epicgames.com`. Turning it off gives the permission back.
 - If you never turn it on, FreeKeep never contacts Epic.

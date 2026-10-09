@@ -63,12 +63,15 @@ only **reminds**. The feature is off by default.
 
 | Purpose | Request | Login |
 |---|---|---|
-| Current and upcoming giveaways | `GET https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US` | no, `credentials: 'omit'` |
+| Current and upcoming giveaways | `GET https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=<ui>` | no, `credentials: 'omit'` |
 
 - The feed sends no CORS headers, so reading it needs host access. It is declared under
   `optional_host_permissions` and requested with `permissions.request()` when the user ticks the
   option; unticking calls `permissions.remove()`. Without the permission the check records
   `no_permission` and the popup links to the settings.
+- `locale` is the browser's UI language mapped to an Epic store locale (`zh-TW` → `zh-Hant`,
+  `es-419` → `es-MX`, unknown → `en-US`). Only titles change with it; ids, links, dates and images
+  are identical in every locale (checked October 2026).
 - No country is sent. The feed is the same for everyone; regional exceptions are rare and the
   store page has the final word.
 - A giveaway is an element with a promotional offer at `discountPercentage: 0`. Both the current
