@@ -85,7 +85,8 @@
 - Epic 的清單是公開的，FreeKeep 以匿名方式讀取：不需要 Epic 帳號、不帶登入、不帶 Cookie，
   只帶上瀏覽器語言（讓遊戲名稱跟 Epic 官網一致），不會送出你的國家或 Steam 資料
 - 開啟時，瀏覽器會詢問一項額外權限：讀取 `store-site-backend-static-ipv4.ak.epicgames.com`；
-  關閉時會把權限交還
+  關閉時會把權限交還。Chrome 的擴充功能頁面可能仍會列出這個網址，那是 Chrome 記得你允許過、
+  下次再開啟時不會再問，但 FreeKeep 實際上已經連不到它
 - 只要你沒開，FreeKeep 就完全不會連到 Epic
 
 ### 權限

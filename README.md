@@ -93,6 +93,8 @@ with a **Get on Epic** button, and a heads-up for next week's games. You claim t
   Steam data are not.
 - Turning it on asks your browser for one extra permission, to read
   `store-site-backend-static-ipv4.ak.epicgames.com`. Turning it off gives the permission back.
+  Chrome's extension page may still list that site, because Chrome remembers you allowed it once
+  and won't ask again if you turn it back on, but FreeKeep can no longer reach it.
 - If you never turn it on, FreeKeep never contacts Epic.
 
 ### Permissions

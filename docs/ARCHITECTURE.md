@@ -69,6 +69,10 @@ only **reminds**. The feature is off by default.
   `optional_host_permissions` and requested with `permissions.request()` when the user ticks the
   option; unticking calls `permissions.remove()`. Without the permission the check records
   `no_permission` and the popup links to the settings.
+- `permissions.remove()` takes the host out of the active permissions (`contains()` is false and
+  requests to Epic fail), but Chrome keeps the user's approval: `chrome://extensions` still lists
+  the site and a later `request()` is granted without a prompt. Diagnostics report the real state
+  as `epicAccess`.
 - `locale` is the browser's UI language mapped to an Epic store locale (`zh-TW` → `zh-Hant`,
   `es-419` → `es-MX`, unknown → `en-US`). Only titles change with it; ids, links, dates and images
   are identical in every locale (checked October 2026).

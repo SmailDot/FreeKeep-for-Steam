@@ -23,7 +23,7 @@ Thanks for testing FreeKeep! It takes about five minutes. (English below.)
 | 6 | 關掉瀏覽器再打開，等約 1 分鐘 | 自動跑一次檢查（popup 的「上次檢查」時間會更新） |
 | 7 | 設定頁勾選「提醒我 Epic Games Store 的免費遊戲」 | Chrome 跳出權限詢問；允許後 popup 出現「Steam ／ Epic Games」分頁，Epic 分頁列出本週限免並通知一次 |
 | 8 | Epic 分頁按「到 Epic 領取」/「隱藏」 | 開啟該遊戲的 Epic 商店頁並標示「已開啟」/ 該遊戲從清單消失 |
-| 9 | 取消勾選 Epic 提醒 | 分頁消失；`chrome://extensions` 的詳細資料裡，Epic 網站權限已被移除 |
+| 9 | 取消勾選 Epic 提醒，再按 popup 的「複製診斷報告」 | 分頁消失；報告裡 `"epicAccess": false`。`chrome://extensions` 的詳細資料可能仍列出 Epic 網址，這是 Chrome 記得你曾經允許過（再次勾選時不會再問），FreeKeep 實際上已經連不到 Epic |
 
 ## 回報問題
 
@@ -53,7 +53,7 @@ popup 底部按「複製診斷報告」，連同你看到的狀況貼到 [Issues
 | 6 | Restart the browser, wait about a minute | A check runs on its own ("Last check" updates) |
 | 7 | Settings → tick **Remind me of free games on the Epic Games Store** | Chrome asks for permission; once allowed, the popup gets **Steam / Epic Games** tabs, the Epic tab lists this week's giveaways, and one notification appears |
 | 8 | On the Epic tab, click **Get on Epic** / **Hide** | The game's Epic store page opens and it is marked **Opened** / the game disappears from the list |
-| 9 | Untick Epic reminders | The tabs disappear; in `chrome://extensions` → Details, the Epic site access is gone |
+| 9 | Untick Epic reminders, then click **Copy diagnostics** in the popup | The tabs disappear and the report says `"epicAccess": false`. `chrome://extensions` → Details may still list the Epic site: Chrome remembers you allowed it once (ticking again won't ask), but FreeKeep can no longer reach it |
 
 ## Report a problem
 
