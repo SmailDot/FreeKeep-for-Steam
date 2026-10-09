@@ -6,8 +6,9 @@
 // Needs Playwright with Chromium (`npm i -D playwright && npx playwright install chromium`)
 // and ffmpeg on PATH. Writes docs/assets/demo-<lang>.gif and .mp4.
 //
-// Story: Epic reminders are on, so the popup has Steam / Epic tabs. Steam finds three promotions and
-// claims them (one fails, then succeeds on retry); at the end the demo flips to the Epic tab.
+// Story, told by the copy on the left while the real popup acts on the right:
+//   problem (others want your password) → how (FreeKeep never sees your login) → claim (three
+//   promotions found and claimed, one retried) → epic (the Epic tab) → proof (check it yourself).
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -32,7 +33,7 @@ const seed = demoSeed(T);
 await mockExtension(context, lang, { ...seed, settings: { ...seed.settings, epic: true } });
 
 const page = await context.newPage();
-await page.goto(`${server.origin}/stage.html?lang=${lang}`);
+await page.goto(`${server.origin}/stage.html?lang=${lang}&scene=problem`);
 const frame = page.frame({ url: /popup\.html/ });
 await frame.waitForSelector('#checkNow');
 // With Steam empty and Epic giveaways listed, the popup would open on the Epic tab. Pick Steam first,
@@ -56,7 +57,12 @@ await frame.evaluate(() => {
   };
 });
 
-await wait(1300);
+const scene = (name) => page.evaluate((n) => window.showScene(n), name);
+await wait(2800);
+await scene('how');
+await wait(3300);
+await scene('claim');
+await wait(500);
 await frame.click('#checkNow');
 await wait(1300);
 await set({ promos: state });
@@ -75,12 +81,13 @@ await wait(1200);
 await frame.click('.card.is-failed button.primary');
 await wait(1100);
 await update(2, { status: 'claimed', attempts: 0, lastError: null });
-await wait(2000);
-// Epic: the copy on the left changes, then the popup switches tabs.
-await page.evaluate(() => window.showScene('epic'));
+await wait(1800);
+await scene('epic');
 await wait(600);
 await frame.click('#tabEpic');
-await wait(3600);
+await wait(2800);
+await scene('proof');
+await wait(3000);
 
 const video = await page.video().path();
 await context.close();
@@ -91,7 +98,7 @@ const out = join(root, `docs/assets/demo-${lang}`);
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '0.4', '-i', video, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-movflags', '+faststart', `${out}.mp4`]);
 execFileSync('ffmpeg', [
   '-y', '-loglevel', 'error', '-ss', '0.4', '-i', video,
-  '-vf', 'fps=12,scale=900:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle',
+  '-vf', 'fps=10,scale=860:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle',
   `${out}.gif`,
 ]);
 rmSync(videoDir, { recursive: true, force: true });

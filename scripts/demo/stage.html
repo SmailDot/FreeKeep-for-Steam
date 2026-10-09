@@ -58,14 +58,18 @@
         color: transparent;
       }
       .privacy {
+        --tone: 74 222 128;
         display: flex;
         gap: 14px;
         align-items: flex-start;
         padding: 16px 18px;
         margin: 0 0 22px;
         border-radius: 16px;
-        background: linear-gradient(135deg, rgb(34 197 94 / 0.18), rgb(34 197 94 / 0.06));
-        border: 1px solid rgb(74 222 128 / 0.45);
+        background: linear-gradient(135deg, rgb(var(--tone) / 0.18), rgb(var(--tone) / 0.06));
+        border: 1px solid rgb(var(--tone) / 0.45);
+        transition:
+          background 0.3s,
+          border-color 0.3s;
         opacity: 0;
         animation:
           up 0.6s 0.5s forwards,
@@ -75,13 +79,17 @@
         flex: none;
         width: 34px;
         height: 34px;
-        color: #4ade80;
+        color: rgb(var(--tone));
       }
       .privacy strong {
         display: block;
         font-size: 21px;
-        color: #bbf7d0;
+        color: color-mix(in srgb, rgb(var(--tone)) 45%, white);
         margin-bottom: 4px;
+      }
+      /* The "problem" scene of the demo: what other tools ask for. */
+      .privacy.bad {
+        --tone: 248 113 113;
       }
       .privacy span {
         font-size: 15.5px;
@@ -90,7 +98,7 @@
       }
       @keyframes glow {
         50% {
-          box-shadow: 0 0 28px rgb(74 222 128 / 0.35);
+          box-shadow: 0 0 28px rgb(var(--tone) / 0.35);
         }
       }
       ul {
@@ -182,9 +190,9 @@
     <section class="copy">
       <div class="brand"><img src="/icon/128.png" alt="" />FreeKeep <span>for Steam</span></div>
       <h1 id="headline"></h1>
-      <div class="privacy">
+      <div id="box" class="privacy">
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/>
+          <path id="boxIcon" fill="currentColor" d=""/>
         </svg>
         <div><strong id="privacyTitle"></strong><span id="privacyBody"></span></div>
       </div>
@@ -194,52 +202,152 @@
     <script>
       const params = new URLSearchParams(location.search);
       const lang = params.get('lang') ?? 'en';
-      const epic = {
-        en: {
-          headline: 'Plus <em>Epic Games</em> giveaway reminders.',
-          privacyTitle: 'Optional, anonymous, off by default',
-          privacyBody: "FreeKeep reads Epic's public list of free games without any login and reminds you. You claim them on Epic's site.",
-          points: [
-            ['🔔', 'One notification when a new Epic giveaway starts'],
-            ['🗓️', "See next week's free games early"],
-            ['🧩', 'Steam and Epic side by side, in separate tabs'],
-          ],
+      // steam / epic: the store screenshots. problem → how → claim → epic → proof: the README demo.
+      const scenes = {
+        steam: {
+          en: {
+            headline: 'Never miss a <em>free Steam game</em> again.',
+            privacyTitle: 'Your credentials never leave your computer',
+            privacyBody: 'No password, no tokens, no server. FreeKeep runs locally and uses the Steam login already in your browser.',
+            points: [
+              ['⚡', 'Claims free-to-keep promos in the background'],
+              ['🎯', 'Only real promotions, never demos or F2P'],
+              ['🪶', 'Zero dependencies, fully open source'],
+            ],
+          },
+          zh_TW: {
+            headline: '再也不會錯過<br><em>Steam 限免遊戲</em>',
+            privacyTitle: '你的帳號憑證永遠不會離開你的電腦',
+            privacyBody: '不要密碼、不要 Token、沒有伺服器。FreeKeep 全程在本機執行，直接沿用瀏覽器裡的 Steam 登入。',
+            points: [
+              ['⚡', '在背景自動領取限時免費遊戲'],
+              ['🎯', '只領真限免，不亂領試玩版和免費遊戲'],
+              ['🪶', '零依賴、完全開源，程式碼人人可查'],
+            ],
+          },
         },
-        zh_TW: {
-          headline: '還能提醒你<br><em>Epic 限免遊戲</em>',
-          privacyTitle: '選用、匿名、預設關閉',
-          privacyBody: '不登入 Epic、不帶 Cookie，只讀取 Epic 公開的限免清單來提醒你；領取在 Epic 網站自己完成。',
-          points: [
-            ['🔔', 'Epic 新限免開始時通知你一次'],
-            ['🗓️', '提前知道下週的免費遊戲'],
-            ['🧩', 'Steam 與 Epic 分頁並列，一目了然'],
-          ],
+        epic: {
+          en: {
+            headline: 'Plus <em>Epic Games</em> giveaway reminders.',
+            privacyTitle: 'Optional, anonymous, off by default',
+            privacyBody: "FreeKeep reads Epic's public list of free games without any login and reminds you. You claim them on Epic's site.",
+            points: [
+              ['🔔', 'One notification when a new Epic giveaway starts'],
+              ['🗓️', "See next week's free games early"],
+              ['🧩', 'Steam and Epic side by side, in separate tabs'],
+            ],
+          },
+          zh_TW: {
+            headline: '還能提醒你<br><em>Epic 限免遊戲</em>',
+            privacyTitle: '選用、匿名、預設關閉',
+            privacyBody: '不登入 Epic、不帶 Cookie，只讀取 Epic 公開的限免清單來提醒你；領取在 Epic 網站自己完成。',
+            points: [
+              ['🔔', 'Epic 新限免開始時通知你一次'],
+              ['🗓️', '提前知道下週的免費遊戲'],
+              ['🧩', 'Steam 與 Epic 分頁並列，一目了然'],
+            ],
+          },
+        },
+        problem: {
+          tone: 'bad',
+          en: {
+            headline: 'Most auto-claimers want your <em>password</em>.',
+            privacyTitle: 'That means trusting a stranger with your account',
+            privacyBody: 'Your password, token or cookies end up in a bot, a server or a config file.',
+            points: [
+              ['🔑', 'Your password in a config file'],
+              ['🍪', "Your login cookies on someone's server"],
+              ['🗂️', 'A new browser tab for every game'],
+            ],
+          },
+          zh_TW: {
+            headline: '大多數自動領取工具<br>都要你的<em>密碼</em>',
+            privacyTitle: '等於把帳號交給陌生人',
+            privacyBody: '你的密碼、Token 或 Cookie 會被存進機器人、伺服器或設定檔裡。',
+            points: [
+              ['🔑', '密碼寫在設定檔裡'],
+              ['🍪', '登入 Cookie 放在別人的伺服器上'],
+              ['🗂️', '每款遊戲都開一個新分頁'],
+            ],
+          },
+        },
+        how: {
+          en: {
+            headline: 'FreeKeep <em>never sees</em> your login.',
+            privacyTitle: 'Your login never leaves your browser',
+            privacyBody: 'The browser attaches the Steam login it already has. Steam locks it (HttpOnly) so no extension can read it, and FreeKeep has no cookie permission.',
+            points: [
+              ['🔑', 'No password'],
+              ['🍪', 'No cookies'],
+              ['🖥️', 'No server'],
+            ],
+          },
+          zh_TW: {
+            headline: 'FreeKeep <em>看不到</em><br>你的登入',
+            privacyTitle: '你的登入不會離開瀏覽器',
+            privacyBody: '瀏覽器自己帶上已登入的 Steam。Steam 把它鎖在 HttpOnly Cookie 裡，擴充功能讀不到，FreeKeep 也沒有讀 Cookie 的權限。',
+            points: [
+              ['🔑', '不要密碼'],
+              ['🍪', '不碰 Cookie'],
+              ['🖥️', '沒有伺服器'],
+            ],
+          },
+        },
+        claim: {
+          en: {
+            headline: 'Free Steam games, claimed <em>in the background</em>.',
+            privacyTitle: 'One quiet request, no tabs',
+            privacyBody: 'The same request as Steam\'s own "Add to Account" button, sent while you do something else.',
+            points: [
+              ['🎯', 'Only real free-to-keep promotions'],
+              ['🧩', 'Skips what you own, checks DLC base games'],
+              ['🔔', 'One quiet notification'],
+            ],
+          },
+          zh_TW: {
+            headline: '在<em>背景</em>自動領取<br>Steam 限免遊戲',
+            privacyTitle: '一個安靜的請求，不開分頁',
+            privacyBody: '跟 Steam「加入帳戶」按鈕送出的請求一模一樣，你在做別的事時它就領好了。',
+            points: [
+              ['🎯', '只領真正的限時免費'],
+              ['🧩', '跳過已擁有的，DLC 會檢查本體'],
+              ['🔔', '只安靜地通知一次'],
+            ],
+          },
+        },
+        proof: {
+          en: {
+            headline: "Don't trust us. <em>Check it.</em>",
+            privacyTitle: 'chrome://extensions → Details',
+            privacyBody: "Notifications and store.steampowered.com (plus Epic's public list, if you turn it on). Nothing else.",
+            points: [
+              ['📖', 'Open source, about 40 KB of code'],
+              ['🌍', '12 languages'],
+              ['💸', 'Free, MIT licensed'],
+            ],
+          },
+          zh_TW: {
+            headline: '不用相信我們<br><em>自己檢查</em>',
+            privacyTitle: 'chrome://extensions → 詳細資料',
+            privacyBody: '只有通知和 store.steampowered.com（開啟 Epic 提醒時再加上 Epic 公開清單），沒有別的。',
+            points: [
+              ['📖', '開源，程式碼約 40 KB'],
+              ['🌍', '12 種語言'],
+              ['💸', '免費，MIT 授權'],
+            ],
+          },
         },
       };
-      const steam = {
-        en: {
-          headline: 'Never miss a <em>free Steam game</em> again.',
-          privacyTitle: 'Your credentials never leave your computer',
-          privacyBody: 'No password, no tokens, no server. FreeKeep runs locally and uses the Steam login already in your browser.',
-          points: [
-            ['⚡', 'Claims free-to-keep promos in the background'],
-            ['🎯', 'Only real promotions, never demos or F2P'],
-            ['🪶', 'Zero dependencies, fully open source'],
-          ],
-        },
-        zh_TW: {
-          headline: '再也不會錯過<br><em>Steam 限免遊戲</em>',
-          privacyTitle: '你的帳號憑證永遠不會離開你的電腦',
-          privacyBody: '不要密碼、不要 Token、沒有伺服器。FreeKeep 全程在本機執行，直接沿用瀏覽器裡的 Steam 登入。',
-          points: [
-            ['⚡', '在背景自動領取限時免費遊戲'],
-            ['🎯', '只領真限免，不亂領試玩版和免費遊戲'],
-            ['🪶', '零依賴、完全開源，程式碼人人可查'],
-          ],
-        },
+      const ICONS = {
+        good: 'M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z',
+        bad: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z',
       };
-      function render(scene) {
-        const copy = (scene === 'epic' ? epic : steam)[lang];
+      function render(name) {
+        const scene = scenes[name] ?? scenes.steam;
+        const copy = scene[lang];
+        const tone = scene.tone ?? 'good';
+        document.getElementById('box').classList.toggle('bad', tone === 'bad');
+        document.getElementById('boxIcon').setAttribute('d', ICONS[tone]);
         document.getElementById('headline').innerHTML = copy.headline;
         document.getElementById('privacyTitle').textContent = copy.privacyTitle;
         document.getElementById('privacyBody').textContent = copy.privacyBody;
