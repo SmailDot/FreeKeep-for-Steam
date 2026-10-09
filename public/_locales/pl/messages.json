@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep: odbieraj darmowe gry Steam"
   },
   "extDescription": {
-    "message": "Automatycznie odbiera darmowe gry Steam przez logowanie w przeglądarce. Bez haseł, bez kart, minimalne uprawnienia."
+    "message": "Odbiera darmowe gry Steam w tle. Bez hasła i ciasteczek: korzysta z logowania, które ma już przeglądarka. Działa w 100% lokalnie."
   },
   "notifyClaimedTitle": {
     "message": "Odebrano darmowe gry"

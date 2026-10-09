@@ -4,30 +4,43 @@
 
 # FreeKeep for Steam
 
-**Never miss a free Steam game again.**
-A tiny browser extension that claims Steam's free-to-keep promotions for you, in the background,
-using the Steam login your browser already has.
+**Auto-claim free Steam games, without giving anyone your password.**
+A tiny browser extension that claims Steam's free-to-keep giveaways for you in the background,
+plus optional reminders for Epic Games Store giveaways.
 
-🔒 **Your credentials never leave your computer.**
+🔒 **No password. No cookies. No server. Your login never leaves your browser.**
 
-[繁體中文](README.zh-TW.md) · [Install](#install) · [How it works](#how-it-works) · [Privacy](PRIVACY.md)
+[繁體中文](README.zh-TW.md) · [Why it's safe](#-why-its-safe-in-plain-words) · [Install](#install) · [How it works](#how-it-works) · [Privacy](PRIVACY.md)
 
 ![FreeKeep demo](docs/assets/demo-en.gif)
 
 </div>
 
-## 🔒 Privacy first
+## 🔒 Why it's safe, in plain words
 
-Most auto-claimers need your Steam password, a session token or cookies, stored in a bot, a server
-or a config file. **FreeKeep never asks for any of them.** It runs entirely inside your own browser
-and lets the browser attach the login it already has, exactly like when you open the Steam store.
+An auto-claimer that wants your password or cookies is a risk, so FreeKeep is built to never need
+them:
 
-| | Typical bots & scripts | FreeKeep |
+1. **Your browser already knows you're logged in to Steam.** Whenever something asks for a page on
+   `store.steampowered.com`, the browser attaches that login by itself, the same way it does when you
+   browse the store. FreeKeep only asks the browser to send the same request as Steam's own
+   **Add to Account** button.
+2. **FreeKeep can't see your login.** Steam keeps it in a locked cookie (`HttpOnly`) that no script or
+   extension can read, and FreeKeep doesn't even have the permission to ask for cookies.
+3. **There is no FreeKeep server.** Nothing is uploaded anywhere, so there is nothing to leak.
+4. **Check it yourself in 30 seconds.** Open `chrome://extensions`, then FreeKeep's **Details**: the
+   only things listed are notifications and access to `store.steampowered.com` (plus Epic's public
+   list, if you turn on Epic reminders). The [code](src/) is open source and small enough to read.
+
+### Compared with typical auto-claimers
+
+| | Typical bots, scripts & extensions | FreeKeep |
 |---|---|---|
-| Asks for your password, token or cookies | Usually | **Never** |
-| Runs on | A bot, a server or an always-on machine | **Your own browser** |
-| Your Steam login | Copied into their config | **Stays in your browser, untouched** |
-| Talks to | Their server, Discord, third-party APIs | **Only `store.steampowered.com`**¹ |
+| Asks for your password, token or cookies | Often | **Never** |
+| How it claims | Opens store tabs and clicks for you, or logs in on a server | **One quiet background request, no tabs** |
+| Runs on | Often a bot, a server or an always-on machine | **Your own browser** |
+| Your Steam login | Often copied into their config | **Stays in your browser, untouched** |
+| Talks to | Often their server, Discord or third-party APIs | **Only `store.steampowered.com`**¹ |
 | Collects data | Varies | **Nothing. No server, no analytics** |
 | Auditable | Varies | **~40 KB of code, open source** |
 

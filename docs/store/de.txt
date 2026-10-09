@@ -1,0 +1,27 @@
+Sichert dir zeitlich begrenzte Gratis-Steam-Spiele und DLCs automatisch im Hintergrund – mit dem Steam-Login, den dein Browser schon hat. Kein Passwort, keine Cookies, kein Server.
+
+🔒 WARUM ES SICHER IST – EINFACH ERKLÄRT
+• Dein Browser weiß bereits, dass du bei Steam angemeldet bist. Bei Anfragen an store.steampowered.com hängt er den Login von selbst an, genau wie beim Stöbern im Shop. FreeKeep bittet ihn nur, dieselbe Anfrage zu senden wie Steams eigener Button „Zum Konto hinzufügen“.
+• FreeKeep kann deinen Login nicht sehen. Steam speichert ihn in einem gesperrten Cookie (HttpOnly), das keine Erweiterung lesen kann – und FreeKeep hat nicht einmal die Cookie-Berechtigung.
+• Es gibt keinen FreeKeep-Server. Nichts wird hochgeladen, also kann auch nichts durchsickern.
+• Prüf es selbst: chrome://extensions → FreeKeep → „Details“ zeigt nur Benachrichtigungen und store.steampowered.com. Der Code ist Open Source.
+
+VIELE AUTO-CLAIMER vs. FREEKEEP
+❌ Wollen Passwort, Token oder Cookies → ✅ Niemals
+❌ Öffnen für jedes Spiel einen Shop-Tab und klicken für dich → ✅ Eine stille Anfrage im Hintergrund, keine Tabs
+❌ Laufen auf einem Server oder Bot → ✅ Läuft nur in deinem eigenen Browser
+❌ Senden Daten an ihren Server → ✅ Kein Server, keine Analyse, kein Tracking
+
+WAS ES MACHT
+• Sichert nur echte, zeitlich begrenzte Gratisaktionen (free to keep), keine Demos, Playtests oder Free-to-Play-Spiele
+• Überspringt Spiele, die du schon besitzt, und sichert DLCs nur, wenn du das Hauptspiel hast
+• Prüft alle 1, 3, 6, 12 oder 24 Stunden und einmal beim Browserstart
+• Sichert automatisch oder benachrichtigt dich zuerst, damit du selbst entscheidest
+• Eine dezente Benachrichtigung, wenn etwas gesichert wurde oder du gefragt bist
+• Optionale Erinnerungen für den Epic Games Store: Du erfährst, wenn Epic ein Spiel verschenkt, und holst es dir selbst auf Epics Seite. Standardmäßig aus; liest Epics öffentliche Liste ohne Login
+• 12 Sprachen, etwa 40 KB Code, keine Abhängigkeiten
+
+Melde dich in diesem Browser im Steam-Shop an – den Rest erledigt FreeKeep.
+
+Nicht mit der Valve Corporation oder Epic Games verbunden. Steam ist eine Marke der Valve Corporation.
+Quellcode und Datenschutzerklärung: https://github.com/SmailDot/FreeKeep-for-Steam

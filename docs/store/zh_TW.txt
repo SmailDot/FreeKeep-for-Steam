@@ -1,0 +1,27 @@
+在背景自動領取 Steam 限時免費遊戲與 DLC，直接沿用瀏覽器裡已登入的 Steam。不要密碼、碰不到 Cookie、沒有伺服器。
+
+🔒 為什麼安全（白話版）
+• 你的瀏覽器本來就記得你登入了 Steam，向 store.steampowered.com 要資料時會自己帶上登入狀態，跟你平常逛商店一樣。FreeKeep 只是請瀏覽器送出和 Steam「加入帳戶」按鈕一模一樣的請求。
+• FreeKeep 看不到你的登入：Steam 把它放在上鎖的 Cookie（HttpOnly）裡，任何擴充功能都讀不到，而且 FreeKeep 連讀 Cookie 的權限都沒有。
+• 沒有 FreeKeep 伺服器：什麼都不會上傳，自然沒有東西可以外洩。
+• 自己驗證：chrome://extensions → FreeKeep →「詳細資料」只列出通知和 store.steampowered.com。程式碼完全開源。
+
+許多自動領取工具 vs FreeKeep
+❌ 要你的密碼、Token 或 Cookie → ✅ 從不
+❌ 每款遊戲開一個商店分頁幫你點 → ✅ 背景送出一個請求，不開分頁
+❌ 在伺服器或機器人上執行 → ✅ 只在你自己的瀏覽器裡執行
+❌ 把資料傳到它們的伺服器 → ✅ 沒有伺服器、沒有分析、沒有追蹤
+
+功能
+• 只領真正的限時免費（free to keep），不會亂領試玩版、Playtest 或免費遊玩遊戲
+• 已擁有的會跳過；DLC 只在你擁有本體時才領
+• 每 1、3、6、12 或 24 小時檢查一次，瀏覽器啟動時也會檢查
+• 可以自動領取，或先通知你再自己決定
+• 只在領到遊戲或需要你處理時安靜地通知一次
+• 選用的 Epic Games Store 限免提醒：Epic 送遊戲時提醒你，再到 Epic 網站自己領。預設關閉，不需登入 Epic 就能讀取公開清單
+• 12 種語言、程式碼約 40 KB、零依賴
+
+在這個瀏覽器登入 Steam 商店，剩下的交給 FreeKeep。
+
+與 Valve Corporation 及 Epic Games 無關。Steam 是 Valve Corporation 的商標。
+原始碼與隱私權政策：https://github.com/SmailDot/FreeKeep-for-Steam

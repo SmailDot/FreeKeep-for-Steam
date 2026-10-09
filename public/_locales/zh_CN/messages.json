@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "FreeKeep for Steam"
+    "message": "FreeKeep：自动领取 Steam 限免游戏"
   },
   "extDescription": {
-    "message": "用浏览器现有的登录自动领取 Steam 限时免费游戏。无需密码、不开标签页、权限最少。"
+    "message": "在后台自动领取 Steam 限免游戏。无需密码、碰不到 Cookie，直接沿用浏览器里已登录的 Steam，全程在你的电脑运行。"
   },
   "notifyClaimedTitle": {
     "message": "已领取免费游戏"
