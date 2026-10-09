@@ -96,11 +96,11 @@ Runs the check for new free promotions in the background at the interval the use
 Shows a system notification only when a game was claimed, a claim failed, the user needs to log in to the Steam store, or (only if the user turned on Epic reminders) a new free game starts on the Epic Games Store. Users can turn notifications off on the options page.
 ```
 
-Host permissions (one field in the dashboard; it covers the required Steam host and the optional Epic one)
+Host permissions (one field in the dashboard, max 1,000 characters; it covers the required Steam host and the optional Epic one)
 ```
-https://store.steampowered.com/* (required): the single purpose requires talking to the Steam store. FreeKeep searches the store for 100%-off promotions (/search/results, /api/appdetails), reads which games the user already owns (/dynamicstore/userdata), reads the store region and the store's anti-forgery token (sessionid) from a store page, and claims a promotion with the same request the store's own "Add to Account" button sends (POST /freelicense/addfreelicense). It uses no content scripts, tabs, scripting or cookies permissions; the login cookie is HttpOnly and never read.
+store.steampowered.com (required): FreeKeep searches the Steam store for 100%-off promotions (/search/results, /api/appdetails), reads which games the user owns (/dynamicstore/userdata), reads the store region and anti-forgery token (sessionid) from a store page, and claims a promotion with the same request as the store's own "Add to Account" button (POST /freelicense/addfreelicense). No content scripts, tabs, scripting or cookies permissions; the HttpOnly login cookie is never read.
 
-https://store-site-backend-static-ipv4.ak.epicgames.com/* (optional, declared in optional_host_permissions): requested with permissions.request() only when the user turns on Epic Games Store reminders in the options page, and removed when they turn it off. FreeKeep uses it for one anonymous GET of Epic's public free-games feed (/freeGamesPromotions), with credentials omitted; its only parameter is the browser's language code, so game names appear in the user's language. The feed sends no CORS headers, so the extension cannot read it without this permission. No Epic account, login or cookies are involved, and no user data is sent to Epic.
+store-site-backend-static-ipv4.ak.epicgames.com (optional): requested only when the user turns on Epic reminders in the options page, and removed when they turn it off. Used for one anonymous GET of Epic's public free-games feed (no credentials; the only parameter is the language code). The feed sends no CORS headers, so it can't be read without this permission. No Epic account, login or user data is involved.
 ```
 
 **Remote code** – *No, I am not using remote code.* All JavaScript is in the package; the popup only
