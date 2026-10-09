@@ -1,6 +1,6 @@
 Automatically claim free-to-keep Steam games and DLC giveaways in the background, using the Steam login your browser already has. No password, no cookies, no server.
 
-🔒 WHY IT'S SAFE, IN PLAIN WORDS
+🔒 WHY IT'S SAFE
 • Your browser already knows you're logged in to Steam. It attaches that login by itself to requests to store.steampowered.com, just like when you browse the store. FreeKeep only asks it to send the same request as Steam's own "Add to Account" button.
 • FreeKeep can't see your login. Steam keeps it in a locked (HttpOnly) cookie that no extension can read, and FreeKeep doesn't even have the cookies permission.
 • There is no FreeKeep server. Nothing is uploaded, so nothing can leak.
@@ -15,6 +15,7 @@ MANY AUTO-CLAIMERS vs FREEKEEP
 WHAT IT DOES
 • Claims only real limited-time free-to-keep promotions, never demos, playtests or free-to-play games
 • Skips games you already own, and claims DLC only when you own the base game
+• Uses your own Steam store region, so it only claims what's free where you are
 • Checks every 1, 3, 6, 12 or 24 hours, plus once when the browser starts
 • Claims automatically, or notifies you first so you can decide
 • One quiet notification when something is claimed or needs you

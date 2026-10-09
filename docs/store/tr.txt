@@ -1,6 +1,6 @@
 Steam'deki süreli ücretsiz oyunları ve DLC'leri, tarayıcınızda zaten açık olan Steam oturumunu kullanarak arka planda otomatik alır. Şifre yok, çerez yok, sunucu yok.
 
-🔒 NEDEN GÜVENLİ? (SADE ANLATIM)
+🔒 NEDEN GÜVENLİ?
 • Tarayıcınız Steam'e giriş yaptığınızı zaten biliyor. store.steampowered.com adresine giden isteklere, mağazada gezinirken olduğu gibi, oturumu kendisi ekler. FreeKeep yalnızca tarayıcıdan, Steam'in "Hesaba ekle" düğmesinin gönderdiği isteğin aynısını göndermesini ister.
 • FreeKeep oturumunuzu göremez. Steam onu hiçbir uzantının okuyamadığı kilitli bir çerezde (HttpOnly) saklar ve FreeKeep'in çerez izni bile yoktur.
 • FreeKeep sunucusu yoktur. Hiçbir şey yüklenmez, bu yüzden sızacak bir şey de yoktur.
@@ -15,6 +15,7 @@ BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
 NELER YAPAR
 • Yalnızca gerçek süreli ücretsiz kampanyaları (free to keep) alır; demo, playtest veya oynaması ücretsiz oyunları almaz
 • Sahip olduğunuz oyunları atlar, DLC'yi yalnızca ana oyuna sahipseniz alır
+• Kendi Steam mağaza bölgenizi kullanır, yalnızca bulunduğunuz bölgede ücretsiz olanları alır
 • Her 1, 3, 6, 12 veya 24 saatte bir ve tarayıcı açıldığında kontrol eder
 • Otomatik alır ya da önce bildirip kararı size bırakır
 • Bir şey alındığında veya size ihtiyaç olduğunda tek, sade bir bildirim
