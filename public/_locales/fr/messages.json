@@ -242,6 +242,6 @@
     "message": "à l'instant"
   },
   "popupPrivacy": {
-    "message": "100 % local · ne touche jamais à votre mot de passe ni aux cookies"
+    "message": "100 % local · ne voit ni votre mot de passe ni votre cookie de connexion"
   }
 }
