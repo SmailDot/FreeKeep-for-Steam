@@ -25,6 +25,7 @@
     "postinstall": "wxt prepare",
     "demo": "node scripts/demo/record.mjs",
     "store-assets": "node scripts/demo/store-assets.mjs",
+    "epic-shot": "node scripts/demo/epic-shot.mjs",
     "icons": "node scripts/render-icons.mjs"
   },
   "devDependencies": {

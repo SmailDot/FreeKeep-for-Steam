@@ -84,9 +84,12 @@ retried up to three times. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for 
 
 ### Epic Games Store reminders
 
-In the settings, turn on **Remind me of free games on the Epic Games Store** and FreeKeep also watches Epic's weekly
-giveaways. It **only reminds you**: a notification when a new free game starts, a list in the popup
-with a **Get on Epic** button, and a heads-up for next week's games. You claim them on Epic's site.
+In the settings, turn on **Remind me of free games on the Epic Games Store** and FreeKeep also
+watches Epic's weekly giveaways. It **only reminds you**: a notification when a new free game starts,
+a list in the popup with a **Get on Epic** button, and a heads-up for next week's games. You claim
+them on Epic's site.
+
+<p align="center"><img src="docs/assets/epic-en.png" width="320" alt="The popup's Epic Games tab: this week's free games with Get on Epic buttons, and next week's games below" /></p>
 
 - Epic's list is public, so FreeKeep reads it anonymously, with no Epic account, no login and no
   cookies. Only your browser's language is sent, so game names match Epic's site; your country and
@@ -145,7 +148,7 @@ npm run zip        # store-ready zip
 ```
 
 The demo above is rendered from the real popup: `npm run build && node scripts/demo/record.mjs en`
-(needs Playwright and ffmpeg).
+(needs Playwright and ffmpeg). The Epic screenshot comes from `npm run epic-shot`.
 
 ### Translations
 

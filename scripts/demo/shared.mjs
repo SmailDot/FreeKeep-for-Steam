@@ -89,6 +89,34 @@ export function demoSeed(T) {
   };
 }
 
+/** After a check: two games claimed, a DLC waiting for its base game. popupSeenAt is older, so the
+ * popup replays its claim celebration. */
+export function demoClaimedSeed(T) {
+  const promos = demoPromos(T);
+  return {
+    ...demoSeed(T),
+    promos: {
+      1: { ...promos[1], status: 'claimed' },
+      2: { ...promos[2], status: 'claimed' },
+      3: { ...promos[3], status: 'needs_base' },
+    },
+    runs: [{ at: T, reason: 'alarm', ok: true, loggedIn: true, country: 'TW', found: 3, claimed: 2, error: null }],
+    popupSeenAt: T - 60_000,
+  };
+}
+
+/** The same account with Epic reminders on and the celebrations already seen. */
+export function demoEpicSeed(T) {
+  const seed = demoClaimedSeed(T);
+  return {
+    ...seed,
+    settings: { ...seed.settings, epic: true },
+    epic: demoEpic(T),
+    runs: [{ ...seed.runs[0], epic: 2 }],
+    popupSeenAt: T,
+  };
+}
+
 /** Installs the mocked extension APIs (with this language and storage) into every popup frame. */
 export async function mockExtension(context, lang, seed) {
   const messages = JSON.parse(readFileSync(join(built, `_locales/${lang}/messages.json`), 'utf8'));

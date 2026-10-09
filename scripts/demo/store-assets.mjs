@@ -9,32 +9,14 @@
 // All images are opaque 24-bit PNGs, as the store requires. Needs Playwright with Chromium.
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { chromium, demoEpic, demoPromos, demoSeed, mockExtension, root, startServer } from './shared.mjs';
+import { chromium, demoClaimedSeed, demoEpicSeed, mockExtension, root, startServer } from './shared.mjs';
 
 const out = join(root, '.output/store');
 mkdirSync(out, { recursive: true });
 
 const T = Date.now();
-const promos = demoPromos(T);
-// Everything already handled; popupSeenAt is older, so the popup replays its claim celebration.
-const claimedSeed = {
-  ...demoSeed(T),
-  promos: {
-    1: { ...promos[1], status: 'claimed' },
-    2: { ...promos[2], status: 'claimed' },
-    3: { ...promos[3], status: 'needs_base' },
-  },
-  runs: [{ at: T, reason: 'alarm', ok: true, loggedIn: true, country: 'TW', found: 3, claimed: 2, error: null }],
-  popupSeenAt: T - 60_000,
-};
-// The same account with Epic reminders on, celebrations already seen, opened on the Epic tab.
-const epicSeed = {
-  ...claimedSeed,
-  settings: { ...claimedSeed.settings, epic: true },
-  epic: demoEpic(T),
-  runs: [{ ...claimedSeed.runs[0], epic: 2 }],
-  popupSeenAt: T,
-};
+const claimedSeed = demoClaimedSeed(T);
+const epicSeed = demoEpicSeed(T);
 
 const STAGE_CSS =
   'html,body{width:1280px!important;height:800px!important}body{padding:0 84px!important;gap:64px!important}' +
