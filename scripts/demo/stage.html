@@ -218,11 +218,11 @@
           zh_TW: {
             headline: '再也不會錯過<br><em>Steam 限免遊戲</em>',
             privacyTitle: '你的帳號憑證永遠不會離開你的電腦',
-            privacyBody: '不要密碼、不要 Token、沒有伺服器。FreeKeep 全程在本機執行，直接沿用瀏覽器裡的 Steam 登入。',
+            privacyBody: '不需密碼或 Token，也沒有伺服器。FreeKeep 完全在本機執行，沿用瀏覽器既有的 Steam 登入。',
             points: [
               ['⚡', '在背景自動領取限時免費遊戲'],
-              ['🎯', '只領真限免，不亂領試玩版和免費遊戲'],
-              ['🪶', '零依賴、完全開源，程式碼人人可查'],
+              ['🎯', '只領取真正的限免，不含試玩版與免費遊玩遊戲'],
+              ['🪶', '無第三方依賴，原始碼完整公開'],
             ],
           },
         },
@@ -240,7 +240,7 @@
           zh_TW: {
             headline: '還能提醒你<br><em>Epic 限免遊戲</em>',
             privacyTitle: '選用、匿名、預設關閉',
-            privacyBody: '不登入 Epic、不帶 Cookie，只讀取 Epic 公開的限免清單來提醒你；領取在 Epic 網站自己完成。',
+            privacyBody: '不需登入 Epic，只讀取公開的限免清單並提醒你；領取在 Epic 網站完成。',
             points: [
               ['🔔', 'Epic 新限免開始時通知你一次'],
               ['🗓️', '提前知道下週的免費遊戲'],
@@ -251,44 +251,44 @@
         problem: {
           tone: 'bad',
           en: {
-            headline: 'Most auto-claimers want your <em>password</em>.',
-            privacyTitle: 'That means trusting a stranger with your account',
-            privacyBody: 'Your password, token or cookies end up in a bot, a server or a config file.',
+            headline: 'Many auto-claimers need your <em>password</em>.',
+            privacyTitle: 'Your account security then depends on a third party',
+            privacyBody: 'Passwords, tokens or login cookies get stored in a bot, on a server or in a config file.',
             points: [
-              ['🔑', 'Your password in a config file'],
-              ['🍪', "Your login cookies on someone's server"],
-              ['🗂️', 'A new browser tab for every game'],
+              ['🔑', 'Password stored in a config file'],
+              ['🍪', 'Login cookies kept on a remote server'],
+              ['🗂️', 'A browser tab opened for every game'],
             ],
           },
           zh_TW: {
-            headline: '大多數自動領取工具<br>都要你的<em>密碼</em>',
-            privacyTitle: '等於把帳號交給陌生人',
-            privacyBody: '你的密碼、Token 或 Cookie 會被存進機器人、伺服器或設定檔裡。',
+            headline: '許多自動領取工具<br>需要你的<em>密碼</em>',
+            privacyTitle: '帳號安全因此取決於第三方',
+            privacyBody: '密碼、Token 或登入 Cookie 會被存放在機器人、伺服器或設定檔中。',
             points: [
-              ['🔑', '密碼寫在設定檔裡'],
-              ['🍪', '登入 Cookie 放在別人的伺服器上'],
-              ['🗂️', '每款遊戲都開一個新分頁'],
+              ['🔑', '密碼存放在設定檔中'],
+              ['🍪', '登入 Cookie 存放在遠端伺服器'],
+              ['🗂️', '每款遊戲各開啟一個分頁'],
             ],
           },
         },
         how: {
           en: {
             headline: 'FreeKeep <em>never sees</em> your login.',
-            privacyTitle: 'Your login never leaves your browser',
-            privacyBody: 'The browser attaches the Steam login it already has. Steam locks it (HttpOnly) so no extension can read it, and FreeKeep has no cookie permission.',
+            privacyTitle: 'It reuses your browser session',
+            privacyBody: 'Your browser attaches your Steam session. Steam protects the login cookie with HttpOnly, so extensions can\'t read it, and FreeKeep doesn\'t request cookie access.',
             points: [
               ['🔑', 'No password'],
-              ['🍪', 'No cookies'],
+              ['🍪', 'No cookie access'],
               ['🖥️', 'No server'],
             ],
           },
           zh_TW: {
-            headline: 'FreeKeep <em>看不到</em><br>你的登入',
-            privacyTitle: '你的登入不會離開瀏覽器',
-            privacyBody: '瀏覽器自己帶上已登入的 Steam。Steam 把它鎖在 HttpOnly Cookie 裡，擴充功能讀不到，FreeKeep 也沒有讀 Cookie 的權限。',
+            headline: 'FreeKeep <em>讀不到</em><br>你的登入資料',
+            privacyTitle: '沿用瀏覽器既有的登入狀態',
+            privacyBody: '由瀏覽器自動附上 Steam 登入狀態。登入憑證受 HttpOnly 保護，擴充功能無法讀取，FreeKeep 也未申請 Cookie 權限。',
             points: [
-              ['🔑', '不要密碼'],
-              ['🍪', '不碰 Cookie'],
+              ['🔑', '不需密碼'],
+              ['🍪', '不讀取 Cookie'],
               ['🖥️', '沒有伺服器'],
             ],
           },
@@ -296,30 +296,30 @@
         claim: {
           en: {
             headline: 'Free Steam games, claimed <em>in the background</em>.',
-            privacyTitle: 'One quiet request, no tabs',
-            privacyBody: 'The same request as Steam\'s own "Add to Account" button, sent while you do something else.',
+            privacyTitle: 'A single request, no tabs',
+            privacyBody: 'The same request as Steam\'s "Add to Account" button, sent in the background.',
             points: [
-              ['🎯', 'Only real free-to-keep promotions'],
-              ['🧩', 'Skips what you own, checks DLC base games'],
-              ['🔔', 'One quiet notification'],
+              ['🎯', 'Genuine free-to-keep promotions only'],
+              ['🧩', 'Skips owned games, checks DLC base games'],
+              ['🔔', 'Notifies you only when needed'],
             ],
           },
           zh_TW: {
             headline: '在<em>背景</em>自動領取<br>Steam 限免遊戲',
-            privacyTitle: '一個安靜的請求，不開分頁',
-            privacyBody: '跟 Steam「加入帳戶」按鈕送出的請求一模一樣，你在做別的事時它就領好了。',
+            privacyTitle: '單一請求，不開分頁',
+            privacyBody: '與 Steam「加入帳戶」按鈕相同的請求，在背景完成。',
             points: [
-              ['🎯', '只領真正的限時免費'],
-              ['🧩', '跳過已擁有的，DLC 會檢查本體'],
-              ['🔔', '只安靜地通知一次'],
+              ['🎯', '只領取真正的限時免費'],
+              ['🧩', '略過已擁有的遊戲，DLC 會確認本體'],
+              ['🔔', '只在必要時通知'],
             ],
           },
         },
         proof: {
           en: {
-            headline: "Don't trust us. <em>Check it.</em>",
-            privacyTitle: 'chrome://extensions → Details',
-            privacyBody: "Notifications and store.steampowered.com (plus Epic's public list, if you turn it on). Nothing else.",
+            headline: 'Transparent and <em>verifiable</em>.',
+            privacyTitle: 'Chrome → Extensions → Details',
+            privacyBody: "Shows only notifications and access to the Steam store (plus Epic's public list, if enabled).",
             points: [
               ['📖', 'Open source, about 40 KB of code'],
               ['🌍', '12 languages'],
@@ -327,9 +327,9 @@
             ],
           },
           zh_TW: {
-            headline: '不用相信我們<br><em>自己檢查</em>',
-            privacyTitle: 'chrome://extensions → 詳細資料',
-            privacyBody: '只有通知和 store.steampowered.com（開啟 Epic 提醒時再加上 Epic 公開清單），沒有別的。',
+            headline: '公開透明<br><em>隨時可查證</em>',
+            privacyTitle: 'Chrome 擴充功能 → 詳細資料',
+            privacyBody: '只會看到通知權限與 Steam 商店的存取權（開啟 Epic 提醒時另含 Epic 公開清單）。',
             points: [
               ['📖', '開源，程式碼約 40 KB'],
               ['🌍', '12 種語言'],

@@ -1,28 +1,28 @@
-Steam'deki süreli ücretsiz oyunları ve DLC'leri, tarayıcınızda zaten açık olan Steam oturumunu kullanarak arka planda otomatik alır. Şifre yok, çerez yok, sunucu yok.
+Steam'deki süreli ücretsiz oyunları ve DLC'leri, tarayıcınızda zaten açık olan Steam oturumunu kullanarak arka planda otomatik olarak alır. Şifre yok, oturum çerezlerine erişim yok, sunucu yok.
 
 🔒 NEDEN GÜVENLİ?
-• Tarayıcınız Steam'e giriş yaptığınızı zaten biliyor. store.steampowered.com adresine giden isteklere, mağazada gezinirken olduğu gibi, oturumu kendisi ekler. FreeKeep yalnızca tarayıcıdan, Steam'in "Hesaba ekle" düğmesinin gönderdiği isteğin aynısını göndermesini ister.
-• FreeKeep oturumunuzu göremez. Steam onu hiçbir uzantının okuyamadığı kilitli bir çerezde (HttpOnly) saklar ve FreeKeep'in çerez izni bile yoktur.
-• FreeKeep sunucusu yoktur. Hiçbir şey yüklenmez, bu yüzden sızacak bir şey de yoktur.
-• Kendiniz kontrol edin: chrome://extensions → FreeKeep → "Ayrıntılar" yalnızca bildirimleri ve store.steampowered.com'u gösterir. Kod açık kaynaklıdır.
+• Tarayıcı oturumunu kullanır: Steam'e giriş yaptıysanız tarayıcı, Steam mağazasına giden isteklere oturumunuzu otomatik olarak ekler. FreeKeep yalnızca "Hesaba ekle" düğmesiyle aynı isteği gönderir.
+• Giriş bilgilerinizi okuyamaz: Steam, oturum çerezini HttpOnly özelliğiyle korur; bu nedenle hiçbir uzantı onu okuyamaz. FreeKeep çerez izni de istemez.
+• Sunucu yok: FreeKeep'in bir arka ucu yoktur; hiçbir veri yüklemez veya toplamaz.
+• Doğrulanabilir: Chrome'daki uzantı ayrıntıları sayfasında yalnızca bildirimler ve Steam mağazasına erişim görünür. Kaynak kodu herkese açıktır.
 
 BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
-❌ Şifrenizi, token'ınızı veya çerezlerinizi ister → ✅ Asla
-❌ Her oyun için bir mağaza sekmesi açıp sizin yerinize tıklar → ✅ Arka planda tek sessiz istek, sekme yok
-❌ Bir sunucuda veya botta çalışır → ✅ Yalnızca kendi tarayıcınızda çalışır
-❌ Verileri kendi sunucusuna gönderir → ✅ Sunucu yok, analiz yok, takip yok
+❌ Şifrenizi veya oturum çerezlerinizi ister → ✅ Gerekmez
+❌ Her oyun için bir mağaza sekmesi açar → ✅ Arka planda tek bir istek, sekme yok
+❌ Bir sunucuda veya botta çalışır → ✅ Yalnızca tarayıcınızda çalışır
+❌ Verileri geliştiricinin sunucusuna gönderir → ✅ Sunucu yok, analiz yok, takip yok
 
-NELER YAPAR
-• Yalnızca gerçek süreli ücretsiz kampanyaları (free to keep) alır; demo, playtest veya oynaması ücretsiz oyunları almaz
+ÖZELLİKLER
+• Yalnızca gerçek süreli ücretsiz kampanyaları (free to keep) alır; demolar, playtest'ler ve oynaması ücretsiz oyunlar hariçtir
 • Sahip olduğunuz oyunları atlar, DLC'yi yalnızca ana oyuna sahipseniz alır
-• Kendi Steam mağaza bölgenizi kullanır, yalnızca bulunduğunuz bölgede ücretsiz olanları alır
+• Steam mağaza bölgenizi kullanır ve yalnızca bölgenizde ücretsiz olanları alır
 • Her 1, 3, 6, 12 veya 24 saatte bir ve tarayıcı açıldığında kontrol eder
-• Otomatik alır ya da önce bildirip kararı size bırakır
-• Bir şey alındığında veya size ihtiyaç olduğunda tek, sade bir bildirim
-• İsteğe bağlı Epic Games Store hatırlatmaları: Epic bir oyunu ücretsiz verdiğinde haber alın, oyunu Epic sitesinde kendiniz alın. Varsayılan olarak kapalı; Epic'in herkese açık listesini oturum açmadan okur
-• 12 dil, yaklaşık 40 KB kod, sıfır bağımlılık
+• Otomatik alır ya da önce size sorar
+• Yalnızca bir oyun alındığında veya ilginiz gerektiğinde bildirim gönderir
+• İsteğe bağlı Epic Games Store hatırlatmaları: Epic'teki ücretsiz oyunları bildirir, oyunu Epic sitesinden siz alırsınız. Varsayılan olarak kapalıdır; herkese açık liste oturum açmadan okunur
+• 12 dil, yaklaşık 40 KB kod, bağımlılık yok
 
-Bu tarayıcıda Steam mağazasına giriş yapın, gerisini FreeKeep halleder.
+Bu tarayıcıda Steam mağazasına giriş yapın, FreeKeep otomatik olarak çalışır.
 
 Valve Corporation veya Epic Games ile bağlantılı değildir. Steam, Valve Corporation'ın ticari markasıdır.
 Kaynak kod ve gizlilik politikası: https://github.com/SmailDot/FreeKeep-for-Steam

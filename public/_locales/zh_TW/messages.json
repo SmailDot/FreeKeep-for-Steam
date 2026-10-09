@@ -3,7 +3,7 @@
     "message": "FreeKeep：自動領取 Steam 限免遊戲"
   },
   "extDescription": {
-    "message": "在背景自動領取 Steam 限免遊戲。不需密碼、碰不到 Cookie，直接沿用瀏覽器裡已登入的 Steam，全程在你的電腦執行。"
+    "message": "在背景自動領取 Steam 限免遊戲，沿用瀏覽器既有的登入狀態。不需密碼、不讀取登入憑證、沒有伺服器。"
   },
   "notifyClaimedTitle": {
     "message": "已領取免費遊戲"
