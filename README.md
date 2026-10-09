@@ -90,7 +90,8 @@ No `tabs`, no `scripting`, no `cookies`, no access to any other site.
 
 ## FAQ
 
-**Is my account safe?** FreeKeep never sees your password or cookies. The browser attaches your
+**Is my account safe?** FreeKeep never sees your password, and it can't read your login cookie:
+Steam marks it `HttpOnly` and FreeKeep has no `cookies` permission. The browser attaches your
 existing Steam login to requests for `store.steampowered.com`, exactly like when you visit the store.
 The code is small enough to read in one sitting.
 

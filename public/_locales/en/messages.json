@@ -242,6 +242,6 @@
     "message": "just now"
   },
   "popupPrivacy": {
-    "message": "100% local · never touches your password or cookies"
+    "message": "100% local · can't see your password or login cookie"
   }
 }

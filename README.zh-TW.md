@@ -84,7 +84,8 @@
 
 ## 常見問題
 
-**帳號安全嗎？** FreeKeep 看不到你的密碼或 cookie。瀏覽器會像你平常逛商店一樣，自動替
+**帳號安全嗎？** FreeKeep 看不到你的密碼，也讀不到你的登入 Cookie：Steam 把它設為 `HttpOnly`，
+而 FreeKeep 沒有 `cookies` 權限。瀏覽器會像你平常逛商店一樣，自動替
 `store.steampowered.com` 的請求帶上登入狀態。程式碼很短，一次就能讀完。
 
 **Steam 允許嗎？** FreeKeep 送出的請求跟按「加入帳戶」一樣，而且頻率很低。但它仍然是非官方的自動化，

@@ -242,6 +242,6 @@
     "message": "たった今"
   },
   "popupPrivacy": {
-    "message": "完全ローカル動作・パスワードやCookieには触れません"
+    "message": "完全ローカル動作・パスワードやログインCookieは見えません"
   }
 }
