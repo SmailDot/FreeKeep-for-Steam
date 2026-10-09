@@ -1,5 +1,5 @@
 import { browser } from 'wxt/browser';
-import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient } from '@/core/epic';
+import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient, epicLocale } from '@/core/epic';
 import { claimNow, runCheck, setEpicStatus, skip, type Deps, type MessageKey } from '@/core/engine';
 import { SteamClient } from '@/core/steam';
 import type { RunReason } from '@/core/types';
@@ -38,7 +38,7 @@ const deps: Deps = {
       }).format(ms),
   },
   epic: {
-    api: new EpicClient(),
+    api: new EpicClient(epicLocale(browser.i18n.getUILanguage())),
     allowed: () => browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
   },
 };

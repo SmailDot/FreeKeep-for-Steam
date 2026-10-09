@@ -1,7 +1,8 @@
 import type { EpicKind, EpicOffer } from './types';
 
 /** Epic's public giveaway feed. It sends no CORS headers, so reading it needs this host permission. */
-export const EPIC_API = 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US';
+export const epicApi = (locale: string) =>
+  `https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=${encodeURIComponent(locale)}`;
 export const EPIC_ORIGIN = 'https://store-site-backend-static-ipv4.ak.epicgames.com/*';
 export const EPIC_STORE = 'https://store.epicgames.com';
 export const EPIC_FREE_GAMES = `${EPIC_STORE}/free-games`;
@@ -26,6 +27,21 @@ interface Element {
     promotionalOffers?: { promotionalOffers?: Offer[] }[];
     upcomingPromotionalOffers?: { promotionalOffers?: Offer[] }[];
   } | null;
+}
+
+const SAME_CODE = ['ar', 'de', 'fr', 'it', 'ja', 'ko', 'pl', 'ru', 'th', 'tr'];
+
+/**
+ * Epic's store locale for the browser's UI language, so titles read as they do on Epic's site.
+ * Ids, links and dates are the same in every locale; only names change.
+ */
+export function epicLocale(uiLanguage: string): string {
+  const lang = uiLanguage.toLowerCase().replace(/_/g, '-');
+  const [base = '', region = ''] = lang.split('-');
+  if (base === 'zh') return /hant|tw|hk|mo/.test(lang) ? 'zh-Hant' : 'zh-CN';
+  if (base === 'es') return region === '' || region === 'es' ? 'es-ES' : 'es-MX';
+  if (base === 'pt') return 'pt-BR';
+  return SAME_CODE.includes(base) ? base : 'en-US';
 }
 
 /** Free (100% off) offers inside a promotion group list. */
@@ -139,11 +155,14 @@ export function parseEpic(json: unknown, now: number): { current: EpicOffer[]; u
 type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
 
 export class EpicClient {
-  constructor(private readonly fetchImpl: FetchLike = (i, init) => fetch(i, init)) {}
+  constructor(
+    private readonly locale = 'en-US',
+    private readonly fetchImpl: FetchLike = (i, init) => fetch(i, init),
+  ) {}
 
-  /** Anonymous request: no cookies and no user data, Epic only learns what any visitor sends. */
+  /** Anonymous request: no cookies and no user data beyond the language, like any visitor sends. */
   async freeGames(now: number): Promise<{ current: EpicOffer[]; upcoming: EpicOffer[] }> {
-    const res = await this.fetchImpl(EPIC_API, { credentials: 'omit', cache: 'no-store' });
+    const res = await this.fetchImpl(epicApi(this.locale), { credentials: 'omit', cache: 'no-store' });
     if (!res.ok) throw new Error(`Epic HTTP ${res.status}`);
     return parseEpic(await res.json(), now);
   }

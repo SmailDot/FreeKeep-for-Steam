@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { EPIC_FREE_GAMES, EpicClient, parseEpic, resolveSlug, thumbnail } from '@/core/epic';
+import { EPIC_FREE_GAMES, EpicClient, epicLocale, parseEpic, resolveSlug, thumbnail } from '@/core/epic';
 
 const feed = JSON.parse(readFileSync(new URL('./fixtures/epic-free-games.json', import.meta.url), 'utf8'));
 const NOW = Date.parse('2026-10-10T00:00:00Z');
@@ -99,20 +99,41 @@ describe('thumbnail', () => {
   });
 });
 
+describe('epicLocale', () => {
+  it('maps browser languages to Epic store locales', () => {
+    expect(epicLocale('zh-TW')).toBe('zh-Hant');
+    expect(epicLocale('zh-HK')).toBe('zh-Hant');
+    expect(epicLocale('zh_TW')).toBe('zh-Hant');
+    expect(epicLocale('zh-CN')).toBe('zh-CN');
+    expect(epicLocale('zh')).toBe('zh-CN');
+    expect(epicLocale('es')).toBe('es-ES');
+    expect(epicLocale('es-419')).toBe('es-MX');
+    expect(epicLocale('pt-PT')).toBe('pt-BR');
+    expect(epicLocale('ja')).toBe('ja');
+    expect(epicLocale('de-AT')).toBe('de');
+    expect(epicLocale('en-GB')).toBe('en-US');
+    expect(epicLocale('nl')).toBe('en-US');
+    expect(epicLocale('')).toBe('en-US');
+  });
+});
+
 describe('EpicClient', () => {
-  it('sends an anonymous request and parses it', async () => {
+  it('sends an anonymous request in the given locale and parses it', async () => {
+    let url = '';
     let init: RequestInit | undefined;
-    const client = new EpicClient(async (_url, i) => {
+    const client = new EpicClient('zh-Hant', async (u, i) => {
+      url = u;
       init = i;
       return new Response(JSON.stringify(feed), { status: 200 });
     });
     const { current } = await client.freeGames(NOW);
     expect(current).toHaveLength(2);
+    expect(url).toBe('https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=zh-Hant');
     expect(init?.credentials).toBe('omit');
   });
 
   it('throws on HTTP errors', async () => {
-    const client = new EpicClient(async () => new Response('', { status: 503 }));
+    const client = new EpicClient('en-US', async () => new Response('', { status: 503 }));
     await expect(client.freeGames(NOW)).rejects.toThrow('Epic HTTP 503');
   });
 });

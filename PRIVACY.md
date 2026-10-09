@@ -49,7 +49,8 @@ These requests are governed by [Valve's privacy policy](https://store.steampower
 This feature is off by default. When you turn it on, your browser asks you to allow access to
 `https://store-site-backend-static-ipv4.ak.epicgames.com`, and FreeKeep then downloads Epic's public
 list of free games from there at each check. The request is anonymous: it carries no cookies and no
-login, uses no Epic account, and includes no data about you, your Steam account or your country. The
+login, and uses no Epic account. The only information it contains is your browser's language, so the
+game names match Epic's site; it includes nothing about you, your Steam account or your country. The
 popup shows the games' cover images, which your browser loads from Epic's image server
 (`cdn1.epicgames.com`) like any web page would. FreeKeep never claims anything on Epic and never
 opens Epic pages by itself; it only opens the store page when you click **Get on Epic** or the
@@ -90,7 +91,8 @@ FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的 Epic
 
 選用的 Epic Games Store 限免提醒預設關閉。開啟時，瀏覽器會請你允許存取
 `https://store-site-backend-static-ipv4.ak.epicgames.com`，之後 FreeKeep 每次檢查會從那裡下載 Epic 公開的限免清單。
-這個請求是匿名的：不帶 Cookie、不帶登入、不使用 Epic 帳號，也不含任何關於你、你的 Steam 帳號或國家的資料。
+這個請求是匿名的：不帶 Cookie、不帶登入、不使用 Epic 帳號。請求裡唯一的資訊是瀏覽器的語言，讓遊戲名稱跟 Epic 官網一致，
+不含任何關於你、你的 Steam 帳號或國家的資料。
 popup 顯示的封面圖由瀏覽器從 Epic 圖片伺服器（`cdn1.epicgames.com`）載入，就像一般網頁一樣。
 FreeKeep 不會在 Epic 上領取任何東西，也不會自己開啟 Epic 頁面，只有在你按下「到 Epic 領取」或通知時才會開啟商店頁。
 清單中的公開資料（名稱、圖片連結、商店連結、日期）以及你是否已開啟或隱藏，只存在你的裝置上；關閉功能時會一併移除權限。
