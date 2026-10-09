@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "ブラウザのSteamログインを使い、無料配布ゲームを自動で受け取ります。パスワード不要、タブも開かず、権限は最小限。"
+  },
+  "notifyClaimedTitle": {
+    "message": "無料ゲームを受け取りました"
+  },
+  "notifyClaimedBody": {
+    "message": "$COUNT$ 本をSteamライブラリに追加しました：$NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "無料配布ゲームがあります"
+  },
+  "notifyAvailableBody": {
+    "message": "無料配布 $COUNT$ 本：$NAMES$。FreeKeepを開いて受け取ってください。",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Steamにログインしてください"
+  },
+  "notifyLoginBody": {
+    "message": "このブラウザでSteamストアにログインすると、FreeKeepが受け取れます：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "受け取れませんでした"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — FreeKeepで再試行するか、ストアページで受け取ってください。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "無料配布を監視中"
+  },
+  "popupChecking": {
+    "message": "Steamを確認中…"
+  },
+  "popupLoggedOut": {
+    "message": "このブラウザでSteamストアにログインすると、FreeKeepがゲームを受け取れます。"
+  },
+  "popupOpenStore": {
+    "message": "Steamストアを開く"
+  },
+  "popupLastCheck": {
+    "message": "最終確認 $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "まだ確認していません"
+  },
+  "popupCheckNow": {
+    "message": "今すぐ確認"
+  },
+  "popupEmptyTitle": {
+    "message": "現在、無料配布はありません"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeepは$HOURS$時間ごとに確認し、新しい無料配布ゲームを受け取ります。",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "前回の確認に失敗：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "ゲーム"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "その他"
+  },
+  "status_pending": {
+    "message": "受け取り可能"
+  },
+  "status_claimed": {
+    "message": "受け取り済み"
+  },
+  "status_owned": {
+    "message": "所有済み"
+  },
+  "status_needs_base": {
+    "message": "本編が必要"
+  },
+  "status_skipped": {
+    "message": "スキップ"
+  },
+  "status_failed": {
+    "message": "失敗"
+  },
+  "waitingLogin": {
+    "message": "Steamのログイン待ち"
+  },
+  "actionClaim": {
+    "message": "受け取る"
+  },
+  "actionSkip": {
+    "message": "スキップ"
+  },
+  "actionRetry": {
+    "message": "再試行"
+  },
+  "actionStore": {
+    "message": "ストア"
+  },
+  "popupRecent": {
+    "message": "最近受け取ったゲーム"
+  },
+  "popupSettings": {
+    "message": "設定"
+  },
+  "popupDiagnostics": {
+    "message": "診断情報をコピー"
+  },
+  "popupCopied": {
+    "message": "コピーしました"
+  },
+  "popupSource": {
+    "message": "ソースコード"
+  },
+  "optTitle": {
+    "message": "FreeKeep の設定"
+  },
+  "optInterval": {
+    "message": "確認間隔"
+  },
+  "optIntervalHint": {
+    "message": "ブラウザ起動直後にも確認します。"
+  },
+  "optHours": {
+    "message": "$N$ 時間ごと",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "無料配布が見つかったとき"
+  },
+  "optModeAuto": {
+    "message": "自動で受け取る"
+  },
+  "optModeAsk": {
+    "message": "先に確認する"
+  },
+  "optDlc": {
+    "message": "所有ゲームのDLCも受け取る"
+  },
+  "optNotifications": {
+    "message": "通知を表示する"
+  },
+  "optSaved": {
+    "message": "保存しました"
+  },
+  "optPrivacy": {
+    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います。パスワードを見ることはなく、他の場所へ何も送信しません。"
+  },
+  "popupUntil": {
+    "message": "$DATE$ まで無料",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "$HOURS$時間ごと",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Valveとは無関係です。SteamはValve Corporationの商標です。"
+  },
+  "toastClaimed": {
+    "message": "$NAME$ を受け取りました！",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "$NAME$ を受け取れませんでした",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ には本編が必要です",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "たった今"
+  },
+  "popupPrivacy": {
+    "message": "完全ローカル動作・パスワードやCookieには触れません"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Tarayıcınızdaki Steam oturumuyla ücretsiz oyunları otomatik alır. Şifre yok, sekme yok, minimum izin."
+  },
+  "notifyClaimedTitle": {
+    "message": "Ücretsiz oyunlar alındı"
+  },
+  "notifyClaimedBody": {
+    "message": "Steam kütüphanenize $COUNT$ oyun eklendi: $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Ücretsiz oyunlar var"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ kalıcı ücretsiz oyun: $NAMES$. Almak için FreeKeep'i açın.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Steam'e giriş yapın"
+  },
+  "notifyLoginBody": {
+    "message": "FreeKeep'in alabilmesi için bu tarayıcıda Steam mağazasına giriş yapın: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "Alınamadı"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — yeniden denemek için FreeKeep'i açın veya mağaza sayfasından alın.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "Ücretsiz oyunları takip ediyor"
+  },
+  "popupChecking": {
+    "message": "Steam kontrol ediliyor…"
+  },
+  "popupLoggedOut": {
+    "message": "FreeKeep'in oyun alabilmesi için bu tarayıcıda Steam mağazasına giriş yapın."
+  },
+  "popupOpenStore": {
+    "message": "Steam mağazasını aç"
+  },
+  "popupLastCheck": {
+    "message": "Son kontrol: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Henüz kontrol edilmedi"
+  },
+  "popupCheckNow": {
+    "message": "Şimdi kontrol et"
+  },
+  "popupEmptyTitle": {
+    "message": "Şu an ücretsiz oyun yok"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep her $HOURS$ saatte bir kontrol eder ve yeni ücretsiz oyunları sizin için alır.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "Son kontrol başarısız: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Oyun"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Diğer"
+  },
+  "status_pending": {
+    "message": "Alınabilir"
+  },
+  "status_claimed": {
+    "message": "Alındı"
+  },
+  "status_owned": {
+    "message": "Kütüphanede"
+  },
+  "status_needs_base": {
+    "message": "Ana oyun gerekli"
+  },
+  "status_skipped": {
+    "message": "Atlandı"
+  },
+  "status_failed": {
+    "message": "Başarısız"
+  },
+  "waitingLogin": {
+    "message": "Steam girişi bekleniyor"
+  },
+  "actionClaim": {
+    "message": "Al"
+  },
+  "actionSkip": {
+    "message": "Atla"
+  },
+  "actionRetry": {
+    "message": "Tekrar dene"
+  },
+  "actionStore": {
+    "message": "Mağaza sayfası"
+  },
+  "popupRecent": {
+    "message": "Son alınanlar"
+  },
+  "popupSettings": {
+    "message": "Ayarlar"
+  },
+  "popupDiagnostics": {
+    "message": "Tanılamayı kopyala"
+  },
+  "popupCopied": {
+    "message": "Kopyalandı"
+  },
+  "popupSource": {
+    "message": "Kaynak kod"
+  },
+  "optTitle": {
+    "message": "FreeKeep ayarları"
+  },
+  "optInterval": {
+    "message": "Kontrol sıklığı"
+  },
+  "optIntervalHint": {
+    "message": "Tarayıcı açıldıktan kısa süre sonra da kontrol edilir."
+  },
+  "optHours": {
+    "message": "$N$ saatte bir",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Ücretsiz oyun bulunduğunda"
+  },
+  "optModeAuto": {
+    "message": "Otomatik olarak al"
+  },
+  "optModeAsk": {
+    "message": "Önce bana sor"
+  },
+  "optDlc": {
+    "message": "Sahip olduğum oyunların DLC'lerini de al"
+  },
+  "optNotifications": {
+    "message": "Bildirimleri göster"
+  },
+  "optSaved": {
+    "message": "Kaydedildi"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar. Şifrenizi asla görmez ve başka hiçbir yere veri göndermez."
+  },
+  "popupUntil": {
+    "message": "$DATE$ tarihine kadar ücretsiz",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "$HOURS$ saatte bir",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Valve ile bağlantılı değildir. Steam, Valve Corporation'ın ticari markasıdır."
+  },
+  "toastClaimed": {
+    "message": "$NAME$ alındı!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "$NAME$ alınamadı",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ için ana oyun gerekli",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "az önce"
+  },
+  "popupPrivacy": {
+    "message": "%100 yerel · şifrenize ve çerezlerinize dokunmaz"
+  }
+}

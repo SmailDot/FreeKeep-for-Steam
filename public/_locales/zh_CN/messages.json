@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "用浏览器现有的登录自动领取 Steam 限时免费游戏。无需密码、不开标签页、权限最少。"
+  },
+  "notifyClaimedTitle": {
+    "message": "已领取免费游戏"
+  },
+  "notifyClaimedBody": {
+    "message": "已将 $COUNT$ 款加入你的 Steam 库：$NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "有限免游戏可以领"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ 款限免：$NAMES$。打开 FreeKeep 领取。",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "请登录 Steam"
+  },
+  "notifyLoginBody": {
+    "message": "在这个浏览器登录 Steam 商店，FreeKeep 才能领取：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "领取失败"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — 打开 FreeKeep 重试，或到商店页手动领取。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "正在帮你盯限免"
+  },
+  "popupChecking": {
+    "message": "正在检查 Steam…"
+  },
+  "popupLoggedOut": {
+    "message": "请在这个浏览器登录 Steam 商店，FreeKeep 才能帮你领。"
+  },
+  "popupOpenStore": {
+    "message": "打开 Steam 商店"
+  },
+  "popupLastCheck": {
+    "message": "上次检查 $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "尚未检查"
+  },
+  "popupCheckNow": {
+    "message": "立即检查"
+  },
+  "popupEmptyTitle": {
+    "message": "目前没有限免"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep 每 $HOURS$ 小时检查一次，有新的限免就帮你领。",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "上次检查失败：$ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "游戏"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "其他"
+  },
+  "status_pending": {
+    "message": "可以领取"
+  },
+  "status_claimed": {
+    "message": "已领取"
+  },
+  "status_owned": {
+    "message": "已拥有"
+  },
+  "status_needs_base": {
+    "message": "缺少本体"
+  },
+  "status_skipped": {
+    "message": "已跳过"
+  },
+  "status_failed": {
+    "message": "失败"
+  },
+  "waitingLogin": {
+    "message": "等待登录 Steam"
+  },
+  "actionClaim": {
+    "message": "领取"
+  },
+  "actionSkip": {
+    "message": "跳过"
+  },
+  "actionRetry": {
+    "message": "重试"
+  },
+  "actionStore": {
+    "message": "商店页"
+  },
+  "popupRecent": {
+    "message": "最近领取"
+  },
+  "popupSettings": {
+    "message": "设置"
+  },
+  "popupDiagnostics": {
+    "message": "复制诊断报告"
+  },
+  "popupCopied": {
+    "message": "已复制"
+  },
+  "popupSource": {
+    "message": "源代码"
+  },
+  "optTitle": {
+    "message": "FreeKeep 设置"
+  },
+  "optInterval": {
+    "message": "检查频率"
+  },
+  "optIntervalHint": {
+    "message": "浏览器启动后也会自动检查一次。"
+  },
+  "optHours": {
+    "message": "每 $N$ 小时",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "发现限免时"
+  },
+  "optModeAuto": {
+    "message": "自动领取"
+  },
+  "optModeAsk": {
+    "message": "先问我"
+  },
+  "optDlc": {
+    "message": "也领取我拥有本体的 DLC"
+  },
+  "optNotifications": {
+    "message": "显示通知"
+  },
+  "optSaved": {
+    "message": "已保存"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep 只会连接 store.steampowered.com，使用这个浏览器现有的 Steam 登录。它看不到你的密码，也不会把任何数据发送到其他地方。"
+  },
+  "popupUntil": {
+    "message": "$DATE$ 前免费",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "每 $HOURS$ 小时",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "与 Valve 无关。Steam 是 Valve Corporation 的商标。"
+  },
+  "toastClaimed": {
+    "message": "已领取 $NAME$！",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "$NAME$ 领取失败",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ 需要先拥有本体",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "刚刚"
+  },
+  "popupPrivacy": {
+    "message": "全程在你的电脑运行・不碰你的密码和 Cookie"
+  }
+}

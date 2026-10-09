@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Auto-claims Steam free-to-keep games with your existing browser login. No passwords, no tabs, minimal permissions."
+  },
+  "notifyClaimedTitle": {
+    "message": "Free games claimed"
+  },
+  "notifyClaimedBody": {
+    "message": "Added $COUNT$ to your Steam library: $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Free games available"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ free-to-keep: $NAMES$. Open FreeKeep to claim.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Log in to Steam"
+  },
+  "notifyLoginBody": {
+    "message": "Log in to the Steam store in this browser so FreeKeep can claim: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "Couldn't claim"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — open FreeKeep to retry or claim it on the store page.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "Watching for free-to-keep games"
+  },
+  "popupChecking": {
+    "message": "Checking Steam…"
+  },
+  "popupLoggedOut": {
+    "message": "Log in to the Steam store in this browser so FreeKeep can claim games."
+  },
+  "popupOpenStore": {
+    "message": "Open Steam store"
+  },
+  "popupLastCheck": {
+    "message": "Last check $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Not checked yet"
+  },
+  "popupCheckNow": {
+    "message": "Check now"
+  },
+  "popupEmptyTitle": {
+    "message": "Nothing free right now"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep checks every $HOURS$ h and claims new free-to-keep games for you.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "Last check failed: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Game"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Other"
+  },
+  "status_pending": {
+    "message": "Ready to claim"
+  },
+  "status_claimed": {
+    "message": "Claimed"
+  },
+  "status_owned": {
+    "message": "In library"
+  },
+  "status_needs_base": {
+    "message": "Needs base game"
+  },
+  "status_skipped": {
+    "message": "Skipped"
+  },
+  "status_failed": {
+    "message": "Failed"
+  },
+  "waitingLogin": {
+    "message": "Waiting for Steam login"
+  },
+  "actionClaim": {
+    "message": "Claim"
+  },
+  "actionSkip": {
+    "message": "Skip"
+  },
+  "actionRetry": {
+    "message": "Retry"
+  },
+  "actionStore": {
+    "message": "Store page"
+  },
+  "popupRecent": {
+    "message": "Recently claimed"
+  },
+  "popupSettings": {
+    "message": "Settings"
+  },
+  "popupDiagnostics": {
+    "message": "Copy diagnostics"
+  },
+  "popupCopied": {
+    "message": "Copied"
+  },
+  "popupSource": {
+    "message": "Source"
+  },
+  "optTitle": {
+    "message": "FreeKeep settings"
+  },
+  "optInterval": {
+    "message": "Check every"
+  },
+  "optIntervalHint": {
+    "message": "A check also runs shortly after the browser starts."
+  },
+  "optHours": {
+    "message": "$N$ h",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "When a free game is found"
+  },
+  "optModeAuto": {
+    "message": "Claim it automatically"
+  },
+  "optModeAsk": {
+    "message": "Ask me first"
+  },
+  "optDlc": {
+    "message": "Also claim DLC for games I own"
+  },
+  "optNotifications": {
+    "message": "Show notifications"
+  },
+  "optSaved": {
+    "message": "Saved"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login. It never sees your password and sends nothing anywhere else."
+  },
+  "popupUntil": {
+    "message": "Free until $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "every $HOURS$ h",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Not affiliated with Valve. Steam is a trademark of Valve Corporation."
+  },
+  "toastClaimed": {
+    "message": "Claimed $NAME$!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "Couldn't claim $NAME$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ needs its base game",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "just now"
+  },
+  "popupPrivacy": {
+    "message": "100% local · never touches your password or cookies"
+  }
+}

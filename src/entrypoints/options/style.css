@@ -1,0 +1,78 @@
+.page {
+  max-width: 560px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+header img {
+  width: 40px;
+  height: 40px;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.field {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 12px;
+}
+
+.label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+legend {
+  float: left;
+  width: 100%;
+}
+
+select {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  clear: both;
+}
+
+.choice input {
+  accent-color: var(--accent);
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 12.5px;
+  margin: 8px 0 0;
+}
+
+.saved {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12.5px;
+}

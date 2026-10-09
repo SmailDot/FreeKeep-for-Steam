@@ -1,0 +1,12 @@
+node_modules
+.output
+.wxt
+stats.html
+stats-*.json
+web-ext.config.ts
+*.log
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json

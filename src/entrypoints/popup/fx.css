@@ -1,0 +1,244 @@
+/* ---------- layers ---------- */
+.fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.fx i {
+  position: fixed;
+  width: 8px;
+  height: 13px;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  animation: confetti 1.1s cubic-bezier(0.15, 0.7, 0.3, 1) forwards;
+}
+
+.fx i.round {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+@keyframes confetti {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 70px)) scale(1) rotate(var(--rot));
+  }
+}
+
+.toasts {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 30;
+  width: calc(100% - 28px);
+  pointer-events: none;
+}
+
+.toast {
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+  animation: toast-in 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
+  transition:
+    opacity 0.35s,
+    transform 0.35s;
+}
+
+.toast-ok {
+  background: var(--ok);
+  color: #04210f;
+}
+
+.toast-bad {
+  background: var(--bad);
+  color: #fff;
+}
+
+.toast-warn {
+  background: var(--warn);
+  color: #1f1300;
+}
+
+.toast.leaving {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.96);
+  }
+}
+
+/* ---------- card effects ---------- */
+.capsule-wrap {
+  grid-area: capsule;
+  position: relative;
+  width: 92px;
+  height: 43px;
+}
+
+.check {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  width: 24px;
+  height: 24px;
+}
+
+.check circle {
+  fill: var(--ok);
+  stroke: var(--surface);
+  stroke-width: 4;
+  transform-origin: center;
+  animation: check-pop 0.4s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+.check path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: check-draw 0.35s 0.2s ease-out forwards;
+}
+
+@keyframes check-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.card.fx-enter {
+  animation: appear 0.3s ease-out;
+}
+
+.card.fx-celebrate {
+  animation: celebrate 0.7s cubic-bezier(0.2, 1.5, 0.4, 1);
+  box-shadow:
+    0 0 0 2px var(--ok),
+    0 0 22px color-mix(in srgb, var(--ok) 55%, transparent);
+}
+
+.card.fx-celebrate .st {
+  animation: chip-pop 0.5s 0.15s cubic-bezier(0.2, 1.8, 0.4, 1);
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.035);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes chip-pop {
+  0% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card.fx-shake {
+  animation: shake 0.5s ease-in-out;
+  box-shadow: 0 0 0 2px var(--bad);
+}
+
+.card.fx-wiggle {
+  animation: wiggle 0.6s ease-in-out;
+  box-shadow: 0 0 0 2px var(--warn);
+}
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes wiggle {
+  25% {
+    transform: rotate(-1.2deg);
+  }
+  75% {
+    transform: rotate(1.2deg);
+  }
+}
+
+/* ---------- busy buttons ---------- */
+button.is-busy {
+  position: relative;
+  color: transparent !important;
+}
+
+button.is-busy > span {
+  visibility: hidden;
+}
+
+button.is-busy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-color: var(--muted) var(--muted) var(--muted) transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+button.primary.is-busy::after {
+  border-color: #fff #fff #fff transparent;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

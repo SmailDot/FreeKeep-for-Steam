@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreeKeep for Steam</title>
+    <meta name="manifest.open_in_tab" content="true" />
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <img src="/icon/48.png" alt="" />
+        <h1 data-i18n="optTitle"></h1>
+      </header>
+
+      <section class="field">
+        <label class="label" for="interval" data-i18n="optInterval"></label>
+        <select id="interval"></select>
+        <p class="hint" data-i18n="optIntervalHint"></p>
+      </section>
+
+      <fieldset class="field">
+        <legend class="label" data-i18n="optMode"></legend>
+        <label class="choice"><input type="radio" name="mode" value="auto" /> <span data-i18n="optModeAuto"></span></label>
+        <label class="choice"><input type="radio" name="mode" value="ask" /> <span data-i18n="optModeAsk"></span></label>
+      </fieldset>
+
+      <section class="field">
+        <label class="choice"><input id="includeDlc" type="checkbox" /> <span data-i18n="optDlc"></span></label>
+        <label class="choice"><input id="notifications" type="checkbox" /> <span data-i18n="optNotifications"></span></label>
+      </section>
+
+      <p id="saved" class="saved" data-i18n="optSaved" hidden></p>
+
+      <footer>
+        <p data-i18n="optPrivacy"></p>
+        <p data-i18n="optAbout"></p>
+      </footer>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

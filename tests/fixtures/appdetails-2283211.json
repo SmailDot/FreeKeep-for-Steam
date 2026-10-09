@@ -1,0 +1,61 @@
+{
+ "2283211": {
+  "success": true,
+  "data": {
+   "type": "dlc",
+   "name": "World of Warships — Ning Hai",
+   "steam_appid": 2283211,
+   "is_free": true,
+   "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2283211/b1178bba54985943e6255fae53261a6155f9167f/header.jpg?t=1791477152",
+   "fullgame": {
+    "appid": "552990",
+    "name": "World of Warships"
+   },
+   "price_overview": {
+    "currency": "TWD",
+    "initial": 30000,
+    "final": 30000,
+    "discount_percent": 100,
+    "initial_formatted": "NT$ 300",
+    "final_formatted": "Free"
+   },
+   "package_groups": [
+    {
+     "name": "default",
+     "title": "Buy World of Warships — Ning Hai",
+     "description": "",
+     "selection_text": "Select a purchase option",
+     "save_text": "",
+     "display_type": 0,
+     "is_recurring_subscription": "false",
+     "subs": [
+      {
+       "packageid": 1869099,
+       "percent_savings_text": "-100% ",
+       "percent_savings": 0,
+       "option_text": "World of Warships — Ning Hai Limited Free Promotional Package - Oct 2026 - <span class=\"discount_original_price\">NT$ 0</span> Free",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": true,
+       "price_in_cents_with_discount": 0
+      },
+      {
+       "packageid": 819072,
+       "percent_savings_text": " ",
+       "percent_savings": 0,
+       "option_text": "World of Warships — Ning Hai - NT$ 300",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": false,
+       "price_in_cents_with_discount": 30000
+      }
+     ]
+    }
+   ],
+   "packages": [
+    1869099,
+    819072
+   ]
+  }
+ }
+}

@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Sichert dir Steam-Gratisspiele automatisch über deinen Browser-Login. Keine Passwörter, keine Tabs, minimale Berechtigungen."
+  },
+  "notifyClaimedTitle": {
+    "message": "Gratisspiele gesichert"
+  },
+  "notifyClaimedBody": {
+    "message": "$COUNT$ zu deiner Steam-Bibliothek hinzugefügt: $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Gratisspiele verfügbar"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ dauerhaft gratis: $NAMES$. Öffne FreeKeep, um sie zu sichern.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Bei Steam anmelden"
+  },
+  "notifyLoginBody": {
+    "message": "Melde dich in diesem Browser im Steam-Shop an, damit FreeKeep Folgendes sichern kann: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "Konnte nicht gesichert werden"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ – öffne FreeKeep zum Wiederholen oder hol es dir auf der Shopseite.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "Hält Ausschau nach Gratisspielen"
+  },
+  "popupChecking": {
+    "message": "Steam wird geprüft…"
+  },
+  "popupLoggedOut": {
+    "message": "Melde dich in diesem Browser im Steam-Shop an, damit FreeKeep Spiele sichern kann."
+  },
+  "popupOpenStore": {
+    "message": "Steam-Shop öffnen"
+  },
+  "popupLastCheck": {
+    "message": "Zuletzt geprüft: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Noch nicht geprüft"
+  },
+  "popupCheckNow": {
+    "message": "Jetzt prüfen"
+  },
+  "popupEmptyTitle": {
+    "message": "Gerade nichts gratis"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep prüft alle $HOURS$ Std. und sichert neue Gratisspiele für dich.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "Letzte Prüfung fehlgeschlagen: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Spiel"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Sonstiges"
+  },
+  "status_pending": {
+    "message": "Bereit"
+  },
+  "status_claimed": {
+    "message": "Gesichert"
+  },
+  "status_owned": {
+    "message": "In Bibliothek"
+  },
+  "status_needs_base": {
+    "message": "Hauptspiel nötig"
+  },
+  "status_skipped": {
+    "message": "Übersprungen"
+  },
+  "status_failed": {
+    "message": "Fehlgeschlagen"
+  },
+  "waitingLogin": {
+    "message": "Warte auf Steam-Login"
+  },
+  "actionClaim": {
+    "message": "Sichern"
+  },
+  "actionSkip": {
+    "message": "Überspringen"
+  },
+  "actionRetry": {
+    "message": "Erneut"
+  },
+  "actionStore": {
+    "message": "Shopseite"
+  },
+  "popupRecent": {
+    "message": "Kürzlich gesichert"
+  },
+  "popupSettings": {
+    "message": "Einstellungen"
+  },
+  "popupDiagnostics": {
+    "message": "Diagnose kopieren"
+  },
+  "popupCopied": {
+    "message": "Kopiert"
+  },
+  "popupSource": {
+    "message": "Quellcode"
+  },
+  "optTitle": {
+    "message": "FreeKeep-Einstellungen"
+  },
+  "optInterval": {
+    "message": "Prüfen alle"
+  },
+  "optIntervalHint": {
+    "message": "Kurz nach dem Browserstart wird ebenfalls geprüft."
+  },
+  "optHours": {
+    "message": "$N$ Std.",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Wenn ein Gratisspiel gefunden wird"
+  },
+  "optModeAuto": {
+    "message": "Automatisch sichern"
+  },
+  "optModeAsk": {
+    "message": "Vorher fragen"
+  },
+  "optDlc": {
+    "message": "Auch DLCs für meine Spiele sichern"
+  },
+  "optNotifications": {
+    "message": "Benachrichtigungen anzeigen"
+  },
+  "optSaved": {
+    "message": "Gespeichert"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep kommuniziert nur mit store.steampowered.com und nutzt dazu den vorhandenen Steam-Login dieses Browsers. Es sieht nie dein Passwort und sendet nichts an andere Stellen."
+  },
+  "popupUntil": {
+    "message": "Gratis bis $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "alle $HOURS$ Std.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Nicht mit Valve verbunden. Steam ist eine Marke der Valve Corporation."
+  },
+  "toastClaimed": {
+    "message": "$NAME$ gesichert!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "$NAME$ konnte nicht gesichert werden",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ benötigt das Hauptspiel",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "gerade eben"
+  },
+  "popupPrivacy": {
+    "message": "100 % lokal · rührt Passwort und Cookies nie an"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "브라우저의 Steam 로그인으로 무료 배포 게임을 자동으로 받아 줍니다. 비밀번호 불필요, 탭 없음, 최소 권한."
+  },
+  "notifyClaimedTitle": {
+    "message": "무료 게임을 받았습니다"
+  },
+  "notifyClaimedBody": {
+    "message": "Steam 라이브러리에 $COUNT$개 추가: $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "무료 게임이 있습니다"
+  },
+  "notifyAvailableBody": {
+    "message": "무료 배포 $COUNT$개: $NAMES$. FreeKeep을 열어 받으세요.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Steam에 로그인하세요"
+  },
+  "notifyLoginBody": {
+    "message": "이 브라우저에서 Steam 상점에 로그인하면 FreeKeep이 받을 수 있습니다: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "받지 못했습니다"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — FreeKeep에서 다시 시도하거나 상점 페이지에서 받으세요.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "무료 배포를 지켜보는 중"
+  },
+  "popupChecking": {
+    "message": "Steam 확인 중…"
+  },
+  "popupLoggedOut": {
+    "message": "이 브라우저에서 Steam 상점에 로그인하면 FreeKeep이 게임을 받을 수 있습니다."
+  },
+  "popupOpenStore": {
+    "message": "Steam 상점 열기"
+  },
+  "popupLastCheck": {
+    "message": "마지막 확인 $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "아직 확인하지 않음"
+  },
+  "popupCheckNow": {
+    "message": "지금 확인"
+  },
+  "popupEmptyTitle": {
+    "message": "지금은 무료 게임이 없습니다"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep이 $HOURS$시간마다 확인하고 새 무료 게임을 대신 받아 줍니다.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "마지막 확인 실패: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "게임"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "기타"
+  },
+  "status_pending": {
+    "message": "받기 가능"
+  },
+  "status_claimed": {
+    "message": "받음"
+  },
+  "status_owned": {
+    "message": "보유 중"
+  },
+  "status_needs_base": {
+    "message": "본편 필요"
+  },
+  "status_skipped": {
+    "message": "건너뜀"
+  },
+  "status_failed": {
+    "message": "실패"
+  },
+  "waitingLogin": {
+    "message": "Steam 로그인 대기 중"
+  },
+  "actionClaim": {
+    "message": "받기"
+  },
+  "actionSkip": {
+    "message": "건너뛰기"
+  },
+  "actionRetry": {
+    "message": "다시 시도"
+  },
+  "actionStore": {
+    "message": "상점 페이지"
+  },
+  "popupRecent": {
+    "message": "최근 받은 게임"
+  },
+  "popupSettings": {
+    "message": "설정"
+  },
+  "popupDiagnostics": {
+    "message": "진단 정보 복사"
+  },
+  "popupCopied": {
+    "message": "복사됨"
+  },
+  "popupSource": {
+    "message": "소스 코드"
+  },
+  "optTitle": {
+    "message": "FreeKeep 설정"
+  },
+  "optInterval": {
+    "message": "확인 주기"
+  },
+  "optIntervalHint": {
+    "message": "브라우저를 시작한 직후에도 한 번 확인합니다."
+  },
+  "optHours": {
+    "message": "$N$시간마다",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "무료 게임을 찾았을 때"
+  },
+  "optModeAuto": {
+    "message": "자동으로 받기"
+  },
+  "optModeAsk": {
+    "message": "먼저 물어보기"
+  },
+  "optDlc": {
+    "message": "보유한 게임의 DLC도 받기"
+  },
+  "optNotifications": {
+    "message": "알림 표시"
+  },
+  "optSaved": {
+    "message": "저장됨"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep은 이 브라우저에 이미 로그인된 Steam 계정을 사용해 store.steampowered.com과만 통신합니다. 비밀번호를 볼 수 없으며 다른 곳으로 아무것도 보내지 않습니다."
+  },
+  "popupUntil": {
+    "message": "$DATE$까지 무료",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "$HOURS$시간마다",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Valve와 무관합니다. Steam은 Valve Corporation의 상표입니다."
+  },
+  "toastClaimed": {
+    "message": "$NAME$ 받기 완료!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "$NAME$을(를) 받지 못했습니다",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$에는 본편이 필요합니다",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "방금"
+  },
+  "popupPrivacy": {
+    "message": "100% 로컬 실행 · 비밀번호와 쿠키는 건드리지 않음"
+  }
+}

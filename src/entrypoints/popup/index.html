@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreeKeep for Steam</title>
+    <meta name="manifest.type" content="browser_action" />
+  </head>
+  <body>
+    <header class="top">
+      <img class="logo" src="/icon/48.png" alt="" />
+      <div class="brand"><strong>FreeKeep</strong><span>for Steam</span></div>
+      <button id="settings" class="icon-btn" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/>
+        </svg>
+      </button>
+    </header>
+
+    <section class="status">
+      <div class="status-line">
+        <span id="dot" class="dot"></span>
+        <span id="statusText"></span>
+      </div>
+      <div class="status-sub">
+        <span id="lastCheck"></span>
+        <button id="checkNow" type="button" data-i18n="popupCheckNow"></button>
+      </div>
+    </section>
+
+    <section id="login" class="banner" hidden>
+      <span data-i18n="popupLoggedOut"></span>
+      <a href="https://store.steampowered.com/login/" target="_blank" rel="noreferrer" data-i18n="popupOpenStore"></a>
+    </section>
+
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+    <div id="fx" class="fx" aria-hidden="true"></div>
+
+    <main id="list"></main>
+
+    <section id="empty" class="empty" hidden>
+      <img src="/icon/96.png" alt="" />
+      <strong data-i18n="popupEmptyTitle"></strong>
+      <p id="emptyBody"></p>
+    </section>
+
+    <section id="recentWrap" hidden>
+      <h2 data-i18n="popupRecent"></h2>
+      <ul id="recent"></ul>
+    </section>
+
+    <p class="privacy">
+      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+        <path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/>
+      </svg>
+      <span data-i18n="popupPrivacy"></span>
+    </p>
+
+    <footer>
+      <button id="diagnostics" class="link" type="button" data-i18n="popupDiagnostics"></button>
+      <a href="https://github.com/SmailDot/FreeKeep-for-Steam" target="_blank" rel="noreferrer" data-i18n="popupSource"></a>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
