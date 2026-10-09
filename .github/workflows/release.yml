@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run compile
+      - run: npm test
+      - name: Check tag matches package version
+        run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
+      - run: npm run zip
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd .output
+          sha256sum *-chrome.zip > SHA256SUMS.txt
+          gh release create "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt \
+            --repo "$GITHUB_REPOSITORY" --title "FreeKeep $GITHUB_REF_NAME" --generate-notes

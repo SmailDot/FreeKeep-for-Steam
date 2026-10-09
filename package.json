@@ -1,0 +1,35 @@
+{
+  "name": "freekeep-for-steam",
+  "description": "Automatically claims Steam free-to-keep promotions using your existing browser login.",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "author": "SmailDot <smaildot@aidot.me> (https://github.com/SmailDot)",
+  "homepage": "https://github.com/SmailDot/FreeKeep-for-Steam",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SmailDot/FreeKeep-for-Steam.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SmailDot/FreeKeep-for-Steam/issues",
+    "email": "smaildot@aidot.me"
+  },
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "compile": "tsc --noEmit",
+    "test": "vitest run",
+    "postinstall": "wxt prepare",
+    "demo": "node scripts/demo/record.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.5",
+    "vitest": "^5.0.3",
+    "wxt": "^0.21.4"
+  }
+}

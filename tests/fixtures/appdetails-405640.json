@@ -1,0 +1,79 @@
+{
+ "405640": {
+  "success": true,
+  "data": {
+   "type": "game",
+   "name": "Pony Island",
+   "steam_appid": 405640,
+   "is_free": true,
+   "header_image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/405640/header.jpg?t=1791477267",
+   "price_overview": {
+    "currency": "TWD",
+    "initial": 11800,
+    "final": 11800,
+    "discount_percent": 100,
+    "initial_formatted": "NT$ 118",
+    "final_formatted": "Free"
+   },
+   "package_groups": [
+    {
+     "name": "default",
+     "title": "Buy Pony Island",
+     "description": "",
+     "selection_text": "Select a purchase option",
+     "save_text": "",
+     "display_type": 0,
+     "is_recurring_subscription": "false",
+     "subs": [
+      {
+       "packageid": 1857153,
+       "percent_savings_text": "-100% ",
+       "percent_savings": 0,
+       "option_text": "Pony Island Limited Free Promotional Package - Oct 2026 - <span class=\"discount_original_price\">NT$ 0</span> Free",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": true,
+       "price_in_cents_with_discount": 0
+      },
+      {
+       "packageid": 1156648,
+       "percent_savings_text": " ",
+       "percent_savings": 0,
+       "option_text": "Pony Island - Commercial License - NT$ 102",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": false,
+       "price_in_cents_with_discount": 10200
+      },
+      {
+       "packageid": 90016,
+       "percent_savings_text": " ",
+       "percent_savings": 0,
+       "option_text": "Pony Island + Soundtrack - NT$ 118",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": false,
+       "price_in_cents_with_discount": 11800
+      },
+      {
+       "packageid": 79724,
+       "percent_savings_text": " ",
+       "percent_savings": 0,
+       "option_text": "Pony Island - NT$ 148",
+       "option_description": "",
+       "can_get_free_license": "0",
+       "is_free_license": false,
+       "price_in_cents_with_discount": 14800
+      }
+     ]
+    }
+   ],
+   "packages": [
+    1857153,
+    1156648,
+    79724,
+    90016
+   ]
+  }
+ }
+}

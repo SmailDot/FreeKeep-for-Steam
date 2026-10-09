@@ -1,0 +1,26 @@
+name: Translation
+description: Request, add or improve a language
+labels: [translation, good first issue]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language and locale code
+      placeholder: Italiano (it)
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What would you like to do?
+      options:
+        - Add a new language (I'll open a pull request)
+        - Improve an existing translation
+        - Request a language (I can't translate it myself)
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: See CONTRIBUTING.md for how to add a language in a few minutes.

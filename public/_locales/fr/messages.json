@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Récupère automatiquement les jeux Steam gratuits avec la connexion de votre navigateur. Sans mot de passe, sans onglet."
+  },
+  "notifyClaimedTitle": {
+    "message": "Jeux gratuits récupérés"
+  },
+  "notifyClaimedBody": {
+    "message": "$COUNT$ ajouté(s) à votre bibliothèque Steam : $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Jeux gratuits disponibles"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ gratuit(s) à conserver : $NAMES$. Ouvrez FreeKeep pour les récupérer.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Connectez-vous à Steam"
+  },
+  "notifyLoginBody": {
+    "message": "Connectez-vous au magasin Steam dans ce navigateur pour que FreeKeep puisse récupérer : $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "Échec de la récupération"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — ouvrez FreeKeep pour réessayer ou récupérez-le sur la page du magasin.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "À l'affût des jeux gratuits"
+  },
+  "popupChecking": {
+    "message": "Vérification de Steam…"
+  },
+  "popupLoggedOut": {
+    "message": "Connectez-vous au magasin Steam dans ce navigateur pour que FreeKeep puisse récupérer des jeux."
+  },
+  "popupOpenStore": {
+    "message": "Ouvrir le magasin Steam"
+  },
+  "popupLastCheck": {
+    "message": "Dernière vérification : $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Pas encore vérifié"
+  },
+  "popupCheckNow": {
+    "message": "Vérifier"
+  },
+  "popupEmptyTitle": {
+    "message": "Rien de gratuit pour l'instant"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep vérifie toutes les $HOURS$ h et récupère pour vous les nouveaux jeux gratuits.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "La dernière vérification a échoué : $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Jeu"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Autre"
+  },
+  "status_pending": {
+    "message": "Prêt à récupérer"
+  },
+  "status_claimed": {
+    "message": "Récupéré"
+  },
+  "status_owned": {
+    "message": "Dans la bibliothèque"
+  },
+  "status_needs_base": {
+    "message": "Jeu de base requis"
+  },
+  "status_skipped": {
+    "message": "Ignoré"
+  },
+  "status_failed": {
+    "message": "Échec"
+  },
+  "waitingLogin": {
+    "message": "En attente de connexion à Steam"
+  },
+  "actionClaim": {
+    "message": "Récupérer"
+  },
+  "actionSkip": {
+    "message": "Ignorer"
+  },
+  "actionRetry": {
+    "message": "Réessayer"
+  },
+  "actionStore": {
+    "message": "Page du magasin"
+  },
+  "popupRecent": {
+    "message": "Récupérés récemment"
+  },
+  "popupSettings": {
+    "message": "Paramètres"
+  },
+  "popupDiagnostics": {
+    "message": "Copier le diagnostic"
+  },
+  "popupCopied": {
+    "message": "Copié"
+  },
+  "popupSource": {
+    "message": "Code source"
+  },
+  "optTitle": {
+    "message": "Paramètres de FreeKeep"
+  },
+  "optInterval": {
+    "message": "Vérifier toutes les"
+  },
+  "optIntervalHint": {
+    "message": "Une vérification a aussi lieu peu après le démarrage du navigateur."
+  },
+  "optHours": {
+    "message": "$N$ h",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Quand un jeu gratuit est trouvé"
+  },
+  "optModeAuto": {
+    "message": "Le récupérer automatiquement"
+  },
+  "optModeAsk": {
+    "message": "Me demander d'abord"
+  },
+  "optDlc": {
+    "message": "Récupérer aussi les DLC de mes jeux"
+  },
+  "optNotifications": {
+    "message": "Afficher les notifications"
+  },
+  "optSaved": {
+    "message": "Enregistré"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep communique uniquement avec store.steampowered.com, en utilisant la connexion Steam déjà présente dans ce navigateur. Il ne voit jamais votre mot de passe et n'envoie rien ailleurs."
+  },
+  "popupUntil": {
+    "message": "Gratuit jusqu'à : $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "toutes les $HOURS$ h",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Non affilié à Valve. Steam est une marque de Valve Corporation."
+  },
+  "toastClaimed": {
+    "message": "$NAME$ récupéré !",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "Impossible de récupérer $NAME$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ nécessite le jeu de base",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "à l'instant"
+  },
+  "popupPrivacy": {
+    "message": "100 % local · ne touche jamais à votre mot de passe ni aux cookies"
+  }
+}

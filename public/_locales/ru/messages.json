@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Автоматически забирает бесплатные игры Steam через ваш вход в браузере. Без паролей, без вкладок, минимум разрешений."
+  },
+  "notifyClaimedTitle": {
+    "message": "Бесплатные игры получены"
+  },
+  "notifyClaimedBody": {
+    "message": "Добавлено в библиотеку Steam ($COUNT$): $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Доступны бесплатные игры"
+  },
+  "notifyAvailableBody": {
+    "message": "Бесплатно навсегда ($COUNT$): $NAMES$. Откройте FreeKeep, чтобы забрать.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Войдите в Steam"
+  },
+  "notifyLoginBody": {
+    "message": "Войдите в магазин Steam в этом браузере, чтобы FreeKeep смог забрать: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "Не удалось получить"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$ — откройте FreeKeep, чтобы повторить, или заберите на странице магазина.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "Слежу за бесплатными раздачами"
+  },
+  "popupChecking": {
+    "message": "Проверяю Steam…"
+  },
+  "popupLoggedOut": {
+    "message": "Войдите в магазин Steam в этом браузере, чтобы FreeKeep мог забирать игры."
+  },
+  "popupOpenStore": {
+    "message": "Открыть магазин Steam"
+  },
+  "popupLastCheck": {
+    "message": "Последняя проверка: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Ещё не проверялось"
+  },
+  "popupCheckNow": {
+    "message": "Проверить"
+  },
+  "popupEmptyTitle": {
+    "message": "Сейчас раздач нет"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep проверяет каждые $HOURS$ ч и забирает новые бесплатные игры за вас.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "Последняя проверка не удалась: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Игра"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Другое"
+  },
+  "status_pending": {
+    "message": "Можно забрать"
+  },
+  "status_claimed": {
+    "message": "Получено"
+  },
+  "status_owned": {
+    "message": "В библиотеке"
+  },
+  "status_needs_base": {
+    "message": "Нужна основная игра"
+  },
+  "status_skipped": {
+    "message": "Пропущено"
+  },
+  "status_failed": {
+    "message": "Ошибка"
+  },
+  "waitingLogin": {
+    "message": "Ждём входа в Steam"
+  },
+  "actionClaim": {
+    "message": "Забрать"
+  },
+  "actionSkip": {
+    "message": "Пропустить"
+  },
+  "actionRetry": {
+    "message": "Повторить"
+  },
+  "actionStore": {
+    "message": "В магазине"
+  },
+  "popupRecent": {
+    "message": "Недавно получено"
+  },
+  "popupSettings": {
+    "message": "Настройки"
+  },
+  "popupDiagnostics": {
+    "message": "Копировать диагностику"
+  },
+  "popupCopied": {
+    "message": "Скопировано"
+  },
+  "popupSource": {
+    "message": "Исходный код"
+  },
+  "optTitle": {
+    "message": "Настройки FreeKeep"
+  },
+  "optInterval": {
+    "message": "Проверять каждые"
+  },
+  "optIntervalHint": {
+    "message": "Проверка также запускается вскоре после старта браузера."
+  },
+  "optHours": {
+    "message": "$N$ ч",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Когда найдена бесплатная игра"
+  },
+  "optModeAuto": {
+    "message": "Забирать автоматически"
+  },
+  "optModeAsk": {
+    "message": "Сначала спросить меня"
+  },
+  "optDlc": {
+    "message": "Также забирать DLC к моим играм"
+  },
+  "optNotifications": {
+    "message": "Показывать уведомления"
+  },
+  "optSaved": {
+    "message": "Сохранено"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep обращается только к store.steampowered.com, используя уже выполненный в этом браузере вход в Steam. Он никогда не видит ваш пароль и ничего никуда не отправляет."
+  },
+  "popupUntil": {
+    "message": "Бесплатно до $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "каждые $HOURS$ ч",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Не связано с Valve. Steam — товарный знак Valve Corporation."
+  },
+  "toastClaimed": {
+    "message": "Получено: $NAME$!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "Не удалось получить $NAME$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "Для $NAME$ нужна основная игра",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "только что"
+  },
+  "popupPrivacy": {
+    "message": "100% локально · не трогает ваш пароль и cookie"
+  }
+}

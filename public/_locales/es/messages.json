@@ -1,0 +1,247 @@
+{
+  "extName": {
+    "message": "FreeKeep for Steam"
+  },
+  "extDescription": {
+    "message": "Reclama solo los juegos gratis de Steam con la sesión de tu navegador. Sin contraseñas, sin pestañas, permisos mínimos."
+  },
+  "notifyClaimedTitle": {
+    "message": "Juegos gratis reclamados"
+  },
+  "notifyClaimedBody": {
+    "message": "Se añadieron $COUNT$ a tu biblioteca de Steam: $NAMES$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyAvailableTitle": {
+    "message": "Juegos gratis disponibles"
+  },
+  "notifyAvailableBody": {
+    "message": "$COUNT$ gratis para siempre: $NAMES$. Abre FreeKeep para reclamarlos.",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      },
+      "names": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyLoginTitle": {
+    "message": "Inicia sesión en Steam"
+  },
+  "notifyLoginBody": {
+    "message": "Inicia sesión en la tienda de Steam en este navegador para que FreeKeep pueda reclamar: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyFailedTitle": {
+    "message": "No se pudo reclamar"
+  },
+  "notifyFailedBody": {
+    "message": "$NAMES$: abre FreeKeep para reintentar o reclámalo en la página de la tienda.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupWatching": {
+    "message": "Vigilando juegos gratis"
+  },
+  "popupChecking": {
+    "message": "Revisando Steam…"
+  },
+  "popupLoggedOut": {
+    "message": "Inicia sesión en la tienda de Steam en este navegador para que FreeKeep pueda reclamar juegos."
+  },
+  "popupOpenStore": {
+    "message": "Abrir la tienda de Steam"
+  },
+  "popupLastCheck": {
+    "message": "Última revisión: $TIME$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupNever": {
+    "message": "Aún sin revisar"
+  },
+  "popupCheckNow": {
+    "message": "Revisar ahora"
+  },
+  "popupEmptyTitle": {
+    "message": "Nada gratis por ahora"
+  },
+  "popupEmptyBody": {
+    "message": "FreeKeep revisa cada $HOURS$ h y reclama por ti los nuevos juegos gratis.",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupLastError": {
+    "message": "La última revisión falló: $ERROR$",
+    "placeholders": {
+      "error": {
+        "content": "$1"
+      }
+    }
+  },
+  "kind_game": {
+    "message": "Juego"
+  },
+  "kind_dlc": {
+    "message": "DLC"
+  },
+  "kind_other": {
+    "message": "Otro"
+  },
+  "status_pending": {
+    "message": "Listo para reclamar"
+  },
+  "status_claimed": {
+    "message": "Reclamado"
+  },
+  "status_owned": {
+    "message": "En tu biblioteca"
+  },
+  "status_needs_base": {
+    "message": "Requiere el juego base"
+  },
+  "status_skipped": {
+    "message": "Omitido"
+  },
+  "status_failed": {
+    "message": "Error"
+  },
+  "waitingLogin": {
+    "message": "Esperando inicio de sesión"
+  },
+  "actionClaim": {
+    "message": "Reclamar"
+  },
+  "actionSkip": {
+    "message": "Omitir"
+  },
+  "actionRetry": {
+    "message": "Reintentar"
+  },
+  "actionStore": {
+    "message": "Ver en tienda"
+  },
+  "popupRecent": {
+    "message": "Reclamados recientemente"
+  },
+  "popupSettings": {
+    "message": "Ajustes"
+  },
+  "popupDiagnostics": {
+    "message": "Copiar diagnóstico"
+  },
+  "popupCopied": {
+    "message": "Copiado"
+  },
+  "popupSource": {
+    "message": "Código fuente"
+  },
+  "optTitle": {
+    "message": "Ajustes de FreeKeep"
+  },
+  "optInterval": {
+    "message": "Revisar cada"
+  },
+  "optIntervalHint": {
+    "message": "También se revisa poco después de abrir el navegador."
+  },
+  "optHours": {
+    "message": "$N$ h",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Cuando se encuentra un juego gratis"
+  },
+  "optModeAuto": {
+    "message": "Reclamarlo automáticamente"
+  },
+  "optModeAsk": {
+    "message": "Preguntarme primero"
+  },
+  "optDlc": {
+    "message": "Reclamar también DLC de mis juegos"
+  },
+  "optNotifications": {
+    "message": "Mostrar notificaciones"
+  },
+  "optSaved": {
+    "message": "Guardado"
+  },
+  "optPrivacy": {
+    "message": "FreeKeep solo se comunica con store.steampowered.com usando la sesión de Steam que ya tiene este navegador. Nunca ve tu contraseña ni envía nada a ningún otro sitio."
+  },
+  "popupUntil": {
+    "message": "Gratis hasta $DATE$",
+    "placeholders": {
+      "date": {
+        "content": "$1"
+      }
+    }
+  },
+  "popupEvery": {
+    "message": "cada $HOURS$ h",
+    "placeholders": {
+      "hours": {
+        "content": "$1"
+      }
+    }
+  },
+  "optAbout": {
+    "message": "Sin afiliación con Valve. Steam es una marca comercial de Valve Corporation."
+  },
+  "toastClaimed": {
+    "message": "¡$NAME$ reclamado!",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastFailed": {
+    "message": "No se pudo reclamar $NAME$",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastNeedsBase": {
+    "message": "$NAME$ requiere el juego base",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "justNow": {
+    "message": "justo ahora"
+  },
+  "popupPrivacy": {
+    "message": "100 % local · nunca toca tu contraseña ni tus cookies"
+  }
+}
