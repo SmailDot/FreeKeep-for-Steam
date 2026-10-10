@@ -19,6 +19,7 @@ export function buildDiagnostics(s: Snapshot, epicAccess: boolean) {
       sessionCheckedAt: iso(s.meta.sessionCheckedAt),
       decidedAt: iso(s.meta.decidedAt),
       cachedApps: Object.keys(s.meta.appCache).length,
+      lastCheck: s.meta.sessionProbe,
     },
     runs: s.runs.map((r) => ({ ...r, at: iso(r.at) })),
     promos: Object.values(s.promos).map((p) => ({

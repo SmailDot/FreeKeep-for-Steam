@@ -1,5 +1,5 @@
 import { decide } from './policy';
-import type { ClaimOutcome, Owned, Session } from './steam';
+import type { ClaimOutcome, Owned, Session, SessionProbe } from './steam';
 import type { EpicMap, EpicOffer, EpicState, EpicStatus, FreeSub, PromoMap, PromoState, RunInfo, RunReason, Settings } from './types';
 
 const HOUR = 3_600_000;
@@ -32,6 +32,8 @@ export interface Meta {
   /** Set while the user is known to be logged out and has been told so. */
   loginNotified: boolean;
   appCache: Record<string, { subs: FreeSub[]; fetchedAt: number }>;
+  /** The last login check's signals (no account data), shown in diagnostics. */
+  sessionProbe: SessionProbe | null;
 }
 
 export const DEFAULT_META: Meta = {
@@ -41,6 +43,7 @@ export const DEFAULT_META: Meta = {
   decidedAt: 0,
   loginNotified: false,
   appCache: {},
+  sessionProbe: null,
 };
 
 export interface Store {
@@ -140,6 +143,7 @@ class Engine {
     this.session = session;
     this.meta.loggedIn = session.loggedIn;
     this.meta.sessionCheckedAt = this.d.now();
+    this.meta.sessionProbe = session.probe ?? null;
     if (session.country) this.meta.country = session.country;
     if (session.loggedIn) this.meta.loginNotified = false;
     return session;
