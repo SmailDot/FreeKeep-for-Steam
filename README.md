@@ -160,6 +160,12 @@ reasons:
 marks these as *Needs base game* and claims them automatically if you get the base game while the
 promotion is running.
 
+**FreeKeep says I'm not logged in, but I am.** Open the Steam store in the same browser, make sure
+your account name appears at the top right, then click **Check now**. In one reported case the
+extension still showed "not logged in" right after installation; removing it and installing it again
+from the Chrome Web Store fixed it. If this happens to you, click **Copy diagnostics** and open an
+issue: the report includes the result of the last login check, without any account data.
+
 **Something isn't working?** Open the popup, click **Copy diagnostics** and paste the report into an
 [issue](../../issues). The report contains no account data.
 
