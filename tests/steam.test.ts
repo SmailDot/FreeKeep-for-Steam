@@ -7,6 +7,7 @@ import {
   parseOwned,
   parseSearchAppIds,
   parseSession,
+  SteamClient,
 } from '@/core/steam';
 
 const fixture = (name: string) => readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
@@ -112,5 +113,36 @@ describe('classifyClaim', () => {
     [502, '<html>', { kind: 'error', code: 'http_502' }],
   ])('HTTP %i %s', (status, body, expected) => {
     expect(classifyClaim(status, body)).toEqual(expected);
+  });
+});
+
+describe('SteamClient.session', () => {
+  const page = (html: string) =>
+    (async () => new Response(html, { status: 200 })) as unknown as ConstructorParameters<typeof SteamClient>[0];
+
+  it('reports how the login check came out, without account data', async () => {
+    const html = 'g_AccountID = 0; g_sessionID = "abcdef0123456789abcdef01"; <div data-userinfo="{&quot;logged_in&quot;:false}">';
+    const session = await new SteamClient(page(html)).session();
+    expect(session.loggedIn).toBe(false);
+    expect(session.probe).toEqual({
+      status: 200,
+      path: '/',
+      redirected: false,
+      bytes: html.length,
+      accountIdSet: false,
+      userInfoLoggedIn: false,
+      sessionIdFound: true,
+    });
+  });
+
+  it('shows a redirect away from the store front', async () => {
+    const fetchImpl = (async () => {
+      const res = new Response('<html></html>', { status: 200 });
+      Object.defineProperty(res, 'url', { value: 'https://store.steampowered.com/login/?redir=' });
+      Object.defineProperty(res, 'redirected', { value: true });
+      return res;
+    }) as unknown as ConstructorParameters<typeof SteamClient>[0];
+    const { probe } = await new SteamClient(fetchImpl).session();
+    expect(probe).toMatchObject({ path: '/login/', redirected: true, accountIdSet: false, userInfoLoggedIn: null });
   });
 });

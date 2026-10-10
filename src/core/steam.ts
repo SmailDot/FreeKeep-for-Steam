@@ -9,6 +9,19 @@ export interface Session {
   loggedIn: boolean;
   sessionid: string | null;
   country: string | null;
+  /** How the check came out, for diagnostics. Holds no account data. */
+  probe?: SessionProbe;
+}
+
+export interface SessionProbe {
+  status: number;
+  /** Path of the final URL, so a redirect (login wall, error page) shows up. */
+  path: string;
+  redirected: boolean;
+  bytes: number;
+  accountIdSet: boolean;
+  userInfoLoggedIn: boolean | null;
+  sessionIdFound: boolean;
 }
 
 export interface Owned {
@@ -135,7 +148,28 @@ export class SteamClient {
   }
 
   async session(): Promise<Session> {
-    return parseSession(await (await this.get(`${STORE}/?l=english`, true)).text());
+    const res = await this.get(`${STORE}/?l=english`, true);
+    const html = await res.text();
+    const session = parseSession(html);
+    const userInfo = parseUserInfo(html);
+    let path = '/';
+    try {
+      path = new URL(res.url).pathname;
+    } catch {
+      // Mocked responses have no URL.
+    }
+    return {
+      ...session,
+      probe: {
+        status: res.status,
+        path,
+        redirected: res.redirected,
+        bytes: html.length,
+        accountIdSet: /g_AccountID\s*=\s*[1-9]/.test(html),
+        userInfoLoggedIn: typeof userInfo?.logged_in === 'boolean' ? userInfo.logged_in : null,
+        sessionIdFound: session.sessionid !== null,
+      },
+    };
   }
 
   async searchFreeAppIds(cc: string): Promise<number[]> {
