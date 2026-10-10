@@ -132,7 +132,30 @@ describe('SteamClient.session', () => {
       accountIdSet: false,
       userInfoLoggedIn: false,
       sessionIdFound: true,
+      cookiesSent: true,
     });
+  });
+
+  it('tells when the browser sends no cookies: each load gets a new sessionid', async () => {
+    let n = 0;
+    const fetchImpl = (async () =>
+      new Response(`g_AccountID = 0; g_sessionID = "${(n++ ? 'b' : 'a').repeat(24)}";`, { status: 200 })) as unknown as ConstructorParameters<
+      typeof SteamClient
+    >[0];
+    const { probe, sessionid } = await new SteamClient(fetchImpl).session();
+    expect(probe?.cookiesSent).toBe(false);
+    expect(sessionid).toBe('a'.repeat(24));
+  });
+
+  it('reports cookies as sent when logged in, without a second load', async () => {
+    let calls = 0;
+    const fetchImpl = (async () => {
+      calls++;
+      return new Response('g_AccountID = 12345; g_sessionID = "abcdef0123456789abcdef01";', { status: 200 });
+    }) as unknown as ConstructorParameters<typeof SteamClient>[0];
+    const { probe } = await new SteamClient(fetchImpl).session();
+    expect(probe?.cookiesSent).toBe(true);
+    expect(calls).toBe(1);
   });
 
   it('shows a redirect away from the store front', async () => {
