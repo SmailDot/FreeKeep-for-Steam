@@ -26,6 +26,18 @@ describe('parseSession', () => {
     expect(parseSession(html)).toEqual({ loggedIn: true, sessionid: 'abcdef0123456789abcdef01', country: 'TW' });
   });
 
+  it('also trusts the data-userinfo attribute', () => {
+    const html =
+      'g_AccountID = 0; g_sessionID = "abcdef0123456789abcdef01"; ' +
+      '<div data-userinfo="{&quot;logged_in&quot;:true,&quot;country_code&quot;:&quot;TW&quot;}">';
+    expect(parseSession(html)).toEqual({ loggedIn: true, sessionid: 'abcdef0123456789abcdef01', country: 'TW' });
+  });
+
+  it('ignores a broken data-userinfo attribute', () => {
+    const html = 'g_AccountID = 0; <div data-userinfo="{not json">';
+    expect(parseSession(html)).toEqual({ loggedIn: false, sessionid: null, country: null });
+  });
+
   it('returns nulls for an unexpected page', () => {
     expect(parseSession('<html></html>')).toEqual({ loggedIn: false, sessionid: null, country: null });
   });

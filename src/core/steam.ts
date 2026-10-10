@@ -23,13 +23,31 @@ export type ClaimOutcome =
   | { kind: 'logged_out' }
   | { kind: 'error'; code: string };
 
-/** Reads login state, CSRF session id and store country from any store page. */
+/** The store's `data-userinfo` attribute, e.g. {"logged_in":false,"country_code":"US"}. */
+function parseUserInfo(html: string): { logged_in?: unknown; country_code?: unknown } | null {
+  const raw = html.match(/data-userinfo="([^"]*)"/)?.[1];
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw.replace(/&quot;/g, '"').replace(/&amp;/g, '&'));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Reads login state, CSRF session id and store country from any store page. Login is taken from
+ * `g_AccountID` or, should Steam stop filling that in, from the `data-userinfo` attribute.
+ */
 export function parseSession(html: string): Session {
   const accountId = Number(html.match(/g_AccountID\s*=\s*(\d+)/)?.[1] ?? 0);
+  const userInfo = parseUserInfo(html);
+  const userCountry = typeof userInfo?.country_code === 'string' ? userInfo.country_code : null;
   return {
-    loggedIn: accountId > 0,
+    loggedIn: accountId > 0 || userInfo?.logged_in === true,
     sessionid: html.match(/g_sessionID\s*=\s*"([0-9a-f]+)"/i)?.[1] ?? null,
-    country: html.match(/(?:&quot;|")COUNTRY(?:&quot;|"):(?:&quot;|")([A-Z]{2})/)?.[1] ?? null,
+    country:
+      html.match(/(?:&quot;|")COUNTRY(?:&quot;|"):(?:&quot;|")([A-Z]{2})/)?.[1] ??
+      (userCountry && /^[A-Z]{2}$/.test(userCountry) ? userCountry : null),
   };
 }
 
