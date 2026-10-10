@@ -22,6 +22,12 @@ export interface SessionProbe {
   accountIdSet: boolean;
   userInfoLoggedIn: boolean | null;
   sessionIdFound: boolean;
+  /**
+   * Whether the browser attached Steam's cookies at all. Only measured when logged out: Steam echoes
+   * the sessionid cookie into the page, so with cookies two loads show the same value and without
+   * them each load gets a new one. The values are compared in memory and never stored.
+   */
+  cookiesSent: boolean | null;
 }
 
 export interface Owned {
@@ -148,6 +154,14 @@ export class SteamClient {
   }
 
   async session(): Promise<Session> {
+    const first = await this.loadSession();
+    if (first.loggedIn) return { ...first, probe: { ...first.probe!, cookiesSent: true } };
+    const second = first.sessionid ? await this.loadSession() : null;
+    const cookiesSent = second?.sessionid ? second.sessionid === first.sessionid : null;
+    return { ...first, probe: { ...first.probe!, cookiesSent } };
+  }
+
+  private async loadSession(): Promise<Session> {
     const res = await this.get(`${STORE}/?l=english`, true);
     const html = await res.text();
     const session = parseSession(html);
@@ -168,6 +182,7 @@ export class SteamClient {
         accountIdSet: /g_AccountID\s*=\s*[1-9]/.test(html),
         userInfoLoggedIn: typeof userInfo?.logged_in === 'boolean' ? userInfo.logged_in : null,
         sessionIdFound: session.sessionid !== null,
+        cookiesSent: null,
       },
     };
   }

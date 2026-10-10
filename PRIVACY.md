@@ -42,6 +42,11 @@ To claim a promotion, FreeKeep reads the store's anti-forgery code (`sessionid`,
 store page) and sends it back to Steam with the claim request, exactly like the store's own
 **Add to Account** button. It is kept in memory only for that request and never stored.
 
+When a check finds you logged out, FreeKeep loads the store page a second time and compares the two
+codes. Steam repeats the code only if your browser sent its cookies, so this tells whether the
+browser is sharing your Steam login with FreeKeep. The codes are compared in memory and never stored;
+only the yes/no result appears in **Copy diagnostics**.
+
 These requests are governed by [Valve's privacy policy](https://store.steampowered.com/privacy_agreement/).
 
 ### Optional: Epic Games Store reminders
@@ -89,7 +94,9 @@ FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的 Epic
 讀取你擁有的遊戲並領取限免。瀏覽器會像你平常逛 Steam 商店一樣自動帶上登入狀態。popup 顯示的遊戲圖片，
 由瀏覽器從 Steam 圖片伺服器（`*.steamstatic.com`）載入，就像一般網頁一樣。領取時，FreeKeep 會從商店頁讀取防偽造代碼
 （`sessionid`，每個商店頁都有）並隨領取請求送回 Steam，做法與商店自己的「加入帳戶」按鈕相同，
-只在該次請求的記憶體中使用，從不儲存。
+只在該次請求的記憶體中使用，從不儲存。檢查結果為未登入時，FreeKeep 會再載入一次商店頁並比對兩次的代碼：
+只有在瀏覽器有送出 Steam 的 Cookie 時，Steam 才會回傳相同的代碼，藉此判斷瀏覽器是否有把登入狀態交給 FreeKeep。
+代碼只在記憶體中比對、從不儲存，「複製診斷報告」中只會出現是或否的結果。
 
 選用的 Epic Games Store 限免提醒預設關閉。開啟時，瀏覽器會請你允許存取
 `https://store-site-backend-static-ipv4.ak.epicgames.com`，之後 FreeKeep 每次檢查會從那裡下載 Epic 公開的限免清單。

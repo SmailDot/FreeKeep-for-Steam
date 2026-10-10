@@ -30,7 +30,7 @@ login cookies only where FreeKeep asks for `credentials: 'include'`.
 
 | Purpose | Request | Login |
 |---|---|---|
-| Login state, CSRF `sessionid`, store country | `GET /?l=english` → `g_AccountID`, `g_sessionID`, `data-config` `COUNTRY` | yes |
+| Login state, CSRF `sessionid`, store country | `GET /?l=english` → `g_AccountID` (or `data-userinfo`), `g_sessionID`, `data-config` `COUNTRY`; loaded twice when logged out, see below | yes |
 | Candidate promotions | `GET /search/results/?specials=1&maxprice=free&json=1&count=100&cc=XX` | no |
 | Packages of an app | `GET /api/appdetails?appids=N&cc=XX&l=english` | no |
 | Promotion deadline | `GET /app/N/?l=english` → "Free to keep when you get it before …" | yes (age gate) |
@@ -51,6 +51,10 @@ Notes from the proof of concept (October 2026):
   - `500` `{"purchaseresultdetail":9}` → already owned
   - `500` `{"purchaseresultdetail":24}` → base game required
   - `401` → not logged in; `404` → bad `sessionid`
+- When the store page says logged out, FreeKeep loads it once more and compares the two
+  `g_sessionID` values. Steam echoes the `sessionid` cookie into the page, so the values match only
+  if the browser attached Steam's cookies. The result (`cookiesSent`) goes into the diagnostics'
+  `lastCheck`, together with the status, final path and the login signals; no ids are stored.
 - Steam cookies are `SameSite=None`, so the service worker's `fetch` carries the login. Origin is
   not checked: a POST from the service worker behaves exactly like one from a store tab. No tabs,
   content scripts or `cookies` permission are needed.
