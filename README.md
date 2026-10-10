@@ -162,8 +162,9 @@ promotion is running.
 
 **FreeKeep says I'm not logged in, but I am.** Open the Steam store in the same browser, make sure
 your account name appears at the top right, then click **Check now**. In one reported case the
-extension still showed "not logged in" right after installation; removing it and installing it again
-from the Chrome Web Store fixed it. If this happens to you, click **Copy diagnostics** and open an
+extension still showed "not logged in" right after installation. Turning on **Remind me of free
+games on the Epic Games Store** in the settings, allowing the permission Chrome asks for, and then
+turning it off again fixed it. If this happens to you, click **Copy diagnostics** and open an
 issue: the report includes the result of the last login check, without any account data.
 
 **Something isn't working?** Open the popup, click **Copy diagnostics** and paste the report into an
