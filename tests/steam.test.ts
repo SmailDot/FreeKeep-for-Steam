@@ -6,6 +6,7 @@ import {
   parseEndsText,
   parseOwned,
   parseSearchAppIds,
+  imageUrl,
   parseSession,
   SteamClient,
 } from '@/core/steam';
@@ -113,6 +114,35 @@ describe('classifyClaim', () => {
     [502, '<html>', { kind: 'error', code: 'http_502' }],
   ])('HTTP %i %s', (status, body, expected) => {
     expect(classifyClaim(status, body)).toEqual(expected);
+  });
+});
+
+describe('imageUrl', () => {
+  it('accepts only https URLs', () => {
+    expect(imageUrl('https://shared.akamai.steamstatic.com/x.jpg')).toBe('https://shared.akamai.steamstatic.com/x.jpg');
+    expect(imageUrl('http://shared.akamai.steamstatic.com/x.jpg')).toBeNull();
+    expect(imageUrl('javascript:alert(1)')).toBeNull();
+    expect(imageUrl('not a url')).toBeNull();
+    expect(imageUrl(undefined)).toBeNull();
+    expect(imageUrl(42)).toBeNull();
+  });
+});
+
+describe('parseAppDetails hardening', () => {
+  const details = (sub: Record<string, unknown>, data: Record<string, unknown> = {}) => ({
+    '1': { success: true, data: { name: 'G', type: 'game', package_groups: [{ subs: [sub] }], ...data } },
+  });
+  const free = { is_free_license: true, price_in_cents_with_discount: 0, option_text: 'Limited Free Promotional Package' };
+
+  it('drops packages without a numeric id', () => {
+    expect(parseAppDetails(1, details({ ...free, packageid: 'abc' }))).toEqual([]);
+    expect(parseAppDetails(1, details({ ...free }))).toEqual([]);
+    expect(parseAppDetails(1, details({ ...free, packageid: 77 }))).toHaveLength(1);
+  });
+
+  it('keeps only https capsule images', () => {
+    expect(parseAppDetails(1, details({ ...free, packageid: 77 }, { header_image: 'javascript:alert(1)' }))[0]!.capsule).toBeNull();
+    expect(parseAppDetails(1, details({ ...free, packageid: 77 }, { header_image: 'https://c.steamstatic.com/h.jpg' }))[0]!.capsule).toBe('https://c.steamstatic.com/h.jpg');
   });
 });
 

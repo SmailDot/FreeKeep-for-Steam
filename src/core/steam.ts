@@ -86,6 +86,16 @@ function kindOf(type: string | undefined): PromoKind {
   return 'other';
 }
 
+/** Only https image URLs reach the popup; anything else becomes the placeholder. */
+export function imageUrl(url: unknown): string | null {
+  if (typeof url !== 'string') return null;
+  try {
+    return new URL(url).protocol === 'https:' ? url : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Returns the limited free promotional packages listed on an app's store data. */
 export function parseAppDetails(appid: number, json: unknown): FreeSub[] {
   const entry = (json as Record<string, { success?: boolean; data?: any }>)?.[String(appid)];
@@ -96,14 +106,16 @@ export function parseAppDetails(appid: number, json: unknown): FreeSub[] {
     for (const sub of group.subs ?? []) {
       const isFree = sub.is_free_license === true && sub.price_in_cents_with_discount === 0;
       if (!isFree || !LIMITED_PROMO.test(sub.option_text ?? '')) continue;
+      const subid = Number(sub.packageid);
+      if (!Number.isInteger(subid) || subid <= 0) continue;
       subs.push({
-        subid: Number(sub.packageid),
+        subid,
         appid,
         name: String(d.name ?? `App ${appid}`),
         kind: kindOf(d.type),
         baseAppid: d.fullgame?.appid ? Number(d.fullgame.appid) : null,
         baseName: d.fullgame?.name ?? null,
-        capsule: d.header_image ?? null,
+        capsule: imageUrl(d.header_image),
       });
     }
   }

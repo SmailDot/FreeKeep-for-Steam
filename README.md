@@ -127,6 +127,9 @@ claim the games on Epic's site.
 | `store-site-backend-static-ipv4.ak.epicgames.com` (optional) | Read Epic's public list of free games, only after you turn on Epic reminders |
 
 It doesn't use the `tabs`, `scripting` or `cookies` permissions and can't access any other site.
+A Content Security Policy in the manifest also makes the browser itself refuse any connection to
+other hosts, images from other servers, and inline or remote scripts, so these limits hold even if
+the code were tampered with.
 
 ## FAQ
 

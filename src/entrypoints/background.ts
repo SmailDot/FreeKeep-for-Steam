@@ -58,6 +58,25 @@ async function scheduleSoon(delayInMinutes = 1): Promise<void> {
 
 const reasonFor: Record<string, RunReason> = { [PERIODIC]: 'alarm', [STARTUP]: 'startup' };
 
+/** Only the popup and options page can message the worker, but their input is still checked. */
+function parseCommand(message: unknown): Command | null {
+  const m = message as Partial<Command> & { subid?: unknown; id?: unknown; status?: unknown };
+  const subid = typeof m?.subid === 'number' && Number.isInteger(m.subid) && m.subid > 0 ? m.subid : null;
+  switch (m?.type) {
+    case 'checkNow':
+      return { type: 'checkNow' };
+    case 'claim':
+    case 'skip':
+      return subid ? { type: m.type, subid } : null;
+    case 'epic':
+      return typeof m.id === 'string' && (m.status === 'opened' || m.status === 'hidden')
+        ? { type: 'epic', id: m.id, status: m.status }
+        : null;
+    default:
+      return null;
+  }
+}
+
 export default defineBackground(() => {
   browser.runtime.onInstalled.addListener(async () => {
     await ensurePeriodicAlarm();
@@ -84,8 +103,9 @@ export default defineBackground(() => {
     void browser.tabs.create({ url });
   });
 
-  browser.runtime.onMessage.addListener((message: Command, _sender, sendResponse) => {
+  browser.runtime.onMessage.addListener((raw: unknown, _sender, sendResponse) => {
     const handle = async (): Promise<CommandResult> => {
+      const message = parseCommand(raw);
       switch (message?.type) {
         case 'checkNow':
           await runCheck(deps, 'manual');

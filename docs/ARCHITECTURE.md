@@ -98,6 +98,22 @@ new games) `→ opened` (user clicked *Get on Epic*) or `hidden` (user dismissed
 forgotten a day after they end or after 14 days unseen. The run summary's `epic` field holds the
 number of live giveaways, `no_permission` or `error`.
 
+## Content Security Policy
+
+The manifest declares a CSP for all extension pages and the service worker, so the browser enforces
+what the code promises:
+
+| Directive | Value | Effect |
+|---|---|---|
+| `connect-src` | Steam store, Epic feed host | Any other `fetch` is refused, even from tampered code |
+| `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com` | Game images only from the stores' CDNs (`data:` is the popup's inline SVG icon) |
+| `default-src` / `style-src` | `'self'` | No inline or remote script or stylesheet |
+| `object-src`, `base-uri`, `form-action`, `frame-ancestors` | `'none'` | No plugins, base tag tricks, form posts or framing |
+
+If Steam or Epic move their image CDN to a new domain, images show the placeholder until `img-src`
+is updated; nothing else is affected. Verified in Chromium: Steam and Epic requests pass, a request
+to another host is refused, and an injected inline script does not run.
+
 ## Engine
 
 Each run (`runCheck`) is serialized with every other engine operation, so alarms, the startup

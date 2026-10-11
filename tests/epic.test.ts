@@ -82,6 +82,14 @@ describe('resolveSlug', () => {
     expect(resolveSlug({ productSlug: 'old', catalogNs: { mappings: [{ pageSlug: 'new', pageType: 'productHome' }] } })).toBe('new');
     expect(resolveSlug({})).toBeNull();
   });
+
+  it('keeps odd slug characters inside the store path', () => {
+    const live = promo('2026-10-01T00:00:00Z', '2026-10-20T00:00:00Z');
+    const el = { id: 'x', namespace: 'n', title: 'Odd', offerType: 'BASE_GAME', productSlug: 'a?b#c@evil.com', promotions: { promotionalOffers: live } };
+    const [offer] = parseEpic(feedOf(el), NOW).current;
+    expect(new URL(offer!.url).host).toBe('store.epicgames.com');
+    expect(offer!.url).toBe('https://store.epicgames.com/p/a%3Fb%23c%40evil.com');
+  });
 });
 
 describe('thumbnail', () => {

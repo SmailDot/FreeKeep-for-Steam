@@ -109,7 +109,7 @@ function toOffer(el: Element, window: { start: number; end: number }, upcoming: 
     id: `${el.namespace ?? ''}:${el.id ?? el.title ?? ''}`,
     title: el.title ?? 'Epic Games Store',
     kind,
-    url: slug ? `${EPIC_STORE}/${kind === 'bundle' ? 'bundle' : 'p'}/${slug}` : EPIC_FREE_GAMES,
+    url: slug ? `${EPIC_STORE}/${kind === 'bundle' ? 'bundle' : 'p'}/${encodeURIComponent(slug)}` : EPIC_FREE_GAMES,
     image,
     start: window.start,
     end: window.end,

@@ -68,8 +68,8 @@ These requests are governed by [Epic's privacy policy](https://www.epicgames.com
 ## Diagnostics
 
 The popup's **Copy diagnostics** button copies a report to your clipboard. It contains your FreeKeep
-settings, recent check results and the public promotion data above (including the Epic list, if that
-feature is on), and nothing about your account.
+settings, your browser's name and version, recent check results and the public promotion data above
+(including the Epic list, if that feature is on), and nothing about your account.
 It is only shared if you paste it somewhere yourself.
 
 ## Contact
@@ -108,6 +108,6 @@ FreeKeep 不會在 Epic 上領取任何東西，也不會自己開啟 Epic 頁�
 （Chrome 的擴充功能頁面可能仍列出該網址，那是 Chrome 記得你允許過，但 FreeKeep 已經連不到它）。
 
 「複製診斷報告」只會複製到你的剪貼簿，
-內容不含帳號資料，只有你自己貼出去才會被分享。
+內容包含設定、瀏覽器名稱與版本、最近的檢查結果與上述公開資料，不含帳號資料，只有你自己貼出去才會被分享。
 
 聯絡方式：[GitHub Issues](https://github.com/SmailDot/FreeKeep-for-Steam/issues) 或 [smaildot@aidot.me](mailto:smaildot@aidot.me)（維護者 [@SmailDot](https://github.com/SmailDot)）。

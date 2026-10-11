@@ -114,6 +114,8 @@
 | `store-site-backend-static-ipv4.ak.epicgames.com`（選用） | 開啟 Epic 提醒後，讀取 Epic 公開的限免清單 |
 
 不使用 `tabs`、`scripting`、`cookies` 權限，也無法存取其他網站。
+manifest 中另設有內容安全政策（CSP），由瀏覽器本身拒絕連線到其他主機、載入其他伺服器的圖片，
+以及執行內嵌或遠端的程式碼，即使程式碼遭到竄改，這些限制依然有效。
 
 ## 常見問題
 
