@@ -13,6 +13,8 @@ window.PIXEL = {
   globe: ['..#####..', '.#..#..#.', '#..#.#..#', '#########', '#..#.#..#', '.#..#..#.', '..#####..'],
   coin: ['..#####..', '.#.....#.', '#...#...#', '#..###..#', '#...#...#', '.#.....#.', '..#####..'],
   star: ['....#....', '...###...', '#########', '.#######.', '..#####..', '..##.##..', '.##...##.', '.#.....#.'],
+  cursor: ['#.......', '##......', '###.....', '####....', '#####...', '######..', '###.....', '#.##....', '...##...', '...##...'],
+  renew: ['...###...', '.##...#.#', '.#.....##', '#.....###', '#........', '........#', '###.....#', '##.....#.', '#.#...##.', '...###...'],
   warn: ['....#....', '...###...', '...#.#...', '..##.##..', '..##.##..', '.#######.', '.###.###.', '#########'],
 };
 window.pix = (name, scale = 3) => {
@@ -21,4 +23,15 @@ window.pix = (name, scale = 3) => {
   let rects = '';
   rows.forEach((r, y) => [...r].forEach((c, x) => { if (c === '#') rects += `<rect x="${x}" y="${y}" width="1" height="1"/>`; }));
   return `<svg width="${w * scale}" height="${rows.length * scale}" viewBox="0 0 ${w} ${rows.length}" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+};
+// Sizes a popup iframe to its content, like Chrome sizes the real popup (at most 600 px tall).
+window.fitFrame = (frame) => {
+  const fit = () => {
+    const body = frame.contentDocument?.body;
+    if (body) frame.style.height = `${Math.min(600, Math.ceil(body.getBoundingClientRect().height))}px`;
+  };
+  frame.addEventListener('load', () => {
+    fit();
+    new frame.contentWindow.ResizeObserver(fit).observe(frame.contentDocument.body);
+  });
 };

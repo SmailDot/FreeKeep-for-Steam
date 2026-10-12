@@ -18,6 +18,11 @@
         flex: 1;
         transition: opacity 0.3s steps(3, end);
       }
+      /* Top-aligned, so the popup grows downwards like the real one instead of jumping around. */
+      .frame {
+        align-self: flex-start;
+        margin-top: 50px;
+      }
       .brand img {
         width: 48px;
         height: 48px;
@@ -108,6 +113,7 @@
     </section>
     <div class="frame"><iframe id="popup" src="/popup.html"></iframe></div>
     <script>
+      fitFrame(document.getElementById('popup'));
       const params = new URLSearchParams(location.search);
       const lang = params.get('lang') ?? 'en';
       // steam / epic: the store screenshots. problem → how → claim → epic → proof: the README demo.
@@ -220,6 +226,28 @@
               ['check', '只領取真正的限時免費'],
               ['tabs', '略過已擁有的遊戲，DLC 會確認本體'],
               ['bell', '只在必要時通知'],
+            ],
+          },
+        },
+        renew: {
+          en: {
+            headline: 'Steam login expired? <em>One click.</em>',
+            privacyTitle: "Steam's web login lasts 24 hours",
+            privacyBody: "FreeKeep's background checks don't renew it, so you choose how: one click, automatically, or just a reminder.",
+            points: [
+              ['cursor', 'One click, done in a background tab'],
+              ['renew', 'Or fully automatic (optional)'],
+              ['bell', 'Or only a reminder'],
+            ],
+          },
+          zh_TW: {
+            headline: 'Steam 登入過期？<br><em>一鍵</em>續期',
+            privacyTitle: 'Steam 網頁登入每 24 小時到期',
+            privacyBody: 'FreeKeep 在背景檢查不會觸發續期，所以由你選：一鍵續期、自動續期，或只提醒。',
+            points: [
+              ['cursor', '點一下，在背景分頁完成'],
+              ['renew', '或全自動續期（選用）'],
+              ['bell', '或只提醒'],
             ],
           },
         },

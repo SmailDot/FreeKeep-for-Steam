@@ -8,7 +8,8 @@
 //
 // Story, told by the copy on the left while the real popup acts on the right:
 //   problem (others want your password) → how (FreeKeep never sees your login) → claim (three
-//   promotions found and claimed, one retried) → epic (the Epic tab) → proof (check it yourself).
+//   promotions found and claimed, one retried) → renew (Steam's 24-hour login renewed with one
+//   click) → epic (the Epic tab) → proof (check it yourself).
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -51,11 +52,13 @@ const update = (id, patch) => {
 };
 
 // The "Check now" and "Retry" buttons are clicked for real; the fake background answers them.
-await frame.evaluate(() => {
+await frame.evaluate((meta) => {
   window.__demo.onCommand = (c) => {
     if (c.type === 'checkNow') window.__demo.set({ runningSince: Date.now() });
+    // The background tab renews Steam's login, then the check finds the user logged in again.
+    if (c.type === 'renewLogin') setTimeout(() => window.__demo.set({ meta: { ...meta, renewal: { at: Date.now(), method: 'tab', result: 'ok' } } }), 1300);
   };
-});
+}, seed.meta);
 
 const scene = (name) => page.evaluate((n) => window.showScene(n), name);
 await wait(2800);
@@ -82,6 +85,12 @@ await frame.click('.card.is-failed .pbtn.blue');
 await wait(1100);
 await update(2, { status: 'claimed', attempts: 0, lastError: null });
 await wait(1800);
+await scene('renew');
+await wait(500);
+await set({ meta: { ...seed.meta, loggedIn: false, login: 'expired' } });
+await wait(1600);
+await frame.click('#loginActions .pbtn');
+await wait(2600);
 await scene('epic');
 await wait(600);
 await frame.click('#tabEpic');

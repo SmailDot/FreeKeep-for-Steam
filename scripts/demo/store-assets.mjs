@@ -20,7 +20,7 @@ const epicSeed = demoEpicSeed(T);
 
 const STAGE_CSS =
   'html,body{width:1280px!important;height:800px!important}body{padding:0 96px!important;gap:72px!important}' +
-  '.brand,h1,.box,li{animation:none!important;opacity:1!important}';
+  '.brand,h1,.box,li{animation:none!important;opacity:1!important}.frame{margin-top:96px!important}';
 
 const server = await startServer();
 const browser = await chromium.launch();
