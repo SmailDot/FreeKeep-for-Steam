@@ -2,182 +2,92 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="/stage.css" />
+    <script src="/pixel.js"></script>
     <style>
       html,
       body {
-        margin: 0;
         width: 1200px;
         height: 700px;
-        overflow: hidden;
-        font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', sans-serif;
       }
       body {
-        display: flex;
-        align-items: center;
-        gap: 56px;
+        gap: 64px;
         padding: 0 72px;
-        box-sizing: border-box;
-        color: #f4f2ff;
-        background:
-          radial-gradient(900px 500px at 15% 10%, #5b3fd6 0%, transparent 60%),
-          radial-gradient(700px 500px at 90% 100%, #0f766e 0%, transparent 60%),
-          #120f24;
       }
       .copy {
         flex: 1;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        font-size: 22px;
-        font-weight: 700;
-        opacity: 0;
-        animation: up 0.6s 0.1s forwards;
+        transition: opacity 0.3s steps(3, end);
       }
       .brand img {
-        width: 52px;
-        height: 52px;
-      }
-      .brand span {
-        font-weight: 400;
-        opacity: 0.7;
+        width: 48px;
+        height: 48px;
       }
       h1 {
-        font-size: 50px;
-        line-height: 1.08;
-        letter-spacing: -0.02em;
-        margin: 22px 0 20px;
-        opacity: 0;
-        animation: up 0.6s 0.3s forwards;
+        font-size: 48px;
+        line-height: 1.25;
+        color: #fff;
+        margin: 22px 0 24px;
       }
-      h1 em {
-        font-style: normal;
-        background: linear-gradient(90deg, #a78bfa, #34d399);
-        -webkit-background-clip: text;
-        color: transparent;
+      .box.bad + ul em,
+      body.problem h1 em {
+        color: var(--bad);
       }
-      .privacy {
-        --tone: 74 222 128;
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        padding: 16px 18px;
-        margin: 0 0 22px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, rgb(var(--tone) / 0.18), rgb(var(--tone) / 0.06));
-        border: 1px solid rgb(var(--tone) / 0.45);
-        transition:
-          background 0.3s,
-          border-color 0.3s;
-        opacity: 0;
-        animation:
-          up 0.6s 0.5s forwards,
-          glow 2.4s 1.2s ease-in-out infinite;
-      }
-      .privacy svg {
-        flex: none;
-        width: 34px;
-        height: 34px;
-        color: rgb(var(--tone));
-      }
-      .privacy strong {
-        display: block;
-        font-size: 21px;
-        color: color-mix(in srgb, rgb(var(--tone)) 45%, white);
-        margin-bottom: 4px;
-      }
-      /* The "problem" scene of the demo: what other tools ask for. */
-      .privacy.bad {
-        --tone: 248 113 113;
-      }
-      .privacy span {
-        font-size: 15.5px;
-        opacity: 0.85;
-        line-height: 1.4;
-      }
-      @keyframes glow {
-        50% {
-          box-shadow: 0 0 28px rgb(var(--tone) / 0.35);
-        }
+      .box span {
+        font-size: 16px;
+        line-height: 1.45;
       }
       ul {
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 26px 0 0;
         display: grid;
         gap: 12px;
       }
       li {
         display: flex;
         align-items: center;
-        gap: 12px;
-        font-size: 19px;
-        opacity: 0;
-        animation: up 0.5s forwards;
-      }
-      li:nth-child(1) {
-        animation-delay: 0.8s;
-      }
-      li:nth-child(2) {
-        animation-delay: 1s;
-      }
-      li:nth-child(3) {
-        animation-delay: 1.2s;
-      }
-      /* The demo recorder switches the copy to the Epic scene at the end (window.showScene). */
-      .copy {
-        transition:
-          opacity 0.3s,
-          transform 0.3s;
-      }
-      body.swap .copy {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      body.swapped li {
-        animation-duration: 0.4s;
-      }
-      body.swapped li:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      body.swapped li:nth-child(2) {
-        animation-delay: 0.25s;
-      }
-      body.swapped li:nth-child(3) {
-        animation-delay: 0.4s;
+        gap: 14px;
+        font-size: 18px;
       }
       li b {
         display: grid;
         place-items: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 9px;
-        background: rgb(255 255 255 / 0.1);
-        font-size: 16px;
+        width: 40px;
+        height: 40px;
+        background: #1b2838;
+        border: 3px solid #000;
+        color: var(--blue);
+        line-height: 0;
       }
-      .window {
-        width: 418px;
-        height: 660px;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow:
-          0 30px 80px rgb(0 0 0 / 0.55),
-          0 0 0 1px rgb(255 255 255 / 0.08);
-        flex: none;
+      .brand,
+      h1,
+      .box,
+      li {
+        opacity: 0;
+        animation: up 0.4s steps(4, end) forwards;
       }
-      iframe {
-        width: 380px;
-        height: 600px;
-        border: 0;
-        transform: scale(1.1);
-        transform-origin: 0 0;
-        background: #fff;
+      h1 {
+        animation-delay: 0.15s;
+      }
+      .box {
+        animation-delay: 0.3s;
+      }
+      li:nth-child(1) {
+        animation-delay: 0.6s;
+      }
+      li:nth-child(2) {
+        animation-delay: 0.75s;
+      }
+      li:nth-child(3) {
+        animation-delay: 0.9s;
+      }
+      body.swap .copy {
+        opacity: 0;
       }
       @keyframes up {
         from {
           opacity: 0;
-          transform: translateY(12px);
+          transform: translateY(8px);
         }
         to {
           opacity: 1;
@@ -188,17 +98,15 @@
   </head>
   <body>
     <section class="copy">
-      <div class="brand"><img src="/icon/128.png" alt="" />FreeKeep <span>for Steam</span></div>
-      <h1 id="headline"></h1>
-      <div id="box" class="privacy">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path id="boxIcon" fill="currentColor" d=""/>
-        </svg>
-        <div><strong id="privacyTitle"></strong><span id="privacyBody"></span></div>
+      <div class="brand"><img src="/icon/48.png" alt="" /><span class="name px">FreeKeep</span><span class="for px">for Steam</span></div>
+      <h1 id="headline" class="px"></h1>
+      <div id="box" class="box">
+        <span id="boxIcon" class="ic"></span>
+        <div><strong id="privacyTitle" class="px"></strong><span id="privacyBody"></span></div>
       </div>
       <ul id="points"></ul>
     </section>
-    <div class="window"><iframe id="popup" src="/popup.html"></iframe></div>
+    <div class="frame"><iframe id="popup" src="/popup.html"></iframe></div>
     <script>
       const params = new URLSearchParams(location.search);
       const lang = params.get('lang') ?? 'en';
@@ -210,9 +118,9 @@
             privacyTitle: 'Your credentials never leave your computer',
             privacyBody: 'No password, no tokens, no server. FreeKeep runs locally and uses the Steam login already in your browser.',
             points: [
-              ['⚡', 'Claims free-to-keep promos in the background'],
-              ['🎯', 'Only real promotions, never demos or F2P'],
-              ['🪶', 'Zero dependencies, fully open source'],
+              ['bolt', 'Claims free-to-keep promos in the background'],
+              ['check', 'Only real promotions, never demos or F2P'],
+              ['book', 'Zero dependencies, fully open source'],
             ],
           },
           zh_TW: {
@@ -220,9 +128,9 @@
             privacyTitle: '你的帳號憑證永遠不會離開你的電腦',
             privacyBody: '不需密碼或 Token，也沒有伺服器。FreeKeep 完全在本機執行，沿用瀏覽器既有的 Steam 登入。',
             points: [
-              ['⚡', '在背景自動領取限時免費遊戲'],
-              ['🎯', '只領取真正的限免，不含試玩版與免費遊玩遊戲'],
-              ['🪶', '無第三方依賴，原始碼完整公開'],
+              ['bolt', '在背景自動領取限時免費遊戲'],
+              ['check', '只領取真正的限免，不含試玩版與免費遊玩遊戲'],
+              ['book', '無第三方依賴，原始碼完整公開'],
             ],
           },
         },
@@ -232,9 +140,9 @@
             privacyTitle: 'Optional, anonymous, off by default',
             privacyBody: "FreeKeep reads Epic's public list of free games without any login and reminds you. You claim them on Epic's site.",
             points: [
-              ['🔔', 'One notification when a new Epic giveaway starts'],
-              ['🗓️', "See next week's free games early"],
-              ['🧩', 'Steam and Epic side by side, in separate tabs'],
+              ['bell', 'One notification when a new Epic giveaway starts'],
+              ['clock', "See next week's free games early"],
+              ['tabs', 'Steam and Epic side by side, in separate tabs'],
             ],
           },
           zh_TW: {
@@ -242,9 +150,9 @@
             privacyTitle: '選用、匿名、預設關閉',
             privacyBody: '不需登入 Epic，只讀取公開的限免清單並提醒你；領取在 Epic 網站完成。',
             points: [
-              ['🔔', 'Epic 新限免開始時通知你一次'],
-              ['🗓️', '提前知道下週的免費遊戲'],
-              ['🧩', 'Steam 與 Epic 分頁並列，一目了然'],
+              ['bell', 'Epic 新限免開始時通知你一次'],
+              ['clock', '提前知道下週的免費遊戲'],
+              ['tabs', 'Steam 與 Epic 分頁並列，一目了然'],
             ],
           },
         },
@@ -255,9 +163,9 @@
             privacyTitle: 'Your account security then depends on a third party',
             privacyBody: 'Passwords, tokens or login cookies get stored in a bot, on a server or in a config file.',
             points: [
-              ['🔑', 'Password stored in a config file'],
-              ['🍪', 'Login cookies kept on a remote server'],
-              ['🗂️', 'A browser tab opened for every game'],
+              ['key', 'Password stored in a config file'],
+              ['cookie', 'Login cookies kept on a remote server'],
+              ['tabs', 'A browser tab opened for every game'],
             ],
           },
           zh_TW: {
@@ -265,9 +173,9 @@
             privacyTitle: '帳號安全因此取決於第三方',
             privacyBody: '密碼、Token 或登入 Cookie 會被存放在機器人、伺服器或設定檔中。',
             points: [
-              ['🔑', '密碼存放在設定檔中'],
-              ['🍪', '登入 Cookie 存放在遠端伺服器'],
-              ['🗂️', '每款遊戲各開啟一個分頁'],
+              ['key', '密碼存放在設定檔中'],
+              ['cookie', '登入 Cookie 存放在遠端伺服器'],
+              ['tabs', '每款遊戲各開啟一個分頁'],
             ],
           },
         },
@@ -277,9 +185,9 @@
             privacyTitle: 'It reuses your browser session',
             privacyBody: 'Your browser attaches your Steam session. Steam protects the login cookie with HttpOnly, so extensions can\'t read it, and FreeKeep doesn\'t request cookie access.',
             points: [
-              ['🔑', 'No password'],
-              ['🍪', 'No cookie access'],
-              ['🖥️', 'No server'],
+              ['key', 'No password'],
+              ['cookie', 'No cookie access'],
+              ['server', 'No server'],
             ],
           },
           zh_TW: {
@@ -287,9 +195,9 @@
             privacyTitle: '沿用瀏覽器既有的登入狀態',
             privacyBody: '由瀏覽器自動附上 Steam 登入狀態。登入憑證受 HttpOnly 保護，擴充功能無法讀取，FreeKeep 也未申請 Cookie 權限。',
             points: [
-              ['🔑', '不需密碼'],
-              ['🍪', '不讀取 Cookie'],
-              ['🖥️', '沒有伺服器'],
+              ['key', '不需密碼'],
+              ['cookie', '不讀取 Cookie'],
+              ['server', '沒有伺服器'],
             ],
           },
         },
@@ -299,9 +207,9 @@
             privacyTitle: 'A single request, no tabs',
             privacyBody: 'The same request as Steam\'s "Add to Account" button, sent in the background.',
             points: [
-              ['🎯', 'Genuine free-to-keep promotions only'],
-              ['🧩', 'Skips owned games, checks DLC base games'],
-              ['🔔', 'Notifies you only when needed'],
+              ['check', 'Genuine free-to-keep promotions only'],
+              ['tabs', 'Skips owned games, checks DLC base games'],
+              ['bell', 'Notifies you only when needed'],
             ],
           },
           zh_TW: {
@@ -309,9 +217,9 @@
             privacyTitle: '單一請求，不開分頁',
             privacyBody: '與 Steam「加入帳戶」按鈕相同的請求，在背景完成。',
             points: [
-              ['🎯', '只領取真正的限時免費'],
-              ['🧩', '略過已擁有的遊戲，DLC 會確認本體'],
-              ['🔔', '只在必要時通知'],
+              ['check', '只領取真正的限時免費'],
+              ['tabs', '略過已擁有的遊戲，DLC 會確認本體'],
+              ['bell', '只在必要時通知'],
             ],
           },
         },
@@ -321,9 +229,9 @@
             privacyTitle: 'Chrome → Extensions → Details',
             privacyBody: "Shows only notifications and access to the Steam store (plus Epic's public list, if enabled).",
             points: [
-              ['📖', 'Open source, about 40 KB of code'],
-              ['🌍', '12 languages'],
-              ['💸', 'Free, MIT licensed'],
+              ['book', 'Open source, about 45 KB of code'],
+              ['globe', '12 languages'],
+              ['coin', 'Free, MIT licensed'],
             ],
           },
           zh_TW: {
@@ -331,35 +239,37 @@
             privacyTitle: 'Chrome 擴充功能 → 詳細資料',
             privacyBody: '只會看到通知權限與 Steam 商店的存取權（開啟 Epic 提醒時另含 Epic 公開清單）。',
             points: [
-              ['📖', '開源，程式碼約 40 KB'],
-              ['🌍', '12 種語言'],
-              ['💸', '免費，MIT 授權'],
+              ['book', '開源，程式碼約 45 KB'],
+              ['globe', '12 種語言'],
+              ['coin', '免費，MIT 授權'],
             ],
           },
         },
       };
-      const ICONS = {
-        good: 'M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z',
-        bad: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z',
-      };
       function render(name) {
         const scene = scenes[name] ?? scenes.steam;
         const copy = scene[lang];
-        const tone = scene.tone ?? 'good';
-        document.getElementById('box').classList.toggle('bad', tone === 'bad');
-        document.getElementById('boxIcon').setAttribute('d', ICONS[tone]);
+        const bad = scene.tone === 'bad';
+        document.body.classList.toggle('problem', bad);
+        document.getElementById('box').classList.toggle('bad', bad);
+        document.getElementById('boxIcon').innerHTML = pix(bad ? 'warn' : 'lock', 3);
         document.getElementById('headline').innerHTML = copy.headline;
         document.getElementById('privacyTitle').textContent = copy.privacyTitle;
         document.getElementById('privacyBody').textContent = copy.privacyBody;
-        document.getElementById('points').innerHTML = copy.points.map(([i, s]) => `<li><b>${i}</b>${s}</li>`).join('');
+        document.getElementById('points').innerHTML = copy.points.map(([i, s]) => `<li><b>${pix(i, 3)}</b>${s}</li>`).join('');
       }
       render(params.get('scene'));
       window.showScene = (scene) => {
         document.body.classList.add('swap');
         setTimeout(() => {
           render(scene);
-          document.body.classList.add('swapped');
           document.body.classList.remove('swap');
+          // Replay the entrance animation for the new copy.
+          document.querySelectorAll('.copy > *, li').forEach((el) => {
+            el.style.animation = 'none';
+            void el.offsetWidth;
+            el.style.animation = '';
+          });
         }, 320);
       };
     </script>

@@ -27,6 +27,8 @@ Thanks for testing FreeKeep! It takes about five minutes. (English below.)
 | 10 | 超過 24 小時沒開 Steam 網頁後打開 popup（設定維持「一鍵續期」） | 顯示「Steam 登入已過期」與「一鍵續期」；按下後背景短暫出現 Steam 分頁並自動關閉，接著顯示已登入 |
 | 11 | 設定改成「自動續期」 | Chrome 詢問 login.steampowered.com 權限；允許後，下次登入過期時不需任何操作就會恢復（診斷報告的 `renewal` 顯示 `"method": "auto", "result": "ok"`） |
 | 12 | 設定改成「只提醒」 | 過期時只跳通知；點通知會開啟 Steam 商店分頁（不會自動關閉），之後 FreeKeep 自動重新檢查 |
+| 13 | 設定頁「外觀與關於」換一個寶箱顏色，或用「主體／鎖扣」自訂 | 工具列圖示、popup、設定頁的寶箱立刻變色；閃光是對比色；重開瀏覽器後顏色仍在 |
+| 14 | 設定頁左側目錄點各項目、上下捲動 | 會捲到該段落，目前所在段落在目錄上亮起；「連線清單」的燈號跟權限一致 |
 
 ## 回報問題
 
@@ -60,6 +62,8 @@ popup 底部按「複製診斷報告」，連同你看到的狀況貼到 [Issues
 | 10 | Open the popup after not visiting Steam for over 24 hours (renewal left at **Renew with one click**) | "Steam login expired" with **Renew now**; clicking it shows a Steam tab briefly in the background, which closes itself, then you're logged in |
 | 11 | Settings → **Renew automatically** | Chrome asks for login.steampowered.com; once allowed, the next lapsed login recovers without any action (diagnostics `renewal` shows `"method": "auto", "result": "ok"`) |
 | 12 | Settings → **Only remind me** | Only a notification when the login lapses; clicking it opens the Steam store in a tab that stays open, then FreeKeep checks again by itself |
+| 13 | Settings → **Look & about**: pick a chest preset, or set your own body / lock colours | The chest changes right away in the toolbar, popup and settings; the sparkle uses a contrasting colour; the colours survive a browser restart |
+| 14 | Click the entries in the settings sidebar and scroll | It jumps to each section and highlights the one in view; the **Connections** lights match the permissions |
 
 ## Report a problem
 

@@ -19,8 +19,8 @@ const claimedSeed = demoClaimedSeed(T);
 const epicSeed = demoEpicSeed(T);
 
 const STAGE_CSS =
-  'html,body{width:1280px!important;height:800px!important}body{padding:0 84px!important;gap:64px!important}' +
-  '.brand,h1,.privacy,li{animation:none!important;opacity:1!important}';
+  'html,body{width:1280px!important;height:800px!important}body{padding:0 96px!important;gap:72px!important}' +
+  '.brand,h1,.box,li{animation:none!important;opacity:1!important}';
 
 const server = await startServer();
 const browser = await chromium.launch();
@@ -36,7 +36,7 @@ async function open(lang, viewport, path, seed = claimedSeed) {
 for (const lang of ['en', 'zh_TW']) {
   const { page, close } = await open(lang, { width: 1280, height: 800 }, `/stage.html?lang=${lang}`);
   await page.addStyleTag({ content: STAGE_CSS });
-  await page.waitForTimeout(950); // mid-celebration: confetti and toasts
+  await page.waitForTimeout(700); // mid-celebration: sparks and toasts
   await page.screenshot({ path: join(out, `screenshot-${lang}-1-claimed.png`) });
   await page.waitForTimeout(3200); // settled
   await page.screenshot({ path: join(out, `screenshot-${lang}-2-overview.png`) });

@@ -78,7 +78,7 @@ await set({
   runs: [{ at: now(), reason: 'manual', ok: true, loggedIn: true, country: 'TW', found: 3, claimed: 1, error: null, epic: 2 }],
 });
 await wait(1200);
-await frame.click('.card.is-failed button.primary');
+await frame.click('.card.is-failed .pbtn.blue');
 await wait(1100);
 await update(2, { status: 'claimed', attempts: 0, lastError: null });
 await wait(1800);
@@ -98,7 +98,7 @@ const out = join(root, `docs/assets/demo-${lang}`);
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '0.4', '-i', video, '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-movflags', '+faststart', `${out}.mp4`]);
 execFileSync('ffmpeg', [
   '-y', '-loglevel', 'error', '-ss', '0.4', '-i', video,
-  '-vf', 'fps=10,scale=860:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle',
+  '-vf', 'fps=10,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle',
   `${out}.gif`,
 ]);
 rmSync(videoDir, { recursive: true, force: true });

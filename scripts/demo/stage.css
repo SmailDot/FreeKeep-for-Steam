@@ -1,0 +1,100 @@
+/* Shared look of the demo stage and store tiles: Steam colours, pixel frames, bundled pixel fonts. */
+@font-face {
+  font-family: 'FK Cubic';
+  src: url('/fonts/Cubic_11.woff2') format('woff2');
+  unicode-range: U+0000-02FF, U+2000-2BFF, U+2E80-FFFF;
+}
+@font-face {
+  font-family: 'FK Galmuri';
+  src: url('/fonts/Galmuri11.woff2') format('woff2');
+}
+:root {
+  --px: 'FK Cubic', 'FK Galmuri', monospace;
+  --blue: #66c0f4;
+  --green: #a4d007;
+  --bad: #ff8f8f;
+  --text: #c7d5e0;
+  --muted: #8f98a0;
+}
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', 'WenQuanYi Zen Hei', sans-serif;
+}
+body {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: var(--text);
+  background-color: #0e141b;
+  background-image:
+    linear-gradient(rgb(102 192 244 / 0.05) 2px, transparent 2px),
+    linear-gradient(90deg, rgb(102 192 244 / 0.05) 2px, transparent 2px);
+  background-size: 24px 24px;
+}
+.px {
+  font-family: var(--px);
+  font-weight: normal;
+  -webkit-font-smoothing: none;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand img {
+  image-rendering: pixelated;
+}
+.brand .name {
+  color: var(--blue);
+  font-size: 24px;
+}
+.brand .for {
+  color: var(--muted);
+  font-size: 24px;
+}
+em {
+  font-style: normal;
+  color: var(--green);
+}
+.frame {
+  flex: none;
+  overflow: hidden;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0 #000;
+  background: #171a21;
+}
+.frame iframe {
+  display: block;
+  width: 380px;
+  height: 600px;
+  border: 0;
+}
+.box {
+  --tone: var(--green);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: #1b2838;
+  border: 4px solid #000;
+  box-shadow:
+    inset 0 0 0 2px var(--tone),
+    6px 6px 0 #000;
+}
+.box.bad {
+  --tone: var(--bad);
+}
+.box .ic {
+  color: var(--tone);
+  line-height: 0;
+  padding-top: 2px;
+}
+.box strong {
+  display: block;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}

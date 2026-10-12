@@ -113,11 +113,13 @@ If an older version is still in review, cancel that review first, then in one su
 The optional permission doesn't trigger a permission warning on update, since it is only requested
 when the user turns the feature on.
 
-## Updating the listing for the login renewal release
+## Updating the listing for 0.3.0 (login renewal, new look)
 
 1. **Privacy practices** – replace the `notifications` justification and the host permission
    justification with the texts above. Single purpose and data usage answers stay the same.
 2. **Privacy policy** – merge to `main` first, so the URL above already describes login renewal.
+3. **Graphics** – the pixel redesign changes how the extension looks, so replace the icon, small
+   promo tile, marquee and screenshots with the new ones from `npm run store-assets`.
 
 `login.steampowered.com` is an optional permission, requested only when the user picks automatic
 renewal, so the update itself shows no new permission warning.

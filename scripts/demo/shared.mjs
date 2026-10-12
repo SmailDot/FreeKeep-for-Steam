@@ -12,8 +12,20 @@ export const { chromium } = require('playwright');
 export const root = fileURLToPath(new URL('../../', import.meta.url));
 export const built = join(root, '.output/chrome-mv3');
 
-const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.json': 'application/json' };
-const pages = { '/stage.html': 'scripts/demo/stage.html', '/tile.html': 'scripts/demo/tile.html' };
+const types = {
+  '.html': 'text/html',
+  '.js': 'text/javascript',
+  '.css': 'text/css',
+  '.png': 'image/png',
+  '.json': 'application/json',
+  '.woff2': 'font/woff2',
+};
+const pages = {
+  '/stage.html': 'scripts/demo/stage.html',
+  '/tile.html': 'scripts/demo/tile.html',
+  '/stage.css': 'scripts/demo/stage.css',
+  '/pixel.js': 'scripts/demo/pixel.js',
+};
 
 /** Serves the built extension plus the demo pages; returns { origin, close }. */
 export async function startServer() {
@@ -31,12 +43,14 @@ export async function startServer() {
   return { origin: `http://127.0.0.1:${server.address().port}`, close: () => server.close() };
 }
 
+/** Flat, pixel-style cover art for the fictional games (few colours, so the GIF stays small). */
 function capsule(title, from, to) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215">
-    <defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="${from}"/><stop offset="1" stop-color="${to}"/></linearGradient></defs>
-    <rect width="460" height="215" fill="url(#g)"/>
-    <circle cx="380" cy="40" r="90" fill="#fff" opacity=".12"/><circle cx="60" cy="200" r="70" fill="#000" opacity=".15"/>
-    <text x="28" y="130" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="52" fill="#fff">${title}</text></svg>`;
+  const blocks = [[360, 24], [392, 24], [392, 56], [424, 88], [24, 168], [56, 168]]
+    .map(([x, y]) => `<rect x="${x}" y="${y}" width="32" height="32" fill="${to}"/>`)
+    .join('');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="460" height="215" shape-rendering="crispEdges">
+    <rect width="460" height="215" fill="${from}"/><rect y="150" width="460" height="65" fill="${to}"/>${blocks}
+    <text x="28" y="120" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="50" fill="#fff">${title}</text></svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
@@ -80,9 +94,9 @@ export function demoEpic(T) {
 /** Extension storage as the popup sees it: logged in, last checked six hours ago, nothing found yet. */
 export function demoSeed(T) {
   return {
-    settings: { intervalHours: 6, mode: 'auto', includeDlc: true, notifications: true },
+    settings: { intervalHours: 6, mode: 'auto', renew: 'tab', includeDlc: true, notifications: true, epic: false, chestBody: '#2a6f9e', chestBand: '#ffcd75' },
     promos: {},
-    meta: { country: 'TW', loggedIn: true, sessionCheckedAt: T, decidedAt: T, loginNotified: false, appCache: {} },
+    meta: { country: 'TW', loggedIn: true, login: 'ok', lastLoggedInAt: T, renewal: null, sessionCheckedAt: T, decidedAt: T, loginNotified: false, appCache: {}, sessionProbe: null, claimedTotal: 12 },
     runs: [{ at: T - 6 * 3_600_000, reason: 'alarm', ok: true, loggedIn: true, country: 'TW', found: 0, claimed: 0, error: null }],
     runningSince: 0,
     popupSeenAt: T,
