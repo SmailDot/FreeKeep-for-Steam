@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Steam 상점에 접근할 수 없습니다"
+  },
+  "popupNoAccessBody": {
+    "message": "브라우저의 확장 프로그램 설정에서 store.steampowered.com 접근 권한이 꺼져 있어 FreeKeep이 게임을 확인하거나 받을 수 없습니다."
+  },
+  "popupNoAccessAllow": {
+    "message": "접근 허용"
+  },
   "kind_game": {
     "message": "게임"
   },

@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Kein Zugriff auf den Steam-Shop"
+  },
+  "popupNoAccessBody": {
+    "message": "Der Zugriff auf store.steampowered.com wurde in den Erweiterungseinstellungen des Browsers ausgeschaltet, daher kann FreeKeep keine Spiele prüfen oder sichern."
+  },
+  "popupNoAccessAllow": {
+    "message": "Zugriff erlauben"
+  },
   "kind_game": {
     "message": "Spiel"
   },

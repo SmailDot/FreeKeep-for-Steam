@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "No access to the Steam store"
+  },
+  "popupNoAccessBody": {
+    "message": "FreeKeep's access to store.steampowered.com was turned off in the browser's extension settings, so it can't check or claim games."
+  },
+  "popupNoAccessAllow": {
+    "message": "Allow access"
+  },
   "kind_game": {
     "message": "Game"
   },

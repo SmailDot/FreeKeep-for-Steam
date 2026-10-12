@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "无法访问 Steam 商店"
+  },
+  "popupNoAccessBody": {
+    "message": "浏览器的扩展设置关闭了 FreeKeep 访问 store.steampowered.com 的权限，因此无法检查或领取游戏。"
+  },
+  "popupNoAccessAllow": {
+    "message": "允许访问"
+  },
   "kind_game": {
     "message": "游戏"
   },

@@ -1,9 +1,26 @@
 import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
+/**
+ * Firefox only. The add-on id is permanent once published on addons.mozilla.org. FreeKeep collects
+ * no data, which AMO requires new add-ons to declare; that key needs Firefox 140 (an ESR) on desktop
+ * and 142 on Android, which also cover everything the UI needs (CSS :has(), OffscreenCanvas).
+ */
+const GECKO = {
+  id: 'freekeep-for-steam@smaildot.github.io',
+  strict_min_version: '140.0',
+  data_collection_permissions: { required: ['none'] },
+};
+const GECKO_ANDROID = { strict_min_version: '142.0' };
+
 export default defineConfig({
   srcDir: 'src',
-  manifest: {
+  zip: {
+    // The sources zip for AMO review only needs what the build reads; the demo videos are large.
+    excludeSources: ['docs/assets/**', '.output/**'],
+  },
+  manifest: ({ browser }) => ({
+    ...(browser === 'firefox' ? { browser_specific_settings: { gecko: GECKO, gecko_android: GECKO_ANDROID } } : {}),
     name: '__MSG_extName__',
     short_name: 'FreeKeep',
     description: '__MSG_extDescription__',
@@ -36,5 +53,5 @@ export default defineConfig({
         "frame-ancestors 'none'",
       ].join('; '),
     },
-  },
+  }),
 });

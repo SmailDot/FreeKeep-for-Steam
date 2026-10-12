@@ -4,7 +4,7 @@ Resgata automaticamente, em segundo plano, jogos e DLCs grátis por tempo limita
 • Usa a sessão do navegador: quando você está logado na Steam, o navegador anexa sua sessão automaticamente às requisições para a loja. O FreeKeep envia apenas a mesma requisição do botão "Adicionar à conta".
 • Não consegue ler suas credenciais: a Steam protege o cookie de login com o atributo HttpOnly, então nenhuma extensão consegue lê-lo. O FreeKeep também não solicita a permissão de cookies.
 • Sem servidor: o FreeKeep não tem backend e não envia nem coleta nenhum dado.
-• Verificável: a página de detalhes da extensão no Chrome mostra apenas notificações e acesso à loja Steam, além dos recursos opcionais que você ativar. O código-fonte é público.
+• Verificável: a página da extensão no navegador (chrome://extensions ou about:addons) mostra apenas notificações e acesso à loja Steam; os recursos opcionais ficam desligados até você ativá-los. O código-fonte é público.
 
 MUITAS FERRAMENTAS DE RESGATE vs FREEKEEP
 ❌ Exigem sua senha ou cookies de login → ✅ Não é necessário

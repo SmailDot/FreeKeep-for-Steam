@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Steamストアにアクセスできません"
+  },
+  "popupNoAccessBody": {
+    "message": "ブラウザの拡張機能の設定で store.steampowered.com へのアクセスがオフになっているため、FreeKeep はゲームの確認や受け取りができません。"
+  },
+  "popupNoAccessAllow": {
+    "message": "アクセスを許可"
+  },
   "kind_game": {
     "message": "ゲーム"
   },

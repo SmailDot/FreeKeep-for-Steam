@@ -1,6 +1,12 @@
 import type { FreeSub, PromoKind } from './types';
 
 export const STORE = 'https://store.steampowered.com';
+/**
+ * FreeKeep's one required site. Users can still turn it off: Firefox lists it under the add-on's
+ * permissions, Chrome under site access. Runs then stop early with `NO_STORE_ACCESS`.
+ */
+export const STORE_ORIGIN = 'https://store.steampowered.com/*';
+export const NO_STORE_ACCESS = 'no_store_access';
 /** Only requested when the user picks automatic login renewal in the options page. */
 export const LOGIN_ORIGIN = 'https://login.steampowered.com/*';
 

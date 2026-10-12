@@ -21,3 +21,6 @@ jobs:
       - run: npm run compile
       - run: npm test
       - run: npm run build
+      - run: npm run build:firefox
+      - name: Lint the Firefox build like addons.mozilla.org does
+        run: npx --yes addons-linter@10.13.0 --warnings-as-errors .output/firefox-mv3

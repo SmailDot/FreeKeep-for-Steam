@@ -82,6 +82,7 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
 | Browser | How |
 |---|---|
 | Chrome, Edge, Brave, Opera | Chrome Web Store (coming soon) |
+| Firefox 140 or later (desktop) | Firefox Add-ons (in review) |
 | Any Chromium browser, manually | Download `freekeep-for-steam-*-chrome.zip` from [Releases](../../releases), unzip it, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked** and pick the folder |
 
 Then sign in to the [Steam store](https://store.steampowered.com/) in the same browser to get started.
@@ -213,11 +214,13 @@ report includes the result of the last login check and renewal, without any acco
 
 ```bash
 npm install
-npm run dev        # Chrome with hot reload
-npm test           # unit tests
-npm run compile    # type check
-npm run build      # .output/chrome-mv3
-npm run zip        # store-ready zip
+npm run dev          # Chrome with hot reload
+npm run dev:firefox  # Firefox with hot reload
+npm test             # unit tests
+npm run compile      # type check
+npm run build        # .output/chrome-mv3
+npm run zip          # store-ready zip
+npm run zip:firefox  # Firefox zip plus the sources zip addons.mozilla.org asks for
 ```
 
 The demo above is rendered from the real popup: `npm run build && node scripts/demo/record.mjs en`

@@ -4,7 +4,7 @@ Steam'deki süreli ücretsiz oyunları ve DLC'leri, tarayıcınızda zaten açı
 • Tarayıcı oturumunu kullanır: Steam'e giriş yaptıysanız tarayıcı, Steam mağazasına giden isteklere oturumunuzu otomatik olarak ekler. FreeKeep yalnızca "Hesaba ekle" düğmesiyle aynı isteği gönderir.
 • Giriş bilgilerinizi okuyamaz: Steam, oturum çerezini HttpOnly özelliğiyle korur; bu nedenle hiçbir uzantı onu okuyamaz. FreeKeep çerez izni de istemez.
 • Sunucu yok: FreeKeep'in bir arka ucu yoktur; hiçbir veri yüklemez veya toplamaz.
-• Doğrulanabilir: Chrome'daki uzantı ayrıntıları sayfasında yalnızca bildirimler, Steam mağazasına erişim ve kendi açtığınız isteğe bağlı özellikler görünür. Kaynak kodu herkese açıktır.
+• Doğrulanabilir: tarayıcınızdaki uzantı sayfasında (chrome://extensions veya about:addons) yalnızca bildirimler ve Steam mağazasına erişim görünür; isteğe bağlı özellikler siz açana kadar kapalı kalır. Kaynak kodu herkese açıktır.
 
 BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
 ❌ Şifrenizi veya oturum çerezlerinizi ister → ✅ Gerekmez

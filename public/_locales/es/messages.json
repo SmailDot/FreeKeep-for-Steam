@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Sin acceso a la tienda de Steam"
+  },
+  "popupNoAccessBody": {
+    "message": "El acceso a store.steampowered.com se desactivó en la configuración de extensiones del navegador, así que FreeKeep no puede comprobar ni reclamar juegos."
+  },
+  "popupNoAccessAllow": {
+    "message": "Permitir acceso"
+  },
   "kind_game": {
     "message": "Juego"
   },

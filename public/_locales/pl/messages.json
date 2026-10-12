@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Brak dostępu do sklepu Steam"
+  },
+  "popupNoAccessBody": {
+    "message": "Dostęp do store.steampowered.com został wyłączony w ustawieniach rozszerzeń przeglądarki, więc FreeKeep nie może sprawdzać ani odbierać gier."
+  },
+  "popupNoAccessAllow": {
+    "message": "Zezwól na dostęp"
+  },
   "kind_game": {
     "message": "Gra"
   },

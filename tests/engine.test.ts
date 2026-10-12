@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { DEFAULT_META, claimNow, runCheck, setEpicStatus, skip, type Deps, type EpicApi, type Meta, type SteamApi } from '@/core/engine';
-import type { ClaimOutcome, Session } from '@/core/steam';
+import { NO_STORE_ACCESS, type ClaimOutcome, type Session } from '@/core/steam';
 import { DEFAULT_SETTINGS, type EpicMap, type EpicOffer, type FreeSub, type PromoMap, type RunInfo, type Settings } from '@/core/types';
 
 const GAME: FreeSub = { subid: 100, appid: 10, name: 'Game A', kind: 'game', baseAppid: null, baseName: null, capsule: null };
@@ -97,6 +97,18 @@ function setup(settings: Partial<Settings> = {}, renewAllowed = false) {
 describe('runCheck in auto mode', () => {
   let t: ReturnType<typeof setup>;
   beforeEach(() => (t = setup()));
+
+  it('stops early with a clear error when the store access was turned off', async () => {
+    t.deps.storeAllowed = async () => false;
+    const run = await runCheck(t.deps, 'alarm');
+    expect(run).toMatchObject({ ok: false, error: NO_STORE_ACCESS, found: 0, claimed: 0 });
+    expect(t.steam.sessionCalls).toBe(0);
+    expect(t.badge()).toBe('!');
+
+    t.deps.storeAllowed = async () => true;
+    expect(await runCheck(t.deps, 'manual')).toMatchObject({ ok: true, claimed: 1 });
+    expect(t.badge()).toBe('');
+  });
 
   it('claims a new free game and skips DLC whose base game is missing', async () => {
     const run = await runCheck(t.deps, 'alarm');

@@ -147,6 +147,22 @@ export function chestSvg(colors: ChestColors = DEFAULT_CHEST, size = 32, tile = 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${bg}${rects}</svg>`;
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function svgNode<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string, string | number>): SVGElementTagNameMap[K] {
+  const node = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v));
+  return node;
+}
+
+/** The chest as an SVG element, built with DOM calls (no HTML strings) for the popup and options page. */
+export function chestElement(colors: ChestColors = DEFAULT_CHEST, size = 32, tile = true): SVGSVGElement {
+  const svg = svgNode('svg', { width: size, height: size, viewBox: '0 0 16 16', 'shape-rendering': 'crispEdges', 'aria-hidden': 'true' });
+  if (tile) svg.append(svgNode('rect', { width: 16, height: 16, rx: 2.5, fill: TILE }));
+  for (const c of chestCells(colors)) svg.append(svgNode('rect', { x: c.x, y: c.y, width: 1, height: 1, fill: c.color }));
+  return svg;
+}
+
 type Ctx = Pick<CanvasRenderingContext2D, 'fillStyle' | 'fillRect' | 'clearRect' | 'beginPath' | 'roundRect' | 'fill'>;
 
 /** Draws the chest onto a canvas of `size` × `size` px (a multiple of 16 keeps it crisp). */

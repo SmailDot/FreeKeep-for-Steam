@@ -1,5 +1,5 @@
 import { decide } from './policy';
-import type { ClaimOutcome, Owned, Session, SessionProbe } from './steam';
+import { NO_STORE_ACCESS, type ClaimOutcome, type Owned, type Session, type SessionProbe } from './steam';
 import type { EpicMap, EpicOffer, EpicState, EpicStatus, FreeSub, PromoMap, PromoState, RunInfo, RunReason, Settings } from './types';
 
 const HOUR = 3_600_000;
@@ -119,6 +119,8 @@ export interface Deps {
   epic?: { api: EpicApi; allowed(): Promise<boolean> };
   /** Whether the optional login.steampowered.com permission for automatic renewal is granted. */
   renewAllowed?(): Promise<boolean>;
+  /** Whether the store.steampowered.com permission is still granted (users can turn it off). */
+  storeAllowed?(): Promise<boolean>;
 }
 
 /** Statuses that are never changed again by automatic runs. */
@@ -447,6 +449,7 @@ export function runCheck(d: Deps, reason: RunReason, renewedBy?: TabRenewal): Pr
     engine.renewedBy = renewedBy ?? null;
     const run: RunInfo = { at: d.now(), reason, ok: true, loggedIn: null, country: null, found: 0, claimed: 0, error: null };
     try {
+      if (d.storeAllowed && !(await d.storeAllowed().catch(() => true))) throw new Error(NO_STORE_ACCESS);
       const manual = reason === 'manual';
       const { seen, added } = await engine.detect(manual, manual || reason === 'renew');
       run.found = seen.length;
@@ -469,6 +472,7 @@ export function runCheck(d: Deps, reason: RunReason, renewedBy?: TabRenewal): Pr
     } finally {
       Object.assign(run, engine.state);
       await engine.save();
+      if (run.error === NO_STORE_ACCESS) await d.ui.setBadge('!', 'warn');
       // Epic is independent: its failures never affect the Steam result and vice versa.
       const epic = await checkEpic(d, await d.store.getSettings()).catch((): RunInfo['epic'] => 'error');
       if (epic !== undefined) run.epic = epic;

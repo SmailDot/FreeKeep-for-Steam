@@ -2,9 +2,9 @@ import '@/assets/theme.css';
 import './style.css';
 import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
-import { LOGIN_ORIGIN, STORE } from '@/core/steam';
+import { LOGIN_ORIGIN, STORE, STORE_ORIGIN } from '@/core/steam';
 import { DEFAULT_SETTINGS, INTERVAL_HOURS, type IntervalHours, type RenewMode, type Settings } from '@/core/types';
-import { CHEST_PRESETS, chestSvg, isHex, type ChestColors } from '@/lib/chest';
+import { CHEST_PRESETS, chestElement, isHex, type ChestColors } from '@/lib/chest';
 import { t, translatePage } from '@/lib/i18n';
 import { fillPixelIcons, pixelSafe } from '@/lib/pixel';
 import { readSnapshot, saveSettings, type Snapshot } from '@/lib/storage';
@@ -62,12 +62,13 @@ function renderStatus(s: Snapshot): void {
 
 /** Which sites FreeKeep can reach right now, read live from the browser's permissions. */
 async function renderHosts(): Promise<void> {
-  const [login, epicOn] = await Promise.all([
+  const [store, login, epicOn] = await Promise.all([
+    browser.permissions.contains({ origins: [STORE_ORIGIN] }),
     browser.permissions.contains(loginPermission),
     browser.permissions.contains(epicPermission),
   ]);
   const rows: [string, string, boolean, boolean][] = [
-    [new URL(STORE).host, t('hostStore'), true, true],
+    [new URL(STORE).host, t('hostStore'), store, true],
     ['login.steampowered.com', t('hostLogin'), login, false],
     ['store-site-backend-static-ipv4.ak.epicgames.com', t('hostEpic'), epicOn, false],
   ];
@@ -81,18 +82,20 @@ async function renderHosts(): Promise<void> {
       code.textContent = host;
       const small = document.createElement('small');
       small.textContent = use;
-      row.append(led, code, tag(t(required ? 'hostRequired' : on ? 'hostOn' : 'hostOff'), on ? 'free' : ''), small);
+      // The required store access can still be turned off in the browser; flag it then.
+      const state = required ? tag(t('hostRequired'), on ? 'free' : 'bad') : tag(t(on ? 'hostOn' : 'hostOff'), on ? 'free' : '');
+      row.append(led, code, state, small);
       return row;
     }),
   );
 }
 
 function renderChest(colors: ChestColors): void {
-  $('navLogo').innerHTML = chestSvg(colors, 32);
-  $('bannerLogo').innerHTML = chestSvg(colors, 64);
-  $('previewBig').innerHTML = chestSvg(colors, 96);
-  $('previewLight').innerHTML = chestSvg(colors, 16);
-  $('previewDark').innerHTML = chestSvg(colors, 16);
+  $('navLogo').replaceChildren(chestElement(colors, 32));
+  $('bannerLogo').replaceChildren(chestElement(colors, 64));
+  $('previewBig').replaceChildren(chestElement(colors, 96));
+  $('previewLight').replaceChildren(chestElement(colors, 16));
+  $('previewDark').replaceChildren(chestElement(colors, 16));
   chestBody.value = colors.body;
   chestBand.value = colors.band;
   document.querySelectorAll<HTMLButtonElement>('.swatch').forEach((b) => {
@@ -135,7 +138,7 @@ function buildSwatches(): void {
       b.dataset.band = p.band;
       b.title = t(`chest_${p.id}`);
       b.setAttribute('aria-label', b.title);
-      b.innerHTML = chestSvg(p, 32);
+      b.replaceChildren(chestElement(p, 32));
       b.addEventListener('click', () => void setChest({ body: p.body, band: p.band }));
       return b;
     }),

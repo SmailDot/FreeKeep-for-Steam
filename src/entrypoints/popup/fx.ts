@@ -40,7 +40,10 @@ export function celebrate(card: HTMLElement, delay = 0): void {
     replay(card, 'fx-celebrate', 900);
     const capsule = card.querySelector<HTMLElement>('.capsule-wrap');
     if (capsule && !capsule.querySelector('.check')) {
-      capsule.insertAdjacentHTML('beforeend', `<span class="check">${pixelIcon('check', 2)}</span>`);
+      const check = document.createElement('span');
+      check.className = 'check';
+      check.append(pixelIcon('check', 2));
+      capsule.append(check);
     }
     sparks(card);
   }, delay);

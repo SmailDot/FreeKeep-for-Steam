@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Steam mağazasına erişim yok"
+  },
+  "popupNoAccessBody": {
+    "message": "Tarayıcının uzantı ayarlarında store.steampowered.com erişimi kapatıldı, bu yüzden FreeKeep oyunları kontrol edemiyor ve alamıyor."
+  },
+  "popupNoAccessAllow": {
+    "message": "Erişime izin ver"
+  },
   "kind_game": {
     "message": "Oyun"
   },

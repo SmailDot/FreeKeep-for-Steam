@@ -1,7 +1,7 @@
 import { browser } from 'wxt/browser';
 import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient, epicLocale } from '@/core/epic';
 import { claimNow, runCheck, setEpicStatus, skip, type Deps, type MessageKey, type TabRenewal } from '@/core/engine';
-import { LOGIN_ORIGIN, STORE, SteamClient } from '@/core/steam';
+import { LOGIN_ORIGIN, STORE, STORE_ORIGIN, SteamClient } from '@/core/steam';
 import type { RunReason, Settings } from '@/core/types';
 import { drawChest, type ChestColors } from '@/lib/chest';
 import { t } from '@/lib/i18n';
@@ -76,6 +76,7 @@ const deps: Deps = {
     allowed: () => browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
   },
   renewAllowed: () => browser.permissions.contains({ origins: [LOGIN_ORIGIN] }),
+  storeAllowed: () => browser.permissions.contains({ origins: [STORE_ORIGIN] }),
 };
 
 /**
@@ -185,6 +186,11 @@ export default defineBackground(() => {
     void ensurePeriodicAlarm();
     const [before, after] = [changes.settings.oldValue as Settings | undefined, changes.settings.newValue as Settings | undefined];
     if (before?.chestBody !== after?.chestBody || before?.chestBand !== after?.chestBand) void applyIcon();
+  });
+
+  // Store access turned back on (popup button, about:addons or Chrome's site access): check right away.
+  browser.permissions.onAdded.addListener((added) => {
+    if (added.origins?.includes(STORE_ORIGIN)) void runCheck(deps, 'manual');
   });
 
   browser.notifications.onClicked.addListener((id) => {

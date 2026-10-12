@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "無法存取 Steam 商店"
+  },
+  "popupNoAccessBody": {
+    "message": "瀏覽器的擴充功能設定關閉了 FreeKeep 存取 store.steampowered.com 的權限，所以無法檢查或領取遊戲。"
+  },
+  "popupNoAccessAllow": {
+    "message": "允許存取"
+  },
   "kind_game": {
     "message": "遊戲"
   },

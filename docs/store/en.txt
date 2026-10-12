@@ -4,7 +4,7 @@ Automatically claims limited-time free Steam games and DLC in the background, us
 • Reuses your browser session: once you're signed in to Steam, your browser attaches your session to requests to the Steam store. FreeKeep only sends the same request as Steam's "Add to Account" button.
 • Can't read your credentials: Steam protects its login cookie with the HttpOnly flag, so no extension can read it. FreeKeep doesn't request the cookies permission either.
 • No server: FreeKeep has no backend and doesn't upload or collect any data.
-• Verifiable: the extension's Details page in Chrome shows only notifications and access to the Steam store, plus any optional feature you turn on. The source code is public.
+• Verifiable: the extension's page in your browser (chrome://extensions or about:addons) lists only notifications and access to the Steam store; optional features stay off until you turn them on. The source code is public.
 
 MANY AUTO-CLAIMERS vs FREEKEEP
 ❌ Require your password or login cookies → ✅ Not needed

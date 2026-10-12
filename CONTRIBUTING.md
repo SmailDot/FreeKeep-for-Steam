@@ -45,9 +45,10 @@ To see it in the browser, run `npm run dev` and switch your browser language, or
 
 ```bash
 npm install
-npm run dev        # Chrome with hot reload
-npm test           # unit tests
-npm run compile    # type check
+npm run dev          # Chrome with hot reload
+npm run dev:firefox  # Firefox with hot reload
+npm test             # unit tests
+npm run compile      # type check
 ```
 
 - Core logic lives in `src/core` and has no browser APIs, so it can be unit tested. Add a test for

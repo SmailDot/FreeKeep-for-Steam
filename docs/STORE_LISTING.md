@@ -127,9 +127,19 @@ when the user turns the feature on.
 `login.steampowered.com` is an optional permission, requested only when the user picks automatic
 renewal, so the update itself shows no new permission warning.
 
+## Updating to 0.3.1 (Firefox support, notification fix)
+
+0.3.0 fails to show notifications in Chrome (the chest icon is a `data:` URL that the CSP blocked),
+and the failed notification marks the whole check as failed. 0.3.1 fixes that, so if 0.3.0 is still
+in review, cancel it and upload 0.3.1 instead; otherwise upload 0.3.1 as an update. Paste the
+descriptions from `docs/store/` again: the "Verifiable" line now names both browsers. Nothing else in
+the listing or the privacy answers changes.
+
 ## Before each release
 
 1. Bump `version` in `package.json`.
-2. `npm test && npm run compile && npm run zip`.
-3. Tag `vX.Y.Z` and push: the release workflow attaches the zip to a GitHub release.
-4. Upload the same zip to the dashboard.
+2. `npm test && npm run compile && npm run zip && npm run zip:firefox`.
+3. Tag `vX.Y.Z` and push: the release workflow attaches the Chrome zip, the Firefox zip and the
+   sources zip to a GitHub release.
+4. Upload the Chrome zip to the dashboard, and the Firefox and sources zips to AMO
+   ([AMO kit](AMO_LISTING.md)).

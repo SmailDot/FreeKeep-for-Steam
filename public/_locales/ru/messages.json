@@ -131,6 +131,15 @@
       }
     }
   },
+  "popupNoAccessTitle": {
+    "message": "Нет доступа к магазину Steam"
+  },
+  "popupNoAccessBody": {
+    "message": "Доступ к store.steampowered.com отключён в настройках расширений браузера, поэтому FreeKeep не может проверять и получать игры."
+  },
+  "popupNoAccessAllow": {
+    "message": "Разрешить доступ"
+  },
   "kind_game": {
     "message": "Игра"
   },

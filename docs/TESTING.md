@@ -11,6 +11,9 @@ Thanks for testing FreeKeep! It takes about five minutes. (English below.)
 4. 在同一個瀏覽器登入 [Steam 商店](https://store.steampowered.com/)
 5. 點工具列的 FreeKeep 圖示（在拼圖選單裡，可以釘選）
 
+Firefox 140 以上：下載 `freekeep-for-steam-*-firefox.zip` 並解壓縮，開啟 `about:debugging#/runtime/this-firefox`，
+按 **Load Temporary Add-on…**，選資料夾裡的 `manifest.json`。這種暫時安裝在重新啟動 Firefox 後會移除。
+
 ## 請幫忙確認
 
 | # | 動作 | 預期結果 |
@@ -45,6 +48,10 @@ popup 底部按「複製診斷報告」，連同你看到的狀況貼到 [Issues
 3. Click **Load unpacked** and pick the unzipped folder that contains `manifest.json`.
 4. Log in to the [Steam store](https://store.steampowered.com/) in the same browser.
 5. Click the FreeKeep icon in the toolbar (inside the puzzle menu; you can pin it).
+
+Firefox 140 or later: unzip `freekeep-for-steam-*-firefox.zip`, open
+`about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on…** and pick `manifest.json` in
+the folder. Firefox removes temporary add-ons when it restarts.
 
 ## Please check
 

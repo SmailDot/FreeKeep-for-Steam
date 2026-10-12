@@ -71,6 +71,7 @@
 | 瀏覽器 | 方式 |
 |---|---|
 | Chrome、Edge、Brave、Opera | Chrome 線上應用程式商店（即將上架） |
+| Firefox 140 以上（桌面版） | Firefox 附加元件（審核中） |
 | 任何 Chromium 瀏覽器（手動） | 到 [Releases](../../releases) 下載 `freekeep-for-steam-*-chrome.zip` → 解壓縮 → 開啟 `chrome://extensions` → 開啟「開發人員模式」→「載入未封裝項目」→ 選擇資料夾 |
 
 安裝後，在同一個瀏覽器登入 [Steam 商店](https://store.steampowered.com/)即可開始使用。
@@ -178,11 +179,13 @@ Epic 則必須經過結帳流程。要自動化就得操控 Epic 網站或處理
 
 ```bash
 npm install
-npm run dev        # 開啟 Chrome 並熱重載
-npm test           # 單元測試
-npm run compile    # 型別檢查
-npm run build      # 輸出到 .output/chrome-mv3
-npm run zip        # 打包成可上架的 zip
+npm run dev          # 開啟 Chrome 並熱重載
+npm run dev:firefox  # 開啟 Firefox 並熱重載
+npm test             # 單元測試
+npm run compile      # 型別檢查
+npm run build        # 輸出到 .output/chrome-mv3
+npm run zip          # 打包成可上架的 zip
+npm run zip:firefox  # Firefox 版 zip，加上 addons.mozilla.org 要求的原始碼 zip
 ```
 
 上面的示範動畫是用真實的 popup 錄製的：`npm run build && node scripts/demo/record.mjs zh_TW`

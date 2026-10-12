@@ -143,6 +143,30 @@ If Steam or Epic move their image CDN to a new domain, images show the placehold
 is updated; nothing else is affected. Verified in Chromium: Steam and Epic requests pass, a request
 to another host is refused, and an injected inline script does not run.
 
+## Firefox
+
+The same code builds for Firefox (`npm run build:firefox`, Manifest V3). Differences:
+
+- `browser_specific_settings.gecko` carries the permanent add-on id
+  `freekeep-for-steam@smaildot.github.io` and declares that no data is collected
+  (`data_collection_permissions: none`), which needs Firefox 140 on desktop (142 on Android, not
+  tested). The Chrome build has no such key.
+- The background runs as an event page instead of a service worker; alarms wake it the same way.
+- Firefox grants `store.steampowered.com` at install, but users can turn it off on the add-on's page
+  in `about:addons` (Chrome's site access menu can withhold it too). Each run first checks the
+  permission and stops with `no_store_access`; the popup then offers **Allow access**, and the
+  background checks again as soon as the permission is back.
+- Steam cookies reach the extension's `fetch` (verified: an extension request and a store tab get
+  the same `sessionid`), so Total Cookie Protection doesn't get in the way.
+- Firefox only lets `permissions.request` run inside a real click; the options page calls it first in
+  the click handler, as Chrome needs too. A script-made click is refused, a real one works.
+- The UI uses no `innerHTML`; icons are built as SVG elements, so `addons-linter` reports nothing.
+  CI lints every build with it.
+
+Verified in Firefox 157: store access and cookies, a full check, toolbar icon and notifications, the
+one-click renewal tab, automatic renewal and Epic reminders behind real permission prompts, and
+turning the store access off and on again.
+
 ## Engine
 
 Each run (`runCheck`) is serialized with every other engine operation, so alarms, the startup

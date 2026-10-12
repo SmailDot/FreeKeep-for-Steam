@@ -3,9 +3,9 @@ import './style.css';
 import './fx.css';
 import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
-import { LOGIN_ORIGIN, STORE } from '@/core/steam';
+import { LOGIN_ORIGIN, NO_STORE_ACCESS, STORE, STORE_ORIGIN } from '@/core/steam';
 import type { EpicState, PromoState, PromoStatus } from '@/core/types';
-import { chestSvg } from '@/lib/chest';
+import { chestElement } from '@/lib/chest';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
 import { fillPixelIcons, pixelSafe } from '@/lib/pixel';
@@ -24,6 +24,10 @@ const TONE: Record<PromoStatus, string> = { pending: 'free', claimed: 'got', fai
 const SEEN_KEY = 'popupSeenAt';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+
+const storePermission = { origins: [STORE_ORIGIN] };
+/** Read live from the browser: users can turn the store access off (Firefox add-on permissions, Chrome site access). */
+let storeAccess = true;
 
 function el<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -61,6 +65,17 @@ function actionButton(label: string, command: Command, tone: Tone = ''): HTMLBut
 /** What the login banner offers depends on the renewal setting chosen in the options page. */
 function renderLogin(s: Snapshot): void {
   const banner = $('login');
+  if (!storeAccess) {
+    banner.hidden = false;
+    $('loginTitle').textContent = t('popupNoAccessTitle');
+    $('loginBody').textContent = t('popupNoAccessBody');
+    const allow = el('button', { type: 'button', className: 'pbtn blue' }, [el('span', { textContent: t('popupNoAccessAllow') })]);
+    // Requesting must be the first call in the click handler, while it still counts as user input.
+    // The background checks again as soon as the access is back, even if the popup closes for the prompt.
+    allow.addEventListener('click', () => void browser.permissions.request(storePermission));
+    $('loginActions').replaceChildren(allow);
+    return;
+  }
   banner.hidden = s.meta.loggedIn !== false;
   if (banner.hidden) return;
 
@@ -251,13 +266,13 @@ function syncCards(current: PromoState[], loggedIn: boolean | null, seenAt: numb
 
 function render(s: Snapshot, seenAt: number): void {
   const chest = { body: s.settings.chestBody, band: s.settings.chestBand };
-  $('logo').innerHTML = chestSvg(chest, 32);
-  $('emptyIcon').innerHTML = chestSvg(chest, 64);
+  $('logo').replaceChildren(chestElement(chest, 32));
+  $('emptyIcon').replaceChildren(chestElement(chest, 64));
   const lastRun = s.runs[0];
   const running = s.runningSince > 0 && Date.now() - s.runningSince < STALE_RUN_MS;
   const loggedOut = s.meta.loggedIn === false;
 
-  $('dot').className = `dot ${running ? 'busy' : loggedOut || lastRun?.ok === false ? 'warn' : 'ok'}`;
+  $('dot').className = `dot ${running ? 'busy' : loggedOut || !storeAccess || lastRun?.ok === false ? 'warn' : 'ok'}`;
   $('statusText').textContent = running
     ? t('popupChecking')
     : `${t('popupWatching')} · ${t('popupEvery', [String(s.settings.intervalHours)])}`;
@@ -265,7 +280,7 @@ function render(s: Snapshot, seenAt: number): void {
     ? t('popupNever')
     : lastRun.ok
       ? t('popupLastCheck', [relativeTime(lastRun.at)])
-      : t('popupLastError', [lastRun.error ?? '?']);
+      : t('popupLastError', [lastRun.error === NO_STORE_ACCESS ? t('popupNoAccessTitle') : (lastRun.error ?? '?')]);
   const checkNow = $<HTMLButtonElement>('checkNow');
   checkNow.disabled = running;
   checkNow.classList.toggle('is-busy', running);
@@ -297,7 +312,7 @@ function render(s: Snapshot, seenAt: number): void {
   syncCards(current, s.meta.loggedIn, seenAt);
   firstRender = false;
 
-  $('empty').hidden = current.length > 0 || !lastRun;
+  $('empty').hidden = current.length > 0 || !lastRun || !storeAccess;
   $('emptyBody').textContent = t('popupEmptyBody', [String(s.settings.intervalHours)]);
   $('recentWrap').hidden = recent.length === 0;
   $('recent').replaceChildren(
@@ -321,6 +336,7 @@ async function main(): Promise<void> {
   }
   $('diagnostics').addEventListener('click', async () => {
     const access = {
+      store: await browser.permissions.contains(storePermission),
       epic: await browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
       login: await browser.permissions.contains({ origins: [LOGIN_ORIGIN] }),
     };
@@ -331,6 +347,7 @@ async function main(): Promise<void> {
   });
 
   const seenAt = Number((await browser.storage.local.get(SEEN_KEY))[SEEN_KEY] ?? 0);
+  storeAccess = await browser.permissions.contains(storePermission);
   const first = await readSnapshot();
   render(first, seenAt);
   await browser.storage.local.set({ [SEEN_KEY]: Date.now() });
@@ -344,6 +361,12 @@ async function main(): Promise<void> {
     render(await readSnapshot(), seenAt);
     void browser.storage.local.set({ [SEEN_KEY]: Date.now() });
   });
+  const accessChanged = async () => {
+    storeAccess = await browser.permissions.contains(storePermission);
+    render(await readSnapshot(), seenAt);
+  };
+  browser.permissions.onAdded.addListener(() => void accessChanged());
+  browser.permissions.onRemoved.addListener(() => void accessChanged());
 }
 
 void main();

@@ -22,16 +22,19 @@ jobs:
       - name: Check tag matches package version
         run: test "v$(node -p 'require("./package.json").version')" = "$GITHUB_REF_NAME"
       - run: npm run zip
+      # Firefox build plus the sources zip addons.mozilla.org asks for (the code is bundled).
+      - run: npm run zip:firefox
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd .output
-          sha256sum *-chrome.zip > SHA256SUMS.txt
+          sha256sum *-chrome.zip *-firefox.zip *-sources.zip > SHA256SUMS.txt
           if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
-            # Release written by hand in the web UI: keep its notes, attach the build and checksums.
-            gh release upload "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
+            # Release written by hand in the web UI: keep its notes, attach the builds and checksums.
+            gh release upload "$GITHUB_REF_NAME" *-chrome.zip *-firefox.zip *-sources.zip SHA256SUMS.txt \
+              --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create "$GITHUB_REF_NAME" *-chrome.zip SHA256SUMS.txt \
+            gh release create "$GITHUB_REF_NAME" *-chrome.zip *-firefox.zip *-sources.zip SHA256SUMS.txt \
               --repo "$GITHUB_REPOSITORY" --title "FreeKeep for Steam $GITHUB_REF_NAME" --generate-notes
           fi
