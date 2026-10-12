@@ -1,3 +1,5 @@
+import { PIXEL_COVERAGE } from './pixel-coverage';
+
 /** Small pixel-art icons for the popup and options page, drawn in `currentColor`. */
 const BITMAPS = {
   bolt: ['.....##.', '....##..', '...##...', '..##....', '.######.', '....##..', '...##...', '..##....', '.##.....'],
@@ -29,6 +31,17 @@ export function pixelIcon(name: PixelIcon, scale = 2): string {
     }),
   );
   return `<svg class="pi" width="${w * scale}" height="${h * scale}" viewBox="0 0 ${w} ${h}" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+}
+
+const COVERED = new Set(PIXEL_COVERAGE);
+
+/**
+ * Whether the bundled (subset) pixel fonts can draw all of `text`. Game titles that can't, mostly
+ * localized Epic titles, are shown entirely in the system font instead of mixing two fonts.
+ */
+export function pixelSafe(text: string): boolean {
+  for (const c of text) if (!COVERED.has(c) && c.trim()) return false;
+  return true;
 }
 
 /** Replaces every `<i data-pi="name">` placeholder inside `root` with its icon. */

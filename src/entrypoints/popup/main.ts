@@ -8,7 +8,7 @@ import type { EpicState, PromoState, PromoStatus } from '@/core/types';
 import { chestSvg } from '@/lib/chest';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
-import { fillPixelIcons } from '@/lib/pixel';
+import { fillPixelIcons, pixelSafe } from '@/lib/pixel';
 import { formatDate, relativeTime } from '@/lib/time';
 import type { Command, CommandResult } from '@/lib/messages';
 import { readSnapshot, type Snapshot } from '@/lib/storage';
@@ -45,6 +45,9 @@ function untilText(endsText: string | null): string | null {
 }
 
 type Tone = 'green' | 'blue' | 'ghost' | '';
+
+/** Game titles stay in pixels unless the subset fonts lack one of their characters. */
+const nameClass = (title: string) => `name px${pixelSafe(title) ? '' : ' nopx'}`;
 
 function actionButton(label: string, command: Command, tone: Tone = ''): HTMLButtonElement {
   const button = el('button', { type: 'button', className: `pbtn ${tone}` }, [el('span', { textContent: label })]);
@@ -110,7 +113,7 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
     el('span', { className: 'tag', textContent: t(`kind_${p.kind}`) }),
   ]);
   const until = untilText(p.endsText);
-  const info = el('div', { className: 'info' }, [el('div', { className: 'name px', textContent: p.name, title: p.name }), meta]);
+  const info = el('div', { className: 'info' }, [el('div', { className: nameClass(p.name), textContent: p.name, title: p.name }), meta]);
   if (p.status === 'needs_base' && p.baseName) info.append(el('div', { className: 'sub', textContent: `↳ ${p.baseName}` }));
   if (until) info.append(el('div', { className: 'sub', textContent: until }));
 
@@ -133,7 +136,7 @@ function epicCard(o: EpicState): HTMLElement {
   const meta = el('div', { className: 'meta' }, [el('span', { className: 'tag', textContent: t(`kind_${kind}`) })]);
   if (o.status === 'opened') meta.append(el('span', { className: 'tag got', textContent: t('epicOpened') }));
   const info = el('div', { className: 'info' }, [
-    el('div', { className: 'name px', textContent: o.title, title: o.title }),
+    el('div', { className: nameClass(o.title), textContent: o.title, title: o.title }),
     meta,
     el('div', { className: 'sub', textContent: t('popupUntil', [formatDate(o.end)]) }),
   ]);

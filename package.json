@@ -26,7 +26,8 @@
     "demo": "node scripts/demo/record.mjs",
     "store-assets": "node scripts/demo/store-assets.mjs",
     "epic-shot": "node scripts/demo/epic-shot.mjs",
-    "icons": "node scripts/render-icons.mjs"
+    "icons": "node scripts/render-icons.mjs",
+    "fonts": "python3 scripts/fonts/subset.py"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

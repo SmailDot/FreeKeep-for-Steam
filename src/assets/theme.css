@@ -100,6 +100,14 @@ a {
   flex: none;
 }
 
+/* Text the subset pixel fonts can't draw (see pixelSafe) falls back to the system font as a whole. */
+.px.nopx,
+.tag.nopx,
+.nopx {
+  font-family: var(--sans);
+  -webkit-font-smoothing: auto;
+}
+
 /* ---------- pixel buttons ---------- */
 .pbtn {
   position: relative;

@@ -6,7 +6,7 @@ import { LOGIN_ORIGIN, STORE } from '@/core/steam';
 import { DEFAULT_SETTINGS, INTERVAL_HOURS, type IntervalHours, type RenewMode, type Settings } from '@/core/types';
 import { CHEST_PRESETS, chestSvg, isHex, type ChestColors } from '@/lib/chest';
 import { t, translatePage } from '@/lib/i18n';
-import { fillPixelIcons } from '@/lib/pixel';
+import { fillPixelIcons, pixelSafe } from '@/lib/pixel';
 import { readSnapshot, saveSettings, type Snapshot } from '@/lib/storage';
 import { formatDate, relativeTime } from '@/lib/time';
 
@@ -32,7 +32,7 @@ async function save(patch: Partial<Settings>): Promise<void> {
 
 function tag(text: string, tone = ''): HTMLSpanElement {
   const span = document.createElement('span');
-  span.className = `tag ${tone}`;
+  span.className = `tag ${tone}${pixelSafe(text) ? '' : ' nopx'}`;
   span.textContent = text;
   return span;
 }

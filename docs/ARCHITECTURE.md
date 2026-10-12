@@ -187,6 +187,11 @@ This is what prevents re-claiming loops.
   (`public/fonts/`, OFL 1.1) and only used at 12 px and 24 px, the sizes their 12 px grid renders
   crisply at; long text uses the system font. Cubic 11 covers Chinese, Japanese and Latin; Cyrillic
   and Greek are routed to Galmuri11 with `unicode-range` because Cubic's are full-width.
+- **Font subsets**: `npm run fonts` cuts both fonts down to the interface's characters plus Latin
+  and Cyrillic (about 66 KB instead of 880 KB; the popup's fonts are ready in about 45 ms instead
+  of 130 ms in Chromium). Text the subsets can't draw, such as a localized Epic title, gets the
+  `nopx` class and is shown entirely in the system font. `tests/fonts.test.ts` checks that every
+  interface string is covered.
 - **Icon**: `src/lib/chest.ts` draws the chest on a 16-cell grid, so it is exact at 16, 32, 48 and
   96 px. Users pick body and lock colours; outline, highlight and the sparkle (opposite hue, or
   Steam green for greys) are derived. The background redraws the toolbar icon with

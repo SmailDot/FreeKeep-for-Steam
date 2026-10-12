@@ -29,7 +29,11 @@ FreeKeep uses Chrome's built-in i18n. Every language is one file:
 2. Translate every `message`. Keep `$PLACEHOLDERS$` as they are and leave `placeholders` untouched.
 3. Keep `extDescription` within 132 characters (Chrome Web Store limit).
 4. Run `npm install && npm test`: a test checks keys, placeholders and length.
-5. Open a pull request. Add yourself to the table above.
+5. Run `npm run fonts` (needs Python with `pip install fonttools brotli`) so the bundled pixel fonts
+   include the characters you used; `tests/fonts.test.ts` fails until they do. Can't run it? Say
+   so in the pull request and a maintainer will. If the fonts have no glyphs for your script at
+   all, that text simply shows in the system font.
+6. Open a pull request. Add yourself to the table above.
 
 **Improve a translation:** edit the file and open a pull request, even for a single word. Native
 speakers reviewing the 🤖 languages are very welcome.

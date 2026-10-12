@@ -1,5 +1,5 @@
 // Visual feedback for claim results, in the same pixel style as the rest of the popup.
-import { pixelIcon } from '@/lib/pixel';
+import { pixelIcon, pixelSafe } from '@/lib/pixel';
 
 const COLORS = ['#66c0f4', '#a4d007', '#ffcd75', '#ffffff'];
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -55,7 +55,7 @@ export function toast(text: string, kind: 'ok' | 'bad' | 'warn'): void {
   const host = document.getElementById('toasts');
   if (!host) return;
   const node = document.createElement('div');
-  node.className = `toast toast-${kind} px`;
+  node.className = `toast toast-${kind} px${pixelSafe(text) ? '' : ' nopx'}`;
   node.textContent = text;
   host.append(node);
   setTimeout(() => node.classList.add('leaving'), 2600);
