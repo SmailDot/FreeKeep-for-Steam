@@ -119,7 +119,10 @@ when the user turns the feature on.
    justification with the texts above. Single purpose and data usage answers stay the same.
 2. **Privacy policy** – merge to `main` first, so the URL above already describes login renewal.
 3. **Graphics** – the pixel redesign changes how the extension looks, so replace the icon, small
-   promo tile, marquee and screenshots with the new ones from `npm run store-assets`.
+   promo tile, marquee and screenshots with the new ones from `npm run store-assets`. Two settings
+   page screenshots (login renewal, connections and chest colours) can go in slots 4 and 5.
+4. **Descriptions** – paste `docs/store/<lang>.txt` again: each now mentions the 24-hour login
+   handling and the new look, and the "Verifiable" line notes optional features.
 
 `login.steampowered.com` is an optional permission, requested only when the user picks automatic
 renewal, so the update itself shows no new permission warning.

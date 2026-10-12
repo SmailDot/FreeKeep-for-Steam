@@ -4,7 +4,7 @@ Steam'deki süreli ücretsiz oyunları ve DLC'leri, tarayıcınızda zaten açı
 • Tarayıcı oturumunu kullanır: Steam'e giriş yaptıysanız tarayıcı, Steam mağazasına giden isteklere oturumunuzu otomatik olarak ekler. FreeKeep yalnızca "Hesaba ekle" düğmesiyle aynı isteği gönderir.
 • Giriş bilgilerinizi okuyamaz: Steam, oturum çerezini HttpOnly özelliğiyle korur; bu nedenle hiçbir uzantı onu okuyamaz. FreeKeep çerez izni de istemez.
 • Sunucu yok: FreeKeep'in bir arka ucu yoktur; hiçbir veri yüklemez veya toplamaz.
-• Doğrulanabilir: Chrome'daki uzantı ayrıntıları sayfasında yalnızca bildirimler ve Steam mağazasına erişim görünür. Kaynak kodu herkese açıktır.
+• Doğrulanabilir: Chrome'daki uzantı ayrıntıları sayfasında yalnızca bildirimler, Steam mağazasına erişim ve kendi açtığınız isteğe bağlı özellikler görünür. Kaynak kodu herkese açıktır.
 
 BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
 ❌ Şifrenizi veya oturum çerezlerinizi ister → ✅ Gerekmez
@@ -19,8 +19,10 @@ BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
 • Her 1, 3, 6, 12 veya 24 saatte bir ve tarayıcı açıldığında kontrol eder
 • Otomatik alır ya da önce size sorar
 • Yalnızca bir oyun alındığında veya ilginiz gerektiğinde bildirim gönderir
+• Steam'in 24 saatlik web oturumunu yönetir: tek tıkla, otomatik olarak (isteğe bağlı izin) yenileyin ya da yalnızca hatırlatma alın
+• Steam renklerinde piksel sanatı görünümü, seçtiğiniz renklerde bir sandık simgesi
 • İsteğe bağlı Epic Games Store hatırlatmaları: Epic'teki ücretsiz oyunları bildirir, oyunu Epic sitesinden siz alırsınız. Varsayılan olarak kapalıdır; herkese açık liste oturum açmadan okunur
-• 12 dil, yaklaşık 40 KB kod, bağımlılık yok
+• 12 dil, yaklaşık 45 KB kod, bağımlılık yok
 
 Bu tarayıcıda Steam mağazasına giriş yapın, FreeKeep otomatik olarak çalışır.
 

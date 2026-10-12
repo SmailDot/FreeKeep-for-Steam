@@ -4,7 +4,7 @@ Reclama automáticamente en segundo plano los juegos y DLC de Steam gratis por t
 • Usa la sesión del navegador: si has iniciado sesión en Steam, el navegador añade tu sesión automáticamente a las peticiones a la tienda de Steam. FreeKeep solo envía la misma petición que el botón «Añadir a la cuenta».
 • No puede leer tus credenciales: Steam protege su cookie de inicio de sesión con el atributo HttpOnly, por lo que ninguna extensión puede leerla. FreeKeep tampoco solicita el permiso de cookies.
 • Sin servidor: FreeKeep no tiene backend y no sube ni recopila ningún dato.
-• Verificable: la página de detalles de la extensión en Chrome solo muestra notificaciones y acceso a la tienda de Steam. El código fuente es público.
+• Verificable: la página de detalles de la extensión en Chrome solo muestra notificaciones y acceso a la tienda de Steam, además de las funciones opcionales que actives. El código fuente es público.
 
 MUCHAS HERRAMIENTAS DE RECLAMO vs FREEKEEP
 ❌ Requieren tu contraseña o cookies de inicio de sesión → ✅ No las necesita
@@ -19,8 +19,10 @@ FUNCIONES
 • Revisa cada 1, 3, 6, 12 o 24 horas, y al iniciar el navegador
 • Reclama automáticamente o te pregunta antes
 • Solo te notifica cuando reclama un juego o necesita tu atención
+• Gestiona la sesión web de Steam, que dura 24 horas: renuévala con un clic, automáticamente (permiso opcional) o recibe solo un aviso
+• Estilo pixel art con los colores de Steam y un cofre en los colores que elijas
 • Avisos opcionales de Epic Games Store: te informa de los juegos gratis de Epic para que los reclames en su web. Desactivado por defecto; la lista pública se lee sin iniciar sesión
-• 12 idiomas, unos 40 KB de código, sin dependencias
+• 12 idiomas, unos 45 KB de código, sin dependencias
 
 Inicia sesión en la tienda de Steam en este navegador y FreeKeep funcionará automáticamente.
 

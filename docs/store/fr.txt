@@ -4,7 +4,7 @@ Récupère automatiquement, en arrière-plan, les jeux et DLC Steam gratuits pou
 • Utilise la session du navigateur : si vous êtes connecté à Steam, le navigateur joint automatiquement votre session aux requêtes vers le magasin Steam. FreeKeep envoie uniquement la même requête que le bouton « Ajouter au compte ».
 • Aucun accès à vos identifiants : Steam protège son cookie de connexion avec l'attribut HttpOnly, si bien qu'aucune extension ne peut le lire. FreeKeep ne demande pas non plus l'autorisation d'accès aux cookies.
 • Aucun serveur : FreeKeep n'a pas de backend et n'envoie ni ne collecte aucune donnée.
-• Vérifiable : la page de détails de l'extension dans Chrome n'affiche que les notifications et l'accès au magasin Steam. Le code source est public.
+• Vérifiable : la page de détails de l'extension dans Chrome n'affiche que les notifications et l'accès au magasin Steam, plus les fonctions facultatives que vous activez. Le code source est public.
 
 BEAUCOUP D'OUTILS DE RÉCUPÉRATION vs FREEKEEP
 ❌ Exigent votre mot de passe ou vos cookies de connexion → ✅ Aucun besoin
@@ -19,8 +19,10 @@ FONCTIONNALITÉS
 • Vérifie toutes les 1, 3, 6, 12 ou 24 heures, ainsi qu'au démarrage du navigateur
 • Récupère automatiquement, ou vous demande d'abord
 • Vous notifie uniquement lorsqu'un jeu est récupéré ou qu'une action est nécessaire
+• Gère la connexion web de Steam, valable 24 heures : renouvelez-la en un clic, automatiquement (autorisation facultative) ou recevez simplement un rappel
+• Style pixel art aux couleurs de Steam, avec un coffre aux couleurs de votre choix
 • Rappels Epic Games Store facultatifs : vous informe des jeux gratuits d'Epic, à récupérer sur le site d'Epic. Désactivé par défaut ; la liste publique est lue sans connexion
-• 12 langues, environ 40 Ko de code, aucune dépendance
+• 12 langues, environ 45 Ko de code, aucune dépendance
 
 Connectez-vous au magasin Steam dans ce navigateur, et FreeKeep fonctionne automatiquement.
 

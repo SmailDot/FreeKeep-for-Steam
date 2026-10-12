@@ -4,7 +4,7 @@ Automatycznie odbiera w tle darmowe gry i DLC na Steam dostępne przez ograniczo
 • Korzysta z sesji przeglądarki: gdy jesteś zalogowany do Steam, przeglądarka automatycznie dołącza sesję do zapytań do sklepu Steam. FreeKeep wysyła tylko to samo zapytanie co przycisk „Dodaj do konta”.
 • Nie odczyta Twoich danych logowania: Steam chroni ciasteczko logowania atrybutem HttpOnly, więc żadne rozszerzenie nie może go odczytać. FreeKeep nie prosi też o uprawnienie do ciasteczek.
 • Bez serwera: FreeKeep nie ma backendu i nie wysyła ani nie zbiera żadnych danych.
-• Możliwość weryfikacji: strona szczegółów rozszerzenia w Chrome pokazuje tylko powiadomienia i dostęp do sklepu Steam. Kod źródłowy jest publiczny.
+• Możliwość weryfikacji: strona szczegółów rozszerzenia w Chrome pokazuje tylko powiadomienia i dostęp do sklepu Steam oraz opcjonalne funkcje, które sam włączysz. Kod źródłowy jest publiczny.
 
 WIELE NARZĘDZI DO ODBIERANIA vs FREEKEEP
 ❌ Wymagają hasła lub ciasteczek logowania → ✅ Niepotrzebne
@@ -19,8 +19,10 @@ FUNKCJE
 • Sprawdza co 1, 3, 6, 12 lub 24 godziny oraz przy uruchomieniu przeglądarki
 • Odbiera automatycznie lub najpierw pyta o zgodę
 • Powiadamia tylko wtedy, gdy gra została odebrana lub potrzebna jest Twoja reakcja
+• Obsługuje 24-godzinne logowanie do Steam w przeglądarce: odnów je jednym kliknięciem, automatycznie (opcjonalne uprawnienie) albo dostań tylko przypomnienie
+• Wygląd w stylu pixel art w kolorach Steam, ze skrzynią w wybranych przez ciebie kolorach
 • Opcjonalne przypomnienia o Epic Games Store: informuje o darmowych grach w Epic, które odbierasz na stronie Epic. Domyślnie wyłączone; publiczna lista jest pobierana bez logowania
-• 12 języków, około 40 KB kodu, bez zależności
+• 12 języków, około 45 KB kodu, bez zależności
 
 Zaloguj się do sklepu Steam w tej przeglądarce, a FreeKeep zacznie działać automatycznie.
 

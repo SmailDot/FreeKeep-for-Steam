@@ -4,7 +4,7 @@ Sichert zeitlich begrenzte Gratis-Spiele und DLCs auf Steam automatisch im Hinte
 • Nutzt die bestehende Browser-Sitzung: Wenn du bei Steam angemeldet bist, hängt der Browser deine Sitzung automatisch an Anfragen an den Steam-Shop an. FreeKeep sendet nur dieselbe Anfrage wie der Button „Zum Konto hinzufügen“.
 • Kein Zugriff auf deine Anmeldedaten: Steam schützt das Login-Cookie mit dem HttpOnly-Flag, sodass keine Erweiterung es lesen kann. FreeKeep fordert auch keine Cookie-Berechtigung an.
 • Kein Server: FreeKeep hat kein Backend und lädt keine Daten hoch oder sammelt sie.
-• Überprüfbar: Auf der Detailseite der Erweiterung in Chrome stehen nur Benachrichtigungen und der Zugriff auf den Steam-Shop. Der Quellcode ist öffentlich.
+• Überprüfbar: Auf der Detailseite der Erweiterung in Chrome stehen nur Benachrichtigungen und der Zugriff auf den Steam-Shop, dazu optionale Funktionen, die du selbst einschaltest. Der Quellcode ist öffentlich.
 
 VIELE AUTO-CLAIMER vs. FREEKEEP
 ❌ Benötigen Passwort oder Login-Cookies → ✅ Nicht nötig
@@ -19,8 +19,10 @@ FUNKTIONEN
 • Prüft alle 1, 3, 6, 12 oder 24 Stunden sowie beim Browserstart
 • Sichert automatisch oder fragt dich vorher
 • Benachrichtigt dich nur, wenn ein Spiel gesichert wurde oder deine Aufmerksamkeit nötig ist
+• Kümmert sich um den 24-Stunden-Web-Login von Steam: mit einem Klick erneuern, automatisch (optionale Berechtigung) oder nur erinnern
+• Pixel-Look in Steam-Farben, mit einer Truhe in deinen Wunschfarben
 • Optionale Erinnerungen für den Epic Games Store: informiert dich über Gratisspiele bei Epic, die du auf Epics Website abholst. Standardmäßig aus; die öffentliche Liste wird ohne Anmeldung gelesen
-• 12 Sprachen, etwa 40 KB Code, keine Abhängigkeiten
+• 12 Sprachen, etwa 45 KB Code, keine Abhängigkeiten
 
 Melde dich in diesem Browser im Steam-Shop an, dann arbeitet FreeKeep automatisch.
 
