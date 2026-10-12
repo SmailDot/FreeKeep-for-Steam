@@ -50,12 +50,13 @@ const deps: Deps = {
   sleep: (ms) => new Promise((r) => setTimeout(r, ms)),
   ui: {
     async notify(id, title, message) {
-      await browser.notifications.create(id, {
-        type: 'basic',
-        iconUrl: await notificationIcon(),
-        title,
-        message,
-      });
+      const options = { type: 'basic' as const, title, message };
+      try {
+        await browser.notifications.create(id, { ...options, iconUrl: await notificationIcon() });
+      } catch {
+        // A notification must never fail a check: fall back to the packaged icon.
+        await browser.notifications.create(id, { ...options, iconUrl: browser.runtime.getURL('/icon/128.png') });
+      }
     },
     async setBadge(text, kind) {
       await browser.action.setBadgeText({ text });

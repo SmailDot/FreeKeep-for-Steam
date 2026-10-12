@@ -22,11 +22,12 @@ export default defineConfig({
     // Enforced by the browser for the popup, the options page and the service worker: FreeKeep can
     // only talk to the Steam store, Steam's login renewal and Epic's giveaway feed, load images only
     // from their CDNs, and run no inline or remote script. "Only talks to Steam" is a browser
-    // guarantee, not a promise.
+    // guarantee, not a promise. `data:` reaches no server: Chrome loads the notification icon (the
+    // chest in the user's colours, drawn locally) through connect-src.
     content_security_policy: {
       extension_pages: [
         "default-src 'self'",
-        'connect-src https://store.steampowered.com https://login.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com',
+        'connect-src data: https://store.steampowered.com https://login.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com',
         "img-src 'self' data: https://*.steamstatic.com https://*.epicgames.com https://*.unrealengine.com",
         "style-src 'self'",
         "object-src 'none'",

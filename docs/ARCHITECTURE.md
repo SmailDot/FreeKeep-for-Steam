@@ -134,8 +134,8 @@ what the code promises:
 
 | Directive | Value | Effect |
 |---|---|---|
-| `connect-src` | Steam store, `login.steampowered.com`, Epic feed host | Any other `fetch` is refused, even from tampered code; the renewal redirect may only pass through these hosts |
-| `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com` | Game images only from the stores' CDNs (`data:` is the popup's inline SVG icon) |
+| `connect-src` | `data:`, Steam store, `login.steampowered.com`, Epic feed host | Any other `fetch` is refused, even from tampered code; the renewal redirect may only pass through these hosts. `data:` reaches no server: Chrome loads the notification icon (the chest in the user's colours, drawn locally as a `data:` URL) through `connect-src` |
+| `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com` | Game images only from the stores' CDNs (`data:` is the notification icon) |
 | `default-src` / `style-src` | `'self'` | No inline or remote script or stylesheet |
 | `object-src`, `base-uri`, `form-action`, `frame-ancestors` | `'none'` | No plugins, base tag tricks, form posts or framing |
 
