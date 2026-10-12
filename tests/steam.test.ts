@@ -8,6 +8,7 @@ import {
   parseSearchAppIds,
   imageUrl,
   parseSession,
+  RENEW_URL,
   SteamClient,
 } from '@/core/steam';
 
@@ -197,5 +198,25 @@ describe('SteamClient.session', () => {
     }) as unknown as ConstructorParameters<typeof SteamClient>[0];
     const { probe } = await new SteamClient(fetchImpl).session();
     expect(probe).toMatchObject({ path: '/login/', redirected: true, accountIdSet: false, userInfoLoggedIn: null });
+  });
+});
+
+describe('SteamClient.renew', () => {
+  it("walks Steam's own renewal redirect back to the store, with the browser's cookies", async () => {
+    const calls: [string, RequestInit | undefined][] = [];
+    const fetchImpl = (async (url: string, init?: RequestInit) => {
+      calls.push([url, init]);
+      return new Response('<html></html>', { status: 200 });
+    }) as unknown as ConstructorParameters<typeof SteamClient>[0];
+    await new SteamClient(fetchImpl).renew();
+    expect(calls).toEqual([[RENEW_URL, { credentials: 'include', cache: 'no-store' }]]);
+    const url = new URL(RENEW_URL);
+    expect(url.origin + url.pathname).toBe('https://login.steampowered.com/jwt/refresh');
+    expect(url.searchParams.get('redir')).toBe('https://store.steampowered.com/?l=english');
+  });
+
+  it('reports an HTTP error', async () => {
+    const fetchImpl = (async () => new Response('', { status: 503 })) as unknown as ConstructorParameters<typeof SteamClient>[0];
+    await expect(new SteamClient(fetchImpl).renew()).rejects.toThrow('HTTP 503 /jwt/refresh');
   });
 });

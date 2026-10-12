@@ -18,15 +18,37 @@ export interface SteamApi {
   endsText(appid: number, cc: string): Promise<string | null>;
   owned(): Promise<Owned>;
   claim(subid: number, sessionid: string): Promise<ClaimOutcome>;
+  /** Asks Steam to renew a lapsed login; the caller checks the session again afterwards. */
+  renew(): Promise<void>;
 }
 
 export interface EpicApi {
   freeGames(now: number): Promise<{ current: EpicOffer[]; upcoming: EpicOffer[] }>;
 }
 
+/** How a lapsed Steam login was renewed, and how that went. Holds no account data. */
+export interface Renewal {
+  at: number;
+  /** auto: background request; tab: background tab the user asked for; visit: Steam page the user opened. */
+  method: 'auto' | 'tab' | 'visit';
+  result: 'ok' | 'logged_out' | 'no_permission' | 'error';
+  error?: string;
+}
+
+/**
+ * ok: logged in. expired: was logged in before and Steam's 24-hour web login has most likely lapsed,
+ * so a renewal should bring it back. logged_out: never logged in here, or a renewal didn't help.
+ */
+export type LoginState = 'ok' | 'expired' | 'logged_out';
+export type TabRenewal = Extract<Renewal['method'], 'tab' | 'visit'>;
+
 export interface Meta {
   country: string | null;
   loggedIn: boolean | null;
+  login: LoginState | null;
+  /** When the store last showed this browser as logged in. */
+  lastLoggedInAt: number;
+  renewal: Renewal | null;
   sessionCheckedAt: number;
   decidedAt: number;
   /** Set while the user is known to be logged out and has been told so. */
@@ -39,6 +61,9 @@ export interface Meta {
 export const DEFAULT_META: Meta = {
   country: null,
   loggedIn: null,
+  login: null,
+  lastLoggedInAt: 0,
+  renewal: null,
   sessionCheckedAt: 0,
   decidedAt: 0,
   loginNotified: false,
@@ -65,6 +90,9 @@ export type MessageKey =
   | 'notifyAvailableBody'
   | 'notifyLoginTitle'
   | 'notifyLoginBody'
+  | 'notifyExpiredTitle'
+  | 'notifyExpiredRenewBody'
+  | 'notifyExpiredOpenBody'
   | 'notifyFailedTitle'
   | 'notifyFailedBody'
   | 'notifyEpicTitle'
@@ -86,6 +114,8 @@ export interface Deps {
   sleep(ms: number): Promise<void>;
   /** Optional Epic reminders: only used when enabled in settings and the host permission is granted. */
   epic?: { api: EpicApi; allowed(): Promise<boolean> };
+  /** Whether the optional login.steampowered.com permission for automatic renewal is granted. */
+  renewAllowed?(): Promise<boolean>;
 }
 
 /** Statuses that are never changed again by automatic runs. */
@@ -119,6 +149,8 @@ function exclusive<T>(fn: () => Promise<T>): Promise<T> {
 
 class Engine {
   private session: Session | null = null;
+  /** Set when this run follows a renewal done outside the engine (a tab), to record its outcome. */
+  renewedBy: TabRenewal | null = null;
 
   constructor(
     private readonly d: Deps,
@@ -129,7 +161,10 @@ class Engine {
 
   static async load(d: Deps): Promise<Engine> {
     const [settings, promos, meta] = await Promise.all([d.store.getSettings(), d.store.getPromos(), d.store.getMeta()]);
-    return new Engine(d, settings, promos, { ...DEFAULT_META, ...meta });
+    const merged = { ...DEFAULT_META, ...meta };
+    // Older versions didn't record logins, but a decision is only ever made while logged in.
+    if (!merged.lastLoggedInAt && merged.decidedAt) merged.lastLoggedInAt = merged.decidedAt;
+    return new Engine(d, settings, promos, merged);
   }
 
   async save(): Promise<void> {
@@ -139,23 +174,64 @@ class Engine {
 
   private async refreshSession(): Promise<Session> {
     if (this.session) return this.session;
-    const session = await this.d.steam.session();
+    let session = await this.d.steam.session();
+    if (this.renewedBy) {
+      this.recordRenewal(this.renewedBy, session.loggedIn ? 'ok' : 'logged_out');
+    } else if (!session.loggedIn && this.settings.renew === 'auto' && session.probe?.cookiesSent !== false) {
+      session = await this.renewInBackground(session);
+    }
+
+    const now = this.d.now();
     this.session = session;
     this.meta.loggedIn = session.loggedIn;
-    this.meta.sessionCheckedAt = this.d.now();
+    this.meta.sessionCheckedAt = now;
     this.meta.sessionProbe = session.probe ?? null;
     if (session.country) this.meta.country = session.country;
-    if (session.loggedIn) this.meta.loginNotified = false;
+    if (session.loggedIn) {
+      this.meta.login = 'ok';
+      this.meta.lastLoggedInAt = now;
+      this.meta.loginNotified = false;
+    } else {
+      const r = this.meta.renewal;
+      const renewalFailed = r !== null && r.at >= this.meta.lastLoggedInAt && r.result === 'logged_out';
+      this.meta.login = this.meta.lastLoggedInAt > 0 && !renewalFailed ? 'expired' : 'logged_out';
+    }
     return session;
+  }
+
+  /** Automatic renewal (opt-in): the same redirect a Steam page visit goes through, run in the background. */
+  private async renewInBackground(before: Session): Promise<Session> {
+    if (!(await this.d.renewAllowed?.().catch(() => false))) {
+      this.recordRenewal('auto', 'no_permission');
+      return before;
+    }
+    try {
+      await this.d.steam.renew();
+      const after = await this.d.steam.session();
+      this.recordRenewal('auto', after.loggedIn ? 'ok' : 'logged_out');
+      return after;
+    } catch (e) {
+      this.recordRenewal('auto', 'error', (e as Error).message);
+      return before;
+    }
+  }
+
+  private recordRenewal(method: Renewal['method'], result: Renewal['result'], error?: string): void {
+    this.meta.renewal = { at: this.d.now(), method, result, ...(error ? { error } : {}) };
   }
 
   private set(p: PromoState, patch: Partial<PromoState>): void {
     Object.assign(p, patch, { updatedAt: this.d.now() });
   }
 
-  async detect(force: boolean): Promise<{ seen: PromoState[]; added: PromoState[] }> {
+  /**
+   * `force` refetches store data; `recheckLogin` checks the session even if it was checked recently.
+   * A known logged-out state is always rechecked, so a renewal or a new login is noticed.
+   */
+  async detect(force: boolean, recheckLogin: boolean): Promise<{ seen: PromoState[]; added: PromoState[] }> {
     const now = this.d.now();
-    if (!this.meta.country || now - this.meta.sessionCheckedAt > SESSION_TTL) await this.refreshSession();
+    const stale = now - this.meta.sessionCheckedAt > SESSION_TTL;
+    if (recheckLogin || stale || !this.meta.country || this.meta.loggedIn !== true) await this.refreshSession();
     const cc = this.meta.country ?? 'US';
 
     const appids = await this.d.steam.searchFreeAppIds(cc);
@@ -252,7 +328,9 @@ class Engine {
       } else if (outcome.kind === 'owned' || outcome.kind === 'needs_base') {
         this.set(p, { status: outcome.kind, lastError: null });
       } else if (outcome.kind === 'logged_out') {
+        // Logged in moments ago, so the 24-hour login has just lapsed.
         this.meta.loggedIn = false;
+        this.meta.login = 'expired';
         for (const rest of targets.slice(i)) this.set(rest, { lastError: 'logged_out' });
         await this.notifyLogin(targets.slice(i));
         break;
@@ -273,10 +351,15 @@ class Engine {
     return claimed.length;
   }
 
+  /** The notification id tells the background what a click should do (see background.ts). */
   private async notifyLogin(targets: PromoState[]): Promise<void> {
     if (this.meta.loginNotified) return;
     this.meta.loginNotified = true;
-    await this.notify('login', 'notifyLoginTitle', 'notifyLoginBody', [names(targets)]);
+    const subs = [names(targets)];
+    if (this.meta.login !== 'expired') return this.notify('login', 'notifyLoginTitle', 'notifyLoginBody', subs);
+    if (this.settings.renew === 'remind') return this.notify('store', 'notifyExpiredTitle', 'notifyExpiredOpenBody', subs);
+    // 'tab', and 'auto' when automatic renewal couldn't run: a click renews in a background tab.
+    return this.notify('renew', 'notifyExpiredTitle', 'notifyExpiredRenewBody', subs);
   }
 
   async notify(id: string, title: MessageKey, body: MessageKey, subs: string[]): Promise<void> {
@@ -349,15 +432,19 @@ async function checkEpic(d: Deps, settings: Settings): Promise<RunInfo['epic']> 
   return current.length;
 }
 
-/** One scheduled or manual check: detect → decide → claim (auto mode) → notify. */
-export function runCheck(d: Deps, reason: RunReason): Promise<RunInfo> {
+/**
+ * One scheduled or manual check: detect → decide → claim (auto mode) → notify. `renewedBy` marks a
+ * check right after the user renewed the Steam login in a tab, so its outcome is recorded.
+ */
+export function runCheck(d: Deps, reason: RunReason, renewedBy?: TabRenewal): Promise<RunInfo> {
   return exclusive(async () => {
     await d.store.setRunning(true);
     const engine = await Engine.load(d);
+    engine.renewedBy = renewedBy ?? null;
     const run: RunInfo = { at: d.now(), reason, ok: true, loggedIn: null, country: null, found: 0, claimed: 0, error: null };
     try {
       const manual = reason === 'manual';
-      const { seen, added } = await engine.detect(manual);
+      const { seen, added } = await engine.detect(manual, manual || reason === 'renew');
       run.found = seen.length;
 
       if (added.length || manual || engine.decisionStale) await engine.decideAll(seen);

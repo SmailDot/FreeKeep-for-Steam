@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steamのログイン期限が切れました"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "クリックすると更新します。その後FreeKeepが受け取ります：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "クリックするとSteamストアが開き、ログインが更新されます。その後FreeKeepが受け取ります：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "受け取れませんでした"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "このブラウザでSteamストアにログインすると、FreeKeepがゲームを受け取れます。"
+  },
+  "popupExpiredTab": {
+    "message": "Steamのウェブログインは24時間で期限が切れます。更新時はSteamストアをバックグラウンドのタブで一瞬読み込みます。"
+  },
+  "popupExpiredRemind": {
+    "message": "Steamのウェブログインは24時間で期限が切れます。Steamストアを開くと更新されます。"
+  },
+  "popupExpiredNoPermission": {
+    "message": "自動更新はまだ許可されていません。ワンクリックで更新するか、設定で許可してください。"
+  },
+  "popupRenew": {
+    "message": "今すぐ更新"
   },
   "popupOpenStore": {
     "message": "Steamストアを開く"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "先に確認する"
   },
+  "optModeHint": {
+    "message": "「先に確認する」では自動で受け取りません。受け取りはSteamアカウントにライセンスを追加するだけで、何もダウンロード・インストールされません。"
+  },
+  "optRenew": {
+    "message": "Steamのログイン期限が切れたとき"
+  },
+  "optRenewHint": {
+    "message": "Steamのウェブログインは24時間で期限が切れ、Steamのページを開くと更新されます。FreeKeepのバックグラウンドチェックでは更新されません。"
+  },
+  "optRenewTab": {
+    "message": "ワンクリックで更新"
+  },
+  "optRenewTabHint": {
+    "message": "通知でお知らせします。クリックするとSteamストアをバックグラウンドのタブで読み込み、終わると自動で閉じます。追加の権限は不要です。"
+  },
+  "optRenewAuto": {
+    "message": "自動で更新"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeepがバックグラウンドでSteamの更新用アドレスを開きます。Steamのページを開いたときと同じ動作です。login.steampowered.comへのアクセス許可が必要です。ログイン情報はブラウザとSteamの間でやり取りされ、FreeKeepからは見えません。"
+  },
+  "optRenewRemind": {
+    "message": "通知のみ"
+  },
+  "optRenewRemindHint": {
+    "message": "通知のみを表示し、FreeKeepが自分でタブを開くことはありません。通知をクリックするとSteamストアが開きます。"
+  },
+  "optRenewDenied": {
+    "message": "権限が許可されなかったため、以前の設定のままです。"
+  },
+  "optRenewMissing": {
+    "message": "自動更新の権限が削除されたため、代わりにワンクリック更新をご案内します。"
+  },
+  "optRenewGrant": {
+    "message": "もう一度許可する"
+  },
   "optDlc": {
     "message": "所有ゲームのDLCも受け取る"
   },
@@ -193,7 +260,7 @@
     "message": "保存しました"
   },
   "optPrivacy": {
-    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います（Epicの通知を有効にした場合は、Epicの公開無料ゲームリストも読み取ります）。パスワードを見ることはなく、あなたのデータをどこにも送信しません。"
+    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います（自動更新を有効にした場合はlogin.steampowered.com、Epicの通知を有効にした場合はEpicの公開無料ゲームリストも使います）。パスワードを見ることはなく、あなたのデータをどこにも送信しません。"
   },
   "popupUntil": {
     "message": "$DATE$ まで無料",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Epicの公開無料ゲームリストの読み取りをFreeKeepに許可してください。"
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "設定を開く"
   },
   "epicError": {

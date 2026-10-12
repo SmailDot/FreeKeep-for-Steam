@@ -23,6 +23,29 @@
         <legend class="label" data-i18n="optMode"></legend>
         <label class="choice"><input type="radio" name="mode" value="auto" /> <span data-i18n="optModeAuto"></span></label>
         <label class="choice"><input type="radio" name="mode" value="ask" /> <span data-i18n="optModeAsk"></span></label>
+        <p class="hint" data-i18n="optModeHint"></p>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="label" data-i18n="optRenew"></legend>
+        <p class="hint lead" data-i18n="optRenewHint"></p>
+        <label class="option">
+          <input type="radio" name="renew" value="tab" />
+          <span><strong data-i18n="optRenewTab"></strong><small data-i18n="optRenewTabHint"></small></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="renew" value="auto" />
+          <span><strong data-i18n="optRenewAuto"></strong><small data-i18n="optRenewAutoHint"></small></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="renew" value="remind" />
+          <span><strong data-i18n="optRenewRemind"></strong><small data-i18n="optRenewRemindHint"></small></span>
+        </label>
+        <p id="renewDenied" class="hint denied" data-i18n="optRenewDenied" hidden></p>
+        <p id="renewMissing" class="hint denied" hidden>
+          <span data-i18n="optRenewMissing"></span>
+          <button id="renewGrant" type="button" class="link" data-i18n="optRenewGrant"></button>
+        </p>
       </fieldset>
 
       <section class="field">

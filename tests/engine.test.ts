@@ -14,6 +14,9 @@ class FakeSteam implements SteamApi {
   outcomes: ClaimOutcome[] = [];
   claims: number[] = [];
   sessionCalls = 0;
+  renewCalls = 0;
+  /** What Steam's renewal redirect does to the session; by default nothing (no refresh cookie). */
+  onRenew: () => void = () => {};
   ccSeen: string[] = [];
 
   async session() {
@@ -33,6 +36,10 @@ class FakeSteam implements SteamApi {
   async owned() {
     return { apps: new Set(this.ownedApps), packages: new Set(this.ownedPackages) };
   }
+  async renew() {
+    this.renewCalls++;
+    this.onRenew();
+  }
   async claim(subid: number) {
     this.claims.push(subid);
     const outcome = this.outcomes.shift() ?? { kind: 'claimed' };
@@ -41,7 +48,7 @@ class FakeSteam implements SteamApi {
   }
 }
 
-function setup(settings: Partial<Settings> = {}) {
+function setup(settings: Partial<Settings> = {}, renewAllowed = false) {
   const steam = new FakeSteam();
   const db = {
     settings: { ...DEFAULT_SETTINGS, ...settings } as Settings,
@@ -74,6 +81,7 @@ function setup(settings: Partial<Settings> = {}) {
     },
     now: () => clock,
     sleep: async () => {},
+    renewAllowed: async () => renewAllowed,
   };
   return {
     steam,
@@ -192,6 +200,122 @@ describe('runCheck in auto mode', () => {
     await runCheck(t.deps, 'alarm');
     expect(t.status(100)).toBe('claimed');
     expect(t.status(200)).toBeUndefined();
+  });
+});
+
+const LOGGED_OUT: Session = {
+  loggedIn: false,
+  sessionid: 'sid',
+  country: 'TW',
+  probe: {
+    status: 200,
+    path: '/',
+    redirected: false,
+    bytes: 1,
+    accountIdSet: false,
+    userInfoLoggedIn: false,
+    sessionIdFound: true,
+    cookiesSent: true,
+  },
+};
+const LOGGED_IN: Session = { loggedIn: true, sessionid: 'sid', country: 'TW' };
+
+describe('lapsed Steam login', () => {
+  /** Logged in once with nothing to claim, then Steam's 24-hour login lapses and a game shows up. */
+  async function lapse(t: ReturnType<typeof setup>) {
+    const promos = t.steam.promos;
+    t.steam.promos = [];
+    await runCheck(t.deps, 'alarm');
+    t.advance(25 * 3_600_000);
+    t.steam.promos = promos;
+    t.steam.session_ = LOGGED_OUT;
+  }
+
+  it('renews in the background in auto mode and claims', async () => {
+    const t = setup({ renew: 'auto' }, true);
+    await lapse(t);
+    t.steam.onRenew = () => (t.steam.session_ = LOGGED_IN);
+    const run = await runCheck(t.deps, 'alarm');
+    expect(t.steam.renewCalls).toBe(1);
+    expect(run).toMatchObject({ loggedIn: true, claimed: 1 });
+    expect(t.db.meta).toMatchObject({ login: 'ok', renewal: { method: 'auto', result: 'ok' } });
+    expect(t.notes.map((n) => n.title)).toEqual(['notifyClaimedTitle']);
+  });
+
+  it('asks for a real login when a background renewal does not help', async () => {
+    const t = setup({ renew: 'auto' }, true);
+    await lapse(t);
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.renewCalls).toBe(1);
+    expect(t.db.meta).toMatchObject({ login: 'logged_out', renewal: { method: 'auto', result: 'logged_out' } });
+    expect(t.notes.map((n) => n.title)).toEqual(['notifyLoginTitle']);
+  });
+
+  it('never renews without the optional permission and offers a one-click renewal instead', async () => {
+    const t = setup({ renew: 'auto' }, false);
+    await lapse(t);
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.renewCalls).toBe(0);
+    expect(t.db.meta).toMatchObject({ login: 'expired', renewal: { result: 'no_permission' } });
+    expect(t.notes.map((n) => n.message)).toEqual(['notifyExpiredRenewBody(Game A, DLC B)']);
+  });
+
+  it('does not try when the browser sends no Steam cookies at all', async () => {
+    const t = setup({ renew: 'auto' }, true);
+    await lapse(t);
+    t.steam.session_ = { ...LOGGED_OUT, probe: { ...LOGGED_OUT.probe!, cookiesSent: false } };
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.renewCalls).toBe(0);
+  });
+
+  it('offers a one-click renewal by default and records the tab renewal', async () => {
+    const t = setup();
+    await lapse(t);
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.renewCalls).toBe(0);
+    expect(t.db.meta.login).toBe('expired');
+    expect(t.notes).toEqual([{ title: 'notifyExpiredTitle', message: 'notifyExpiredRenewBody(Game A, DLC B)' }]);
+
+    t.steam.session_ = LOGGED_IN; // the background tab went through Steam's renewal
+    const run = await runCheck(t.deps, 'renew', 'tab');
+    expect(run).toMatchObject({ reason: 'renew', loggedIn: true, claimed: 1 });
+    expect(t.db.meta).toMatchObject({ login: 'ok', renewal: { method: 'tab', result: 'ok' } });
+  });
+
+  it('switches to "log in" when a tab renewal does not help', async () => {
+    const t = setup();
+    await lapse(t);
+    await runCheck(t.deps, 'renew', 'tab');
+    expect(t.db.meta).toMatchObject({ login: 'logged_out', renewal: { method: 'tab', result: 'logged_out' } });
+  });
+
+  it('only points to the Steam store in remind mode', async () => {
+    const t = setup({ renew: 'remind' });
+    await lapse(t);
+    await runCheck(t.deps, 'alarm');
+    expect(t.notes.map((n) => n.message)).toEqual(['notifyExpiredOpenBody(Game A, DLC B)']);
+  });
+
+  it('treats a login seen by an older version as lapsed, not missing', async () => {
+    const t = setup();
+    t.db.meta = { ...t.db.meta, decidedAt: 500 } as Meta;
+    delete (t.db.meta as Partial<Meta>).lastLoggedInAt;
+    t.steam.session_ = LOGGED_OUT;
+    await runCheck(t.deps, 'alarm');
+    expect(t.db.meta.login).toBe('expired');
+  });
+
+  it('rechecks the login on every run while logged out', async () => {
+    const t = setup();
+    t.steam.promos = [];
+    t.steam.session_ = LOGGED_OUT;
+    await runCheck(t.deps, 'alarm');
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.sessionCalls).toBe(2);
+    t.steam.session_ = LOGGED_IN;
+    await runCheck(t.deps, 'alarm');
+    await runCheck(t.deps, 'alarm');
+    expect(t.steam.sessionCalls).toBe(3);
   });
 });
 

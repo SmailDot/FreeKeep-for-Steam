@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steam login expired"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Click here to renew it. FreeKeep then claims: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Click here to open the Steam store, which renews it. FreeKeep then claims: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Couldn't claim"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Log in to the Steam store in this browser so FreeKeep can claim games."
+  },
+  "popupExpiredTab": {
+    "message": "Steam's web login lasts 24 hours. Renewing loads the Steam store in a background tab for a moment."
+  },
+  "popupExpiredRemind": {
+    "message": "Steam's web login lasts 24 hours. Opening the Steam store renews it."
+  },
+  "popupExpiredNoPermission": {
+    "message": "Automatic renewal isn't allowed yet. Renew with one click, or allow it in settings."
+  },
+  "popupRenew": {
+    "message": "Renew now"
   },
   "popupOpenStore": {
     "message": "Open Steam store"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Ask me first"
   },
+  "optModeHint": {
+    "message": "“Ask me first” never claims on its own. Claiming only adds the license to your Steam account; nothing is downloaded or installed."
+  },
+  "optRenew": {
+    "message": "When the Steam login expires"
+  },
+  "optRenewHint": {
+    "message": "Steam's web login lasts 24 hours and renews whenever you open a Steam page. FreeKeep's background checks don't renew it."
+  },
+  "optRenewTab": {
+    "message": "Renew with one click"
+  },
+  "optRenewTabHint": {
+    "message": "You get a notification. One click loads the Steam store in a background tab that closes when done. No extra permission."
+  },
+  "optRenewAuto": {
+    "message": "Renew automatically"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep opens Steam's renewal address in the background, as visiting a Steam page does. Needs access to login.steampowered.com. The login is exchanged between your browser and Steam; FreeKeep never sees it."
+  },
+  "optRenewRemind": {
+    "message": "Only remind me"
+  },
+  "optRenewRemindHint": {
+    "message": "You only get a notification; FreeKeep never opens a tab on its own. Clicking the notification opens the Steam store."
+  },
+  "optRenewDenied": {
+    "message": "Permission not granted. Your previous choice is kept."
+  },
+  "optRenewMissing": {
+    "message": "The permission for automatic renewal was removed, so you'll get the one-click option instead."
+  },
+  "optRenewGrant": {
+    "message": "Allow again"
+  },
   "optDlc": {
     "message": "Also claim DLC for games I own"
   },
@@ -193,7 +260,7 @@
     "message": "Saved"
   },
   "optPrivacy": {
-    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login (plus Epic's public list of free games, if you turn on Epic reminders). It never sees your password and never sends your data anywhere."
+    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login (plus login.steampowered.com if you turn on automatic renewal, and Epic's public list of free games if you turn on Epic reminders). It never sees your password and never sends your data anywhere."
   },
   "popupUntil": {
     "message": "Free until $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Allow FreeKeep to read Epic's public list of free games."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Open settings"
   },
   "epicError": {

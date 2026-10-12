@@ -32,7 +32,8 @@ party's hands. FreeKeep is designed so it never needs them:
    FreeKeep has no backend. It doesn't upload or collect any data.
 4. **Verifiable**
    On Chrome's extension Details page, FreeKeep shows only notifications and access to the Steam
-   store (plus Epic's public list if Epic reminders are on). The [source code](src/) is public.
+   store (plus Epic's public list or Steam's login renewal, if you turn those options on). The
+   [source code](src/) is public.
 
 ### Compared with typical auto-claimers
 
@@ -46,8 +47,9 @@ party's hands. FreeKeep is designed so it never needs them:
 | Data collection | Varies | **None. No analytics, no tracking** |
 | Source code | Varies | **Open source, about 40 KB** |
 
-¹ Plus Epic's public list of free games, only if you turn on the optional
-[Epic reminders](#epic-games-store-reminders). That request contains no login information.
+¹ Plus two optional features you turn on yourself: [Epic reminders](#epic-games-store-reminders)
+(Epic's public list of free games, without any login information) and
+[automatic login renewal](#steams-24-hour-login) (Steam's own `login.steampowered.com`).
 
 For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](docs/ARCHITECTURE.md).
 
@@ -55,8 +57,8 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
 
 - **Claims free-to-keep games automatically.** Only genuine limited-time promotions (Steam's
   "Limited Free Promotional Package"); demos, playtests and free-to-play games are excluded.
-- **No credentials, fully local.** No password, no token, no server. It connects only to the Steam
-  store and never opens tabs or clicks on your behalf.
+- **No credentials, fully local.** No password, no token, no server. It connects only to Steam and
+  never clicks on your behalf.
 - **Checks your library.** Skips games you own, and claims DLC only if you own the base game (Steam
   would reject it otherwise).
 - **Region-aware.** Uses your Steam store region, so it claims only what's free in your region.
@@ -64,6 +66,8 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
 - **Flexible schedule.** Checks every 1, 3, 6, 12 or 24 hours, and once at browser startup. Checks
   missed while your computer was asleep run when it wakes up.
 - **Automatic or confirm first.** Claim right away, or get notified and decide yourself.
+- **Handles Steam's 24-hour login.** Renew it with one click, automatically, or just get a reminder;
+  [details below](#steams-24-hour-login).
 - **Optional Epic Games Store reminders.** Notifies you when Epic gives a game away, with a link to
   claim it. Off by default; [details below](#epic-games-store-reminders).
 - **Lightweight and auditable.** About 40 KB of code, no runtime dependencies, written in TypeScript
@@ -116,6 +120,30 @@ claim the games on Epic's site.
   again, but FreeKeep can no longer connect to it.
 - If you never turn it on, FreeKeep never connects to Epic.
 
+### Steam's 24-hour login
+
+Steam's web login is valid for 24 hours. When you open a Steam page after that, Steam renews it on
+the spot with a longer-lived login it keeps on `login.steampowered.com`. FreeKeep's background checks
+don't trigger that renewal, so after a day without visiting Steam, FreeKeep sees you as logged out.
+Pick how FreeKeep handles this under **When the Steam login expires** in the settings:
+
+| Option | What happens | Extra permission |
+|---|---|---|
+| **Renew with one click** (default) | You get a notification. Clicking it, or **Renew now** in the popup, loads the Steam store in a background tab, which renews the login, and closes the tab. FreeKeep then checks again and claims. | None |
+| **Renew automatically** | FreeKeep requests Steam's renewal address in the background, the same one Steam sends your browser to, and carries on without bothering you. | `login.steampowered.com` |
+| **Only remind me** | You only get a notification; FreeKeep never opens a tab on its own. Clicking the notification opens the Steam store. | None |
+
+What automatic renewal involves:
+
+- FreeKeep requests `login.steampowered.com/jwt/refresh`, which redirects back to the store. Your
+  browser sends and stores the login cookies along the way; FreeKeep's code never sees them, and it
+  still has no cookies permission. It only reads the store page the redirect ends on, the same page
+  it already reads to check whether you're logged in.
+- Chrome describes the permission as *Read and change your data on login.steampowered.com*, the
+  standard wording for any site access. It is optional and off by default, and switching to another
+  option removes it. If you'd rather FreeKeep never had it, one-click renewal does the same thing
+  through a normal page load.
+
 ### Permissions
 
 | Permission | Why |
@@ -125,8 +153,10 @@ claim the games on Epic's site.
 | `alarms` | Run the periodic check |
 | `notifications` | Tell you when a game is claimed or needs your attention |
 | `store-site-backend-static-ipv4.ak.epicgames.com` (optional) | Read Epic's public list of free games, only after you turn on Epic reminders |
+| `login.steampowered.com` (optional) | Renew Steam's 24-hour login in the background, only after you choose **Renew automatically** |
 
 It doesn't use the `tabs`, `scripting` or `cookies` permissions and can't access any other site.
+(One-click renewal opens and closes its own tab, which needs no permission.)
 A Content Security Policy in the manifest also makes the browser itself refuse any connection to
 other hosts, images from other servers, and inline or remote scripts, so these limits hold even if
 the code were tampered with.
@@ -143,6 +173,11 @@ frequency. It is still unofficial automation, so use it at your own discretion. 
 affiliated with Valve.
 
 **Does it work on new or limited accounts?** Yes. It has been tested on a brand-new account.
+
+**Does claiming download or install anything?** No. Claiming adds the game's license to your Steam
+account, exactly like *Add to Account*. Nothing is downloaded or run until you install the game in
+Steam yourself. If you'd like to look at each game before it reaches your library, choose **Ask me
+first**: FreeKeep then only notifies you and never claims on its own.
 
 **Why doesn't it claim Epic games automatically?** On Steam, a free license takes a single request,
 the same one the *Add to Account* button sends. On Epic, claiming a game goes through the checkout
@@ -163,12 +198,11 @@ reasons:
 marks these as *Needs base game* and claims them automatically if you get the base game while the
 promotion is running.
 
-**FreeKeep says I'm not logged in, but I am.** Open the Steam store in the same browser, make sure
-your account name appears at the top right, then click **Check now**. In one reported case the
-extension still showed "not logged in" right after installation. Turning on **Remind me of free
-games on the Epic Games Store** in the settings, allowing the permission Chrome asks for, and then
-turning it off again fixed it. If this happens to you, click **Copy diagnostics** and open an
-issue: the report includes the result of the last login check, without any account data.
+**FreeKeep says I'm not logged in, but Steam shows me as logged in.** Most likely Steam's 24-hour
+web login has lapsed and nothing has renewed it yet; see [Steam's 24-hour login](#steams-24-hour-login).
+Click **Renew now** in the popup, or open any Steam page and then reopen FreeKeep, which checks again
+by itself. If it still says you're not logged in, click **Copy diagnostics** and open an issue: the
+report includes the result of the last login check and renewal, without any account data.
 
 **Something isn't working?** Open the popup, click **Copy diagnostics** and paste the report into an
 [issue](../../issues). The report contains no account data.

@@ -24,6 +24,9 @@ Thanks for testing FreeKeep! It takes about five minutes. (English below.)
 | 7 | 設定頁勾選「提醒我 Epic Games Store 的免費遊戲」 | Chrome 跳出權限詢問；允許後 popup 出現「Steam ／ Epic Games」分頁，Epic 分頁列出本週限免並通知一次 |
 | 8 | Epic 分頁按「到 Epic 領取」/「隱藏」 | 開啟該遊戲的 Epic 商店頁並標示「已開啟」/ 該遊戲從清單消失 |
 | 9 | 取消勾選 Epic 提醒，再按 popup 的「複製診斷報告」 | 分頁消失；報告裡 `"epicAccess": false`。`chrome://extensions` 的詳細資料可能仍列出 Epic 網址，這是 Chrome 記得你曾經允許過（再次勾選時不會再問），FreeKeep 實際上已經連不到 Epic |
+| 10 | 超過 24 小時沒開 Steam 網頁後打開 popup（設定維持「一鍵續期」） | 顯示「Steam 登入已過期」與「一鍵續期」；按下後背景短暫出現 Steam 分頁並自動關閉，接著顯示已登入 |
+| 11 | 設定改成「自動續期」 | Chrome 詢問 login.steampowered.com 權限；允許後，下次登入過期時不需任何操作就會恢復（診斷報告的 `renewal` 顯示 `"method": "auto", "result": "ok"`） |
+| 12 | 設定改成「只提醒」 | 過期時只跳通知；點通知會開啟 Steam 商店分頁（不會自動關閉），之後 FreeKeep 自動重新檢查 |
 
 ## 回報問題
 
@@ -54,6 +57,9 @@ popup 底部按「複製診斷報告」，連同你看到的狀況貼到 [Issues
 | 7 | Settings → tick **Remind me of free games on the Epic Games Store** | Chrome asks for permission; once allowed, the popup gets **Steam / Epic Games** tabs, the Epic tab lists this week's giveaways, and one notification appears |
 | 8 | On the Epic tab, click **Get on Epic** / **Hide** | The game's Epic store page opens and it is marked **Opened** / the game disappears from the list |
 | 9 | Untick Epic reminders, then click **Copy diagnostics** in the popup | The tabs disappear and the report says `"epicAccess": false`. `chrome://extensions` → Details may still list the Epic site: Chrome remembers you allowed it once (ticking again won't ask), but FreeKeep can no longer reach it |
+| 10 | Open the popup after not visiting Steam for over 24 hours (renewal left at **Renew with one click**) | "Steam login expired" with **Renew now**; clicking it shows a Steam tab briefly in the background, which closes itself, then you're logged in |
+| 11 | Settings → **Renew automatically** | Chrome asks for login.steampowered.com; once allowed, the next lapsed login recovers without any action (diagnostics `renewal` shows `"method": "auto", "result": "ok"`) |
+| 12 | Settings → **Only remind me** | Only a notification when the login lapses; clicking it opens the Steam store in a tab that stays open, then FreeKeep checks again by itself |
 
 ## Report a problem
 

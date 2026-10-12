@@ -3,7 +3,8 @@
 FreeKeep is a Manifest V3 extension built with [WXT](https://wxt.dev) and TypeScript. It has no
 runtime dependencies and no server: everything runs in the user's browser against
 `store.steampowered.com`, plus Epic's public giveaway list when the user turns on the optional
-[Epic reminders](#epic-games-store-reminders-optional).
+[Epic reminders](#epic-games-store-reminders-optional), and Steam's login renewal when the user picks
+[automatic renewal](#steam-login-renewal).
 
 ```
 src/
@@ -59,6 +60,34 @@ Notes from the proof of concept (October 2026):
   not checked: a POST from the service worker behaves exactly like one from a store tab. No tabs,
   content scripts or `cookies` permission are needed.
 
+## Steam login renewal
+
+`steamLoginSecure` (store login, HttpOnly) is a JWT valid for 24 hours. The long-lived refresh token
+(`steamRefresh_steam`, about 200 days) lives on `login.steampowered.com`. When a browser navigates to
+the store with a lapsed login, Steam sends it through `login.steampowered.com/jwt/refresh?redir=…`,
+which issues a new store login and redirects back; the store's `auth_refresh.js` also renews open
+pages before the token expires. The service worker's `fetch` of the store page does neither, so
+without a visit the store reports the user as logged out after a day (`cookiesSent: true`, no
+`g_AccountID`).
+
+`meta.login` separates the two logged-out cases: `expired` (seen logged in before, so a renewal
+should help; older versions are covered by `decidedAt`, which is only set while logged in) and
+`logged_out` (never seen logged in, or the last renewal didn't help). The user picks the handling
+in `settings.renew`:
+
+| `renew` | Trigger | How | Permission |
+|---|---|---|---|
+| `tab` (default) | Notification click or **Renew now** | `tabs.create({ active: false })` on the store, wait for `status: 'complete'` on a store URL (max 25 s), close it, then `runCheck(…, 'renew', 'tab')` | none (store URLs are visible through the store host permission) |
+| `auto` | Any session check that finds the user logged out, with cookies sent | `GET https://login.steampowered.com/jwt/refresh?redir=https://store.steampowered.com/?l=english` with credentials, then a normal session check | optional `login.steampowered.com` |
+| `remind` | – | Notification only; a click opens the store as a normal tab and checks once it loads | none |
+
+Automatic renewal falls back to the one-click notification when the permission is missing or the
+request fails. The response is the store page (verified in Chromium: `redirected: true`, final URL
+the store, passes the CSP); Set-Cookie headers are handled by the browser and are not readable by
+the extension. `meta.renewal` keeps `{ at, method, result }` for the popup and diagnostics. The
+popup also starts a check when opened while logged out (at most once a minute), so a renewal or a
+login done in a normal tab shows up right away.
+
 ## Epic Games Store reminders (optional)
 
 Epic can't be claimed with a single request: getting a game goes through Epic's checkout page.
@@ -105,7 +134,7 @@ what the code promises:
 
 | Directive | Value | Effect |
 |---|---|---|
-| `connect-src` | Steam store, Epic feed host | Any other `fetch` is refused, even from tampered code |
+| `connect-src` | Steam store, `login.steampowered.com`, Epic feed host | Any other `fetch` is refused, even from tampered code; the renewal redirect may only pass through these hosts |
 | `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com` | Game images only from the stores' CDNs (`data:` is the popup's inline SVG icon) |
 | `default-src` / `style-src` | `'self'` | No inline or remote script or stylesheet |
 | `object-src`, `base-uri`, `form-action`, `frame-ancestors` | `'none'` | No plugins, base tag tricks, form posts or framing |
@@ -119,14 +148,16 @@ to another host is refused, and an injected inline script does not run.
 Each run (`runCheck`) is serialized with every other engine operation, so alarms, the startup
 check and popup actions never overlap.
 
-1. **Session** – refreshed only when the country is unknown, once a day, or when claiming.
+1. **Session** – refreshed when the country is unknown, once a day, on manual runs, while logged
+   out, or when claiming. With automatic renewal, a lapsed login is renewed here.
 2. **Detect** – one search request; `appdetails` only for apps not seen in the last 12 h.
    New promotions also fetch their deadline text.
 3. **Decide** – when something is new, on manual runs, or once a day. Needs login; if logged out,
    ownership is unknown and promotions stay pending.
 4. **Claim** – auto mode only. One at a time with a 2.5 s gap. Results map to statuses below.
 5. **Notify** – one notification per batch of claims, failures, new promotions (ask mode) or a
-   needed login (once per logged-out period).
+   needed login (once per logged-out period). The login notification's id prefix
+   (`freekeep-renew-`, `freekeep-store-`, `freekeep-login-`) tells the background what a click does.
 6. **Prune** – forget promotions not seen for 3 days (claimed ones after 30 days).
 
 ```
@@ -154,10 +185,10 @@ This is what prevents re-claiming loops.
 
 | Key | Content |
 |---|---|
-| `settings` | interval, mode, DLC, notifications, Epic reminders |
+| `settings` | interval, mode, login renewal, DLC, notifications, Epic reminders |
 | `promos` | per-subid state (public store data + status) |
 | `epic` | per-offer Epic giveaway state (public feed data + status), only with Epic reminders on |
-| `meta` | login state, country, timestamps, app cache |
+| `meta` | login state, last login and renewal times, country, timestamps, app cache |
 | `runs` | last 20 run summaries |
 | `runningSince` | spinner state for the popup |
 | `popupSeenAt` | replays celebrations for claims made while the popup was closed |
@@ -168,7 +199,8 @@ No session ids, cookies, account ids or names are stored.
 
 - `tests/steam.test.ts` – parsers against trimmed real responses in `tests/fixtures/`.
 - `tests/engine.test.ts` – the state machine with a fake Steam client: auto/ask modes, DLC rules,
-  retries, login loss, pruning, and no re-claiming across runs; Epic reminders with a fake feed.
+  retries, login loss, the three renewal modes, pruning, and no re-claiming across runs; Epic
+  reminders with a fake feed.
 - `tests/epic.test.ts` – the Epic parser against a trimmed real feed, plus changeover, bundle,
   missing slug and image edge cases.
 - `tests/locales.test.ts` – every locale has the same keys and placeholders as English.

@@ -12,16 +12,21 @@ export default defineConfig({
     // Keep this list minimal: no tabs, scripting or cookies access is needed.
     permissions: ['storage', 'alarms', 'notifications'],
     host_permissions: ['https://store.steampowered.com/*'],
-    // Only requested when the user turns on Epic reminders in the options page.
-    optional_host_permissions: ['https://store-site-backend-static-ipv4.ak.epicgames.com/*'],
+    // Each is only requested when the user turns its feature on in the options page:
+    // Epic reminders, and automatic renewal of Steam's 24-hour web login.
+    optional_host_permissions: [
+      'https://store-site-backend-static-ipv4.ak.epicgames.com/*',
+      'https://login.steampowered.com/*',
+    ],
     action: { default_title: '__MSG_extName__' },
     // Enforced by the browser for the popup, the options page and the service worker: FreeKeep can
-    // only talk to the Steam store and Epic's giveaway feed, load images only from their CDNs, and
-    // run no inline or remote script. "Only talks to Steam" is a browser guarantee, not a promise.
+    // only talk to the Steam store, Steam's login renewal and Epic's giveaway feed, load images only
+    // from their CDNs, and run no inline or remote script. "Only talks to Steam" is a browser
+    // guarantee, not a promise.
     content_security_policy: {
       extension_pages: [
         "default-src 'self'",
-        'connect-src https://store.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com',
+        'connect-src https://store.steampowered.com https://login.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com',
         "img-src 'self' data: https://*.steamstatic.com https://*.epicgames.com https://*.unrealengine.com",
         "style-src 'self'",
         "object-src 'none'",

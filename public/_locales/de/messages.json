@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steam-Login abgelaufen"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Klicke hier, um ihn zu erneuern. Danach sichert FreeKeep: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Klicke hier, um den Steam-Shop zu öffnen; das erneuert ihn. Danach sichert FreeKeep: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Konnte nicht gesichert werden"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Melde dich in diesem Browser im Steam-Shop an, damit FreeKeep Spiele sichern kann."
+  },
+  "popupExpiredTab": {
+    "message": "Der Web-Login von Steam gilt 24 Stunden. Zum Erneuern lädt FreeKeep den Steam-Shop kurz in einem Hintergrund-Tab."
+  },
+  "popupExpiredRemind": {
+    "message": "Der Web-Login von Steam gilt 24 Stunden. Das Öffnen des Steam-Shops erneuert ihn."
+  },
+  "popupExpiredNoPermission": {
+    "message": "Automatisches Erneuern ist noch nicht erlaubt. Erneuere mit einem Klick oder erlaube es in den Einstellungen."
+  },
+  "popupRenew": {
+    "message": "Jetzt erneuern"
   },
   "popupOpenStore": {
     "message": "Steam-Shop öffnen"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Vorher fragen"
   },
+  "optModeHint": {
+    "message": "„Vorher fragen“ sichert nie von selbst. Sichern fügt nur die Lizenz deinem Steam-Konto hinzu; nichts wird heruntergeladen oder installiert."
+  },
+  "optRenew": {
+    "message": "Wenn der Steam-Login abläuft"
+  },
+  "optRenewHint": {
+    "message": "Der Web-Login von Steam gilt 24 Stunden und wird erneuert, sobald du eine Steam-Seite öffnest. Die Hintergrundprüfungen von FreeKeep erneuern ihn nicht."
+  },
+  "optRenewTab": {
+    "message": "Mit einem Klick erneuern"
+  },
+  "optRenewTabHint": {
+    "message": "Du bekommst eine Benachrichtigung. Ein Klick lädt den Steam-Shop in einem Hintergrund-Tab, der sich danach schließt. Keine zusätzliche Berechtigung."
+  },
+  "optRenewAuto": {
+    "message": "Automatisch erneuern"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep ruft im Hintergrund die Erneuerungsadresse von Steam auf, wie beim Öffnen einer Steam-Seite. Braucht Zugriff auf login.steampowered.com. Der Login wird zwischen deinem Browser und Steam ausgetauscht; FreeKeep sieht ihn nie."
+  },
+  "optRenewRemind": {
+    "message": "Nur erinnern"
+  },
+  "optRenewRemindHint": {
+    "message": "Du bekommst nur eine Benachrichtigung; FreeKeep öffnet nie selbst einen Tab. Ein Klick darauf öffnet den Steam-Shop."
+  },
+  "optRenewDenied": {
+    "message": "Berechtigung nicht erteilt. Deine bisherige Wahl bleibt."
+  },
+  "optRenewMissing": {
+    "message": "Die Berechtigung für automatisches Erneuern wurde entfernt, daher bekommst du stattdessen die Ein-Klick-Option."
+  },
+  "optRenewGrant": {
+    "message": "Wieder erlauben"
+  },
   "optDlc": {
     "message": "Auch DLCs für meine Spiele sichern"
   },
@@ -193,7 +260,7 @@
     "message": "Gespeichert"
   },
   "optPrivacy": {
-    "message": "FreeKeep kommuniziert nur mit store.steampowered.com und nutzt dazu den vorhandenen Steam-Login dieses Browsers (dazu Epics öffentliche Gratisspiel-Liste, wenn du Epic-Erinnerungen einschaltest). Es sieht nie dein Passwort und sendet deine Daten nirgendwohin."
+    "message": "FreeKeep kommuniziert nur mit store.steampowered.com und nutzt dazu den vorhandenen Steam-Login dieses Browsers (dazu login.steampowered.com, wenn du automatisches Erneuern einschaltest, und Epics öffentliche Gratisspiel-Liste, wenn du Epic-Erinnerungen einschaltest). Es sieht nie dein Passwort und sendet deine Daten nirgendwohin."
   },
   "popupUntil": {
     "message": "Gratis bis $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Erlaube FreeKeep, Epics öffentliche Liste der Gratisspiele zu lesen."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Einstellungen öffnen"
   },
   "epicError": {

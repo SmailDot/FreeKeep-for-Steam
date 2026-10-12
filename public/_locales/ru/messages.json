@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Срок входа в Steam истёк"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Нажмите, чтобы продлить его. Затем FreeKeep заберёт: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Нажмите, чтобы открыть магазин Steam — это продлит вход. Затем FreeKeep заберёт: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Не удалось получить"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Войдите в магазин Steam в этом браузере, чтобы FreeKeep мог забирать игры."
+  },
+  "popupExpiredTab": {
+    "message": "Вход в Steam в браузере действует 24 часа. Для продления FreeKeep ненадолго загружает магазин Steam в фоновой вкладке."
+  },
+  "popupExpiredRemind": {
+    "message": "Вход в Steam в браузере действует 24 часа. Открытие магазина Steam продлевает его."
+  },
+  "popupExpiredNoPermission": {
+    "message": "Автоматическое продление ещё не разрешено. Продлите одним нажатием или разрешите его в настройках."
+  },
+  "popupRenew": {
+    "message": "Продлить"
   },
   "popupOpenStore": {
     "message": "Открыть магазин Steam"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Сначала спросить меня"
   },
+  "optModeHint": {
+    "message": "В режиме «Сначала спросить меня» FreeKeep ничего не забирает сам. Получение лишь добавляет лицензию в ваш аккаунт Steam; ничего не скачивается и не устанавливается."
+  },
+  "optRenew": {
+    "message": "Когда истекает вход в Steam"
+  },
+  "optRenewHint": {
+    "message": "Вход в Steam в браузере действует 24 часа и продлевается, когда вы открываете страницу Steam. Фоновые проверки FreeKeep его не продлевают."
+  },
+  "optRenewTab": {
+    "message": "Продлевать одним нажатием"
+  },
+  "optRenewTabHint": {
+    "message": "Вы получите уведомление. Одно нажатие загружает магазин Steam в фоновой вкладке, которая потом закрывается сама. Без дополнительных разрешений."
+  },
+  "optRenewAuto": {
+    "message": "Продлевать автоматически"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep в фоне открывает адрес продления Steam — так же, как при посещении страницы Steam. Нужен доступ к login.steampowered.com. Данные входа передаются только между браузером и Steam; FreeKeep их не видит."
+  },
+  "optRenewRemind": {
+    "message": "Только напоминать"
+  },
+  "optRenewRemindHint": {
+    "message": "Вы получите только уведомление; FreeKeep никогда не открывает вкладки сам. Нажатие на уведомление откроет магазин Steam."
+  },
+  "optRenewDenied": {
+    "message": "Разрешение не получено. Прежний выбор сохранён."
+  },
+  "optRenewMissing": {
+    "message": "Разрешение на автоматическое продление было отозвано, поэтому вместо него будет предложено продление одним нажатием."
+  },
+  "optRenewGrant": {
+    "message": "Разрешить снова"
+  },
   "optDlc": {
     "message": "Также забирать DLC к моим играм"
   },
@@ -193,7 +260,7 @@
     "message": "Сохранено"
   },
   "optPrivacy": {
-    "message": "FreeKeep обращается только к store.steampowered.com, используя уже выполненный в этом браузере вход в Steam (и к публичному списку бесплатных игр Epic, если вы включите напоминания Epic). Он никогда не видит ваш пароль и никуда не отправляет ваши данные."
+    "message": "FreeKeep обращается только к store.steampowered.com, используя уже выполненный в этом браузере вход в Steam (а также к login.steampowered.com, если вы включите автоматическое продление, и к публичному списку бесплатных игр Epic, если вы включите напоминания Epic). Он никогда не видит ваш пароль и никуда не отправляет ваши данные."
   },
   "popupUntil": {
     "message": "Бесплатно до $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Разрешите FreeKeep читать публичный список бесплатных игр Epic."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Открыть настройки"
   },
   "epicError": {

@@ -1,6 +1,15 @@
 import type { FreeSub, PromoKind } from './types';
 
 export const STORE = 'https://store.steampowered.com';
+/** Only requested when the user picks automatic login renewal in the options page. */
+export const LOGIN_ORIGIN = 'https://login.steampowered.com/*';
+
+/**
+ * Steam's own renewal address: the store sends a browser here once its 24-hour login has lapsed.
+ * With Steam's long-lived login cookie (on login.steampowered.com) it issues a new store login and
+ * redirects back to `redir`; without it, it just redirects back.
+ */
+export const RENEW_URL = `https://login.steampowered.com/jwt/refresh?redir=${encodeURIComponent(`${STORE}/?l=english`)}`;
 
 /** Steam's own package naming for limited-time free-to-keep promotions. */
 const LIMITED_PROMO = /Limited Free Promotional Package/i;
@@ -197,6 +206,16 @@ export class SteamClient {
         cookiesSent: null,
       },
     };
+  }
+
+  /**
+   * Walks Steam's renewal redirect the way a page visit does. The browser sends and stores the login
+   * cookies itself; FreeKeep never sees them, and the caller checks the session again afterwards.
+   */
+  async renew(): Promise<void> {
+    const res = await this.fetchImpl(RENEW_URL, { credentials: 'include', cache: 'no-store' });
+    await res.text();
+    if (!res.ok) throw new Error(`HTTP ${res.status} /jwt/refresh`);
   }
 
   async searchFreeAppIds(cc: string): Promise<number[]> {

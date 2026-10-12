@@ -1,6 +1,6 @@
 # Privacy Policy
 
-_Last updated: 2026-10-09 (added the optional Epic Games Store reminders, version 0.2.0)_
+_Last updated: 2026-10-12 (added Steam login renewal, including the optional automatic renewal)_
 
 FreeKeep for Steam ("FreeKeep") is a browser extension that claims free-to-keep promotions on the
 Steam store for the person using it.
@@ -9,6 +9,8 @@ Steam store for the person using it.
 
 - It does not collect, sell or share any personal data, and sends nothing to anyone but Steam itself.
   (If you turn on Epic reminders, it also downloads Epic's public list of free games; see below.)
+- It never opens a browser tab by itself. It only does so when you ask it to renew your Steam login
+  or open a store page (see below).
 - It has no server, analytics, tracking or advertising.
 - It never asks for, reads or stores your Steam password.
 - It cannot read your Steam login cookie: Steam marks it `HttpOnly` and FreeKeep does not have the
@@ -22,8 +24,9 @@ leaves your device and is deleted when you remove the extension:
 - your FreeKeep settings;
 - public store information about current promotions (app and package ids, names, images, deadline)
   and what FreeKeep did with each one;
-- the time and result of the last checks, whether you were logged in, and your Steam store
-  region (country code, used to look up the right regional promotions);
+- the time and result of the last checks, whether you were logged in (and when it last saw you
+  logged in), the time and outcome of the last login renewal, and your Steam store region (country
+  code, used to look up the right regional promotions);
 - only if Epic reminders are on: public information about Epic's current and upcoming free games
   (title, image link, store link, dates) and whether you opened or hid each one.
 
@@ -48,6 +51,26 @@ browser is sharing your Steam login with FreeKeep. The codes are compared in mem
 only the yes/no result appears in **Copy diagnostics**.
 
 These requests are governed by [Valve's privacy policy](https://store.steampowered.com/privacy_agreement/).
+
+### Renewing Steam's 24-hour login
+
+Steam's web login is valid for 24 hours and renews when you open a Steam page. You choose in the
+settings what FreeKeep does when it finds the login lapsed:
+
+- **Renew with one click** (default): when you click the notification or **Renew now**, FreeKeep
+  opens `https://store.steampowered.com/` in a background tab, waits for it to load (Steam renews
+  the login during that load) and closes the tab. It reads nothing from the tab except whether it
+  has finished loading a store page.
+- **Only remind me**: FreeKeep only notifies you. Clicking the notification opens the Steam store
+  in a normal tab, which stays open.
+- **Renew automatically** (optional permission, off by default): your browser asks you to allow
+  access to `https://login.steampowered.com`. FreeKeep then requests Steam's renewal address
+  (`/jwt/refresh`), which redirects back to the store. Your browser sends and stores the login
+  cookies on the way; FreeKeep has no access to them and does not have the `cookies` permission. The
+  only response FreeKeep reads is the store page the redirect ends on, the same page it reads to
+  check the login. Choosing another option removes the permission again.
+
+FreeKeep stores only when and how the last renewal happened and whether it worked.
 
 ### Optional: Epic Games Store reminders
 
@@ -90,13 +113,22 @@ FreeKeep 不會蒐集、出售或分享任何個人資料，除了 Steam 本身�
 不會離開你的裝置，移除擴充功能即刪除。為了判斷要領哪些遊戲，FreeKeep 會讀取你的帳號擁有哪些目前的限免，
 這份清單只在記憶體中使用，不會被儲存。
 
-FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的 Epic 提醒時另見下段），用來尋找限免、
+FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的自動續期或 Epic 提醒時另見下段），用來尋找限免、
 讀取你擁有的遊戲並領取限免。瀏覽器會像你平常逛 Steam 商店一樣自動帶上登入狀態。popup 顯示的遊戲圖片，
 由瀏覽器從 Steam 圖片伺服器（`*.steamstatic.com`）載入，就像一般網頁一樣。領取時，FreeKeep 會從商店頁讀取防偽造代碼
 （`sessionid`，每個商店頁都有）並隨領取請求送回 Steam，做法與商店自己的「加入帳戶」按鈕相同，
 只在該次請求的記憶體中使用，從不儲存。檢查結果為未登入時，FreeKeep 會再載入一次商店頁並比對兩次的代碼：
 只有在瀏覽器有送出 Steam 的 Cookie 時，Steam 才會回傳相同的代碼，藉此判斷瀏覽器是否有把登入狀態交給 FreeKeep。
 代碼只在記憶體中比對、從不儲存，「複製診斷報告」中只會出現是或否的結果。
+
+Steam 網頁登入的有效期限是 24 小時，打開 Steam 網頁時會自動續期。登入過期時的處理方式由你在設定中選擇：
+「一鍵續期」（預設）會在你點通知或「一鍵續期」時，於背景分頁開啟 `https://store.steampowered.com/`，等它載入完成
+（Steam 會在載入時續期）後關閉分頁，除了「是否已載入商店頁」以外不讀取分頁的任何內容；「只提醒」只會通知，
+點通知時以一般分頁開啟 Steam 商店；「自動續期」（選用權限，預設關閉）會請你允許存取 `https://login.steampowered.com`，
+之後 FreeKeep 會請求 Steam 的續期網址（`/jwt/refresh`），它會轉址回商店。過程中的登入 Cookie 由瀏覽器自行送出與保存，
+FreeKeep 無法存取，也沒有 `cookies` 權限；FreeKeep 唯一讀取的回應是轉址最後抵達的商店頁，與檢查登入時讀的是同一頁。
+改選其他選項時會移除該權限。FreeKeep 只儲存最近一次續期的時間、方式與是否成功。FreeKeep 不會自己開啟分頁，
+只有在你要求續期或開啟商店頁時才會開啟。
 
 選用的 Epic Games Store 限免提醒預設關閉。開啟時，瀏覽器會請你允許存取
 `https://store-site-backend-static-ipv4.ak.epicgames.com`，之後 FreeKeep 每次檢查會從那裡下載 Epic 公開的限免清單。

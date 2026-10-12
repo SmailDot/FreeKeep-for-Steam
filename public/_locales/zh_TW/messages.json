@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steam 登入已過期"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "點這則通知續期，FreeKeep 會接著領取：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "點這則通知開啟 Steam 商店即可續期，FreeKeep 會接著領取：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "領取失敗"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "請在這個瀏覽器登入 Steam 商店，FreeKeep 才能幫你領。"
+  },
+  "popupExpiredTab": {
+    "message": "Steam 網頁登入每 24 小時要續期一次。續期時會在背景短暫開啟 Steam 商店分頁，完成後自動關閉。"
+  },
+  "popupExpiredRemind": {
+    "message": "Steam 網頁登入每 24 小時要續期一次，打開 Steam 商店就會自動續期。"
+  },
+  "popupExpiredNoPermission": {
+    "message": "自動續期還沒取得權限。可以先一鍵續期，或到設定允許。"
+  },
+  "popupRenew": {
+    "message": "一鍵續期"
   },
   "popupOpenStore": {
     "message": "開啟 Steam 商店"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "先問我"
   },
+  "optModeHint": {
+    "message": "選「先問我」時不會自動領取任何遊戲。領取只是把授權加入你的 Steam 帳號，不會下載或安裝任何東西。"
+  },
+  "optRenew": {
+    "message": "Steam 登入過期時"
+  },
+  "optRenewHint": {
+    "message": "Steam 網頁登入每 24 小時到期，你打開 Steam 網頁時會自動續期；FreeKeep 在背景檢查不會觸發續期。"
+  },
+  "optRenewTab": {
+    "message": "一鍵續期"
+  },
+  "optRenewTabHint": {
+    "message": "跳通知提醒你。點一下，FreeKeep 會在背景分頁載入 Steam 商店完成續期，然後自動關閉。不需要額外權限。"
+  },
+  "optRenewAuto": {
+    "message": "自動續期"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep 在背景走一次 Steam 的續期網址，效果和你打開 Steam 網頁相同。需要允許存取 login.steampowered.com。登入資料只在瀏覽器和 Steam 之間交換，FreeKeep 看不到。"
+  },
+  "optRenewRemind": {
+    "message": "只提醒"
+  },
+  "optRenewRemindHint": {
+    "message": "只跳通知，FreeKeep 不會自己開分頁；點通知會替你打開 Steam 商店。"
+  },
+  "optRenewDenied": {
+    "message": "沒有取得權限，維持原本的選擇。"
+  },
+  "optRenewMissing": {
+    "message": "自動續期的權限已被移除，到期時會改用一鍵續期。"
+  },
+  "optRenewGrant": {
+    "message": "重新允許"
+  },
   "optDlc": {
     "message": "也領取我擁有本體的 DLC"
   },
@@ -193,7 +260,7 @@
     "message": "已儲存"
   },
   "optPrivacy": {
-    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入（開啟 Epic 提醒時，另外讀取 Epic 公開的免費遊戲清單）。它看不到你的密碼，也不會把你的任何資料傳到任何地方。"
+    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入（開啟自動續期時另外連到 login.steampowered.com；開啟 Epic 提醒時另外讀取 Epic 公開的免費遊戲清單）。它看不到你的密碼，也不會把你的任何資料傳到任何地方。"
   },
   "popupUntil": {
     "message": "$DATE$ 前免費",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "允許 FreeKeep 讀取 Epic 公開的免費遊戲清單。"
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "前往設定"
   },
   "epicError": {

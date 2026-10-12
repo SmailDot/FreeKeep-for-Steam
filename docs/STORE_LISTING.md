@@ -68,14 +68,16 @@ Runs the check for new free promotions in the background at the interval the use
 
 `notifications`
 ```
-Shows a system notification only when a game was claimed, a claim failed, the user needs to log in to the Steam store, or (only if the user turned on Epic reminders) a new free game starts on the Epic Games Store. Users can turn notifications off on the options page.
+Shows a system notification only when a game was claimed, a claim failed, the user's Steam login expired or is missing, or (only if the user turned on Epic reminders) a new free game starts on the Epic Games Store. Users can turn notifications off on the options page.
 ```
 
-Host permissions (one field in the dashboard, max 1,000 characters; it covers the required Steam host and the optional Epic one)
+Host permissions (one field in the dashboard, max 1,000 characters; it covers the required Steam host and the two optional ones)
 ```
-store.steampowered.com (required): FreeKeep searches the Steam store for 100%-off promotions (/search/results, /api/appdetails), reads which games the user owns (/dynamicstore/userdata), reads the store region and anti-forgery token (sessionid) from a store page, and claims a promotion with the same request as the store's own "Add to Account" button (POST /freelicense/addfreelicense). No content scripts, tabs, scripting or cookies permissions; the HttpOnly login cookie is never read.
+store.steampowered.com (required): searches the Steam store for 100%-off promotions, reads which games the user owns, the store region and the anti-forgery token (sessionid) from a store page, and claims with the same request as the store's own "Add to Account" button. No content scripts, scripting or cookies permissions; the HttpOnly login cookie is never read.
 
-store-site-backend-static-ipv4.ak.epicgames.com (optional): requested only when the user turns on Epic reminders in the options page, and removed when they turn it off. Used for one anonymous GET of Epic's public free-games feed (no credentials; the only parameter is the language code). The feed sends no CORS headers, so it can't be read without this permission. No Epic account, login or user data is involved.
+login.steampowered.com (optional, off by default): only if the user picks automatic renewal of Steam's 24-hour web login. One GET of Steam's own renewal URL (/jwt/refresh), which redirects back to the store, as a normal store visit does. The browser handles the login cookies; FreeKeep only reads the final store page.
+
+store-site-backend-static-ipv4.ak.epicgames.com (optional): only if the user turns on Epic reminders. One anonymous GET of Epic's public free-games feed (no credentials; the only parameter is the language code). No Epic account or user data.
 ```
 
 **Remote code** – *No, I am not using remote code.* All JavaScript is in the package; the popup only
@@ -110,6 +112,15 @@ If an older version is still in review, cancel that review first, then in one su
 
 The optional permission doesn't trigger a permission warning on update, since it is only requested
 when the user turns the feature on.
+
+## Updating the listing for the login renewal release
+
+1. **Privacy practices** – replace the `notifications` justification and the host permission
+   justification with the texts above. Single purpose and data usage answers stay the same.
+2. **Privacy policy** – merge to `main` first, so the URL above already describes login renewal.
+
+`login.steampowered.com` is an optional permission, requested only when the user picks automatic
+renewal, so the update itself shows no new permission warning.
 
 ## Before each release
 

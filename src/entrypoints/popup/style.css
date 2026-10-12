@@ -138,6 +138,18 @@ body {
   font-weight: 600;
 }
 
+.banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-actions button.link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 #list {
   display: flex;
   flex-direction: column;

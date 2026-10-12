@@ -37,9 +37,18 @@ export type PromoMap = Record<string, PromoState>;
 export const INTERVAL_HOURS = [1, 3, 6, 12, 24] as const;
 export type IntervalHours = (typeof INTERVAL_HOURS)[number];
 
+/**
+ * What to do when Steam's 24-hour web login has lapsed: renew it in the background (needs the
+ * optional login.steampowered.com permission), renew it in a background tab when the user clicks,
+ * or only tell the user.
+ */
+export const RENEW_MODES = ['auto', 'tab', 'remind'] as const;
+export type RenewMode = (typeof RENEW_MODES)[number];
+
 export interface Settings {
   intervalHours: IntervalHours;
   mode: 'auto' | 'ask';
+  renew: RenewMode;
   /** Also claim DLC whose base game is owned. */
   includeDlc: boolean;
   notifications: boolean;
@@ -50,12 +59,13 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   intervalHours: 6,
   mode: 'auto',
+  renew: 'tab',
   includeDlc: true,
   notifications: true,
   epic: false,
 };
 
-export type RunReason = 'alarm' | 'startup' | 'installed' | 'manual';
+export type RunReason = 'alarm' | 'startup' | 'installed' | 'manual' | 'renew';
 
 export interface RunInfo {
   at: number;

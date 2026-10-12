@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steam 登录已过期"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "点击此通知续期，FreeKeep 随后会领取：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "点击此通知打开 Steam 商店即可续期，FreeKeep 随后会领取：$NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "领取失败"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "请在这个浏览器登录 Steam 商店，FreeKeep 才能帮你领。"
+  },
+  "popupExpiredTab": {
+    "message": "Steam 网页登录每 24 小时需要续期一次。续期时会在后台短暂打开 Steam 商店标签页，完成后自动关闭。"
+  },
+  "popupExpiredRemind": {
+    "message": "Steam 网页登录每 24 小时需要续期一次，打开 Steam 商店即可自动续期。"
+  },
+  "popupExpiredNoPermission": {
+    "message": "自动续期尚未获得权限。可以先一键续期，或到设置中允许。"
+  },
+  "popupRenew": {
+    "message": "一键续期"
   },
   "popupOpenStore": {
     "message": "打开 Steam 商店"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "先问我"
   },
+  "optModeHint": {
+    "message": "选择“先问我”时不会自动领取任何游戏。领取只是把许可添加到你的 Steam 账户，不会下载或安装任何内容。"
+  },
+  "optRenew": {
+    "message": "Steam 登录过期时"
+  },
+  "optRenewHint": {
+    "message": "Steam 网页登录每 24 小时到期，你打开 Steam 网页时会自动续期；FreeKeep 的后台检查不会触发续期。"
+  },
+  "optRenewTab": {
+    "message": "一键续期"
+  },
+  "optRenewTabHint": {
+    "message": "弹出通知提醒你。点一下，FreeKeep 会在后台标签页加载 Steam 商店完成续期，然后自动关闭。不需要额外权限。"
+  },
+  "optRenewAuto": {
+    "message": "自动续期"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep 在后台访问一次 Steam 的续期地址，效果与你打开 Steam 网页相同。需要允许访问 login.steampowered.com。登录信息只在浏览器和 Steam 之间交换，FreeKeep 看不到。"
+  },
+  "optRenewRemind": {
+    "message": "仅提醒"
+  },
+  "optRenewRemindHint": {
+    "message": "只弹出通知，FreeKeep 不会自己打开标签页；点击通知会为你打开 Steam 商店。"
+  },
+  "optRenewDenied": {
+    "message": "未获得权限，保留原来的选择。"
+  },
+  "optRenewMissing": {
+    "message": "自动续期的权限已被移除，到期时将改用一键续期。"
+  },
+  "optRenewGrant": {
+    "message": "重新允许"
+  },
   "optDlc": {
     "message": "也领取我拥有本体的 DLC"
   },
@@ -193,7 +260,7 @@
     "message": "已保存"
   },
   "optPrivacy": {
-    "message": "FreeKeep 只会连接 store.steampowered.com，使用这个浏览器现有的 Steam 登录（开启 Epic 提醒时，另外读取 Epic 公开的免费游戏列表）。它看不到你的密码，也不会把你的任何数据发送到任何地方。"
+    "message": "FreeKeep 只会连接 store.steampowered.com，使用这个浏览器现有的 Steam 登录（开启自动续期时另外连接 login.steampowered.com；开启 Epic 提醒时另外读取 Epic 公开的免费游戏列表）。它看不到你的密码，也不会把你的任何数据发送到任何地方。"
   },
   "popupUntil": {
     "message": "$DATE$ 前免费",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "允许 FreeKeep 读取 Epic 公开的免费游戏列表。"
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "前往设置"
   },
   "epicError": {

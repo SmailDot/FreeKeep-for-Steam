@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Connexion Steam expirée"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Cliquez ici pour la renouveler. FreeKeep récupérera ensuite : $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Cliquez ici pour ouvrir le magasin Steam, ce qui la renouvelle. FreeKeep récupérera ensuite : $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Échec de la récupération"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Connectez-vous au magasin Steam dans ce navigateur pour que FreeKeep puisse récupérer des jeux."
+  },
+  "popupExpiredTab": {
+    "message": "La connexion web de Steam dure 24 heures. Pour la renouveler, FreeKeep charge brièvement le magasin Steam dans un onglet en arrière-plan."
+  },
+  "popupExpiredRemind": {
+    "message": "La connexion web de Steam dure 24 heures. Ouvrir le magasin Steam la renouvelle."
+  },
+  "popupExpiredNoPermission": {
+    "message": "Le renouvellement automatique n'est pas encore autorisé. Renouvelez en un clic, ou autorisez-le dans les paramètres."
+  },
+  "popupRenew": {
+    "message": "Renouveler"
   },
   "popupOpenStore": {
     "message": "Ouvrir le magasin Steam"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Me demander d'abord"
   },
+  "optModeHint": {
+    "message": "« Me demander d'abord » ne récupère jamais rien de lui-même. Récupérer ajoute seulement la licence à votre compte Steam ; rien n'est téléchargé ni installé."
+  },
+  "optRenew": {
+    "message": "Quand la connexion Steam expire"
+  },
+  "optRenewHint": {
+    "message": "La connexion web de Steam dure 24 heures et se renouvelle dès que vous ouvrez une page Steam. Les vérifications en arrière-plan de FreeKeep ne la renouvellent pas."
+  },
+  "optRenewTab": {
+    "message": "Renouveler en un clic"
+  },
+  "optRenewTabHint": {
+    "message": "Vous recevez une notification. Un clic charge le magasin Steam dans un onglet en arrière-plan qui se ferme ensuite. Aucune autorisation supplémentaire."
+  },
+  "optRenewAuto": {
+    "message": "Renouveler automatiquement"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep ouvre en arrière-plan l'adresse de renouvellement de Steam, comme lorsque vous visitez une page Steam. Nécessite l'accès à login.steampowered.com. La connexion est échangée entre votre navigateur et Steam ; FreeKeep ne la voit jamais."
+  },
+  "optRenewRemind": {
+    "message": "Me le rappeler seulement"
+  },
+  "optRenewRemindHint": {
+    "message": "Vous recevez seulement une notification ; FreeKeep n'ouvre jamais d'onglet de lui-même. Un clic sur la notification ouvre le magasin Steam."
+  },
+  "optRenewDenied": {
+    "message": "Autorisation refusée. Votre choix précédent est conservé."
+  },
+  "optRenewMissing": {
+    "message": "L'autorisation de renouvellement automatique a été retirée ; vous aurez l'option en un clic à la place."
+  },
+  "optRenewGrant": {
+    "message": "Autoriser à nouveau"
+  },
   "optDlc": {
     "message": "Récupérer aussi les DLC de mes jeux"
   },
@@ -193,7 +260,7 @@
     "message": "Enregistré"
   },
   "optPrivacy": {
-    "message": "FreeKeep communique uniquement avec store.steampowered.com, en utilisant la connexion Steam déjà présente dans ce navigateur (et avec la liste publique des jeux gratuits d'Epic, si vous activez les rappels Epic). Il ne voit jamais votre mot de passe et n'envoie vos données nulle part."
+    "message": "FreeKeep communique uniquement avec store.steampowered.com, en utilisant la connexion Steam déjà présente dans ce navigateur (et avec login.steampowered.com si vous activez le renouvellement automatique, ainsi qu'avec la liste publique des jeux gratuits d'Epic si vous activez les rappels Epic). Il ne voit jamais votre mot de passe et n'envoie vos données nulle part."
   },
   "popupUntil": {
     "message": "Gratuit jusqu'à : $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Autorisez FreeKeep à lire la liste publique des jeux gratuits d'Epic."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Ouvrir les paramètres"
   },
   "epicError": {

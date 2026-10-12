@@ -3,7 +3,7 @@ import './style.css';
 import './fx.css';
 import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
-import { STORE } from '@/core/steam';
+import { LOGIN_ORIGIN, STORE } from '@/core/steam';
 import type { EpicState, PromoState, PromoStatus } from '@/core/types';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
@@ -12,6 +12,8 @@ import { readSnapshot, type Snapshot } from '@/lib/storage';
 import { busy, celebrate, fail, toast } from './fx';
 
 const STALE_RUN_MS = 2 * 60_000;
+/** Opening the popup while logged out checks again, so a renewal or login done elsewhere shows up. */
+const LOGIN_RECHECK_MS = 60_000;
 const ORDER: PromoStatus[] = ['pending', 'failed', 'claimed', 'needs_base', 'owned', 'skipped'];
 /** Popup-only UI state: when the user last saw the list, to replay celebrations for background claims. */
 const SEEN_KEY = 'popupSeenAt';
@@ -54,6 +56,36 @@ function actionButton(label: string, command: Command, primary = false): HTMLBut
     void send(command);
   });
   return button;
+}
+
+/** What the login banner offers depends on the renewal setting chosen in the options page. */
+function renderLogin(s: Snapshot): void {
+  const banner = $('login');
+  banner.hidden = s.meta.loggedIn !== false;
+  if (banner.hidden) return;
+
+  const actions: HTMLElement[] = [];
+  const settingsLink = () => {
+    const open = el('button', { type: 'button', className: 'link', textContent: t('openSettings') });
+    open.addEventListener('click', () => void browser.runtime.openOptionsPage());
+    return open;
+  };
+  if (s.meta.login !== 'expired') {
+    $('loginTitle').textContent = t('notifyLoginTitle');
+    $('loginBody').textContent = t('popupLoggedOut');
+    actions.push(el('a', { href: `${STORE}/login/`, target: '_blank', rel: 'noreferrer', textContent: t('popupOpenStore') }));
+  } else if (s.settings.renew === 'remind') {
+    $('loginTitle').textContent = t('notifyExpiredTitle');
+    $('loginBody').textContent = t('popupExpiredRemind');
+    actions.push(actionButton(t('popupOpenStore'), { type: 'renewLogin', visible: true }, true));
+  } else {
+    const noPermission = s.settings.renew === 'auto' && s.meta.renewal?.result === 'no_permission';
+    $('loginTitle').textContent = t('notifyExpiredTitle');
+    $('loginBody').textContent = t(noPermission ? 'popupExpiredNoPermission' : 'popupExpiredTab');
+    actions.push(actionButton(t('popupRenew'), { type: 'renewLogin', visible: false }, true));
+    if (noPermission) actions.push(settingsLink());
+  }
+  $('loginActions').replaceChildren(...actions);
 }
 
 function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
@@ -151,7 +183,7 @@ function renderEpic(s: Snapshot): number {
   const notice = $('epicNotice');
   notice.hidden = false;
   if (status === 'no_permission') {
-    const open = el('button', { type: 'button', className: 'link', textContent: t('epicAllow') });
+    const open = el('button', { type: 'button', className: 'link', textContent: t('openSettings') });
     open.addEventListener('click', () => void browser.runtime.openOptionsPage());
     notice.replaceChildren(t('epicNoPermission'), ' ', open);
   } else if (status === 'error') {
@@ -242,7 +274,7 @@ function render(s: Snapshot, seenAt: number): void {
   const checkNow = $<HTMLButtonElement>('checkNow');
   checkNow.disabled = running;
   checkNow.classList.toggle('is-busy', running);
-  $('login').hidden = !loggedOut;
+  renderLogin(s);
 
   // Promos seen in the latest detection are "current"; older claimed ones go to the history list.
   const promos = Object.values(s.promos);
@@ -292,16 +324,24 @@ async function main(): Promise<void> {
     });
   }
   $('diagnostics').addEventListener('click', async () => {
-    const epicAccess = await browser.permissions.contains({ origins: [EPIC_ORIGIN] });
-    const report = buildDiagnostics(await readSnapshot(), epicAccess);
+    const access = {
+      epic: await browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
+      login: await browser.permissions.contains({ origins: [LOGIN_ORIGIN] }),
+    };
+    const report = buildDiagnostics(await readSnapshot(), access);
     await navigator.clipboard.writeText(JSON.stringify(report, null, 2));
     $('diagnostics').textContent = t('popupCopied');
     setTimeout(() => ($('diagnostics').textContent = t('popupDiagnostics')), 1500);
   });
 
   const seenAt = Number((await browser.storage.local.get(SEEN_KEY))[SEEN_KEY] ?? 0);
-  render(await readSnapshot(), seenAt);
+  const first = await readSnapshot();
+  render(first, seenAt);
   await browser.storage.local.set({ [SEEN_KEY]: Date.now() });
+  const idle = !(first.runningSince > 0 && Date.now() - first.runningSince < STALE_RUN_MS);
+  if (first.meta.loggedIn === false && idle && Date.now() - first.meta.sessionCheckedAt > LOGIN_RECHECK_MS) {
+    void send({ type: 'checkNow' });
+  }
 
   browser.storage.onChanged.addListener(async (changes, area) => {
     if (area !== 'local' || (Object.keys(changes).length === 1 && SEEN_KEY in changes)) return;

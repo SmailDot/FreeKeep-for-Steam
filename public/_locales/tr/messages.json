@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "Steam oturumunun süresi doldu"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Yenilemek için tıklayın. Ardından FreeKeep şunları alır: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Steam mağazasını açmak için tıklayın; bu oturumu yeniler. Ardından FreeKeep şunları alır: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Alınamadı"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "FreeKeep'in oyun alabilmesi için bu tarayıcıda Steam mağazasına giriş yapın."
+  },
+  "popupExpiredTab": {
+    "message": "Steam'in web oturumu 24 saat geçerlidir. Yenilemek için FreeKeep, Steam mağazasını arka plandaki bir sekmede kısa süreliğine yükler."
+  },
+  "popupExpiredRemind": {
+    "message": "Steam'in web oturumu 24 saat geçerlidir. Steam mağazasını açmak oturumu yeniler."
+  },
+  "popupExpiredNoPermission": {
+    "message": "Otomatik yenilemeye henüz izin verilmedi. Tek tıkla yenileyin veya ayarlardan izin verin."
+  },
+  "popupRenew": {
+    "message": "Şimdi yenile"
   },
   "popupOpenStore": {
     "message": "Steam mağazasını aç"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Önce bana sor"
   },
+  "optModeHint": {
+    "message": "“Önce bana sor” seçeneği hiçbir şeyi kendiliğinden almaz. Almak yalnızca lisansı Steam hesabınıza ekler; hiçbir şey indirilmez veya kurulmaz."
+  },
+  "optRenew": {
+    "message": "Steam oturumunun süresi dolduğunda"
+  },
+  "optRenewHint": {
+    "message": "Steam'in web oturumu 24 saat geçerlidir ve bir Steam sayfası açtığınızda yenilenir. FreeKeep'in arka plan kontrolleri onu yenilemez."
+  },
+  "optRenewTab": {
+    "message": "Tek tıkla yenile"
+  },
+  "optRenewTabHint": {
+    "message": "Bir bildirim alırsınız. Tek tık, Steam mağazasını arka plandaki bir sekmede yükler ve sekme iş bitince kapanır. Ek izin gerekmez."
+  },
+  "optRenewAuto": {
+    "message": "Otomatik yenile"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep, bir Steam sayfası açtığınızda olduğu gibi Steam'in yenileme adresini arka planda açar. login.steampowered.com erişimi gerekir. Oturum bilgisi yalnızca tarayıcınızla Steam arasında değiş tokuş edilir; FreeKeep onu asla görmez."
+  },
+  "optRenewRemind": {
+    "message": "Yalnızca hatırlat"
+  },
+  "optRenewRemindHint": {
+    "message": "Yalnızca bir bildirim alırsınız; FreeKeep kendi başına asla sekme açmaz. Bildirime tıklamak Steam mağazasını açar."
+  },
+  "optRenewDenied": {
+    "message": "İzin verilmedi. Önceki seçiminiz korunuyor."
+  },
+  "optRenewMissing": {
+    "message": "Otomatik yenileme izni kaldırıldı; bunun yerine tek tıkla yenileme seçeneği sunulacak."
+  },
+  "optRenewGrant": {
+    "message": "Yeniden izin ver"
+  },
   "optDlc": {
     "message": "Sahip olduğum oyunların DLC'lerini de al"
   },
@@ -193,7 +260,7 @@
     "message": "Kaydedildi"
   },
   "optPrivacy": {
-    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar (Epic hatırlatmalarını açarsanız Epic'in herkese açık ücretsiz oyun listesini de okur). Şifrenizi asla görmez ve verilerinizi hiçbir yere göndermez."
+    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar (otomatik yenilemeyi açarsanız login.steampowered.com ile de iletişim kurar, Epic hatırlatmalarını açarsanız Epic'in herkese açık ücretsiz oyun listesini de okur). Şifrenizi asla görmez ve verilerinizi hiçbir yere göndermez."
   },
   "popupUntil": {
     "message": "$DATE$ tarihine kadar ücretsiz",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "FreeKeep'in Epic'in herkese açık ücretsiz oyun listesini okumasına izin verin."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Ayarları aç"
   },
   "epicError": {

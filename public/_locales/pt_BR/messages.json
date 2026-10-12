@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "O login da Steam expirou"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Clique aqui para renová-lo. Depois o FreeKeep resgata: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Clique aqui para abrir a loja Steam, o que renova o login. Depois o FreeKeep resgata: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "Não foi possível resgatar"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Entre na loja Steam neste navegador para o FreeKeep poder resgatar jogos."
+  },
+  "popupExpiredTab": {
+    "message": "O login da Steam no navegador dura 24 horas. Para renovar, o FreeKeep carrega a loja Steam por um instante em uma aba em segundo plano."
+  },
+  "popupExpiredRemind": {
+    "message": "O login da Steam no navegador dura 24 horas. Abrir a loja Steam o renova."
+  },
+  "popupExpiredNoPermission": {
+    "message": "A renovação automática ainda não foi permitida. Renove com um clique ou permita nas configurações."
+  },
+  "popupRenew": {
+    "message": "Renovar agora"
   },
   "popupOpenStore": {
     "message": "Abrir a loja Steam"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Perguntar antes"
   },
+  "optModeHint": {
+    "message": "“Perguntar antes” nunca resgata sozinho. Resgatar só adiciona a licença à sua conta Steam; nada é baixado nem instalado."
+  },
+  "optRenew": {
+    "message": "Quando o login da Steam expirar"
+  },
+  "optRenewHint": {
+    "message": "O login da Steam no navegador dura 24 horas e é renovado sempre que você abre uma página da Steam. As verificações em segundo plano do FreeKeep não o renovam."
+  },
+  "optRenewTab": {
+    "message": "Renovar com um clique"
+  },
+  "optRenewTabHint": {
+    "message": "Você recebe uma notificação. Um clique carrega a loja Steam em uma aba em segundo plano, que se fecha ao terminar. Sem permissões extras."
+  },
+  "optRenewAuto": {
+    "message": "Renovar automaticamente"
+  },
+  "optRenewAutoHint": {
+    "message": "O FreeKeep abre em segundo plano o endereço de renovação da Steam, como acontece ao visitar uma página da Steam. Precisa de acesso a login.steampowered.com. O login é trocado entre o seu navegador e a Steam; o FreeKeep nunca o vê."
+  },
+  "optRenewRemind": {
+    "message": "Só me avisar"
+  },
+  "optRenewRemindHint": {
+    "message": "Você só recebe uma notificação; o FreeKeep nunca abre abas por conta própria. Clicar na notificação abre a loja Steam."
+  },
+  "optRenewDenied": {
+    "message": "Permissão não concedida. Sua escolha anterior foi mantida."
+  },
+  "optRenewMissing": {
+    "message": "A permissão de renovação automática foi removida, então você receberá a opção de um clique no lugar."
+  },
+  "optRenewGrant": {
+    "message": "Permitir de novo"
+  },
   "optDlc": {
     "message": "Resgatar também DLCs dos meus jogos"
   },
@@ -193,7 +260,7 @@
     "message": "Salvo"
   },
   "optPrivacy": {
-    "message": "O FreeKeep só se comunica com store.steampowered.com, usando o login da Steam que já existe neste navegador (e com a lista pública de jogos grátis da Epic, se você ativar os lembretes da Epic). Ele nunca vê sua senha e nunca envia seus dados para lugar nenhum."
+    "message": "O FreeKeep só se comunica com store.steampowered.com, usando o login da Steam que já existe neste navegador (e com login.steampowered.com, se você ativar a renovação automática, e com a lista pública de jogos grátis da Epic, se você ativar os lembretes da Epic). Ele nunca vê sua senha e nunca envia seus dados para lugar nenhum."
   },
   "popupUntil": {
     "message": "Grátis até $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Permita que o FreeKeep leia a lista pública de jogos grátis da Epic."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Abrir configurações"
   },
   "epicError": {

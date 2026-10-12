@@ -44,6 +44,25 @@
       }
     }
   },
+  "notifyExpiredTitle": {
+    "message": "La sesión de Steam ha caducado"
+  },
+  "notifyExpiredRenewBody": {
+    "message": "Haz clic aquí para renovarla. Después, FreeKeep reclamará: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
+  "notifyExpiredOpenBody": {
+    "message": "Haz clic aquí para abrir la tienda de Steam, lo que la renueva. Después, FreeKeep reclamará: $NAMES$",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "notifyFailedTitle": {
     "message": "No se pudo reclamar"
   },
@@ -63,6 +82,18 @@
   },
   "popupLoggedOut": {
     "message": "Inicia sesión en la tienda de Steam en este navegador para que FreeKeep pueda reclamar juegos."
+  },
+  "popupExpiredTab": {
+    "message": "La sesión web de Steam dura 24 horas. Para renovarla, FreeKeep carga un momento la tienda de Steam en una pestaña en segundo plano."
+  },
+  "popupExpiredRemind": {
+    "message": "La sesión web de Steam dura 24 horas. Abrir la tienda de Steam la renueva."
+  },
+  "popupExpiredNoPermission": {
+    "message": "La renovación automática aún no está permitida. Renueva con un clic o permítela en los ajustes."
+  },
+  "popupRenew": {
+    "message": "Renovar ahora"
   },
   "popupOpenStore": {
     "message": "Abrir la tienda de Steam"
@@ -183,6 +214,42 @@
   "optModeAsk": {
     "message": "Preguntarme primero"
   },
+  "optModeHint": {
+    "message": "«Preguntarme primero» nunca reclama por sí solo. Reclamar solo añade la licencia a tu cuenta de Steam; no se descarga ni se instala nada."
+  },
+  "optRenew": {
+    "message": "Cuando caduque la sesión de Steam"
+  },
+  "optRenewHint": {
+    "message": "La sesión web de Steam dura 24 horas y se renueva cada vez que abres una página de Steam. Las comprobaciones en segundo plano de FreeKeep no la renuevan."
+  },
+  "optRenewTab": {
+    "message": "Renovar con un clic"
+  },
+  "optRenewTabHint": {
+    "message": "Recibes una notificación. Con un clic se carga la tienda de Steam en una pestaña en segundo plano que se cierra al terminar. Sin permisos adicionales."
+  },
+  "optRenewAuto": {
+    "message": "Renovar automáticamente"
+  },
+  "optRenewAutoHint": {
+    "message": "FreeKeep abre en segundo plano la dirección de renovación de Steam, igual que al visitar una página de Steam. Necesita acceso a login.steampowered.com. La sesión se intercambia entre tu navegador y Steam; FreeKeep nunca la ve."
+  },
+  "optRenewRemind": {
+    "message": "Solo avisarme"
+  },
+  "optRenewRemindHint": {
+    "message": "Solo recibes una notificación; FreeKeep nunca abre pestañas por su cuenta. Al hacer clic en ella se abre la tienda de Steam."
+  },
+  "optRenewDenied": {
+    "message": "Permiso no concedido. Se mantiene tu elección anterior."
+  },
+  "optRenewMissing": {
+    "message": "Se quitó el permiso de renovación automática, así que tendrás la opción de un clic en su lugar."
+  },
+  "optRenewGrant": {
+    "message": "Permitir de nuevo"
+  },
   "optDlc": {
     "message": "Reclamar también DLC de mis juegos"
   },
@@ -193,7 +260,7 @@
     "message": "Guardado"
   },
   "optPrivacy": {
-    "message": "FreeKeep solo se comunica con store.steampowered.com usando la sesión de Steam que ya tiene este navegador (y con la lista pública de juegos gratis de Epic, si activas los avisos de Epic). Nunca ve tu contraseña ni envía tus datos a ningún sitio."
+    "message": "FreeKeep solo se comunica con store.steampowered.com usando la sesión de Steam que ya tiene este navegador (y con login.steampowered.com, si activas la renovación automática, y con la lista pública de juegos gratis de Epic, si activas los avisos de Epic). Nunca ve tu contraseña ni envía tus datos a ningún sitio."
   },
   "popupUntil": {
     "message": "Gratis hasta $DATE$",
@@ -284,7 +351,7 @@
   "epicNoPermission": {
     "message": "Permite que FreeKeep lea la lista pública de juegos gratis de Epic."
   },
-  "epicAllow": {
+  "openSettings": {
     "message": "Abrir ajustes"
   },
   "epicError": {
