@@ -115,6 +115,7 @@ describe('runCheck in auto mode', () => {
     await runCheck(t.deps, 'manual');
     expect(t.steam.claims).toEqual([100]);
     expect(t.notes).toHaveLength(1);
+    expect(t.db.meta.claimedTotal).toBe(1);
   });
 
   it('claims DLC when the base game is owned', async () => {

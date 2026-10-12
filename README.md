@@ -68,9 +68,11 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
 - **Automatic or confirm first.** Claim right away, or get notified and decide yourself.
 - **Handles Steam's 24-hour login.** Renew it with one click, automatically, or just get a reminder;
   [details below](#steams-24-hour-login).
+- **Pixel-art look in Steam colours.** Pick your own chest colours for the toolbar icon. The pixel
+  fonts are bundled, so nothing is loaded from a font server.
 - **Optional Epic Games Store reminders.** Notifies you when Epic gives a game away, with a link to
   claim it. Off by default; [details below](#epic-games-store-reminders).
-- **Lightweight and auditable.** About 40 KB of code, no runtime dependencies, written in TypeScript
+- **Lightweight and auditable.** About 45 KB of code, no runtime dependencies, written in TypeScript
   with unit tests.
 - **12 languages.** English, 繁體中文, 简体中文, Русский, Español, Português, Deutsch, 日本語, Français,
   Polski, 한국어, Türkçe. [Help translate](CONTRIBUTING.md#translations).
@@ -237,5 +239,9 @@ Maintained by [@SmailDot](https://github.com/SmailDot). Questions, bugs and idea
 
 Code: [MIT](LICENSE). The FreeKeep name and logo are not covered by the license; please don't
 publish forks or copies under that name or with that logo.
+
+The bundled pixel fonts, [Cubic 11](https://github.com/ACh-K/Cubic-11) and
+[Galmuri11](https://github.com/quiple/galmuri), are licensed under the SIL Open Font License 1.1; see
+[public/fonts](public/fonts/README.md).
 
 Steam is a trademark of Valve Corporation. FreeKeep is not affiliated with or endorsed by Valve.

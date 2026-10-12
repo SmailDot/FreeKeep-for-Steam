@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "権限が許可されなかったため、Epicの通知はオフのままです。"
+  },
+  "navClaim": {
+    "message": "受け取り"
+  },
+  "navRenew": {
+    "message": "ログイン更新"
+  },
+  "navNotify": {
+    "message": "通知"
+  },
+  "navEpic": {
+    "message": "Epic通知"
+  },
+  "navLinks": {
+    "message": "接続先"
+  },
+  "navLook": {
+    "message": "外観と情報"
+  },
+  "optAutoSave": {
+    "message": "すべての設定はこのページにあり、変更は自動で保存されます。"
+  },
+  "optModeAutoHint": {
+    "message": "見つけたらすぐにライブラリへ追加し、終わったらお知らせします。"
+  },
+  "optModeAskHint": {
+    "message": "通知のみ。受け取るかどうかはポップアップで決めます。"
+  },
+  "optNotificationsHint": {
+    "message": "受け取り完了、失敗、または対応が必要なときだけ。"
+  },
+  "optLinks": {
+    "message": "FreeKeepが接続できる場所"
+  },
+  "optLinksHint": {
+    "message": "ブラウザがFreeKeepに与えている権限をその場で読み取っています。"
+  },
+  "hostStore": {
+    "message": "無料配布の検索、ライブラリの確認、受け取り"
+  },
+  "hostLogin": {
+    "message": "「自動で更新」を選んだときのみ"
+  },
+  "hostEpic": {
+    "message": "Epic通知をオンにしたときのみ"
+  },
+  "hostRequired": {
+    "message": "必須"
+  },
+  "hostOn": {
+    "message": "オン"
+  },
+  "hostOff": {
+    "message": "オフ"
+  },
+  "optRenewLast": {
+    "message": "前回の更新：$WHEN$（$RESULT$）",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "成功"
+  },
+  "renewResult_logged_out": {
+    "message": "未ログインのまま"
+  },
+  "renewResult_no_permission": {
+    "message": "権限なし"
+  },
+  "renewResult_error": {
+    "message": "失敗"
+  },
+  "optLook": {
+    "message": "宝箱の色"
+  },
+  "optChestHint": {
+    "message": "プリセットを選ぶか、本体と錠前の色を自由に設定できます。ハイライト、影、きらめきは自動で調整されます。"
+  },
+  "optChestBody": {
+    "message": "本体"
+  },
+  "optChestBand": {
+    "message": "錠前"
+  },
+  "optChestReset": {
+    "message": "元に戻す"
+  },
+  "chest_steam": {
+    "message": "Steamブルー"
+  },
+  "chest_wood": {
+    "message": "クラシックウッド"
+  },
+  "chest_emerald": {
+    "message": "エメラルド"
+  },
+  "chest_amethyst": {
+    "message": "アメジスト"
+  },
+  "chest_ruby": {
+    "message": "ルビー"
+  },
+  "chest_obsidian": {
+    "message": "オブシディアン"
+  },
+  "chest_gold": {
+    "message": "ゴールド"
+  },
+  "chest_sakura": {
+    "message": "さくら"
+  },
+  "chipLoggedIn": {
+    "message": "Steamにログイン中"
+  },
+  "chipLoggedOut": {
+    "message": "Steam未ログイン"
+  },
+  "chipRegion": {
+    "message": "地域 $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$本を受け取り済み",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "デフォルト"
+  },
+  "tagNoPermission": {
+    "message": "追加の権限不要"
+  },
+  "tagNeedsPermission": {
+    "message": "login.steampowered.comの許可が必要"
   }
 }

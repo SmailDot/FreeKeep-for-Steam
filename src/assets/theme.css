@@ -1,39 +1,43 @@
-:root {
-  color-scheme: light dark;
-  --bg: #f7f7fb;
-  --surface: #ffffff;
-  --border: #e4e4ee;
-  --text: #17172b;
-  --muted: #6b6b85;
-  --accent: #6d4aed;
-  --accent-text: #ffffff;
-  --ok: #16a34a;
-  --ok-bg: #dcfce7;
-  --warn: #b45309;
-  --warn-bg: #fef3c7;
-  --bad: #dc2626;
-  --bad-bg: #fee2e2;
-  --chip-bg: #eeeef6;
-  --radius: 10px;
-  font: 13px/1.45 system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', sans-serif;
+/*
+ * Steam colours, pixel shapes. Pixel fonts are bundled (see public/fonts/README.md) and only used at
+ * 12 px and 24 px, the sizes their 12 px grid renders crisply at. Long text stays in the system font.
+ */
+@font-face {
+  font-family: 'FK Cubic';
+  src: url('/fonts/Cubic_11.woff2') format('woff2');
+  font-display: block;
+  /* Its Cyrillic and Greek are full-width, so those fall through to Galmuri. */
+  unicode-range: U+0000-02FF, U+2000-2BFF, U+2E80-FFFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #12121c;
-    --surface: #1b1b29;
-    --border: #2b2b3d;
-    --text: #ececf6;
-    --muted: #9a9ab3;
-    --accent: #8b6cff;
-    --ok: #4ade80;
-    --ok-bg: #12351f;
-    --warn: #fbbf24;
-    --warn-bg: #3a2c0b;
-    --bad: #f87171;
-    --bad-bg: #3b1515;
-    --chip-bg: #26263a;
-  }
+@font-face {
+  font-family: 'FK Galmuri';
+  src: url('/fonts/Galmuri11.woff2') format('woff2');
+  font-display: block;
+}
+
+:root {
+  color-scheme: dark;
+  --ink: #000;
+  --bg0: #0e141b;
+  --bg: #171a21;
+  --panel: #1b2838;
+  --panel2: #2a475e;
+  --line: #12202e;
+  --text: #c7d5e0;
+  --muted: #8f98a0;
+  --white: #ffffff;
+  --blue: #66c0f4;
+  --green: #a4d007;
+  --green-btn: #5c7e10;
+  --green-bg: #4c6b22;
+  --warn: #e8b545;
+  --warn-bg: #4a3b16;
+  --bad: #ff8f8f;
+  --bad-bg: #4a1d1d;
+  --px: 'FK Cubic', 'FK Galmuri', ui-monospace, monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', 'Microsoft JhengHei', 'PingFang TC', 'Noto Sans TC', 'Noto Sans CJK TC', sans-serif;
+  font: 13px/1.45 var(--sans);
 }
 
 * {
@@ -47,35 +51,210 @@ body {
 }
 
 button,
-select {
+select,
+input {
   font: inherit;
   color: inherit;
 }
 
 button {
   cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 8px;
-  padding: 5px 10px;
-}
-
-button.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-text);
-  font-weight: 600;
-}
-
-button:disabled {
-  opacity: 0.55;
-  cursor: default;
 }
 
 a {
-  color: var(--accent);
+  color: var(--blue);
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 
 [hidden] {
   display: none !important;
+}
+
+/* ---------- pixel type ---------- */
+.px,
+.px-lg,
+.pbtn,
+.tag {
+  font-family: var(--px);
+  font-weight: normal;
+  -webkit-font-smoothing: none;
+}
+
+.px {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.px-lg {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.pi {
+  display: inline-block;
+  vertical-align: middle;
+  flex: none;
+}
+
+/* ---------- pixel buttons ---------- */
+.pbtn {
+  position: relative;
+  border: 0;
+  padding: 7px 11px 6px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text);
+  background: var(--panel2);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow:
+    inset -3px -3px 0 rgb(0 0 0 / 0.35),
+    inset 3px 3px 0 rgb(255 255 255 / 0.12),
+    3px 3px 0 var(--ink);
+}
+
+.pbtn:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.pbtn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow:
+    inset -3px -3px 0 rgb(0 0 0 / 0.35),
+    inset 3px 3px 0 rgb(255 255 255 / 0.12),
+    1px 1px 0 var(--ink);
+}
+
+.pbtn.blue {
+  background: var(--blue);
+  color: #0b1a26;
+}
+
+.pbtn.green {
+  background: var(--green-btn);
+  color: #e9f7c0;
+}
+
+.pbtn.ghost {
+  background: transparent;
+  color: var(--muted);
+  box-shadow: inset 0 0 0 2px var(--panel2);
+}
+
+.pbtn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ---------- busy buttons: three blinking pixels ---------- */
+button.is-busy {
+  color: transparent !important;
+}
+
+button.is-busy > span {
+  visibility: hidden;
+}
+
+button.is-busy::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: var(--text);
+  box-shadow:
+    -8px 0 0 var(--text),
+    8px 0 0 var(--text);
+  animation: dots 0.9s steps(3, end) infinite;
+}
+
+.pbtn.blue.is-busy::after,
+.pbtn.green.is-busy::after {
+  background: #0b1a26;
+  box-shadow:
+    -8px 0 0 #0b1a26,
+    8px 0 0 #0b1a26;
+}
+
+@keyframes dots {
+  33% {
+    opacity: 0.3;
+  }
+}
+
+button.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* ---------- tags ---------- */
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 1px 6px 0;
+  white-space: nowrap;
+  color: var(--text);
+  background: var(--panel2);
+}
+
+.tag.free {
+  background: var(--green-bg);
+  color: #d2f26b;
+}
+
+.tag.got {
+  background: #173a4f;
+  color: var(--blue);
+}
+
+.tag.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.tag.bad {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+/* ---------- windows ---------- */
+.win {
+  background: var(--panel);
+  border: 4px solid var(--ink);
+}
+
+/* Section label: "── Recently claimed ──" drawn with pixel dashes. */
+.sec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.sec::before,
+.sec::after {
+  content: '';
+  height: 2px;
+  background: var(--panel2);
+}
+
+.sec::before {
+  width: 14px;
+}
+
+.sec::after {
+  flex: 1;
 }

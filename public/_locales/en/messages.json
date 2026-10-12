@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "Permission wasn't granted, so Epic reminders stay off."
+  },
+  "navClaim": {
+    "message": "Claiming"
+  },
+  "navRenew": {
+    "message": "Login renewal"
+  },
+  "navNotify": {
+    "message": "Notifications"
+  },
+  "navEpic": {
+    "message": "Epic reminders"
+  },
+  "navLinks": {
+    "message": "Connections"
+  },
+  "navLook": {
+    "message": "Look & about"
+  },
+  "optAutoSave": {
+    "message": "Everything is on this one page. Changes save automatically."
+  },
+  "optModeAutoHint": {
+    "message": "Adds it to your library as soon as it's found, then tells you."
+  },
+  "optModeAskHint": {
+    "message": "Only notifies you; you decide in the popup."
+  },
+  "optNotificationsHint": {
+    "message": "Only when a game is claimed, a claim fails, or something needs you."
+  },
+  "optLinks": {
+    "message": "Where FreeKeep can connect"
+  },
+  "optLinksHint": {
+    "message": "Read live from the permissions your browser has given FreeKeep."
+  },
+  "hostStore": {
+    "message": "Find promotions, check your library, claim"
+  },
+  "hostLogin": {
+    "message": "Only with automatic renewal"
+  },
+  "hostEpic": {
+    "message": "Only with Epic reminders"
+  },
+  "hostRequired": {
+    "message": "Required"
+  },
+  "hostOn": {
+    "message": "On"
+  },
+  "hostOff": {
+    "message": "Off"
+  },
+  "optRenewLast": {
+    "message": "Last renewal: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "worked"
+  },
+  "renewResult_logged_out": {
+    "message": "still logged out"
+  },
+  "renewResult_no_permission": {
+    "message": "permission missing"
+  },
+  "renewResult_error": {
+    "message": "failed"
+  },
+  "optLook": {
+    "message": "Chest colours"
+  },
+  "optChestHint": {
+    "message": "Pick a preset or your own body and lock colours. Highlights, shadows and the sparkle are matched automatically."
+  },
+  "optChestBody": {
+    "message": "Body"
+  },
+  "optChestBand": {
+    "message": "Lock"
+  },
+  "optChestReset": {
+    "message": "Reset"
+  },
+  "chest_steam": {
+    "message": "Steam blue"
+  },
+  "chest_wood": {
+    "message": "Classic wood"
+  },
+  "chest_emerald": {
+    "message": "Emerald"
+  },
+  "chest_amethyst": {
+    "message": "Amethyst"
+  },
+  "chest_ruby": {
+    "message": "Ruby"
+  },
+  "chest_obsidian": {
+    "message": "Obsidian"
+  },
+  "chest_gold": {
+    "message": "Gold"
+  },
+  "chest_sakura": {
+    "message": "Sakura"
+  },
+  "chipLoggedIn": {
+    "message": "Logged in to Steam"
+  },
+  "chipLoggedOut": {
+    "message": "Not logged in to Steam"
+  },
+  "chipRegion": {
+    "message": "Region $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$ games claimed",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "Default"
+  },
+  "tagNoPermission": {
+    "message": "No extra permission"
+  },
+  "tagNeedsPermission": {
+    "message": "Needs login.steampowered.com"
   }
 }

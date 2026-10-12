@@ -56,6 +56,8 @@ export interface Meta {
   appCache: Record<string, { subs: FreeSub[]; fetchedAt: number }>;
   /** The last login check's signals (no account data), shown in diagnostics. */
   sessionProbe: SessionProbe | null;
+  /** How many games FreeKeep has claimed since it was installed. */
+  claimedTotal: number;
 }
 
 export const DEFAULT_META: Meta = {
@@ -69,6 +71,7 @@ export const DEFAULT_META: Meta = {
   loginNotified: false,
   appCache: {},
   sessionProbe: null,
+  claimedTotal: 0,
 };
 
 export interface Store {
@@ -325,6 +328,7 @@ class Engine {
       if (outcome.kind === 'claimed') {
         this.set(p, { status: 'claimed', lastError: null });
         claimed.push(p);
+        this.meta.claimedTotal += 1;
       } else if (outcome.kind === 'owned' || outcome.kind === 'needs_base') {
         this.set(p, { status: outcome.kind, lastError: null });
       } else if (outcome.kind === 'logged_out') {

@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "未获得权限，Epic 提醒保持关闭。"
+  },
+  "navClaim": {
+    "message": "领取"
+  },
+  "navRenew": {
+    "message": "登录续期"
+  },
+  "navNotify": {
+    "message": "通知"
+  },
+  "navEpic": {
+    "message": "Epic 提醒"
+  },
+  "navLinks": {
+    "message": "连接清单"
+  },
+  "navLook": {
+    "message": "外观与关于"
+  },
+  "optAutoSave": {
+    "message": "所有设置都在这一页，更改会自动保存。"
+  },
+  "optModeAutoHint": {
+    "message": "发现后立即加入你的游戏库，完成后通知你。"
+  },
+  "optModeAskHint": {
+    "message": "只通知，由你在弹出窗口决定是否领取。"
+  },
+  "optNotificationsHint": {
+    "message": "只在领取成功、领取失败或需要你处理时。"
+  },
+  "optLinks": {
+    "message": "FreeKeep 能连接的地方"
+  },
+  "optLinksHint": {
+    "message": "实时读取浏览器授予 FreeKeep 的权限。"
+  },
+  "hostStore": {
+    "message": "查找限免、比对游戏库、领取"
+  },
+  "hostLogin": {
+    "message": "仅在选择“自动续期”时"
+  },
+  "hostEpic": {
+    "message": "仅在开启 Epic 提醒时"
+  },
+  "hostRequired": {
+    "message": "必需"
+  },
+  "hostOn": {
+    "message": "已开启"
+  },
+  "hostOff": {
+    "message": "未开启"
+  },
+  "optRenewLast": {
+    "message": "上次续期：$WHEN$（$RESULT$）",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "成功"
+  },
+  "renewResult_logged_out": {
+    "message": "仍未登录"
+  },
+  "renewResult_no_permission": {
+    "message": "缺少权限"
+  },
+  "renewResult_error": {
+    "message": "失败"
+  },
+  "optLook": {
+    "message": "宝箱颜色"
+  },
+  "optChestHint": {
+    "message": "选择一个预设，或自定义主体和锁扣的颜色；亮面、阴影和闪光会自动搭配。"
+  },
+  "optChestBody": {
+    "message": "主体"
+  },
+  "optChestBand": {
+    "message": "锁扣"
+  },
+  "optChestReset": {
+    "message": "恢复默认"
+  },
+  "chest_steam": {
+    "message": "Steam 蓝"
+  },
+  "chest_wood": {
+    "message": "经典木箱"
+  },
+  "chest_emerald": {
+    "message": "翡翠"
+  },
+  "chest_amethyst": {
+    "message": "紫晶"
+  },
+  "chest_ruby": {
+    "message": "红宝"
+  },
+  "chest_obsidian": {
+    "message": "黑曜"
+  },
+  "chest_gold": {
+    "message": "黄金"
+  },
+  "chest_sakura": {
+    "message": "樱花"
+  },
+  "chipLoggedIn": {
+    "message": "已登录 Steam"
+  },
+  "chipLoggedOut": {
+    "message": "未登录 Steam"
+  },
+  "chipRegion": {
+    "message": "地区 $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "已帮你领取 $N$ 款",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "默认"
+  },
+  "tagNoPermission": {
+    "message": "无需额外权限"
+  },
+  "tagNeedsPermission": {
+    "message": "需允许 login.steampowered.com"
   }
 }

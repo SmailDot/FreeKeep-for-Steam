@@ -54,6 +54,9 @@ export interface Settings {
   notifications: boolean;
   /** Remind about Epic Games Store giveaways (needs the optional Epic host permission). */
   epic: boolean;
+  /** Colours of the chest icon, a personal touch; validated as #rrggbb. */
+  chestBody: string;
+  chestBand: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -63,6 +66,8 @@ export const DEFAULT_SETTINGS: Settings = {
   includeDlc: true,
   notifications: true,
   epic: false,
+  chestBody: '#2a6f9e',
+  chestBand: '#ffcd75',
 };
 
 export type RunReason = 'alarm' | 'startup' | 'installed' | 'manual' | 'renew';

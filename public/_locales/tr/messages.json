@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "İzin verilmedi, Epic hatırlatmaları kapalı kalır."
+  },
+  "navClaim": {
+    "message": "Alma"
+  },
+  "navRenew": {
+    "message": "Oturum yenileme"
+  },
+  "navNotify": {
+    "message": "Bildirimler"
+  },
+  "navEpic": {
+    "message": "Epic hatırlatmaları"
+  },
+  "navLinks": {
+    "message": "Bağlantılar"
+  },
+  "navLook": {
+    "message": "Görünüm ve hakkında"
+  },
+  "optAutoSave": {
+    "message": "Tüm ayarlar bu sayfada. Değişiklikler otomatik kaydedilir."
+  },
+  "optModeAutoHint": {
+    "message": "Bulur bulmaz kitaplığınıza ekler, ardından size haber verir."
+  },
+  "optModeAskHint": {
+    "message": "Yalnızca bildirir; kararı açılır pencerede siz verirsiniz."
+  },
+  "optNotificationsHint": {
+    "message": "Yalnızca bir oyun alındığında, bir şey başarısız olduğunda veya işlem gerektiğinde."
+  },
+  "optLinks": {
+    "message": "FreeKeep'in bağlanabildiği yerler"
+  },
+  "optLinksHint": {
+    "message": "Tarayıcınızın FreeKeep'e verdiği izinlerden anlık olarak okunur."
+  },
+  "hostStore": {
+    "message": "Promosyon bulma, kitaplığı kontrol etme, alma"
+  },
+  "hostLogin": {
+    "message": "Yalnızca otomatik yenilemede"
+  },
+  "hostEpic": {
+    "message": "Yalnızca Epic hatırlatmalarında"
+  },
+  "hostRequired": {
+    "message": "Gerekli"
+  },
+  "hostOn": {
+    "message": "Açık"
+  },
+  "hostOff": {
+    "message": "Kapalı"
+  },
+  "optRenewLast": {
+    "message": "Son yenileme: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "başarılı"
+  },
+  "renewResult_logged_out": {
+    "message": "hâlâ oturum yok"
+  },
+  "renewResult_no_permission": {
+    "message": "izin eksik"
+  },
+  "renewResult_error": {
+    "message": "başarısız"
+  },
+  "optLook": {
+    "message": "Sandık renkleri"
+  },
+  "optChestHint": {
+    "message": "Hazır bir renk seçin ya da sandık ve kilit için kendi renklerinizi belirleyin. Parlaklık, gölge ve ışıltı otomatik ayarlanır."
+  },
+  "optChestBody": {
+    "message": "Sandık"
+  },
+  "optChestBand": {
+    "message": "Kilit"
+  },
+  "optChestReset": {
+    "message": "Varsayılana dön"
+  },
+  "chest_steam": {
+    "message": "Steam mavisi"
+  },
+  "chest_wood": {
+    "message": "Klasik ahşap"
+  },
+  "chest_emerald": {
+    "message": "Zümrüt"
+  },
+  "chest_amethyst": {
+    "message": "Ametist"
+  },
+  "chest_ruby": {
+    "message": "Yakut"
+  },
+  "chest_obsidian": {
+    "message": "Obsidyen"
+  },
+  "chest_gold": {
+    "message": "Altın"
+  },
+  "chest_sakura": {
+    "message": "Sakura"
+  },
+  "chipLoggedIn": {
+    "message": "Steam oturumu açık"
+  },
+  "chipLoggedOut": {
+    "message": "Steam oturumu kapalı"
+  },
+  "chipRegion": {
+    "message": "Bölge $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$ oyun alındı",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "Varsayılan"
+  },
+  "tagNoPermission": {
+    "message": "Ek izin gerekmez"
+  },
+  "tagNeedsPermission": {
+    "message": "login.steampowered.com gerekir"
   }
 }

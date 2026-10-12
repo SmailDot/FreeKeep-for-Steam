@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "권한이 허용되지 않아 Epic 알림이 꺼진 상태로 유지됩니다."
+  },
+  "navClaim": {
+    "message": "받기"
+  },
+  "navRenew": {
+    "message": "로그인 갱신"
+  },
+  "navNotify": {
+    "message": "알림"
+  },
+  "navEpic": {
+    "message": "Epic 알림"
+  },
+  "navLinks": {
+    "message": "연결 목록"
+  },
+  "navLook": {
+    "message": "모양 및 정보"
+  },
+  "optAutoSave": {
+    "message": "모든 설정이 이 페이지에 있으며, 변경 사항은 자동으로 저장됩니다."
+  },
+  "optModeAutoHint": {
+    "message": "찾는 즉시 라이브러리에 추가하고 알려 드립니다."
+  },
+  "optModeAskHint": {
+    "message": "알림만 보내며, 받을지는 팝업에서 직접 정합니다."
+  },
+  "optNotificationsHint": {
+    "message": "게임을 받았거나, 실패했거나, 확인이 필요할 때만."
+  },
+  "optLinks": {
+    "message": "FreeKeep이 연결할 수 있는 곳"
+  },
+  "optLinksHint": {
+    "message": "브라우저가 FreeKeep에 준 권한을 실시간으로 읽습니다."
+  },
+  "hostStore": {
+    "message": "무료 게임 찾기, 라이브러리 확인, 받기"
+  },
+  "hostLogin": {
+    "message": "'자동으로 갱신'을 선택한 경우에만"
+  },
+  "hostEpic": {
+    "message": "Epic 알림을 켠 경우에만"
+  },
+  "hostRequired": {
+    "message": "필수"
+  },
+  "hostOn": {
+    "message": "켜짐"
+  },
+  "hostOff": {
+    "message": "꺼짐"
+  },
+  "optRenewLast": {
+    "message": "마지막 갱신: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "성공"
+  },
+  "renewResult_logged_out": {
+    "message": "여전히 로그아웃 상태"
+  },
+  "renewResult_no_permission": {
+    "message": "권한 없음"
+  },
+  "renewResult_error": {
+    "message": "실패"
+  },
+  "optLook": {
+    "message": "상자 색상"
+  },
+  "optChestHint": {
+    "message": "프리셋을 고르거나 상자와 자물쇠 색을 직접 정하세요. 하이라이트, 그림자, 반짝임은 자동으로 맞춰집니다."
+  },
+  "optChestBody": {
+    "message": "상자"
+  },
+  "optChestBand": {
+    "message": "자물쇠"
+  },
+  "optChestReset": {
+    "message": "기본값으로"
+  },
+  "chest_steam": {
+    "message": "Steam 블루"
+  },
+  "chest_wood": {
+    "message": "클래식 나무"
+  },
+  "chest_emerald": {
+    "message": "에메랄드"
+  },
+  "chest_amethyst": {
+    "message": "자수정"
+  },
+  "chest_ruby": {
+    "message": "루비"
+  },
+  "chest_obsidian": {
+    "message": "흑요석"
+  },
+  "chest_gold": {
+    "message": "황금"
+  },
+  "chest_sakura": {
+    "message": "벚꽃"
+  },
+  "chipLoggedIn": {
+    "message": "Steam 로그인됨"
+  },
+  "chipLoggedOut": {
+    "message": "Steam 로그인 안 됨"
+  },
+  "chipRegion": {
+    "message": "지역 $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$개 받음",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "기본값"
+  },
+  "tagNoPermission": {
+    "message": "추가 권한 없음"
+  },
+  "tagNeedsPermission": {
+    "message": "login.steampowered.com 허용 필요"
   }
 }

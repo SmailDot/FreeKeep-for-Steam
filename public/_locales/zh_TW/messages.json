@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "沒有取得權限，Epic 提醒維持關閉。"
+  },
+  "navClaim": {
+    "message": "領取"
+  },
+  "navRenew": {
+    "message": "登入續期"
+  },
+  "navNotify": {
+    "message": "通知"
+  },
+  "navEpic": {
+    "message": "Epic 提醒"
+  },
+  "navLinks": {
+    "message": "連線清單"
+  },
+  "navLook": {
+    "message": "外觀與關於"
+  },
+  "optAutoSave": {
+    "message": "所有設定都在這一頁，變更會自動儲存。"
+  },
+  "optModeAutoHint": {
+    "message": "發現就幫你加入收藏庫，完成後通知你。"
+  },
+  "optModeAskHint": {
+    "message": "只通知，由你在彈出視窗決定要不要領。"
+  },
+  "optNotificationsHint": {
+    "message": "只在領到、領取失敗或需要你處理時。"
+  },
+  "optLinks": {
+    "message": "FreeKeep 能連到的地方"
+  },
+  "optLinksHint": {
+    "message": "即時讀取瀏覽器給 FreeKeep 的權限。"
+  },
+  "hostStore": {
+    "message": "找限免、比對收藏庫、領取"
+  },
+  "hostLogin": {
+    "message": "只在選「自動續期」時"
+  },
+  "hostEpic": {
+    "message": "只在開啟 Epic 提醒時"
+  },
+  "hostRequired": {
+    "message": "必要"
+  },
+  "hostOn": {
+    "message": "已開啟"
+  },
+  "hostOff": {
+    "message": "未開啟"
+  },
+  "optRenewLast": {
+    "message": "上次續期：$WHEN$（$RESULT$）",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "成功"
+  },
+  "renewResult_logged_out": {
+    "message": "仍未登入"
+  },
+  "renewResult_no_permission": {
+    "message": "缺少權限"
+  },
+  "renewResult_error": {
+    "message": "失敗"
+  },
+  "optLook": {
+    "message": "寶箱顏色"
+  },
+  "optChestHint": {
+    "message": "挑一個預設，或自訂主體和鎖扣的顏色；亮面、陰影和閃光會自動配好。"
+  },
+  "optChestBody": {
+    "message": "主體"
+  },
+  "optChestBand": {
+    "message": "鎖扣"
+  },
+  "optChestReset": {
+    "message": "恢復預設"
+  },
+  "chest_steam": {
+    "message": "Steam 藍"
+  },
+  "chest_wood": {
+    "message": "經典木箱"
+  },
+  "chest_emerald": {
+    "message": "翡翠"
+  },
+  "chest_amethyst": {
+    "message": "紫晶"
+  },
+  "chest_ruby": {
+    "message": "紅寶"
+  },
+  "chest_obsidian": {
+    "message": "黑曜"
+  },
+  "chest_gold": {
+    "message": "黃金"
+  },
+  "chest_sakura": {
+    "message": "櫻花"
+  },
+  "chipLoggedIn": {
+    "message": "已登入 Steam"
+  },
+  "chipLoggedOut": {
+    "message": "未登入 Steam"
+  },
+  "chipRegion": {
+    "message": "地區 $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "已幫你領 $N$ 款",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "預設"
+  },
+  "tagNoPermission": {
+    "message": "不需額外權限"
+  },
+  "tagNeedsPermission": {
+    "message": "需允許 login.steampowered.com"
   }
 }

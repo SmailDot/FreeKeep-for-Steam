@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "Доступ не предоставлен, напоминания Epic остаются выключенными."
+  },
+  "navClaim": {
+    "message": "Получение"
+  },
+  "navRenew": {
+    "message": "Продление входа"
+  },
+  "navNotify": {
+    "message": "Уведомления"
+  },
+  "navEpic": {
+    "message": "Напоминания Epic"
+  },
+  "navLinks": {
+    "message": "Подключения"
+  },
+  "navLook": {
+    "message": "Вид и сведения"
+  },
+  "optAutoSave": {
+    "message": "Все настройки на этой странице. Изменения сохраняются автоматически."
+  },
+  "optModeAutoHint": {
+    "message": "Сразу добавляет игру в библиотеку и сообщает об этом."
+  },
+  "optModeAskHint": {
+    "message": "Только уведомляет; решение вы принимаете во всплывающем окне."
+  },
+  "optNotificationsHint": {
+    "message": "Только когда игра получена, что-то не удалось или нужны ваши действия."
+  },
+  "optLinks": {
+    "message": "Куда FreeKeep может подключаться"
+  },
+  "optLinksHint": {
+    "message": "Читается в реальном времени из разрешений, которые браузер выдал FreeKeep."
+  },
+  "hostStore": {
+    "message": "Поиск раздач, проверка библиотеки, получение"
+  },
+  "hostLogin": {
+    "message": "Только при автоматическом продлении"
+  },
+  "hostEpic": {
+    "message": "Только при напоминаниях Epic"
+  },
+  "hostRequired": {
+    "message": "Обязательно"
+  },
+  "hostOn": {
+    "message": "Вкл."
+  },
+  "hostOff": {
+    "message": "Выкл."
+  },
+  "optRenewLast": {
+    "message": "Последнее продление: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "успешно"
+  },
+  "renewResult_logged_out": {
+    "message": "вход не восстановлен"
+  },
+  "renewResult_no_permission": {
+    "message": "нет разрешения"
+  },
+  "renewResult_error": {
+    "message": "ошибка"
+  },
+  "optLook": {
+    "message": "Цвета сундука"
+  },
+  "optChestHint": {
+    "message": "Выберите готовый вариант или свои цвета для сундука и замка. Блики, тени и искорка подберутся автоматически."
+  },
+  "optChestBody": {
+    "message": "Сундук"
+  },
+  "optChestBand": {
+    "message": "Замок"
+  },
+  "optChestReset": {
+    "message": "Сбросить"
+  },
+  "chest_steam": {
+    "message": "Синий Steam"
+  },
+  "chest_wood": {
+    "message": "Классическое дерево"
+  },
+  "chest_emerald": {
+    "message": "Изумруд"
+  },
+  "chest_amethyst": {
+    "message": "Аметист"
+  },
+  "chest_ruby": {
+    "message": "Рубин"
+  },
+  "chest_obsidian": {
+    "message": "Обсидиан"
+  },
+  "chest_gold": {
+    "message": "Золото"
+  },
+  "chest_sakura": {
+    "message": "Сакура"
+  },
+  "chipLoggedIn": {
+    "message": "Вход в Steam выполнен"
+  },
+  "chipLoggedOut": {
+    "message": "Вход в Steam не выполнен"
+  },
+  "chipRegion": {
+    "message": "Регион $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "Получено игр: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "По умолчанию"
+  },
+  "tagNoPermission": {
+    "message": "Без доп. разрешений"
+  },
+  "tagNeedsPermission": {
+    "message": "Нужен login.steampowered.com"
   }
 }

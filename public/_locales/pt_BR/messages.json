@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "A permissão não foi concedida, então os avisos da Epic continuam desligados."
+  },
+  "navClaim": {
+    "message": "Resgate"
+  },
+  "navRenew": {
+    "message": "Renovar login"
+  },
+  "navNotify": {
+    "message": "Notificações"
+  },
+  "navEpic": {
+    "message": "Lembretes da Epic"
+  },
+  "navLinks": {
+    "message": "Conexões"
+  },
+  "navLook": {
+    "message": "Aparência e sobre"
+  },
+  "optAutoSave": {
+    "message": "Todas as configurações ficam nesta página. As mudanças são salvas automaticamente."
+  },
+  "optModeAutoHint": {
+    "message": "Adiciona à sua biblioteca assim que encontra e depois avisa você."
+  },
+  "optModeAskHint": {
+    "message": "Só avisa; você decide na janela do FreeKeep."
+  },
+  "optNotificationsHint": {
+    "message": "Só quando um jogo é resgatado, algo falha ou você precisa agir."
+  },
+  "optLinks": {
+    "message": "Onde o FreeKeep pode se conectar"
+  },
+  "optLinksHint": {
+    "message": "Lido em tempo real das permissões que o navegador deu ao FreeKeep."
+  },
+  "hostStore": {
+    "message": "Encontrar promoções, conferir a biblioteca, resgatar"
+  },
+  "hostLogin": {
+    "message": "Só com a renovação automática"
+  },
+  "hostEpic": {
+    "message": "Só com os lembretes da Epic"
+  },
+  "hostRequired": {
+    "message": "Necessário"
+  },
+  "hostOn": {
+    "message": "Ativado"
+  },
+  "hostOff": {
+    "message": "Desativado"
+  },
+  "optRenewLast": {
+    "message": "Última renovação: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "deu certo"
+  },
+  "renewResult_logged_out": {
+    "message": "continua sem login"
+  },
+  "renewResult_no_permission": {
+    "message": "falta permissão"
+  },
+  "renewResult_error": {
+    "message": "falhou"
+  },
+  "optLook": {
+    "message": "Cores do baú"
+  },
+  "optChestHint": {
+    "message": "Escolha uma predefinição ou suas próprias cores para o baú e a fechadura. Brilhos, sombras e o cintilar se ajustam sozinhos."
+  },
+  "optChestBody": {
+    "message": "Baú"
+  },
+  "optChestBand": {
+    "message": "Fechadura"
+  },
+  "optChestReset": {
+    "message": "Restaurar padrão"
+  },
+  "chest_steam": {
+    "message": "Azul Steam"
+  },
+  "chest_wood": {
+    "message": "Madeira clássica"
+  },
+  "chest_emerald": {
+    "message": "Esmeralda"
+  },
+  "chest_amethyst": {
+    "message": "Ametista"
+  },
+  "chest_ruby": {
+    "message": "Rubi"
+  },
+  "chest_obsidian": {
+    "message": "Obsidiana"
+  },
+  "chest_gold": {
+    "message": "Ouro"
+  },
+  "chest_sakura": {
+    "message": "Sakura"
+  },
+  "chipLoggedIn": {
+    "message": "Conectado à Steam"
+  },
+  "chipLoggedOut": {
+    "message": "Sem login na Steam"
+  },
+  "chipRegion": {
+    "message": "Região $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$ jogos resgatados",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "Padrão"
+  },
+  "tagNoPermission": {
+    "message": "Sem permissão extra"
+  },
+  "tagNeedsPermission": {
+    "message": "Precisa de login.steampowered.com"
   }
 }

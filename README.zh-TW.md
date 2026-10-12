@@ -59,9 +59,10 @@
 - **彈性排程**：每 1、3、6、12 或 24 小時檢查一次，瀏覽器啟動時也會檢查；電腦休眠期間錯過的檢查會在喚醒後補執行
 - **自動或先確認**：可直接自動領取，或先通知再由你決定
 - **處理 Steam 的 24 小時登入**：可選一鍵續期、自動續期或只提醒，[詳見下方](#steam-的-24-小時登入)
+- **Steam 配色的像素風介面**：工具列的寶箱圖示可以自訂顏色；像素字型內建在擴充功能裡，不會向任何字型伺服器下載
 - **選用的 Epic Games Store 限免提醒**：Epic 推出免費遊戲時通知你，並附上領取連結；預設關閉，
   [詳見下方](#epic-games-store-限免提醒)
-- **輕量、可審查**：程式碼約 40 KB，無執行期依賴，以 TypeScript 撰寫並具備單元測試
+- **輕量、可審查**：程式碼約 45 KB，無執行期依賴，以 TypeScript 撰寫並具備單元測試
 - **12 種語言**：English、繁體中文、简体中文、Русский、Español、Português、Deutsch、日本語、Français、
   Polski、한국어、Türkçe，[歡迎協助翻譯](CONTRIBUTING.md#translations)
 
@@ -201,5 +202,8 @@ FreeKeep 目前支援 12 種語言，加入新語言只要幾分鐘：複製
 ## 授權
 
 程式碼採 [MIT](LICENSE) 授權。「FreeKeep」名稱與 logo 不在授權範圍內，請勿以此名稱或 logo 發布分支或複製版本。
+
+內建的像素字型 [俐方體 11 號](https://github.com/ACh-K/Cubic-11)與 [Galmuri11](https://github.com/quiple/galmuri)
+採 SIL Open Font License 1.1 授權，詳見 [public/fonts](public/fonts/README.md)。
 
 Steam 是 Valve Corporation 的商標，FreeKeep 與 Valve 無關，也未獲其背書。

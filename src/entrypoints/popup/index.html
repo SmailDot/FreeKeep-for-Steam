@@ -8,40 +8,36 @@
   </head>
   <body>
     <header class="top">
-      <img class="logo" src="/icon/48.png" alt="" />
-      <div class="brand"><strong>FreeKeep</strong><span>for Steam</span></div>
-      <button id="settings" class="icon-btn" type="button">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/>
-        </svg>
-      </button>
+      <span id="logo" class="logo"></span>
+      <div class="brand"><span class="px-lg">FreeKeep</span><span class="px">for Steam</span></div>
+      <button id="settings" class="icon-btn" type="button"><i data-pi="gear"></i></button>
     </header>
 
-    <section class="status">
-      <div class="status-line">
+    <section class="hud">
+      <div class="hud-line px">
         <span id="dot" class="dot"></span>
         <span id="statusText"></span>
       </div>
-      <div class="status-sub">
+      <div class="hud-sub">
         <span id="lastCheck"></span>
-        <button id="checkNow" type="button" data-i18n="popupCheckNow"></button>
+        <button id="checkNow" class="pbtn" type="button"><span data-i18n="popupCheckNow"></span></button>
       </div>
     </section>
 
-    <section id="login" class="banner" hidden>
-      <strong id="loginTitle"></strong>
-      <span id="loginBody"></span>
-      <div id="loginActions" class="banner-actions"></div>
+    <section id="login" class="dlg" hidden>
+      <div id="loginTitle" class="dlg-title px"></div>
+      <p id="loginBody"></p>
+      <div id="loginActions" class="dlg-actions"></div>
     </section>
 
     <div id="toasts" class="toasts" aria-live="polite"></div>
     <div id="fx" class="fx" aria-hidden="true"></div>
 
     <nav id="tabs" class="tabs" role="tablist" hidden>
-      <button id="tabSteam" type="button" role="tab" aria-controls="steamPanel" aria-selected="true">
+      <button id="tabSteam" class="px" type="button" role="tab" aria-controls="steamPanel" aria-selected="true">
         Steam <span id="countSteam" class="count"></span>
       </button>
-      <button id="tabEpic" type="button" role="tab" aria-controls="epicWrap" aria-selected="false">
+      <button id="tabEpic" class="px" type="button" role="tab" aria-controls="epicWrap" aria-selected="false">
         Epic Games <span id="countEpic" class="count"></span>
       </button>
     </nav>
@@ -50,34 +46,29 @@
       <main id="list"></main>
 
       <section id="empty" class="empty" hidden>
-        <img src="/icon/96.png" alt="" />
-        <strong data-i18n="popupEmptyTitle"></strong>
+        <span id="emptyIcon"></span>
+        <strong class="px" data-i18n="popupEmptyTitle"></strong>
         <p id="emptyBody"></p>
       </section>
 
       <section id="recentWrap" hidden>
-        <h2 data-i18n="popupRecent"></h2>
+        <h2 class="sec px"><span data-i18n="popupRecent"></span></h2>
         <ul id="recent"></ul>
       </section>
     </div>
 
     <section id="epicWrap" class="epic" role="tabpanel" aria-labelledby="tabEpic" hidden>
-      <p class="epic-lead" data-i18n="epicReminderOnly"></p>
+      <p class="epic-lead px" data-i18n="epicReminderOnly"></p>
       <p id="epicNotice" class="epic-notice" hidden></p>
       <div id="epicList"></div>
       <p id="epicNext" class="epic-next" hidden></p>
     </section>
 
-    <p class="privacy">
-      <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-        <path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/>
-      </svg>
-      <span data-i18n="popupPrivacy"></span>
-    </p>
+    <p class="privacy"><i data-pi="lock" data-scale="1.5"></i><span data-i18n="popupPrivacy"></span></p>
 
     <footer>
-      <button id="diagnostics" class="link" type="button" data-i18n="popupDiagnostics"></button>
-      <a href="https://github.com/SmailDot/FreeKeep-for-Steam" target="_blank" rel="noreferrer" data-i18n="popupSource"></a>
+      <button id="diagnostics" class="link px" type="button" data-i18n="popupDiagnostics"></button>
+      <a class="px" href="https://github.com/SmailDot/FreeKeep-for-Steam" target="_blank" rel="noreferrer" data-i18n="popupSource"></a>
     </footer>
 
     <script type="module" src="./main.ts"></script>

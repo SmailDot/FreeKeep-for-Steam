@@ -2,7 +2,8 @@ import { browser } from 'wxt/browser';
 import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient, epicLocale } from '@/core/epic';
 import { claimNow, runCheck, setEpicStatus, skip, type Deps, type MessageKey, type TabRenewal } from '@/core/engine';
 import { LOGIN_ORIGIN, STORE, SteamClient } from '@/core/steam';
-import type { RunReason } from '@/core/types';
+import type { RunReason, Settings } from '@/core/types';
+import { drawChest, type ChestColors } from '@/lib/chest';
 import { t } from '@/lib/i18n';
 import type { Command, CommandResult } from '@/lib/messages';
 import { browserStore, readSnapshot } from '@/lib/storage';
@@ -11,6 +12,36 @@ const PERIODIC = 'freekeep-periodic';
 const STARTUP = 'freekeep-startup';
 /** Long enough for Steam's renewal redirects and the store page; the tab is closed either way. */
 const TAB_TIMEOUT_MS = 25_000;
+
+function chestCanvas(colors: ChestColors, size: number): OffscreenCanvas {
+  const canvas = new OffscreenCanvas(size, size);
+  drawChest(canvas.getContext('2d')!, colors, size);
+  return canvas;
+}
+
+/** The toolbar icon follows the chest colours picked in the options page. */
+async function applyIcon(): Promise<void> {
+  const { settings } = await readSnapshot();
+  const colors = { body: settings.chestBody, band: settings.chestBand };
+  const imageData = Object.fromEntries(
+    [16, 32].map((size) => [size, chestCanvas(colors, size).getContext('2d')!.getImageData(0, 0, size, size)]),
+  );
+  await browser.action.setIcon({ imageData });
+}
+
+/** Notifications show the chest in the user's colours too (a PNG data URL, drawn locally). */
+async function notificationIcon(): Promise<string> {
+  try {
+    const { settings } = await readSnapshot();
+    const blob = await chestCanvas({ body: settings.chestBody, band: settings.chestBand }, 128).convertToBlob();
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    let binary = '';
+    for (const b of bytes) binary += String.fromCharCode(b);
+    return `data:image/png;base64,${btoa(binary)}`;
+  } catch {
+    return browser.runtime.getURL('/icon/128.png');
+  }
+}
 
 const deps: Deps = {
   steam: new SteamClient(),
@@ -21,14 +52,14 @@ const deps: Deps = {
     async notify(id, title, message) {
       await browser.notifications.create(id, {
         type: 'basic',
-        iconUrl: browser.runtime.getURL('/icon/128.png'),
+        iconUrl: await notificationIcon(),
         title,
         message,
       });
     },
     async setBadge(text, kind) {
       await browser.action.setBadgeText({ text });
-      await browser.action.setBadgeBackgroundColor({ color: kind === 'warn' ? '#d97706' : '#16a34a' });
+      await browser.action.setBadgeBackgroundColor({ color: kind === 'warn' ? '#e8b545' : '#5c7e10' });
     },
     t: (key: MessageKey, subs?: string[]) => t(key, subs),
     formatDate: (ms) =>
@@ -140,13 +171,19 @@ export default defineBackground(() => {
     await scheduleSoon();
   });
 
+  // Chrome doesn't keep an icon set at runtime across restarts, so draw it whenever the worker starts.
+  void applyIcon();
+
   browser.alarms.onAlarm.addListener((alarm) => {
     const reason = reasonFor[alarm.name];
     if (reason) void runCheck(deps, reason);
   });
 
   browser.storage.onChanged.addListener((changes, area) => {
-    if (area === 'local' && changes.settings) void ensurePeriodicAlarm();
+    if (area !== 'local' || !changes.settings) return;
+    void ensurePeriodicAlarm();
+    const [before, after] = [changes.settings.oldValue as Settings | undefined, changes.settings.newValue as Settings | undefined];
+    if (before?.chestBody !== after?.chestBody || before?.chestBand !== after?.chestBand) void applyIcon();
   });
 
   browser.notifications.onClicked.addListener((id) => {

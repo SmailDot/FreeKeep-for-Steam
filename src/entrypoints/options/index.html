@@ -7,65 +7,156 @@
     <meta name="manifest.open_in_tab" content="true" />
   </head>
   <body>
-    <main class="page">
-      <header>
-        <img src="/icon/48.png" alt="" />
-        <h1 data-i18n="optTitle"></h1>
-      </header>
+    <div class="app">
+      <nav class="toc" aria-label="FreeKeep">
+        <div class="toc-brand"><span id="navLogo"></span><span class="px-lg">FreeKeep</span></div>
+        <a href="#claim"><i data-pi="bolt"></i><span class="px" data-i18n="navClaim"></span></a>
+        <a href="#interval"><i data-pi="clock"></i><span class="px" data-i18n="optInterval"></span></a>
+        <a href="#renew"><i data-pi="key"></i><span class="px" data-i18n="navRenew"></span></a>
+        <a href="#notify"><i data-pi="bell"></i><span class="px" data-i18n="navNotify"></span></a>
+        <a href="#epicSec"><i data-pi="star"></i><span class="px" data-i18n="navEpic"></span></a>
+        <a href="#links"><i data-pi="eye"></i><span class="px" data-i18n="navLinks"></span></a>
+        <a href="#look"><i data-pi="palette"></i><span class="px" data-i18n="navLook"></span></a>
+        <p class="toc-hint" data-i18n="optAutoSave"></p>
+      </nav>
 
-      <section class="field">
-        <label class="label" for="interval" data-i18n="optInterval"></label>
-        <select id="interval"></select>
-        <p class="hint" data-i18n="optIntervalHint"></p>
-      </section>
+      <main>
+        <header class="banner win">
+          <span id="bannerLogo"></span>
+          <div class="grow">
+            <h1 class="px-lg" data-i18n="optTitle"></h1>
+            <div id="chips" class="chips"></div>
+          </div>
+          <button id="checkNow" class="pbtn blue" type="button"><span data-i18n="popupCheckNow"></span></button>
+        </header>
 
-      <fieldset class="field">
-        <legend class="label" data-i18n="optMode"></legend>
-        <label class="choice"><input type="radio" name="mode" value="auto" /> <span data-i18n="optModeAuto"></span></label>
-        <label class="choice"><input type="radio" name="mode" value="ask" /> <span data-i18n="optModeAsk"></span></label>
-        <p class="hint" data-i18n="optModeHint"></p>
-      </fieldset>
+        <section id="claim">
+          <h2 class="px-lg"><i data-pi="bolt"></i><span data-i18n="optMode"></span></h2>
+          <div class="cards two">
+            <label class="card">
+              <input type="radio" name="mode" value="auto" />
+              <span class="card-top"><i data-pi="bolt" data-scale="3"></i><span class="radio"></span></span>
+              <strong class="px" data-i18n="optModeAuto"></strong>
+              <small data-i18n="optModeAutoHint"></small>
+            </label>
+            <label class="card">
+              <input type="radio" name="mode" value="ask" />
+              <span class="card-top"><i data-pi="ask" data-scale="3"></i><span class="radio"></span></span>
+              <strong class="px" data-i18n="optModeAsk"></strong>
+              <small data-i18n="optModeAskHint"></small>
+            </label>
+          </div>
+          <p class="hint" data-i18n="optModeHint"></p>
+          <div class="box win">
+            <label class="row">
+              <span class="row-text"><strong class="px" data-i18n="optDlc"></strong></span>
+              <input id="includeDlc" type="checkbox" />
+              <span class="psw px" aria-hidden="true"><span>ON</span><span>OFF</span></span>
+            </label>
+          </div>
+        </section>
 
-      <fieldset class="field">
-        <legend class="label" data-i18n="optRenew"></legend>
-        <p class="hint lead" data-i18n="optRenewHint"></p>
-        <label class="option">
-          <input type="radio" name="renew" value="tab" />
-          <span><strong data-i18n="optRenewTab"></strong><small data-i18n="optRenewTabHint"></small></span>
-        </label>
-        <label class="option">
-          <input type="radio" name="renew" value="auto" />
-          <span><strong data-i18n="optRenewAuto"></strong><small data-i18n="optRenewAutoHint"></small></span>
-        </label>
-        <label class="option">
-          <input type="radio" name="renew" value="remind" />
-          <span><strong data-i18n="optRenewRemind"></strong><small data-i18n="optRenewRemindHint"></small></span>
-        </label>
-        <p id="renewDenied" class="hint denied" data-i18n="optRenewDenied" hidden></p>
-        <p id="renewMissing" class="hint denied" hidden>
-          <span data-i18n="optRenewMissing"></span>
-          <button id="renewGrant" type="button" class="link" data-i18n="optRenewGrant"></button>
-        </p>
-      </fieldset>
+        <section id="interval">
+          <h2 class="px-lg"><i data-pi="clock"></i><span data-i18n="optInterval"></span></h2>
+          <div class="box win seg-box">
+            <div id="intervalSeg" class="seg" role="radiogroup"></div>
+          </div>
+          <p class="hint" data-i18n="optIntervalHint"></p>
+        </section>
 
-      <section class="field">
-        <label class="choice"><input id="includeDlc" type="checkbox" /> <span data-i18n="optDlc"></span></label>
-        <label class="choice"><input id="notifications" type="checkbox" /> <span data-i18n="optNotifications"></span></label>
-      </section>
+        <section id="renew">
+          <h2 class="px-lg"><i data-pi="key"></i><span data-i18n="optRenew"></span></h2>
+          <p class="hint lead" data-i18n="optRenewHint"></p>
+          <div class="cards three">
+            <label class="card">
+              <input type="radio" name="renew" value="tab" />
+              <span class="card-top"><i data-pi="cursor" data-scale="3"></i><span class="radio"></span></span>
+              <strong class="px" data-i18n="optRenewTab"></strong>
+              <small data-i18n="optRenewTabHint"></small>
+              <span class="tags"><span class="tag got" data-i18n="tagDefault"></span><span class="tag" data-i18n="tagNoPermission"></span></span>
+            </label>
+            <label class="card">
+              <input type="radio" name="renew" value="auto" />
+              <span class="card-top"><i data-pi="renew" data-scale="3"></i><span class="radio"></span></span>
+              <strong class="px" data-i18n="optRenewAuto"></strong>
+              <small data-i18n="optRenewAutoHint"></small>
+              <span class="tags"><span class="tag warn" data-i18n="tagNeedsPermission"></span></span>
+            </label>
+            <label class="card">
+              <input type="radio" name="renew" value="remind" />
+              <span class="card-top"><i data-pi="bell" data-scale="3"></i><span class="radio"></span></span>
+              <strong class="px" data-i18n="optRenewRemind"></strong>
+              <small data-i18n="optRenewRemindHint"></small>
+              <span class="tags"><span class="tag" data-i18n="tagNoPermission"></span></span>
+            </label>
+          </div>
+          <p id="renewLast" class="hint" hidden></p>
+          <p id="renewDenied" class="hint denied" data-i18n="optRenewDenied" hidden></p>
+          <p id="renewMissing" class="hint denied" hidden>
+            <span data-i18n="optRenewMissing"></span>
+            <button id="renewGrant" type="button" class="link" data-i18n="optRenewGrant"></button>
+          </p>
+        </section>
 
-      <section class="field">
-        <label class="choice"><input id="epic" type="checkbox" /> <span data-i18n="optEpic"></span></label>
-        <p class="hint" data-i18n="optEpicHint"></p>
-        <p id="epicDenied" class="hint denied" data-i18n="optEpicDenied" hidden></p>
-      </section>
+        <section id="notify">
+          <h2 class="px-lg"><i data-pi="bell"></i><span data-i18n="navNotify"></span></h2>
+          <div class="box win">
+            <label class="row">
+              <span class="row-text"><strong class="px" data-i18n="optNotifications"></strong><small data-i18n="optNotificationsHint"></small></span>
+              <input id="notifications" type="checkbox" />
+              <span class="psw px" aria-hidden="true"><span>ON</span><span>OFF</span></span>
+            </label>
+          </div>
+        </section>
 
-      <p id="saved" class="saved" data-i18n="optSaved" hidden></p>
+        <section id="epicSec">
+          <h2 class="px-lg"><i data-pi="star"></i><span data-i18n="navEpic"></span></h2>
+          <div class="box win">
+            <label class="row">
+              <span class="row-text"><strong class="px" data-i18n="optEpic"></strong><small data-i18n="optEpicHint"></small></span>
+              <input id="epic" type="checkbox" />
+              <span class="psw px" aria-hidden="true"><span>ON</span><span>OFF</span></span>
+            </label>
+          </div>
+          <p id="epicDenied" class="hint denied" data-i18n="optEpicDenied" hidden></p>
+        </section>
 
-      <footer>
-        <p data-i18n="optPrivacy"></p>
-        <p data-i18n="optAbout"></p>
-      </footer>
-    </main>
+        <section id="links">
+          <h2 class="px-lg"><i data-pi="eye"></i><span data-i18n="optLinks"></span></h2>
+          <p class="hint lead" data-i18n="optLinksHint"></p>
+          <div id="hosts" class="box win"></div>
+          <p class="hint" data-i18n="optPrivacy"></p>
+        </section>
+
+        <section id="look">
+          <h2 class="px-lg"><i data-pi="palette"></i><span data-i18n="optLook"></span></h2>
+          <div class="box win look">
+            <div>
+              <p class="hint lead" data-i18n="optChestHint"></p>
+              <div id="swatches" class="swatches"></div>
+              <div class="custom">
+                <label class="pick"><input id="chestBody" type="color" /><span class="px" data-i18n="optChestBody"></span></label>
+                <label class="pick"><input id="chestBand" type="color" /><span class="px" data-i18n="optChestBand"></span></label>
+                <button id="chestReset" class="pbtn ghost" type="button"><span data-i18n="optChestReset"></span></button>
+              </div>
+            </div>
+            <div class="preview">
+              <span id="previewBig"></span>
+              <div class="toolbars">
+                <span class="toolbar light"><i></i><span id="previewLight"></span><i></i></span>
+                <span class="toolbar dark"><i></i><span id="previewDark"></span><i></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="about">
+            <p data-i18n="optAbout"></p>
+            <p><span id="version"></span> · <a href="https://github.com/SmailDot/FreeKeep-for-Steam" target="_blank" rel="noreferrer" data-i18n="popupSource"></a></p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <p id="saved" class="saved px" data-i18n="optSaved" hidden></p>
     <script type="module" src="./main.ts"></script>
   </body>
 </html>

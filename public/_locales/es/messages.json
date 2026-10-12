@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "No se concedió el permiso, así que los avisos de Epic siguen desactivados."
+  },
+  "navClaim": {
+    "message": "Reclamar"
+  },
+  "navRenew": {
+    "message": "Renovar sesión"
+  },
+  "navNotify": {
+    "message": "Notificaciones"
+  },
+  "navEpic": {
+    "message": "Avisos de Epic"
+  },
+  "navLinks": {
+    "message": "Conexiones"
+  },
+  "navLook": {
+    "message": "Aspecto e info"
+  },
+  "optAutoSave": {
+    "message": "Todo está en esta página. Los cambios se guardan automáticamente."
+  },
+  "optModeAutoHint": {
+    "message": "Lo añade a tu biblioteca en cuanto lo encuentra y luego te avisa."
+  },
+  "optModeAskHint": {
+    "message": "Solo te avisa; tú decides en la ventana emergente."
+  },
+  "optNotificationsHint": {
+    "message": "Solo cuando se reclama un juego, algo falla o hace falta que hagas algo."
+  },
+  "optLinks": {
+    "message": "Adónde puede conectarse FreeKeep"
+  },
+  "optLinksHint": {
+    "message": "Se lee en directo de los permisos que tu navegador ha dado a FreeKeep."
+  },
+  "hostStore": {
+    "message": "Buscar promociones, comprobar tu biblioteca, reclamar"
+  },
+  "hostLogin": {
+    "message": "Solo con la renovación automática"
+  },
+  "hostEpic": {
+    "message": "Solo con los avisos de Epic"
+  },
+  "hostRequired": {
+    "message": "Necesario"
+  },
+  "hostOn": {
+    "message": "Activado"
+  },
+  "hostOff": {
+    "message": "Desactivado"
+  },
+  "optRenewLast": {
+    "message": "Última renovación: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "correcta"
+  },
+  "renewResult_logged_out": {
+    "message": "sigue sin sesión"
+  },
+  "renewResult_no_permission": {
+    "message": "falta el permiso"
+  },
+  "renewResult_error": {
+    "message": "falló"
+  },
+  "optLook": {
+    "message": "Colores del cofre"
+  },
+  "optChestHint": {
+    "message": "Elige un color predefinido o los tuyos para el cofre y el cierre. Los brillos, las sombras y el destello se ajustan solos."
+  },
+  "optChestBody": {
+    "message": "Cofre"
+  },
+  "optChestBand": {
+    "message": "Cierre"
+  },
+  "optChestReset": {
+    "message": "Restablecer"
+  },
+  "chest_steam": {
+    "message": "Azul Steam"
+  },
+  "chest_wood": {
+    "message": "Madera clásica"
+  },
+  "chest_emerald": {
+    "message": "Esmeralda"
+  },
+  "chest_amethyst": {
+    "message": "Amatista"
+  },
+  "chest_ruby": {
+    "message": "Rubí"
+  },
+  "chest_obsidian": {
+    "message": "Obsidiana"
+  },
+  "chest_gold": {
+    "message": "Oro"
+  },
+  "chest_sakura": {
+    "message": "Sakura"
+  },
+  "chipLoggedIn": {
+    "message": "Sesión de Steam iniciada"
+  },
+  "chipLoggedOut": {
+    "message": "Sin sesión en Steam"
+  },
+  "chipRegion": {
+    "message": "Región $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "$N$ juegos reclamados",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "Predeterminado"
+  },
+  "tagNoPermission": {
+    "message": "Sin permisos extra"
+  },
+  "tagNeedsPermission": {
+    "message": "Necesita login.steampowered.com"
   }
 }

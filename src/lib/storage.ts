@@ -1,5 +1,6 @@
 import { browser } from 'wxt/browser';
 import { DEFAULT_META, type Meta, type Store } from '@/core/engine';
+import { isHex } from '@/lib/chest';
 import { DEFAULT_SETTINGS, INTERVAL_HOURS, RENEW_MODES, type EpicMap, type PromoMap, type RunInfo, type Settings } from '@/core/types';
 
 const MAX_RUNS = 20;
@@ -21,6 +22,8 @@ export function normalizeSettings(raw: Partial<Settings> | undefined): Settings 
   if (!INTERVAL_HOURS.includes(s.intervalHours)) s.intervalHours = DEFAULT_SETTINGS.intervalHours;
   if (s.mode !== 'auto' && s.mode !== 'ask') s.mode = DEFAULT_SETTINGS.mode;
   if (!RENEW_MODES.includes(s.renew)) s.renew = DEFAULT_SETTINGS.renew;
+  if (!isHex(s.chestBody)) s.chestBody = DEFAULT_SETTINGS.chestBody;
+  if (!isHex(s.chestBand)) s.chestBand = DEFAULT_SETTINGS.chestBand;
   s.epic = s.epic === true;
   return s;
 }

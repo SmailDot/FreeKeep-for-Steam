@@ -21,7 +21,7 @@ Steam store for the person using it.
 FreeKeep keeps the following in your browser's extension storage (`chrome.storage.local`). It never
 leaves your device and is deleted when you remove the extension:
 
-- your FreeKeep settings;
+- your FreeKeep settings, including the chest colours you picked;
 - public store information about current promotions (app and package ids, names, images, deadline)
   and what FreeKeep did with each one;
 - the time and result of the last checks, whether you were logged in (and when it last saw you

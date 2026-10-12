@@ -181,14 +181,30 @@ This is what prevents re-claiming loops.
 - Chrome fires missed alarms once after the device wakes, so sleeping laptops catch up.
 - The service worker is idle between checks; a run takes a few seconds.
 
+## Interface
+
+- **Look**: Steam colours with pixel-style frames, buttons and icons. Two pixel fonts are bundled
+  (`public/fonts/`, OFL 1.1) and only used at 12 px and 24 px, the sizes their 12 px grid renders
+  crisply at; long text uses the system font. Cubic 11 covers Chinese, Japanese and Latin; Cyrillic
+  and Greek are routed to Galmuri11 with `unicode-range` because Cubic's are full-width.
+- **Icon**: `src/lib/chest.ts` draws the chest on a 16-cell grid, so it is exact at 16, 32, 48 and
+  96 px. Users pick body and lock colours; outline, highlight and the sparkle (opposite hue, or
+  Steam green for greys) are derived. The background redraws the toolbar icon with
+  `action.setIcon({ imageData })` from an `OffscreenCanvas` when the colours change and whenever the
+  worker starts, and uses a PNG data URL of it for notifications. The packaged icons in
+  `public/icon/` are rendered from `docs/assets/icon.svg` (the default colours) by `npm run icons`.
+- **Options page**: one scrolling page with a sidebar that works as a table of contents; an
+  `IntersectionObserver` highlights the section in view. The connections list reads
+  `permissions.contains` live and updates on `permissions.onAdded` / `onRemoved`.
+
 ## Storage (`chrome.storage.local`)
 
 | Key | Content |
 |---|---|
-| `settings` | interval, mode, login renewal, DLC, notifications, Epic reminders |
+| `settings` | interval, mode, login renewal, DLC, notifications, Epic reminders, chest colours |
 | `promos` | per-subid state (public store data + status) |
 | `epic` | per-offer Epic giveaway state (public feed data + status), only with Epic reminders on |
-| `meta` | login state, last login and renewal times, country, timestamps, app cache |
+| `meta` | login state, last login and renewal times, country, timestamps, app cache, games claimed so far |
 | `runs` | last 20 run summaries |
 | `runningSince` | spinner state for the popup |
 | `popupSeenAt` | replays celebrations for claims made while the popup was closed |

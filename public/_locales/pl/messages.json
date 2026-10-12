@@ -371,5 +371,152 @@
   },
   "optEpicDenied": {
     "message": "Nie udzielono uprawnienia, przypomnienia Epic pozostają wyłączone."
+  },
+  "navClaim": {
+    "message": "Odbieranie"
+  },
+  "navRenew": {
+    "message": "Odnawianie logowania"
+  },
+  "navNotify": {
+    "message": "Powiadomienia"
+  },
+  "navEpic": {
+    "message": "Przypomnienia Epic"
+  },
+  "navLinks": {
+    "message": "Połączenia"
+  },
+  "navLook": {
+    "message": "Wygląd i informacje"
+  },
+  "optAutoSave": {
+    "message": "Wszystkie ustawienia są na tej stronie. Zmiany zapisują się automatycznie."
+  },
+  "optModeAutoHint": {
+    "message": "Od razu dodaje grę do biblioteki, a potem daje ci znać."
+  },
+  "optModeAskHint": {
+    "message": "Tylko powiadamia; decydujesz w okienku."
+  },
+  "optNotificationsHint": {
+    "message": "Tylko gdy gra zostanie odebrana, coś się nie uda albo potrzebna jest twoja reakcja."
+  },
+  "optLinks": {
+    "message": "Z czym FreeKeep może się łączyć"
+  },
+  "optLinksHint": {
+    "message": "Odczytywane na bieżąco z uprawnień, które przeglądarka dała FreeKeep."
+  },
+  "hostStore": {
+    "message": "Szukanie promocji, sprawdzanie biblioteki, odbieranie"
+  },
+  "hostLogin": {
+    "message": "Tylko przy automatycznym odnawianiu"
+  },
+  "hostEpic": {
+    "message": "Tylko przy przypomnieniach Epic"
+  },
+  "hostRequired": {
+    "message": "Wymagane"
+  },
+  "hostOn": {
+    "message": "Włączone"
+  },
+  "hostOff": {
+    "message": "Wyłączone"
+  },
+  "optRenewLast": {
+    "message": "Ostatnie odnowienie: $WHEN$ ($RESULT$)",
+    "placeholders": {
+      "when": {
+        "content": "$1"
+      },
+      "result": {
+        "content": "$2"
+      }
+    }
+  },
+  "renewResult_ok": {
+    "message": "udane"
+  },
+  "renewResult_logged_out": {
+    "message": "nadal bez logowania"
+  },
+  "renewResult_no_permission": {
+    "message": "brak uprawnienia"
+  },
+  "renewResult_error": {
+    "message": "nieudane"
+  },
+  "optLook": {
+    "message": "Kolory skrzyni"
+  },
+  "optChestHint": {
+    "message": "Wybierz gotowy zestaw albo własne kolory skrzyni i zamka. Odblaski, cienie i iskra dopasują się same."
+  },
+  "optChestBody": {
+    "message": "Skrzynia"
+  },
+  "optChestBand": {
+    "message": "Zamek"
+  },
+  "optChestReset": {
+    "message": "Przywróć domyślne"
+  },
+  "chest_steam": {
+    "message": "Niebieski Steam"
+  },
+  "chest_wood": {
+    "message": "Klasyczne drewno"
+  },
+  "chest_emerald": {
+    "message": "Szmaragd"
+  },
+  "chest_amethyst": {
+    "message": "Ametyst"
+  },
+  "chest_ruby": {
+    "message": "Rubin"
+  },
+  "chest_obsidian": {
+    "message": "Obsydian"
+  },
+  "chest_gold": {
+    "message": "Złoto"
+  },
+  "chest_sakura": {
+    "message": "Sakura"
+  },
+  "chipLoggedIn": {
+    "message": "Zalogowano do Steam"
+  },
+  "chipLoggedOut": {
+    "message": "Brak logowania do Steam"
+  },
+  "chipRegion": {
+    "message": "Region $CC$",
+    "placeholders": {
+      "cc": {
+        "content": "$1"
+      }
+    }
+  },
+  "chipClaimed": {
+    "message": "Odebrane gry: $N$",
+    "placeholders": {
+      "n": {
+        "content": "$1"
+      }
+    }
+  },
+  "tagDefault": {
+    "message": "Domyślne"
+  },
+  "tagNoPermission": {
+    "message": "Bez dodatkowych uprawnień"
+  },
+  "tagNeedsPermission": {
+    "message": "Wymaga login.steampowered.com"
   }
 }

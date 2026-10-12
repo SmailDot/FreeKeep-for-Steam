@@ -5,8 +5,11 @@ import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
 import { LOGIN_ORIGIN, STORE } from '@/core/steam';
 import type { EpicState, PromoState, PromoStatus } from '@/core/types';
+import { chestSvg } from '@/lib/chest';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
+import { fillPixelIcons } from '@/lib/pixel';
+import { formatDate, relativeTime } from '@/lib/time';
 import type { Command, CommandResult } from '@/lib/messages';
 import { readSnapshot, type Snapshot } from '@/lib/storage';
 import { busy, celebrate, fail, toast } from './fx';
@@ -15,6 +18,8 @@ const STALE_RUN_MS = 2 * 60_000;
 /** Opening the popup while logged out checks again, so a renewal or login done elsewhere shows up. */
 const LOGIN_RECHECK_MS = 60_000;
 const ORDER: PromoStatus[] = ['pending', 'failed', 'claimed', 'needs_base', 'owned', 'skipped'];
+/** Tag colour for each status. */
+const TONE: Record<PromoStatus, string> = { pending: 'free', claimed: 'got', failed: 'bad', needs_base: 'warn', owned: '', skipped: '' };
 /** Popup-only UI state: when the user last saw the list, to replay celebrations for background claims. */
 const SEEN_KEY = 'popupSeenAt';
 
@@ -34,23 +39,15 @@ async function send(command: Command): Promise<CommandResult> {
   return browser.runtime.sendMessage(command);
 }
 
-function relativeTime(at: number): string {
-  const rtf = new Intl.RelativeTimeFormat(browser.i18n.getUILanguage(), { numeric: 'auto' });
-  const minutes = Math.round((at - Date.now()) / 60_000);
-  if (minutes === 0) return t('justNow');
-  if (Math.abs(minutes) < 60) return rtf.format(minutes, 'minute');
-  const hours = Math.round(minutes / 60);
-  if (Math.abs(hours) < 48) return rtf.format(hours, 'hour');
-  return rtf.format(Math.round(hours / 24), 'day');
-}
-
 function untilText(endsText: string | null): string | null {
   const date = endsText?.match(/before (.+?)\.?$/i)?.[1];
   return date ? t('popupUntil', [date]) : null;
 }
 
-function actionButton(label: string, command: Command, primary = false): HTMLButtonElement {
-  const button = el('button', { type: 'button', className: primary ? 'primary' : '' }, [el('span', { textContent: label })]);
+type Tone = 'green' | 'blue' | 'ghost' | '';
+
+function actionButton(label: string, command: Command, tone: Tone = ''): HTMLButtonElement {
+  const button = el('button', { type: 'button', className: `pbtn ${tone}` }, [el('span', { textContent: label })]);
   button.addEventListener('click', () => {
     busy(button);
     void send(command);
@@ -66,23 +63,23 @@ function renderLogin(s: Snapshot): void {
 
   const actions: HTMLElement[] = [];
   const settingsLink = () => {
-    const open = el('button', { type: 'button', className: 'link', textContent: t('openSettings') });
+    const open = el('button', { type: 'button', className: 'link px', textContent: t('openSettings') });
     open.addEventListener('click', () => void browser.runtime.openOptionsPage());
     return open;
   };
   if (s.meta.login !== 'expired') {
     $('loginTitle').textContent = t('notifyLoginTitle');
     $('loginBody').textContent = t('popupLoggedOut');
-    actions.push(el('a', { href: `${STORE}/login/`, target: '_blank', rel: 'noreferrer', textContent: t('popupOpenStore') }));
+    actions.push(el('a', { className: 'pbtn blue', href: `${STORE}/login/`, target: '_blank', rel: 'noreferrer', textContent: t('popupOpenStore') }));
   } else if (s.settings.renew === 'remind') {
     $('loginTitle').textContent = t('notifyExpiredTitle');
     $('loginBody').textContent = t('popupExpiredRemind');
-    actions.push(actionButton(t('popupOpenStore'), { type: 'renewLogin', visible: true }, true));
+    actions.push(actionButton(t('popupOpenStore'), { type: 'renewLogin', visible: true }, 'blue'));
   } else {
     const noPermission = s.settings.renew === 'auto' && s.meta.renewal?.result === 'no_permission';
     $('loginTitle').textContent = t('notifyExpiredTitle');
     $('loginBody').textContent = t(noPermission ? 'popupExpiredNoPermission' : 'popupExpiredTab');
-    actions.push(actionButton(t('popupRenew'), { type: 'renewLogin', visible: false }, true));
+    actions.push(actionButton(t('popupRenew'), { type: 'renewLogin', visible: false }, 'blue'));
     if (noPermission) actions.push(settingsLink());
   }
   $('loginActions').replaceChildren(...actions);
@@ -92,10 +89,10 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
   const status = p.status === 'pending' && p.lastError === 'logged_out' ? t('waitingLogin') : t(`status_${p.status}`);
   const actions = el('div', { className: 'actions' });
   if (p.status === 'pending' && loggedIn !== false) {
-    actions.append(actionButton(t('actionClaim'), { type: 'claim', subid: p.subid }, true));
-    actions.append(actionButton(t('actionSkip'), { type: 'skip', subid: p.subid }));
+    actions.append(actionButton(t('actionClaim'), { type: 'claim', subid: p.subid }, 'green'));
+    actions.append(actionButton(t('actionSkip'), { type: 'skip', subid: p.subid }, 'ghost'));
   } else if (p.status === 'failed') {
-    actions.append(actionButton(t('actionRetry'), { type: 'claim', subid: p.subid }, true));
+    actions.append(actionButton(t('actionRetry'), { type: 'claim', subid: p.subid }, 'blue'));
   }
   actions.append(
     el('a', {
@@ -107,12 +104,13 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
     }),
   );
 
+  const waiting = p.status === 'pending' && p.lastError === 'logged_out';
   const meta = el('div', { className: 'meta' }, [
-    el('span', { className: 'chip', textContent: t(`kind_${p.kind}`) }),
-    el('span', { className: `chip st st-${p.status}`, textContent: status }),
+    el('span', { className: `tag st ${waiting ? 'warn' : TONE[p.status]}`, textContent: status }),
+    el('span', { className: 'tag', textContent: t(`kind_${p.kind}`) }),
   ]);
   const until = untilText(p.endsText);
-  const info = el('div', { className: 'info' }, [el('div', { className: 'name', textContent: p.name, title: p.name }), meta]);
+  const info = el('div', { className: 'info' }, [el('div', { className: 'name px', textContent: p.name, title: p.name }), meta]);
   if (p.status === 'needs_base' && p.baseName) info.append(el('div', { className: 'sub', textContent: `↳ ${p.baseName}` }));
   if (until) info.append(el('div', { className: 'sub', textContent: until }));
 
@@ -126,25 +124,16 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
   ]);
 }
 
-function formatDate(ms: number): string {
-  return new Intl.DateTimeFormat(browser.i18n.getUILanguage(), {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  }).format(ms);
-}
-
 function epicCard(o: EpicState): HTMLElement {
-  const get = el('a', { className: 'button primary', href: o.url, target: '_blank', rel: 'noreferrer', textContent: t('epicGet') });
+  const get = el('a', { className: 'pbtn blue', href: o.url, target: '_blank', rel: 'noreferrer', textContent: t('epicGet') });
   get.addEventListener('click', () => void send({ type: 'epic', id: o.id, status: 'opened' }));
-  const actions = el('div', { className: 'actions' }, [get, actionButton(t('epicHide'), { type: 'epic', id: o.id, status: 'hidden' })]);
+  const actions = el('div', { className: 'actions' }, [get, actionButton(t('epicHide'), { type: 'epic', id: o.id, status: 'hidden' }, 'ghost')]);
 
   const kind = o.kind === 'addon' ? 'dlc' : o.kind;
-  const meta = el('div', { className: 'meta' }, [el('span', { className: 'chip', textContent: t(`kind_${kind}`) })]);
-  if (o.status === 'opened') meta.append(el('span', { className: 'chip st st-claimed', textContent: t('epicOpened') }));
+  const meta = el('div', { className: 'meta' }, [el('span', { className: 'tag', textContent: t(`kind_${kind}`) })]);
+  if (o.status === 'opened') meta.append(el('span', { className: 'tag got', textContent: t('epicOpened') }));
   const info = el('div', { className: 'info' }, [
-    el('div', { className: 'name', textContent: o.title, title: o.title }),
+    el('div', { className: 'name px', textContent: o.title, title: o.title }),
     meta,
     el('div', { className: 'sub', textContent: t('popupUntil', [formatDate(o.end)]) }),
   ]);
@@ -253,11 +242,14 @@ function syncCards(current: PromoState[], loggedIn: boolean | null, seenAt: numb
     chosenTab = 'steam'; // a claim result is more important than the Epic list
     showTab('steam');
   }
-  // Wait a frame so the cards are laid out before measuring them for confetti.
+  // Wait a frame so the cards are laid out before measuring them for the sparks.
   requestAnimationFrame(() => effects.forEach((run) => run()));
 }
 
 function render(s: Snapshot, seenAt: number): void {
+  const chest = { body: s.settings.chestBody, band: s.settings.chestBand };
+  $('logo').innerHTML = chestSvg(chest, 32);
+  $('emptyIcon').innerHTML = chestSvg(chest, 64);
   const lastRun = s.runs[0];
   const running = s.runningSince > 0 && Date.now() - s.runningSince < STALE_RUN_MS;
   const loggedOut = s.meta.loggedIn === false;
@@ -314,6 +306,7 @@ function render(s: Snapshot, seenAt: number): void {
 
 async function main(): Promise<void> {
   translatePage();
+  fillPixelIcons();
   $('settings').title = t('popupSettings');
   $('settings').addEventListener('click', () => void browser.runtime.openOptionsPage());
   $('checkNow').addEventListener('click', () => void send({ type: 'checkNow' }));

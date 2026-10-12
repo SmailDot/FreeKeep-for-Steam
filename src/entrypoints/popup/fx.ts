@@ -1,6 +1,7 @@
-// Visual feedback for claim results. Pure DOM + CSS, no dependencies.
+// Visual feedback for claim results, in the same pixel style as the rest of the popup.
+import { pixelIcon } from '@/lib/pixel';
 
-const COLORS = ['#8b6cff', '#22c55e', '#facc15', '#38bdf8', '#f472b6', '#fb923c'];
+const COLORS = ['#66c0f4', '#a4d007', '#ffcd75', '#ffffff'];
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function replay(el: HTMLElement, className: string, ms: number): void {
@@ -10,8 +11,8 @@ function replay(el: HTMLElement, className: string, ms: number): void {
   setTimeout(() => el.classList.remove(className), ms);
 }
 
-/** Bursts confetti from the centre of `anchor` inside the fixed #fx layer. */
-export function confetti(anchor: HTMLElement, count = 44): void {
+/** A short burst of square pixels from the centre of `anchor`. */
+export function sparks(anchor: HTMLElement, count = 18): void {
   if (reducedMotion()) return;
   const layer = document.getElementById('fx');
   if (!layer) return;
@@ -20,37 +21,32 @@ export function confetti(anchor: HTMLElement, count = 44): void {
   const y = rect.top + rect.height / 2;
   for (let i = 0; i < count; i++) {
     const piece = document.createElement('i');
-    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-    const distance = 70 + Math.random() * 110;
-    piece.style.left = `${x}px`;
-    piece.style.top = `${y}px`;
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+    const distance = 50 + Math.random() * 70;
+    piece.style.left = `${Math.round(x)}px`;
+    piece.style.top = `${Math.round(y)}px`;
     piece.style.background = COLORS[i % COLORS.length]!;
-    piece.style.setProperty('--dx', `${Math.cos(angle) * distance}px`);
-    piece.style.setProperty('--dy', `${Math.sin(angle) * distance - 40}px`);
-    piece.style.setProperty('--rot', `${Math.random() * 720 - 360}deg`);
-    piece.style.animationDelay = `${Math.random() * 80}ms`;
-    if (i % 3 === 0) piece.classList.add('round');
+    piece.style.setProperty('--dx', `${Math.round(Math.cos(angle) * distance)}px`);
+    piece.style.setProperty('--dy', `${Math.round(Math.sin(angle) * distance)}px`);
+    piece.style.animationDelay = `${Math.round(Math.random() * 60)}ms`;
     layer.append(piece);
-    setTimeout(() => piece.remove(), 1400);
+    setTimeout(() => piece.remove(), 900);
   }
 }
 
-/** Success: glow + bounce on the card, a drawn check mark on the capsule, confetti. */
+/** Success: the card flashes green and hops, a pixel check lands on the capsule, sparks fly. */
 export function celebrate(card: HTMLElement, delay = 0): void {
   setTimeout(() => {
-    replay(card, 'fx-celebrate', 1600);
+    replay(card, 'fx-celebrate', 900);
     const capsule = card.querySelector<HTMLElement>('.capsule-wrap');
     if (capsule && !capsule.querySelector('.check')) {
-      capsule.insertAdjacentHTML(
-        'beforeend',
-        '<svg class="check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>',
-      );
+      capsule.insertAdjacentHTML('beforeend', `<span class="check">${pixelIcon('check', 2)}</span>`);
     }
-    confetti(card);
+    sparks(card);
   }, delay);
 }
 
-/** Failure: shake + red flash. Softer amber wiggle for "needs base game". */
+/** Failure: shake with a red frame. Softer amber wiggle for "needs base game". */
 export function fail(card: HTMLElement, soft = false): void {
   replay(card, soft ? 'fx-wiggle' : 'fx-shake', 900);
 }
@@ -59,14 +55,14 @@ export function toast(text: string, kind: 'ok' | 'bad' | 'warn'): void {
   const host = document.getElementById('toasts');
   if (!host) return;
   const node = document.createElement('div');
-  node.className = `toast toast-${kind}`;
+  node.className = `toast toast-${kind} px`;
   node.textContent = text;
   host.append(node);
   setTimeout(() => node.classList.add('leaving'), 2600);
   setTimeout(() => node.remove(), 3000);
 }
 
-/** Spinner state for a button while its command is in flight. */
+/** Busy state for a button while its command is in flight. */
 export function busy(button: HTMLButtonElement): void {
   button.disabled = true;
   button.classList.add('is-busy');
