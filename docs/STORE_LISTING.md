@@ -1,6 +1,7 @@
 # Chrome Web Store submission kit
 
 Copy-paste material for the [Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+Live listing: <https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio>.
 Upload `.output/freekeep-for-steam-<version>-chrome.zip` (from `npm run zip` or a GitHub release).
 
 ## Store listing

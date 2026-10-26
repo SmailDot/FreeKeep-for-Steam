@@ -1,7 +1,9 @@
 # Firefox Add-ons (AMO) submission kit
 
-Copy-paste material for [addons.mozilla.org](https://addons.mozilla.org/developers/). Build both
-files with `npm run zip:firefox` (or take them from a GitHub release):
+Copy-paste material for [addons.mozilla.org](https://addons.mozilla.org/developers/). Live listing:
+<https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/> (URL slug
+`freekeep-for-steam-epic`; slugs are limited to 30 characters). Build both files with
+`npm run zip:firefox` (or take them from a GitHub release):
 
 - `freekeep-for-steam-<version>-firefox.zip` – the add-on
 - `freekeep-for-steam-<version>-sources.zip` – the source code AMO asks for, since the add-on is

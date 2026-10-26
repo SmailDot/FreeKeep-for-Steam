@@ -10,6 +10,11 @@ optional reminders for Epic Games Store giveaways.
 
 🔒 **No password, no access to your login cookie, no server. Everything runs in your browser.**
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/eodieoianjikheencgjejfiaehplijio?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio)
+[![Chrome users](https://img.shields.io/chrome-web-store/users/eodieoianjikheencgjejfiaehplijio?label=users)](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio)
+[![Firefox Add-ons](https://img.shields.io/amo/v/freekeep-for-steam-epic?label=Firefox%20Add-ons&logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/)
+[![Firefox users](https://img.shields.io/amo/users/freekeep-for-steam-epic?label=users)](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/)
+
 [繁體中文](README.zh-TW.md) · [Why it's safe](#-why-its-safe) · [Install](#install) · [How it works](#how-it-works) · [Privacy](PRIVACY.md)
 
 ![FreeKeep demo](docs/assets/demo-en.gif)
@@ -81,14 +86,14 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
 
 | Browser | How |
 |---|---|
-| Chrome, Edge, Brave, Opera | Chrome Web Store (coming soon) |
-| Firefox 140 or later (desktop) | Firefox Add-ons (in review) |
+| Chrome, Edge, Brave, Opera | [Chrome Web Store](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio) |
+| Firefox 140 or later (desktop) | [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/) |
 | Any Chromium browser, manually | Download `freekeep-for-steam-*-chrome.zip` from [Releases](../../releases), unzip it, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked** and pick the folder |
 
 Then sign in to the [Steam store](https://store.steampowered.com/) in the same browser to get started.
 
-> Manual installs don't update automatically. Steam occasionally changes its website, so keep an eye
-> on the releases, or switch to the store version once it's available.
+> Store versions update automatically; manual installs don't. Steam occasionally changes its website,
+> so if you installed manually, keep an eye on the releases or switch to a store version.
 
 ## How it works
 
@@ -232,6 +237,18 @@ FreeKeep speaks 12 languages, and you can add yours in a few minutes: copy
 [`public/_locales/en/messages.json`](public/_locales/en/messages.json), translate it and open a pull
 request. Native speakers reviewing the machine-assisted languages are just as welcome. See
 [CONTRIBUTING.md](CONTRIBUTING.md#translations) for the status table and steps.
+
+## Star history
+
+Thanks to everyone who starred FreeKeep! The chart updates on its own (GitHub caches it, so it can
+lag a few hours).
+
+<a href="https://star-history.com/#SmailDot/FreeKeep-for-Steam&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=SmailDot/FreeKeep-for-Steam&type=Date&theme=dark" />
+    <img alt="FreeKeep star history" src="https://api.star-history.com/svg?repos=SmailDot/FreeKeep-for-Steam&type=Date" width="600" />
+  </picture>
+</a>
 
 ## Contact
 

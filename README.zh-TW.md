@@ -9,6 +9,11 @@
 
 🔒 **不需密碼、不讀取登入憑證、不經過任何伺服器，所有動作都在你的瀏覽器內完成。**
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/eodieoianjikheencgjejfiaehplijio?label=Chrome%20Web%20Store&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio)
+[![Chrome users](https://img.shields.io/chrome-web-store/users/eodieoianjikheencgjejfiaehplijio?label=users)](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio)
+[![Firefox Add-ons](https://img.shields.io/amo/v/freekeep-for-steam-epic?label=Firefox%20Add-ons&logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/)
+[![Firefox users](https://img.shields.io/amo/users/freekeep-for-steam-epic?label=users)](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/)
+
 [English](README.md) · [為什麼安全](#-為什麼安全) · [安裝](#安裝) · [運作原理](#運作原理) · [隱私權](PRIVACY.md)
 
 ![FreeKeep 示範](docs/assets/demo-zh_TW.gif)
@@ -70,13 +75,13 @@
 
 | 瀏覽器 | 方式 |
 |---|---|
-| Chrome、Edge、Brave、Opera | Chrome 線上應用程式商店（即將上架） |
-| Firefox 140 以上（桌面版） | Firefox 附加元件（審核中） |
+| Chrome、Edge、Brave、Opera | [Chrome 線上應用程式商店](https://chromewebstore.google.com/detail/eodieoianjikheencgjejfiaehplijio) |
+| Firefox 140 以上（桌面版） | [Firefox 附加元件](https://addons.mozilla.org/firefox/addon/freekeep-for-steam-epic/) |
 | 任何 Chromium 瀏覽器（手動） | 到 [Releases](../../releases) 下載 `freekeep-for-steam-*-chrome.zip` → 解壓縮 → 開啟 `chrome://extensions` → 開啟「開發人員模式」→「載入未封裝項目」→ 選擇資料夾 |
 
 安裝後，在同一個瀏覽器登入 [Steam 商店](https://store.steampowered.com/)即可開始使用。
 
-> 手動安裝的版本不會自動更新。Steam 偶爾會調整網站，建議留意 Releases，或在商店版上架後改用商店版。
+> 商店版會自動更新，手動安裝的版本不會。Steam 偶爾會調整網站，手動安裝的話建議留意 Releases，或改用商店版。
 
 ## 運作原理
 
@@ -196,6 +201,17 @@ npm run zip:firefox  # Firefox 版 zip，加上 addons.mozilla.org 要求的原�
 FreeKeep 目前支援 12 種語言，加入新語言只要幾分鐘：複製
 [`public/_locales/en/messages.json`](public/_locales/en/messages.json)、翻譯後發 Pull Request 即可。
 也非常歡迎母語者校正機器輔助翻譯的語言。語言狀態表與步驟請見 [CONTRIBUTING.md](CONTRIBUTING.md#translations)。
+
+## Star 趨勢
+
+謝謝每一位幫 FreeKeep 按星星的人！圖表會自動更新（GitHub 有快取，可能會延遲幾個小時）。
+
+<a href="https://star-history.com/#SmailDot/FreeKeep-for-Steam&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=SmailDot/FreeKeep-for-Steam&type=Date&theme=dark" />
+    <img alt="FreeKeep 的 GitHub star 趨勢" src="https://api.star-history.com/svg?repos=SmailDot/FreeKeep-for-Steam&type=Date" width="600" />
+  </picture>
+</a>
 
 ## 聯絡
 
