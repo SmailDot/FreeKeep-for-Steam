@@ -22,9 +22,10 @@ FUNKCJE
 • Obsługuje 24-godzinne logowanie do Steam w przeglądarce: odnów je jednym kliknięciem, automatycznie (opcjonalne uprawnienie) albo dostań tylko przypomnienie
 • Wygląd w stylu pixel art w kolorach Steam, ze skrzynią w wybranych przez ciebie kolorach
 • Opcjonalne przypomnienia o Epic Games Store: informuje o darmowych grach w Epic, które odbierasz na stronie Epic. Domyślnie wyłączone; publiczna lista jest pobierana bez logowania
-• 12 języków, około 45 KB kodu, bez zależności
+• Opcjonalne przypomnienia GOG: informuje o rozdawnictwach na stronie głównej GOG i grach przecenionych do 0, które odbierasz na stronie GOG. Domyślnie wyłączone; publiczne strony GOG są pobierane bez logowania
+• 12 języków, około 55 KB kodu, bez zależności
 
 Zaloguj się do sklepu Steam w tej przeglądarce, a FreeKeep zacznie działać automatycznie.
 
-Niepowiązane z Valve Corporation ani Epic Games. Steam jest znakiem towarowym Valve Corporation.
+Niepowiązane z Valve Corporation, Epic Games ani GOG. Steam jest znakiem towarowym Valve Corporation.
 Kod źródłowy i polityka prywatności: https://github.com/SmailDot/FreeKeep-for-Steam

@@ -1,8 +1,9 @@
 import { browser } from 'wxt/browser';
 import { EPIC_FREE_GAMES, EPIC_ORIGIN, EpicClient, epicLocale } from '@/core/epic';
-import { claimNow, runCheck, setEpicStatus, skip, type Deps, type MessageKey, type TabRenewal } from '@/core/engine';
+import { claimNow, runCheck, setOfferStatus, skip, type Deps, type MessageKey, type TabRenewal } from '@/core/engine';
+import { GOG_ORIGINS, GogClient, gogHome, gogLocale } from '@/core/gog';
 import { LOGIN_ORIGIN, STORE, STORE_ORIGIN, SteamClient } from '@/core/steam';
-import type { RunReason, Settings } from '@/core/types';
+import { REMINDER_STORES, type ReminderStore, type RunReason, type Settings } from '@/core/types';
 import { drawChest, type ChestColors } from '@/lib/chest';
 import { t } from '@/lib/i18n';
 import type { Command, CommandResult } from '@/lib/messages';
@@ -75,6 +76,10 @@ const deps: Deps = {
     api: new EpicClient(epicLocale(browser.i18n.getUILanguage())),
     allowed: () => browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
   },
+  gog: {
+    api: new GogClient(gogLocale(browser.i18n.getUILanguage())),
+    allowed: () => browser.permissions.contains({ origins: GOG_ORIGINS }),
+  },
   renewAllowed: () => browser.permissions.contains({ origins: [LOGIN_ORIGIN] }),
   storeAllowed: () => browser.permissions.contains({ origins: [STORE_ORIGIN] }),
 };
@@ -141,9 +146,18 @@ async function scheduleSoon(delayInMinutes = 1): Promise<void> {
 
 const reasonFor: Record<string, RunReason> = { [PERIODIC]: 'alarm', [STARTUP]: 'startup' };
 
+/**
+ * A GOG notification opens the one game it announced (a 100%-off game's page, or the home page for a
+ * giveaway, where its claim button is), or GOG's home page when it announced several.
+ */
+async function gogTarget(notifiedAt: number): Promise<string> {
+  const announced = Object.values((await readSnapshot()).gog).filter((o) => o.firstSeen === notifiedAt);
+  return announced.length === 1 ? announced[0]!.url : gogHome(gogLocale(browser.i18n.getUILanguage()));
+}
+
 /** Only the popup and options page can message the worker, but their input is still checked. */
 function parseCommand(message: unknown): Command | null {
-  const m = message as Partial<Command> & { subid?: unknown; id?: unknown; status?: unknown };
+  const m = message as Partial<Command> & { subid?: unknown; id?: unknown; status?: unknown; store?: unknown };
   const subid = typeof m?.subid === 'number' && Number.isInteger(m.subid) && m.subid > 0 ? m.subid : null;
   switch (m?.type) {
     case 'checkNow':
@@ -153,9 +167,11 @@ function parseCommand(message: unknown): Command | null {
     case 'claim':
     case 'skip':
       return subid ? { type: m.type, subid } : null;
-    case 'epic':
-      return typeof m.id === 'string' && (m.status === 'opened' || m.status === 'hidden')
-        ? { type: 'epic', id: m.id, status: m.status }
+    case 'offer':
+      return REMINDER_STORES.includes(m.store as ReminderStore) &&
+        typeof m.id === 'string' &&
+        (m.status === 'opened' || m.status === 'hidden')
+        ? { type: 'offer', store: m.store as ReminderStore, id: m.id, status: m.status }
         : null;
     default:
       return null;
@@ -198,6 +214,9 @@ export default defineBackground(() => {
     // The engine names each notification after what a click should do.
     if (id.startsWith('freekeep-renew-')) return void renewInTab(false);
     if (id.startsWith('freekeep-store-')) return void renewInTab(true);
+    if (id.startsWith('freekeep-gog-')) {
+      return void gogTarget(Number(id.slice('freekeep-gog-'.length))).then((url) => browser.tabs.create({ url }));
+    }
     const url = id.startsWith('freekeep-epic-') ? EPIC_FREE_GAMES : browser.runtime.getURL('/popup.html');
     void browser.tabs.create({ url });
   });
@@ -218,8 +237,8 @@ export default defineBackground(() => {
         case 'skip':
           await skip(deps, message.subid);
           return { ok: true };
-        case 'epic':
-          await setEpicStatus(deps, message.id, message.status);
+        case 'offer':
+          await setOfferStatus(deps, message.store, message.id, message.status);
           return { ok: true };
         default:
           return { ok: false, error: 'unknown command' };

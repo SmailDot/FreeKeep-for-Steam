@@ -6,7 +6,7 @@
 
 **Auto-claim free Steam games, no password required.**
 A lightweight browser extension that claims Steam's limited-time free games in the background, with
-optional reminders for Epic Games Store giveaways.
+optional reminders for Epic Games Store and GOG giveaways.
 
 🔒 **No password, no access to your login cookie, no server. Everything runs in your browser.**
 
@@ -36,9 +36,9 @@ party's hands. FreeKeep is designed so it never needs them:
 3. **No server involved**
    FreeKeep has no backend. It doesn't upload or collect any data.
 4. **Verifiable**
-   On Chrome's extension Details page, FreeKeep shows only notifications and access to the Steam
-   store (plus Epic's public list or Steam's login renewal, if you turn those options on). The
-   [source code](src/) is public.
+   On your browser's extension page, FreeKeep shows only notifications and access to the Steam
+   store (plus Epic's or GOG's public lists or Steam's login renewal, if you turn those options on).
+   The [source code](src/) is public.
 
 ### Compared with typical auto-claimers
 
@@ -50,11 +50,12 @@ party's hands. FreeKeep is designed so it never needs them:
 | Your login data | Copied to the tool's config or server | **Stays in your browser** |
 | Connects to | The tool's server, Discord or other third-party services | **The Steam store only**¹ |
 | Data collection | Varies | **None. No analytics, no tracking** |
-| Source code | Varies | **Open source, about 40 KB** |
+| Source code | Varies | **Open source, about 55 KB** |
 
-¹ Plus two optional features you turn on yourself: [Epic reminders](#epic-games-store-reminders)
-(Epic's public list of free games, without any login information) and
-[automatic login renewal](#steams-24-hour-login) (Steam's own `login.steampowered.com`).
+¹ Plus three optional features you turn on yourself: [Epic reminders](#epic-games-store-reminders)
+(Epic's public list of free games, without any login information),
+[GOG reminders](#gog-reminders) (GOG's public home page and catalog, without any login information)
+and [automatic login renewal](#steams-24-hour-login) (Steam's own `login.steampowered.com`).
 
 For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](docs/ARCHITECTURE.md).
 
@@ -77,7 +78,9 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
   fonts are bundled, so nothing is loaded from a font server.
 - **Optional Epic Games Store reminders.** Notifies you when Epic gives a game away, with a link to
   claim it. Off by default; [details below](#epic-games-store-reminders).
-- **Lightweight and auditable.** About 45 KB of code, no runtime dependencies, written in TypeScript
+- **Optional GOG reminders.** Notifies you of giveaways on GOG's home page and games discounted to 0,
+  with a link to claim them. Off by default; [details below](#gog-reminders).
+- **Lightweight and auditable.** About 55 KB of code, no runtime dependencies, written in TypeScript
   with unit tests.
 - **12 languages.** English, 繁體中文, 简体中文, Русский, Español, Português, Deutsch, 日本語, Français,
   Polski, 한국어, Türkçe. [Help translate](CONTRIBUTING.md#translations).
@@ -128,6 +131,24 @@ claim the games on Epic's site.
   again, but FreeKeep can no longer connect to it.
 - If you never turn it on, FreeKeep never connects to Epic.
 
+### GOG reminders
+
+Turn on **Remind me of free games on GOG** in the settings, and FreeKeep also watches GOG for two
+kinds of free games. Like Epic, this feature **only sends reminders**; you claim the games on GOG's
+site, and they stay in your GOG library for good:
+
+- **Giveaways** on GOG's home page: claim them with the button on the home page banner while you're
+  logged in to GOG.
+- **Games discounted to 0**: add the game to your cart and check out for free.
+
+<p align="center"><img src="docs/assets/gog-en.png" width="320" alt="The popup's GOG tab: a home page giveaway with its end date and a game at 100% off, each with a Get on GOG button" /></p>
+
+- FreeKeep reads GOG's public home page sections (`sections.gog.com`) and catalog
+  (`catalog.gog.com`) anonymously, without a GOG account, login information or cookies. The requests
+  include only your browser's language.
+- Turning it on asks your browser for permission to read those two sites; turning it off removes it.
+- If you never turn it on, FreeKeep never connects to GOG.
+
 ### Steam's 24-hour login
 
 Steam's web login is valid for 24 hours. When you open a Steam page after that, Steam renews it on
@@ -162,6 +183,7 @@ What automatic renewal involves:
 | `notifications` | Tell you when a game is claimed or needs your attention |
 | `store-site-backend-static-ipv4.ak.epicgames.com` (optional) | Read Epic's public list of free games, only after you turn on Epic reminders |
 | `login.steampowered.com` (optional) | Renew Steam's 24-hour login in the background, only after you choose **Renew automatically** |
+| `sections.gog.com`, `catalog.gog.com` (optional) | Read GOG's public home page and catalog, only after you turn on GOG reminders |
 
 It doesn't use the `tabs`, `scripting` or `cookies` permissions and can't access any other site.
 (One-click renewal opens and closes its own tab, which needs no permission.)
@@ -187,11 +209,12 @@ account, exactly like *Add to Account*. Nothing is downloaded or run until you i
 Steam yourself. If you'd like to look at each game before it reaches your library, choose **Ask me
 first**: FreeKeep then only notifies you and never claims on its own.
 
-**Why doesn't it claim Epic games automatically?** On Steam, a free license takes a single request,
-the same one the *Add to Account* button sends. On Epic, claiming a game goes through the checkout
-flow. Automating it would require scripting Epic's website or handling your Epic login, which goes
-against FreeKeep's principle of never touching user credentials. For Epic, FreeKeep sends reminders
-instead.
+**Why doesn't it claim Epic or GOG games automatically?** On Steam, a free license takes a single
+request, the same one the *Add to Account* button sends. On Epic, claiming a game goes through the
+checkout flow. On GOG, the giveaway button sends your GOG access token, and games at 100% off go
+through checkout too. Automating either would require scripting those websites or handling your
+login there, which goes against FreeKeep's principle of never touching user credentials. For Epic
+and GOG, FreeKeep sends reminders instead.
 
 **Someone else got a free game that FreeKeep didn't detect for me. Why?** Usually for one of two
 reasons:
@@ -229,7 +252,7 @@ npm run zip:firefox  # Firefox zip plus the sources zip addons.mozilla.org asks 
 ```
 
 The demo above is rendered from the real popup: `npm run build && node scripts/demo/record.mjs en`
-(needs Playwright and ffmpeg). The Epic screenshot comes from `npm run epic-shot`.
+(needs Playwright and ffmpeg). The Epic and GOG screenshots come from `npm run epic-shot`.
 
 ### Translations
 

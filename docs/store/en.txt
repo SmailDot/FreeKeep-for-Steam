@@ -22,9 +22,10 @@ FEATURES
 • Handles Steam's 24-hour web login: renew it with one click, automatically (optional permission), or just get a reminder
 • Pixel-art look in Steam colours, with a chest icon in colours you pick
 • Optional Epic Games Store reminders: tells you about Epic's free games so you can claim them on Epic's site. Off by default; the public list is read without signing in
-• 12 languages, about 45 KB of code, no dependencies
+• Optional GOG reminders: tells you about giveaways on GOG's home page and games discounted to 0, which you claim on GOG's site. Off by default; GOG's public pages are read without signing in
+• 12 languages, about 55 KB of code, no dependencies
 
 Sign in to the Steam store in this browser and FreeKeep runs automatically.
 
-Not affiliated with Valve Corporation or Epic Games. Steam is a trademark of Valve Corporation.
+Not affiliated with Valve Corporation, Epic Games or GOG. Steam is a trademark of Valve Corporation.
 Source code and privacy policy: https://github.com/SmailDot/FreeKeep-for-Steam

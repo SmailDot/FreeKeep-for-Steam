@@ -5,7 +5,7 @@ import type { Snapshot } from './storage';
  * A report users can paste into a GitHub issue. Everything in it is either public store data
  * or FreeKeep's own state: no session ids, cookies, account ids or account names are ever stored.
  */
-export function buildDiagnostics(s: Snapshot, access: { store: boolean; epic: boolean; login: boolean }) {
+export function buildDiagnostics(s: Snapshot, access: { store: boolean; epic: boolean; gog: boolean; login: boolean }) {
   return {
     version: browser.runtime.getManifest().version,
     userAgent: navigator.userAgent,
@@ -15,6 +15,8 @@ export function buildDiagnostics(s: Snapshot, access: { store: boolean; epic: bo
     storeAccess: access.store,
     /** Whether FreeKeep can currently read Epic's list (the optional host permission is active). */
     epicAccess: access.epic,
+    /** Whether FreeKeep can currently read GOG's home page sections and catalog (optional). */
+    gogAccess: access.gog,
     /** Whether automatic login renewal can reach login.steampowered.com (optional host permission). */
     loginAccess: access.login,
     session: {
@@ -49,9 +51,18 @@ export function buildDiagnostics(s: Snapshot, access: { store: boolean; epic: bo
       start: iso(o.start),
       end: iso(o.end),
     })),
+    gog: Object.values(s.gog).map((o) => ({
+      title: o.title,
+      kind: o.kind,
+      deal: o.deal,
+      status: o.status,
+      end: iso(o.end),
+      firstSeen: iso(o.firstSeen),
+      lastSeen: iso(o.lastSeen),
+    })),
   };
 }
 
-function iso(ms: number): string | null {
+function iso(ms: number | null): string | null {
   return ms ? new Date(ms).toISOString() : null;
 }

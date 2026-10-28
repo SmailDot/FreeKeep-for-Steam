@@ -22,9 +22,10 @@ Steamの期間限定無料ゲームやDLCを、ブラウザにある既存のSte
 • Steamの24時間で切れるウェブログインに対応：ワンクリック更新、自動更新（任意の権限）、通知のみから選べます
 • Steamカラーのピクセルアート風デザイン。宝箱アイコンの色も選べます
 • 任意のEpic Games Store通知：Epicの無料配布をお知らせし、受け取りはEpicのサイトで行います。初期設定はオフ、公開リストの取得にログインは不要
-• 12言語対応、コード約45 KB、外部依存なし
+• 任意のGOG通知：GOGトップページの無料配布と0円に値下げされたゲームをお知らせし、受け取りはGOGのサイトで行います。初期設定はオフ、公開ページの取得にログインは不要
+• 12言語対応、コード約55 KB、外部依存なし
 
 このブラウザでSteamストアにログインすれば、FreeKeepが自動で動作します。
 
-Valve CorporationおよびEpic Gamesとは関係ありません。SteamはValve Corporationの商標です。
+Valve Corporation、Epic Games、GOGとは関係ありません。SteamはValve Corporationの商標です。
 ソースコードとプライバシーポリシー：https://github.com/SmailDot/FreeKeep-for-Steam

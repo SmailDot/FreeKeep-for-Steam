@@ -2,8 +2,9 @@
 
 FreeKeep is a Manifest V3 extension built with [WXT](https://wxt.dev) and TypeScript. It has no
 runtime dependencies and no server: everything runs in the user's browser against
-`store.steampowered.com`, plus Epic's public giveaway list when the user turns on the optional
-[Epic reminders](#epic-games-store-reminders-optional), and Steam's login renewal when the user picks
+`store.steampowered.com`, plus Epic's public giveaway list and GOG's public home page and catalog
+when the user turns on the optional [Epic](#epic-games-store-reminders-optional) or
+[GOG reminders](#gog-reminders-optional), and Steam's login renewal when the user picks
 [automatic renewal](#steam-login-renewal).
 
 ```
@@ -11,6 +12,7 @@ src/
 ├─ core/                  pure logic, no browser APIs (unit tested)
 │  ├─ steam.ts            Steam endpoints + response parsers
 │  ├─ epic.ts             Epic giveaway feed parser (reminders only)
+│  ├─ gog.ts              GOG giveaway and 100%-off parsers (reminders only)
 │  ├─ policy.ts           owned / needs base game / skipped / eligible
 │  ├─ engine.ts           detect → decide → claim → notify, state machine
 │  └─ types.ts
@@ -20,7 +22,7 @@ src/
    ├─ popup/              status, promo list, claim feedback effects
    └─ options/            settings page
 public/_locales/          12 languages, English is the reference
-tests/                    vitest + fixtures captured from real Steam and Epic responses
+tests/                    vitest + fixtures captured from real Steam, Epic and GOG responses
 scripts/demo/             renders the README GIF and store images from the real popup
 ```
 
@@ -127,6 +129,46 @@ new games) `→ opened` (user clicked *Get on Epic*) or `hidden` (user dismissed
 forgotten a day after they end or after 14 days unseen. The run summary's `epic` field holds the
 number of live giveaways, `no_permission` or `error`.
 
+## GOG reminders (optional)
+
+GOG can't be claimed with a single request either: its home page giveaway button posts with the
+user's GOG access token (`POST https://www.gog.com/giveaway/claim`, `Authorization: Bearer …`;
+without it GOG answers 401/403), and a game at 100% off goes through GOG's checkout. So, like Epic,
+FreeKeep only **reminds**, and the feature is off by default.
+
+| Purpose | Request | Login |
+|---|---|---|
+| Is a giveaway running? | `GET https://sections.gog.com/v1/pages/2f?locale=<ui>` | no, `credentials: 'omit'` |
+| The giveaway's product and end date | `GET https://sections.gog.com/v1/pages/2f/sections/<id>?locale=<ui>` | no |
+| Games discounted to 0 | `GET https://catalog.gog.com/v1/catalog?price=between:0,0&discounted=eq:true&productType=in:game,pack,dlc&…&locale=<ui>` | no |
+
+- Page `2f` is GOG's home page in its section service, the same list the site renders. A giveaway
+  is a section of type `GIVEAWAY_SECTION`; its details hold `properties.product.{title, slug,
+  coverHorizontal}` and `properties.endDate`, the fields GOG's own giveaway banner reads (from its
+  front-end code, October 2026; no giveaway was running then, so the tests build that response from
+  those fields). If the details can't be read, the giveaway is still reported as "GOG giveaway"
+  with a link to the home page, so a format change can't hide it. A section whose end date has
+  passed is dropped.
+- The catalog query also returns permanently free games (demos, free-to-play); only products whose
+  base price is above 0 and final price is 0 count, i.e. a real 100% discount. These have no end
+  date in the catalog, so the popup shows how to claim instead ("Add to cart, check out for free").
+- A game listed both ways is shown once, as the giveaway. If one source fails the other is still
+  used; only both failing records `error`.
+- Both hosts allow CORS only for `www.gog.com`, so reading them needs host access:
+  `sections.gog.com` and `catalog.gog.com` are requested together when the user ticks the option and
+  removed when they untick it. `locale` is the UI language mapped to GOG's store languages
+  (`en-US`, `de-DE`, `fr-FR`, `pl-PL`, `ru-RU`, `zh-Hans`); no country or currency is sent.
+- Covers are `images.gog-statics.com/<hash>.png`; the popup asks for the `_giveaway_381x223.jpg`
+  size GOG's banner uses (~40 KB).
+- Links: a giveaway opens the home page (the claim button is its banner); a deal opens the
+  product page from the catalog's `storeLink`, accepted only on `www.gog.com`.
+
+The same reminder code runs Epic and GOG (`checkReminders` in `engine.ts`), each with its own
+storage key, settings flag and run summary field (`gog`). Offers without an end date are kept for
+14 days after they were last seen, so a deal that briefly drops out of the catalog isn't announced
+twice; the popup lists the ones the last successful GOG check saw. A notification for a single
+GOG offer opens it directly, one for several opens the home page.
+
 ## Content Security Policy
 
 The manifest declares a CSP for all extension pages and the service worker, so the browser enforces
@@ -134,8 +176,8 @@ what the code promises:
 
 | Directive | Value | Effect |
 |---|---|---|
-| `connect-src` | `data:`, Steam store, `login.steampowered.com`, Epic feed host | Any other `fetch` is refused, even from tampered code; the renewal redirect may only pass through these hosts. `data:` reaches no server: Chrome loads the notification icon (the chest in the user's colours, drawn locally as a `data:` URL) through `connect-src` |
-| `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com` | Game images only from the stores' CDNs (`data:` is the notification icon) |
+| `connect-src` | `data:`, Steam store, `login.steampowered.com`, Epic feed host, `sections.gog.com`, `catalog.gog.com` | Any other `fetch` is refused, even from tampered code; the renewal redirect may only pass through these hosts. `data:` reaches no server: Chrome loads the notification icon (the chest in the user's colours, drawn locally as a `data:` URL) through `connect-src` |
+| `img-src` | `'self'`, `data:`, `*.steamstatic.com`, `*.epicgames.com`, `*.unrealengine.com`, `images.gog-statics.com` | Game images only from the stores' CDNs (`data:` is the notification icon) |
 | `default-src` / `style-src` | `'self'` | No inline or remote script or stylesheet |
 | `object-src`, `base-uri`, `form-action`, `frame-ancestors` | `'none'` | No plugins, base tag tricks, form posts or framing |
 
@@ -230,9 +272,10 @@ This is what prevents re-claiming loops.
 
 | Key | Content |
 |---|---|
-| `settings` | interval, mode, login renewal, DLC, notifications, Epic reminders, chest colours |
+| `settings` | interval, mode, login renewal, DLC, notifications, Epic and GOG reminders, chest colours |
 | `promos` | per-subid state (public store data + status) |
 | `epic` | per-offer Epic giveaway state (public feed data + status), only with Epic reminders on |
+| `gog` | the same for GOG giveaways and 100%-off games, only with GOG reminders on |
 | `meta` | login state, last login and renewal times, country, timestamps, app cache, games claimed so far |
 | `runs` | last 20 run summaries |
 | `runningSince` | spinner state for the popup |
@@ -245,7 +288,10 @@ No session ids, cookies, account ids or names are stored.
 - `tests/steam.test.ts` – parsers against trimmed real responses in `tests/fixtures/`.
 - `tests/engine.test.ts` – the state machine with a fake Steam client: auto/ask modes, DLC rules,
   retries, login loss, the three renewal modes, pruning, and no re-claiming across runs; Epic
-  reminders with a fake feed.
+  and GOG reminders with fake feeds.
 - `tests/epic.test.ts` – the Epic parser against a trimmed real feed, plus changeover, bundle,
   missing slug and image edge cases.
+- `tests/gog.test.ts` – the GOG parsers against real home page and catalog responses, a giveaway
+  built from the fields GOG's banner reads, unreadable details, permanently free games, foreign
+  links, and one source failing.
 - `tests/locales.test.ts` – every locale has the same keys and placeholders as English.

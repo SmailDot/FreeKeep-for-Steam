@@ -1,6 +1,6 @@
 # Privacy Policy
 
-_Last updated: 2026-10-12 (added Steam login renewal, including the optional automatic renewal)_
+_Last updated: 2026-10-28 (added the optional GOG reminders)_
 
 FreeKeep for Steam ("FreeKeep") is a browser extension that claims free-to-keep promotions on the
 Steam store for the person using it.
@@ -8,7 +8,8 @@ Steam store for the person using it.
 ## What FreeKeep does not do
 
 - It does not collect, sell or share any personal data, and sends nothing to anyone but Steam itself.
-  (If you turn on Epic reminders, it also downloads Epic's public list of free games; see below.)
+  (If you turn on Epic or GOG reminders, it also downloads that store's public list of free games;
+  see below.)
 - It never opens a browser tab by itself. It only does so when you ask it to renew your Steam login
   or open a store page (see below).
 - It has no server, analytics, tracking or advertising.
@@ -28,15 +29,17 @@ leaves your device and is deleted when you remove the extension:
   logged in), the time and outcome of the last login renewal, and your Steam store region (country
   code, used to look up the right regional promotions);
 - only if Epic reminders are on: public information about Epic's current and upcoming free games
-  (title, image link, store link, dates) and whether you opened or hid each one.
+  (title, image link, store link, dates) and whether you opened or hid each one;
+- only if GOG reminders are on: the same public information about GOG's current giveaways and games
+  discounted to 0, and whether you opened or hid each one.
 
 To decide what to claim, FreeKeep also reads which of the current promotions your account already
 owns. This list is used in memory and is not stored.
 
 ## Network requests
 
-FreeKeep only sends requests to `https://store.steampowered.com` (plus Epic, only if you turn on the
-optional reminders below), to find promotions, read which games your account owns, and claim
+FreeKeep only sends requests to `https://store.steampowered.com` (plus Epic or GOG, only if you turn
+on the optional reminders below), to find promotions, read which games your account owns, and claim
 promotions. Your browser attaches your existing Steam login to these requests the same way it does
 when you visit the Steam store yourself. The popup shows game images, which your browser loads from
 Steam's image servers (`*.steamstatic.com`) like any web page would.
@@ -88,11 +91,25 @@ reach it).
 
 These requests are governed by [Epic's privacy policy](https://www.epicgames.com/site/privacypolicy).
 
+### Optional: GOG reminders
+
+This feature is off by default. When you turn it on, your browser asks you to allow access to
+`https://sections.gog.com` and `https://catalog.gog.com`. At each check FreeKeep then reads GOG's
+public home page sections (to see whether a giveaway is running) and GOG's public catalog (to find
+games discounted to 0). The requests are anonymous: they carry no cookies and no login, and use no
+GOG account. The only information they contain is your browser's language; nothing about you, your
+Steam account or your country. The popup shows the games' cover images, which your browser loads
+from GOG's image server (`images.gog-statics.com`). FreeKeep never claims anything on GOG and never
+opens GOG pages by itself; it only opens GOG when you click **Get on GOG** or the notification.
+Turning the feature off removes the permission and the list.
+
+These requests are governed by [GOG's privacy policy](https://support.gog.com/hc/articles/212632109-Privacy-Policy?product=gog).
+
 ## Diagnostics
 
 The popup's **Copy diagnostics** button copies a report to your clipboard. It contains your FreeKeep
 settings, your browser's name and version, recent check results and the public promotion data above
-(including the Epic list, if that feature is on), and nothing about your account.
+(including the Epic and GOG lists, if those features are on), and nothing about your account.
 It is only shared if you paste it somewhere yourself.
 
 ## Contact
@@ -113,7 +130,7 @@ FreeKeep 不會蒐集、出售或分享任何個人資料，除了 Steam 本身�
 不會離開你的裝置，移除擴充功能即刪除。為了判斷要領哪些遊戲，FreeKeep 會讀取你的帳號擁有哪些目前的限免，
 這份清單只在記憶體中使用，不會被儲存。
 
-FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的自動續期或 Epic 提醒時另見下段），用來尋找限免、
+FreeKeep 只會連線到 `https://store.steampowered.com`（開啟選用的自動續期、Epic 或 GOG 提醒時另見下段），用來尋找限免、
 讀取你擁有的遊戲並領取限免。瀏覽器會像你平常逛 Steam 商店一樣自動帶上登入狀態。popup 顯示的遊戲圖片，
 由瀏覽器從 Steam 圖片伺服器（`*.steamstatic.com`）載入，就像一般網頁一樣。領取時，FreeKeep 會從商店頁讀取防偽造代碼
 （`sessionid`，每個商店頁都有）並隨領取請求送回 Steam，做法與商店自己的「加入帳戶」按鈕相同，
@@ -138,6 +155,12 @@ popup 顯示的封面圖由瀏覽器從 Epic 圖片伺服器（`cdn1.epicgames.c
 FreeKeep 不會在 Epic 上領取任何東西，也不會自己開啟 Epic 頁面，只有在你按下「到 Epic 領取」或通知時才會開啟商店頁。
 清單中的公開資料（名稱、圖片連結、商店連結、日期）以及你是否已開啟或隱藏，只存在你的裝置上；關閉功能時會一併移除權限
 （Chrome 的擴充功能頁面可能仍列出該網址，那是 Chrome 記得你允許過，但 FreeKeep 已經連不到它）。
+
+選用的 GOG 限免提醒預設關閉。開啟時，瀏覽器會請你允許存取 `https://sections.gog.com` 與 `https://catalog.gog.com`，
+之後 FreeKeep 每次檢查會讀取 GOG 公開的首頁區塊（確認是否有限時贈送）與商品目錄（找出折扣到 0 元的遊戲）。
+這些請求是匿名的：不帶 Cookie、不帶登入、不使用 GOG 帳號，唯一的資訊是瀏覽器的語言，不含任何關於你、你的 Steam 帳號或國家的資料。
+popup 顯示的封面圖由瀏覽器從 GOG 圖片伺服器（`images.gog-statics.com`）載入。FreeKeep 不會在 GOG 上領取任何東西，
+也不會自己開啟 GOG 頁面，只有在你按下「到 GOG 領取」或通知時才會開啟。關閉功能時會一併移除權限與清單。
 
 「複製診斷報告」只會複製到你的剪貼簿，
 內容包含設定、瀏覽器名稱與版本、最近的檢查結果與上述公開資料，不含帳號資料，只有你自己貼出去才會被分享。

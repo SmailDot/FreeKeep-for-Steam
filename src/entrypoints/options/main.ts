@@ -2,6 +2,7 @@ import '@/assets/theme.css';
 import './style.css';
 import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
+import { GOG_ORIGINS } from '@/core/gog';
 import { LOGIN_ORIGIN, STORE, STORE_ORIGIN } from '@/core/steam';
 import { DEFAULT_SETTINGS, INTERVAL_HOURS, type IntervalHours, type RenewMode, type Settings } from '@/core/types';
 import { CHEST_PRESETS, chestElement, isHex, type ChestColors } from '@/lib/chest';
@@ -15,9 +16,11 @@ const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getEleme
 const includeDlc = $<HTMLInputElement>('includeDlc');
 const notifications = $<HTMLInputElement>('notifications');
 const epic = $<HTMLInputElement>('epic');
+const gog = $<HTMLInputElement>('gog');
 const chestBody = $<HTMLInputElement>('chestBody');
 const chestBand = $<HTMLInputElement>('chestBand');
 const epicPermission = { origins: [EPIC_ORIGIN] };
+const gogPermission = { origins: GOG_ORIGINS };
 const loginPermission = { origins: [LOGIN_ORIGIN] };
 const modes = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
 const renewModes = document.querySelectorAll<HTMLInputElement>('input[name="renew"]');
@@ -62,15 +65,18 @@ function renderStatus(s: Snapshot): void {
 
 /** Which sites FreeKeep can reach right now, read live from the browser's permissions. */
 async function renderHosts(): Promise<void> {
-  const [store, login, epicOn] = await Promise.all([
+  const [store, login, epicOn, gogOn] = await Promise.all([
     browser.permissions.contains({ origins: [STORE_ORIGIN] }),
     browser.permissions.contains(loginPermission),
     browser.permissions.contains(epicPermission),
+    browser.permissions.contains(gogPermission),
   ]);
   const rows: [string, string, boolean, boolean][] = [
     [new URL(STORE).host, t('hostStore'), store, true],
     ['login.steampowered.com', t('hostLogin'), login, false],
     ['store-site-backend-static-ipv4.ak.epicgames.com', t('hostEpic'), epicOn, false],
+    ['sections.gog.com', t('hostGog'), gogOn, false],
+    ['catalog.gog.com', t('hostGog'), gogOn, false],
   ];
   $('hosts').replaceChildren(
     ...rows.map(([host, use, on, required]) => {
@@ -188,6 +194,7 @@ async function init(): Promise<void> {
   modes.forEach((m) => (m.checked = m.value === settings.mode));
   // Reflect the real state: the user may have revoked the permission in chrome://extensions.
   epic.checked = settings.epic && (await browser.permissions.contains(epicPermission));
+  gog.checked = settings.gog && (await browser.permissions.contains(gogPermission));
 
   includeDlc.addEventListener('change', () => void save({ includeDlc: includeDlc.checked }));
   notifications.addEventListener('change', () => void save({ notifications: notifications.checked }));
@@ -215,23 +222,30 @@ async function init(): Promise<void> {
   renewModes.forEach((r) => r.addEventListener('change', () => void chooseRenew(r.value as RenewMode)));
   $('renewGrant').addEventListener('click', () => void chooseRenew('auto'));
 
-  epic.addEventListener('change', async () => {
-    if (!epic.checked) {
-      await save({ epic: false });
-      await browser.storage.local.remove('epic'); // the engine also clears it on its next run
-      await browser.permissions.remove(epicPermission); // give it back: least privilege
-      return;
-    }
-    // Must be the first call in the click handler, while Chrome still counts it as a user gesture.
-    const granted = await browser.permissions.request(epicPermission);
-    $('epicDenied').hidden = granted;
-    if (!granted) {
-      epic.checked = false;
-      return;
-    }
-    await save({ epic: true });
-    void browser.runtime.sendMessage({ type: 'checkNow' });
-  });
+  /**
+   * Epic and GOG reminders each need their store's public data. The permission is requested when a
+   * reminder is turned on and given back when it's turned off: least privilege.
+   */
+  const reminderToggle = (input: HTMLInputElement, store: 'epic' | 'gog', permission: { origins: string[] }, denied: string) =>
+    input.addEventListener('change', async () => {
+      if (!input.checked) {
+        await save({ [store]: false });
+        await browser.storage.local.remove(store); // the engine also clears it on its next run
+        await browser.permissions.remove(permission);
+        return;
+      }
+      // Must be the first call in the click handler, while the browser still counts it as user input.
+      const granted = await browser.permissions.request(permission);
+      $(denied).hidden = granted;
+      if (!granted) {
+        input.checked = false;
+        return;
+      }
+      await save({ [store]: true });
+      void browser.runtime.sendMessage({ type: 'checkNow' });
+    });
+  reminderToggle(epic, 'epic', epicPermission, 'epicDenied');
+  reminderToggle(gog, 'gog', gogPermission, 'gogDenied');
 
   // Colour pickers preview while dragging and save once a colour is picked.
   const picked = (): ChestColors => ({ body: chestBody.value, band: chestBand.value });

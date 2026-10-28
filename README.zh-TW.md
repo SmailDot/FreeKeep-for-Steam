@@ -5,7 +5,7 @@
 # FreeKeep for Steam
 
 **自動領取 Steam 限免遊戲，全程不需要提供密碼。**
-輕量的瀏覽器擴充功能，在背景自動領取 Steam 限時免費遊戲，並可選擇開啟 Epic Games Store 限免提醒。
+輕量的瀏覽器擴充功能，在背景自動領取 Steam 限時免費遊戲，並可選擇開啟 Epic Games Store 與 GOG 的限免提醒。
 
 🔒 **不需密碼、不讀取登入憑證、不經過任何伺服器，所有動作都在你的瀏覽器內完成。**
 
@@ -32,8 +32,8 @@
 3. **不經過任何伺服器**
    FreeKeep 沒有後端伺服器，不上傳、也不蒐集任何資料。
 4. **可自行查證**
-   在 Chrome 擴充功能的「詳細資料」頁面，可以看到 FreeKeep 只有通知權限與 Steam 商店的存取權
-   （開啟 Epic 提醒或自動續期時，另含 Epic 公開清單或 Steam 的登入續期網址）。[原始碼](src/)完整公開。
+   在瀏覽器的擴充功能頁面，可以看到 FreeKeep 只有通知權限與 Steam 商店的存取權
+   （開啟 Epic、GOG 提醒或自動續期時，另含 Epic、GOG 的公開清單或 Steam 的登入續期網址）。[原始碼](src/)完整公開。
 
 ### 與常見自動領取工具的比較
 
@@ -45,9 +45,10 @@
 | 登入資料 | 複製到工具的設定檔或伺服器 | **始終留在瀏覽器中** |
 | 連線對象 | 工具的伺服器、Discord 或其他第三方服務 | **僅限 Steam 商店**¹ |
 | 資料蒐集 | 視工具而定 | **不蒐集，無分析、無追蹤** |
-| 原始碼 | 視工具而定 | **開源，約 40 KB** |
+| 原始碼 | 視工具而定 | **開源，約 55 KB** |
 
-¹ 另有兩項需自行開啟的選用功能：[Epic 限免提醒](#epic-games-store-限免提醒)（讀取 Epic 公開的限免清單，不含任何登入資訊）
+¹ 另有三項需自行開啟的選用功能：[Epic 限免提醒](#epic-games-store-限免提醒)（讀取 Epic 公開的限免清單，不含任何登入資訊）、
+[GOG 限免提醒](#gog-限免提醒)（讀取 GOG 公開的首頁與商品目錄，不含任何登入資訊）
 與[自動續期](#steam-的-24-小時登入)（Steam 自己的 `login.steampowered.com`）。
 
 詳細內容請參閱[隱私權政策](PRIVACY.md)與[架構說明](docs/ARCHITECTURE.md)。
@@ -67,7 +68,9 @@
 - **Steam 配色的像素風介面**：工具列的寶箱圖示可以自訂顏色；像素字型內建在擴充功能裡，不會向任何字型伺服器下載
 - **選用的 Epic Games Store 限免提醒**：Epic 推出免費遊戲時通知你，並附上領取連結；預設關閉，
   [詳見下方](#epic-games-store-限免提醒)
-- **輕量、可審查**：程式碼約 45 KB，無執行期依賴，以 TypeScript 撰寫並具備單元測試
+- **選用的 GOG 限免提醒**：GOG 首頁有限時贈送、或有遊戲折扣到 0 元時通知你，並附上領取連結；預設關閉，
+  [詳見下方](#gog-限免提醒)
+- **輕量、可審查**：程式碼約 55 KB，無執行期依賴，以 TypeScript 撰寫並具備單元測試
 - **12 種語言**：English、繁體中文、简体中文、Русский、Español、Português、Deutsch、日本語、Français、
   Polski、한국어、Türkçe，[歡迎協助翻譯](CONTRIBUTING.md#translations)
 
@@ -112,6 +115,21 @@
   下次開啟時不再詢問，但 FreeKeep 實際上已無法連線
 - 未開啟此功能時，FreeKeep 不會與 Epic 有任何連線
 
+### GOG 限免提醒
+
+在設定中開啟「**提醒我 GOG 的免費遊戲**」後，FreeKeep 也會留意 GOG 的兩種免費遊戲。和 Epic 一樣，
+此功能**僅提供提醒**，領取需在 GOG 網站上完成，領到後會永久留在你的 GOG 遊戲庫：
+
+- **首頁的限時贈送**：登入 GOG 後，按首頁橫幅上的按鈕領取
+- **折扣到 0 元的遊戲**：加入購物車，以 0 元結帳
+
+<p align="center"><img src="docs/assets/gog-zh_TW.png" width="320" alt="popup 的 GOG 分頁：首頁限時贈送與截止時間，以及一款 100% 折扣的遊戲，各附「到 GOG 領取」按鈕" /></p>
+
+- FreeKeep 以匿名方式讀取 GOG 公開的首頁區塊（`sections.gog.com`）與商品目錄（`catalog.gog.com`），
+  不需要 GOG 帳號，也不附帶登入資訊或 Cookie。請求中只包含瀏覽器語言
+- 開啟時，瀏覽器會請你授權讀取這兩個網址；關閉時會一併移除
+- 未開啟此功能時，FreeKeep 不會與 GOG 有任何連線
+
 ### Steam 的 24 小時登入
 
 Steam 網頁登入的有效期限是 24 小時。之後只要打開任一 Steam 網頁，Steam 就會用它存在
@@ -141,6 +159,7 @@ Steam 網頁登入的有效期限是 24 小時。之後只要打開任一 Steam 
 | `notifications` | 領取成功或需要你處理時通知你 |
 | `store-site-backend-static-ipv4.ak.epicgames.com`（選用） | 開啟 Epic 提醒後，讀取 Epic 公開的限免清單 |
 | `login.steampowered.com`（選用） | 選擇「自動續期」後，在背景續期 Steam 的 24 小時登入 |
+| `sections.gog.com`、`catalog.gog.com`（選用） | 開啟 GOG 提醒後，讀取 GOG 公開的首頁與商品目錄 |
 
 不使用 `tabs`、`scripting`、`cookies` 權限，也無法存取其他網站（一鍵續期開啟與關閉的是它自己的分頁，不需要權限）。
 manifest 中另設有內容安全政策（CSP），由瀏覽器本身拒絕連線到其他主機、載入其他伺服器的圖片，
@@ -161,9 +180,10 @@ manifest 中另設有內容安全政策（CSP），由瀏覽器本身拒絕連�
 在你自己從 Steam 安裝之前，不會下載或執行任何東西。如果想先看過每款遊戲再決定，請選擇「**先問我**」：
 FreeKeep 只會通知你，不會自動領取。
 
-**為什麼 Epic 的遊戲不能自動領取？** Steam 的免費授權只需要一個請求，與「加入帳戶」按鈕相同；
-Epic 則必須經過結帳流程。要自動化就得操控 Epic 網站或處理你的 Epic 登入資訊，這違反 FreeKeep
-「不接觸使用者憑證」的原則，因此 Epic 改以提醒的方式支援。
+**為什麼 Epic 和 GOG 的遊戲不能自動領取？** Steam 的免費授權只需要一個請求，與「加入帳戶」按鈕相同；
+Epic 則必須經過結帳流程。GOG 的限時贈送按鈕會帶上你的 GOG 登入權杖，折扣到 0 元的遊戲也要結帳。
+要自動化就得操控這些網站或處理你在那裡的登入資訊，這違反 FreeKeep「不接觸使用者憑證」的原則，
+因此 Epic 和 GOG 改以提醒的方式支援。
 
 **別人領到的免費遊戲，為什麼 FreeKeep 沒有偵測到？** 通常是以下兩種原因之一：
 
@@ -194,7 +214,7 @@ npm run zip:firefox  # Firefox 版 zip，加上 addons.mozilla.org 要求的原�
 ```
 
 上面的示範動畫是用真實的 popup 錄製的：`npm run build && node scripts/demo/record.mjs zh_TW`
-（需要 Playwright 和 ffmpeg）。Epic 分頁的截圖則由 `npm run epic-shot` 產生。
+（需要 Playwright 和 ffmpeg）。Epic 與 GOG 分頁的截圖則由 `npm run epic-shot` 產生。
 
 ### 翻譯
 

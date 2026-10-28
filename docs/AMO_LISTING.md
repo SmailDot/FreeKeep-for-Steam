@@ -30,11 +30,11 @@ shown in. Add 中文（台灣） afterwards from the language selector of the li
 **Summary** (max 250) – AMO pre-fills `extDescription`; this longer one fits better:
 
 ```
-Auto-claims Steam's limited-time free-to-keep games and DLC in the background, using the Steam login already in your browser. No password, no cookie access, no server, no data collected. Optional reminders for Epic's free games.
+Auto-claims Steam's limited-time free-to-keep games and DLC in the background, using the Steam login already in your browser. No password, no cookie access, no server, no data collected. Optional Epic and GOG reminders.
 ```
 
 ```
-在背景自動領取 Steam 限時免費遊戲與 DLC，沿用瀏覽器中既有的 Steam 登入狀態。不需密碼、不讀取登入憑證、沒有伺服器、不蒐集任何資料。另可選擇開啟 Epic 限免提醒。
+在背景自動領取 Steam 限時免費遊戲與 DLC，沿用瀏覽器中既有的 Steam 登入狀態。不需密碼、不讀取登入憑證、沒有伺服器、不蒐集任何資料。另可選擇開啟 Epic 與 GOG 限免提醒。
 ```
 
 **Description** – AMO supports some Markdown (bold, italic, code, links, lists; no headings), so
@@ -62,11 +62,12 @@ Automatically claims limited-time free-to-keep Steam games and DLC in the backgr
 - Handles Steam's 24-hour web login: renew it with one click, automatically (optional permission), or just get a reminder
 - Pixel-art look in Steam colours, with a chest icon in colours you pick
 - Optional Epic Games Store reminders: tells you about Epic's free games so you can claim them on Epic's site. Off by default; the public list is read without signing in
-- 12 languages, about 45 KB of code, no dependencies
+- Optional GOG reminders: tells you about giveaways on GOG's home page and games discounted to 0, which you claim on GOG's site. Off by default; GOG's public pages are read without signing in
+- 12 languages, about 55 KB of code, no dependencies
 
 Sign in to the Steam store in Firefox and FreeKeep runs on its own.
 
-Not affiliated with Valve Corporation or Epic Games. Steam is a trademark of Valve Corporation.
+Not affiliated with Valve Corporation, Epic Games or GOG. Steam is a trademark of Valve Corporation.
 Source code: [github.com/SmailDot/FreeKeep-for-Steam](https://github.com/SmailDot/FreeKeep-for-Steam)
 ```
 
@@ -91,11 +92,12 @@ Source code: [github.com/SmailDot/FreeKeep-for-Steam](https://github.com/SmailDo
 - 處理 Steam 的 24 小時網頁登入：可選一鍵續期、自動續期（選用權限）或只提醒
 - Steam 配色的像素風介面，寶箱圖示可自訂顏色
 - 選用的 Epic Games Store 限免提醒：通知 Epic 的免費遊戲，由你到 Epic 網站領取。預設關閉，讀取公開清單時不需登入
-- 支援 12 種語言、程式碼約 45 KB、無第三方依賴
+- 選用的 GOG 限免提醒：通知 GOG 首頁的限時贈送與折扣到 0 元的遊戲，由你到 GOG 網站領取。預設關閉，讀取公開頁面時不需登入
+- 支援 12 種語言、程式碼約 55 KB、無第三方依賴
 
 在 Firefox 登入 Steam 商店後，FreeKeep 就會自動運作。
 
-與 Valve Corporation 及 Epic Games 無關。Steam 是 Valve Corporation 的商標。
+與 Valve Corporation、Epic Games 及 GOG 無關。Steam 是 Valve Corporation 的商標。
 原始碼：[github.com/SmailDot/FreeKeep-for-Steam](https://github.com/SmailDot/FreeKeep-for-Steam)
 ```
 
@@ -119,7 +121,7 @@ FreeKeep for Steam does not collect, sell or share any personal data. It has no 
 - It only connects to https://store.steampowered.com, to find free promotions, check which of them your account already owns, and claim them. Firefox attaches your existing Steam login to these requests, as it does when you visit the store yourself. To claim, FreeKeep sends back the store's anti-forgery code (sessionid) exactly like the store's own "Add to Account" button; it is kept in memory for that request only. Game images load from Steam's image servers (*.steamstatic.com).
 - It opens a Steam store tab only when you ask it to renew your Steam login or open a store page.
 - Your settings, public data about current promotions, recent check results, your login state and your Steam store region (country code) are stored only in Firefox's extension storage on your device, and are deleted when you remove the add-on.
-- Optional and off by default: "Renew automatically" asks for access to https://login.steampowered.com to renew Steam's 24-hour web login (Firefox handles the cookies; FreeKeep cannot see them). "Epic reminders" asks for access to Epic's public free-games list at store-site-backend-static-ipv4.ak.epicgames.com; that request is anonymous and contains only your browser language. Turning either off removes the permission again.
+- Optional and off by default: "Renew automatically" asks for access to https://login.steampowered.com to renew Steam's 24-hour web login (Firefox handles the cookies; FreeKeep cannot see them). "Epic reminders" asks for access to Epic's public free-games list at store-site-backend-static-ipv4.ak.epicgames.com, and "GOG reminders" for access to GOG's public home page and catalog at sections.gog.com and catalog.gog.com; those requests are anonymous and contain only your browser language. Turning any of them off removes the permission again.
 - "Copy diagnostics" copies a report with your settings and recent check results, without account data, to your clipboard. It is only shared if you paste it somewhere yourself.
 
 Full policy: https://github.com/SmailDot/FreeKeep-for-Steam/blob/main/PRIVACY.md
@@ -142,11 +144,13 @@ Build from the uploaded sources (any OS; tested with Node.js 22.22 and npm 10.9 
 The add-on is written to .output/firefox-mv3/ and zipped to
 .output/freekeep-for-steam-<version>-firefox.zip; its files are identical to the uploaded package.
 
-Network: only https://store.steampowered.com (required). Two optional host permissions are
-requested only when the user turns on the matching setting: login.steampowered.com (renew Steam's
-24-hour store login in the background) and store-site-backend-static-ipv4.ak.epicgames.com (Epic's
-public giveaway list, reminders only). The manifest CSP limits connect-src to these hosts (plus
-data: for the locally drawn notification icon). No remote code, no eval, no analytics, no data
+Network: only https://store.steampowered.com (required). Optional host permissions are requested
+only when the user turns on the matching setting: login.steampowered.com (renew Steam's 24-hour
+store login in the background), store-site-backend-static-ipv4.ak.epicgames.com (Epic's public
+giveaway list, reminders only), and sections.gog.com + catalog.gog.com (GOG's public home page
+sections and catalog, reminders only; GOG giveaways need the user's GOG token to claim, so FreeKeep
+never claims on GOG). Optional requests are anonymous (credentials: 'omit'). The manifest CSP
+limits connect-src to these hosts (plus data: for the locally drawn notification icon). No remote code, no eval, no analytics, no data
 leaves the browser; data_collection_permissions is "none".
 
 No cookies permission: the browser attaches the user's own Steam cookies to store requests.

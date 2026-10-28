@@ -269,7 +269,7 @@
     "message": "已保存"
   },
   "optPrivacy": {
-    "message": "FreeKeep 只会连接 store.steampowered.com，使用这个浏览器现有的 Steam 登录（开启自动续期时另外连接 login.steampowered.com；开启 Epic 提醒时另外读取 Epic 公开的免费游戏列表）。它看不到你的密码，也不会把你的任何数据发送到任何地方。"
+    "message": "FreeKeep 只会连接 store.steampowered.com，使用这个浏览器现有的 Steam 登录（开启自动续期时另外连接 login.steampowered.com；开启 Epic 提醒时另外读取 Epic 公开的免费游戏列表；开启 GOG 提醒时另外读取 GOG 公开的首页与商品目录）。它看不到你的密码，也不会把你的任何数据发送到任何地方。"
   },
   "popupUntil": {
     "message": "$DATE$ 前免费",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "GOG 限时免费"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — $DATE$ 前免费，点击打开 GOG。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — GOG 现正免费，点击打开 GOG。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "仅提醒・请到 Epic 网站领取"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "Epic 目前没有免费游戏。"
   },
+  "gogReminderOnly": {
+    "message": "仅提醒・请到 GOG 网站领取"
+  },
+  "gogGet": {
+    "message": "到 GOG 领取"
+  },
+  "gogGiveaway": {
+    "message": "限时赠送"
+  },
+  "gogDeal": {
+    "message": "100% 折扣"
+  },
+  "gogHowGiveaway": {
+    "message": "到 GOG 首页领取"
+  },
+  "gogHowDeal": {
+    "message": "加入购物车，0 元结账"
+  },
+  "gogNoPermission": {
+    "message": "允许 FreeKeep 读取 GOG 公开的首页与商品目录。"
+  },
+  "gogError": {
+    "message": "无法读取 GOG 列表，下次检查时会重试。"
+  },
+  "gogNone": {
+    "message": "GOG 目前没有免费游戏。"
+  },
   "kind_bundle": {
     "message": "组合包"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "未获得权限，Epic 提醒保持关闭。"
   },
+  "optGog": {
+    "message": "提醒我 GOG 的免费游戏"
+  },
+  "optGogHint": {
+    "message": "可选功能。包括 GOG 首页的限时赠送，以及折扣到 0 元、加入购物车后免费结账即可永久拥有的游戏。开启时会请求读取 GOG 公开首页与商品目录的权限，不会用到任何 GOG 账号或登录。"
+  },
+  "optGogDenied": {
+    "message": "未获得权限，GOG 提醒保持关闭。"
+  },
   "navClaim": {
     "message": "领取"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "通知"
   },
-  "navEpic": {
-    "message": "Epic 提醒"
+  "navReminders": {
+    "message": "Epic 与 GOG 提醒"
+  },
+  "optRemindersHint": {
+    "message": "Epic 和 GOG 的游戏无法自动领取：在那里领取需要你自己的登录，而 FreeKeep 从不碰登录数据。FreeKeep 会告诉你哪些免费，并帮你打开对应的页面。"
   },
   "navLinks": {
     "message": "连接清单"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "仅在开启 Epic 提醒时"
+  },
+  "hostGog": {
+    "message": "仅在开启 GOG 提醒时"
   },
   "hostRequired": {
     "message": "必需"

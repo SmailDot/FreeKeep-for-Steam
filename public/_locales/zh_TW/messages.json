@@ -269,7 +269,7 @@
     "message": "已儲存"
   },
   "optPrivacy": {
-    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入（開啟自動續期時另外連到 login.steampowered.com；開啟 Epic 提醒時另外讀取 Epic 公開的免費遊戲清單）。它看不到你的密碼，也不會把你的任何資料傳到任何地方。"
+    "message": "FreeKeep 只會連線到 store.steampowered.com，使用這個瀏覽器現有的 Steam 登入（開啟自動續期時另外連到 login.steampowered.com；開啟 Epic 提醒時另外讀取 Epic 公開的免費遊戲清單；開啟 GOG 提醒時另外讀取 GOG 公開的首頁與商品目錄）。它看不到你的密碼，也不會把你的任何資料傳到任何地方。"
   },
   "popupUntil": {
     "message": "$DATE$ 前免費",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "GOG 限時免費"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — $DATE$ 前免費，點一下打開 GOG。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — GOG 現正免費，點一下打開 GOG。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "僅提醒・請到 Epic 網站領取"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "Epic 目前沒有免費遊戲。"
   },
+  "gogReminderOnly": {
+    "message": "僅提醒・請到 GOG 網站領取"
+  },
+  "gogGet": {
+    "message": "到 GOG 領取"
+  },
+  "gogGiveaway": {
+    "message": "限時贈送"
+  },
+  "gogDeal": {
+    "message": "100% 折扣"
+  },
+  "gogHowGiveaway": {
+    "message": "到 GOG 首頁領取"
+  },
+  "gogHowDeal": {
+    "message": "加入購物車，0 元結帳"
+  },
+  "gogNoPermission": {
+    "message": "允許 FreeKeep 讀取 GOG 公開的首頁與商品目錄。"
+  },
+  "gogError": {
+    "message": "無法讀取 GOG 清單，下次檢查時會再試。"
+  },
+  "gogNone": {
+    "message": "GOG 目前沒有免費遊戲。"
+  },
   "kind_bundle": {
     "message": "組合包"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "沒有取得權限，Epic 提醒維持關閉。"
   },
+  "optGog": {
+    "message": "提醒我 GOG 的免費遊戲"
+  },
+  "optGogHint": {
+    "message": "選用功能。包含 GOG 首頁的限時贈送，以及折扣到 0 元、加入購物車後免費結帳即可永久擁有的遊戲。開啟時會請求讀取 GOG 公開首頁與商品目錄的權限，不會用到任何 GOG 帳號或登入。"
+  },
+  "optGogDenied": {
+    "message": "沒有取得權限，GOG 提醒維持關閉。"
+  },
   "navClaim": {
     "message": "領取"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "通知"
   },
-  "navEpic": {
-    "message": "Epic 提醒"
+  "navReminders": {
+    "message": "Epic 與 GOG 提醒"
+  },
+  "optRemindersHint": {
+    "message": "Epic 和 GOG 的遊戲無法自動領取：在那裡領取需要你自己的登入，而 FreeKeep 從不碰登入資料。FreeKeep 會告訴你哪些免費，並幫你打開對的頁面。"
   },
   "navLinks": {
     "message": "連線清單"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "只在開啟 Epic 提醒時"
+  },
+  "hostGog": {
+    "message": "只在開啟 GOG 提醒時"
   },
   "hostRequired": {
     "message": "必要"

@@ -14,7 +14,7 @@
         <a href="#interval"><i data-pi="clock"></i><span class="px" data-i18n="optInterval"></span></a>
         <a href="#renew"><i data-pi="key"></i><span class="px" data-i18n="navRenew"></span></a>
         <a href="#notify"><i data-pi="bell"></i><span class="px" data-i18n="navNotify"></span></a>
-        <a href="#epicSec"><i data-pi="star"></i><span class="px" data-i18n="navEpic"></span></a>
+        <a href="#epicSec"><i data-pi="star"></i><span class="px" data-i18n="navReminders"></span></a>
         <a href="#links"><i data-pi="eye"></i><span class="px" data-i18n="navLinks"></span></a>
         <a href="#look"><i data-pi="palette"></i><span class="px" data-i18n="navLook"></span></a>
         <p class="toc-hint" data-i18n="optAutoSave"></p>
@@ -110,15 +110,22 @@
         </section>
 
         <section id="epicSec">
-          <h2 class="px-lg"><i data-pi="star"></i><span data-i18n="navEpic"></span></h2>
+          <h2 class="px-lg"><i data-pi="star"></i><span data-i18n="navReminders"></span></h2>
+          <p class="hint lead" data-i18n="optRemindersHint"></p>
           <div class="box win">
             <label class="row">
               <span class="row-text"><strong class="px" data-i18n="optEpic"></strong><small data-i18n="optEpicHint"></small></span>
               <input id="epic" type="checkbox" />
               <span class="psw px" aria-hidden="true"><span>ON</span><span>OFF</span></span>
             </label>
+            <label class="row">
+              <span class="row-text"><strong class="px" data-i18n="optGog"></strong><small data-i18n="optGogHint"></small></span>
+              <input id="gog" type="checkbox" />
+              <span class="psw px" aria-hidden="true"><span>ON</span><span>OFF</span></span>
+            </label>
           </div>
           <p id="epicDenied" class="hint denied" data-i18n="optEpicDenied" hidden></p>
+          <p id="gogDenied" class="hint denied" data-i18n="optGogDenied" hidden></p>
         </section>
 
         <section id="links">

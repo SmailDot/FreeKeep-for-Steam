@@ -32,6 +32,8 @@ Firefox 140 以上：下載 `freekeep-for-steam-*-firefox.zip` 並解壓縮，�
 | 12 | 設定改成「只提醒」 | 過期時只跳通知；點通知會開啟 Steam 商店分頁（不會自動關閉），之後 FreeKeep 自動重新檢查 |
 | 13 | 設定頁「外觀與關於」換一個寶箱顏色，或用「主體／鎖扣」自訂 | 工具列圖示、popup、設定頁的寶箱立刻變色；閃光是對比色；重開瀏覽器後顏色仍在 |
 | 14 | 設定頁左側目錄點各項目、上下捲動 | 會捲到該段落，目前所在段落在目錄上亮起；「連線清單」的燈號跟權限一致 |
+| 15 | 設定頁開啟「提醒我 GOG 的免費遊戲」 | 瀏覽器詢問 sections.gog.com 與 catalog.gog.com 權限；允許後 popup 出現「GOG」分頁。沒有限免時顯示「GOG 目前沒有免費遊戲」，診斷報告的最新一次檢查有 `"gog": 0` |
+| 16 | GOG 有限時贈送或 0 元遊戲時 | 通知一次；GOG 分頁列出遊戲，限時贈送附截止時間、0 元遊戲顯示「加入購物車，0 元結帳」；「到 GOG 領取」開啟首頁或商品頁 |
 
 ## 回報問題
 
@@ -71,6 +73,8 @@ the folder. Firefox removes temporary add-ons when it restarts.
 | 12 | Settings → **Only remind me** | Only a notification when the login lapses; clicking it opens the Steam store in a tab that stays open, then FreeKeep checks again by itself |
 | 13 | Settings → **Look & about**: pick a chest preset, or set your own body / lock colours | The chest changes right away in the toolbar, popup and settings; the sparkle uses a contrasting colour; the colours survive a browser restart |
 | 14 | Click the entries in the settings sidebar and scroll | It jumps to each section and highlights the one in view; the **Connections** lights match the permissions |
+| 15 | Settings → turn on **Remind me of free games on GOG** | The browser asks for sections.gog.com and catalog.gog.com; once allowed, the popup gets a **GOG** tab. With nothing free it says "Nothing free on GOG right now", and the latest run in the diagnostics has `"gog": 0` |
+| 16 | When GOG has a giveaway or a game at 100% off | One notification; the GOG tab lists it, a giveaway with its end date and a 100%-off game with "Add to cart, check out for free"; **Get on GOG** opens the home page or the game's page |
 
 ## Report a problem
 

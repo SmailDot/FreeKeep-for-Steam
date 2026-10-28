@@ -162,7 +162,7 @@ body {
 
 /* ---------- game cards ---------- */
 #list,
-#epicList {
+.remind-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -253,7 +253,7 @@ body {
   content: ' ▶';
 }
 
-/* ---------- empty, recent, epic ---------- */
+/* ---------- empty, recent, Epic / GOG reminders ---------- */
 .empty {
   display: flex;
   flex-direction: column;
@@ -300,23 +300,23 @@ body {
   white-space: nowrap;
 }
 
-.epic {
+.remind {
   padding: 0 12px 10px;
 }
 
-.epic-lead {
+.remind-lead {
   margin: 0 0 8px;
   color: var(--muted);
 }
 
-.epic-notice,
-.epic-next {
+.remind-notice,
+.remind-next {
   margin: 0 0 8px;
   font-size: 12px;
   color: var(--muted);
 }
 
-.epic-next {
+.remind-next {
   margin: 8px 0 0;
 }
 

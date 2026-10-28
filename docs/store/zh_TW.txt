@@ -22,9 +22,10 @@
 • 處理 Steam 的 24 小時網頁登入：可選一鍵續期、自動續期（選用權限）或只提醒
 • Steam 配色的像素風介面，寶箱圖示可自訂顏色
 • 選用的 Epic Games Store 限免提醒：通知 Epic 的免費遊戲，由你到 Epic 網站領取。預設關閉，讀取公開清單時不需登入
-• 支援 12 種語言、程式碼約 45 KB、無第三方依賴
+• 選用的 GOG 限免提醒：通知 GOG 首頁的限時贈送與折扣到 0 元的遊戲，由你到 GOG 網站領取。預設關閉，讀取公開頁面時不需登入
+• 支援 12 種語言、程式碼約 55 KB、無第三方依賴
 
 在此瀏覽器登入 Steam 商店後，FreeKeep 即會自動運作。
 
-與 Valve Corporation 及 Epic Games 無關。Steam 是 Valve Corporation 的商標。
+與 Valve Corporation、Epic Games 及 GOG 無關。Steam 是 Valve Corporation 的商標。
 原始碼與隱私權政策：https://github.com/SmailDot/FreeKeep-for-Steam

@@ -30,22 +30,25 @@ export default defineConfig({
     permissions: ['storage', 'alarms', 'notifications'],
     host_permissions: ['https://store.steampowered.com/*'],
     // Each is only requested when the user turns its feature on in the options page:
-    // Epic reminders, and automatic renewal of Steam's 24-hour web login.
+    // Epic reminders, automatic renewal of Steam's 24-hour web login, and GOG reminders.
     optional_host_permissions: [
       'https://store-site-backend-static-ipv4.ak.epicgames.com/*',
       'https://login.steampowered.com/*',
+      'https://sections.gog.com/*',
+      'https://catalog.gog.com/*',
     ],
     action: { default_title: '__MSG_extName__' },
     // Enforced by the browser for the popup, the options page and the service worker: FreeKeep can
-    // only talk to the Steam store, Steam's login renewal and Epic's giveaway feed, load images only
-    // from their CDNs, and run no inline or remote script. "Only talks to Steam" is a browser
-    // guarantee, not a promise. `data:` reaches no server: Chrome loads the notification icon (the
-    // chest in the user's colours, drawn locally) through connect-src.
+    // only talk to the Steam store, Steam's login renewal, Epic's giveaway feed and GOG's public
+    // home page sections and catalog, load images only from their CDNs, and run no inline or
+    // remote script. "Only talks to Steam" is a browser guarantee, not a promise. `data:` reaches
+    // no server: Chrome loads the notification icon (the chest in the user's colours, drawn
+    // locally) through connect-src.
     content_security_policy: {
       extension_pages: [
         "default-src 'self'",
-        'connect-src data: https://store.steampowered.com https://login.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com',
-        "img-src 'self' data: https://*.steamstatic.com https://*.epicgames.com https://*.unrealengine.com",
+        'connect-src data: https://store.steampowered.com https://login.steampowered.com https://store-site-backend-static-ipv4.ak.epicgames.com https://sections.gog.com https://catalog.gog.com',
+        "img-src 'self' data: https://*.steamstatic.com https://*.epicgames.com https://*.unrealengine.com https://images.gog-statics.com",
         "style-src 'self'",
         "object-src 'none'",
         "base-uri 'none'",

@@ -269,7 +269,7 @@
     "message": "Kaydedildi"
   },
   "optPrivacy": {
-    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar (otomatik yenilemeyi açarsanız login.steampowered.com ile de iletişim kurar, Epic hatırlatmalarını açarsanız Epic'in herkese açık ücretsiz oyun listesini de okur). Şifrenizi asla görmez ve verilerinizi hiçbir yere göndermez."
+    "message": "FreeKeep yalnızca store.steampowered.com ile, bu tarayıcıdaki mevcut Steam oturumunu kullanarak iletişim kurar (otomatik yenilemeyi açarsanız login.steampowered.com ile de iletişim kurar, Epic hatırlatmalarını açarsanız Epic'in herkese açık ücretsiz oyun listesini, GOG hatırlatmalarını açarsanız GOG'un herkese açık ana sayfasını ve kataloğunu da okur). Şifrenizi asla görmez ve verilerinizi hiçbir yere göndermez."
   },
   "popupUntil": {
     "message": "$DATE$ tarihine kadar ücretsiz",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "GOG'da ücretsiz"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — $DATE$ tarihine kadar ücretsiz. GOG'u açmak için tıklayın.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — şu an GOG'da ücretsiz. GOG'u açmak için tıklayın.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "Yalnızca hatırlatma · Epic sitesinden alın"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "Şu an Epic'te ücretsiz oyun yok."
   },
+  "gogReminderOnly": {
+    "message": "Yalnızca hatırlatma · GOG sitesinden alın"
+  },
+  "gogGet": {
+    "message": "GOG'da al"
+  },
+  "gogGiveaway": {
+    "message": "Hediye"
+  },
+  "gogDeal": {
+    "message": "%100 indirim"
+  },
+  "gogHowGiveaway": {
+    "message": "GOG ana sayfasından alın"
+  },
+  "gogHowDeal": {
+    "message": "Sepete ekleyin, 0'a sipariş verin"
+  },
+  "gogNoPermission": {
+    "message": "FreeKeep'in GOG'un herkese açık ana sayfasını ve kataloğunu okumasına izin verin."
+  },
+  "gogError": {
+    "message": "GOG listesi yüklenemedi. FreeKeep bir sonraki kontrolde yeniden deneyecek."
+  },
+  "gogNone": {
+    "message": "Şu an GOG'da ücretsiz oyun yok."
+  },
   "kind_bundle": {
     "message": "Paket"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "İzin verilmedi, Epic hatırlatmaları kapalı kalır."
   },
+  "optGog": {
+    "message": "GOG'daki ücretsiz oyunları hatırlat"
+  },
+  "optGogHint": {
+    "message": "İsteğe bağlı. GOG ana sayfasındaki hediyeleri ve 0'a indirilmiş, ücretsiz bir siparişle alınan oyunları kapsar. Açıldığında GOG'un herkese açık ana sayfasını ve kataloğunu okuma izni istenir; hiçbir GOG hesabı veya oturumu kullanılmaz."
+  },
+  "optGogDenied": {
+    "message": "İzin verilmedi, GOG hatırlatmaları kapalı kalır."
+  },
   "navClaim": {
     "message": "Alma"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "Bildirimler"
   },
-  "navEpic": {
-    "message": "Epic hatırlatmaları"
+  "navReminders": {
+    "message": "Epic ve GOG hatırlatmaları"
+  },
+  "optRemindersHint": {
+    "message": "Epic ve GOG oyunları otomatik alınamaz: bunun için o sitelerde kendi oturumunuz gerekir ve FreeKeep oturum bilgilerine asla dokunmaz. FreeKeep neyin ücretsiz olduğunu söyler ve doğru sayfayı açar."
   },
   "navLinks": {
     "message": "Bağlantılar"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "Yalnızca Epic hatırlatmalarında"
+  },
+  "hostGog": {
+    "message": "Yalnızca GOG hatırlatmalarında"
   },
   "hostRequired": {
     "message": "Gerekli"

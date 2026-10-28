@@ -40,6 +40,9 @@
       <button id="tabEpic" class="px" type="button" role="tab" aria-controls="epicWrap" aria-selected="false">
         Epic Games <span id="countEpic" class="count"></span>
       </button>
+      <button id="tabGog" class="px" type="button" role="tab" aria-controls="gogWrap" aria-selected="false">
+        GOG <span id="countGog" class="count"></span>
+      </button>
     </nav>
 
     <div id="steamPanel" role="tabpanel" aria-labelledby="tabSteam">
@@ -57,11 +60,17 @@
       </section>
     </div>
 
-    <section id="epicWrap" class="epic" role="tabpanel" aria-labelledby="tabEpic" hidden>
-      <p class="epic-lead px" data-i18n="epicReminderOnly"></p>
-      <p id="epicNotice" class="epic-notice" hidden></p>
-      <div id="epicList"></div>
-      <p id="epicNext" class="epic-next" hidden></p>
+    <section id="epicWrap" class="remind" role="tabpanel" aria-labelledby="tabEpic" hidden>
+      <p class="remind-lead px" data-i18n="epicReminderOnly"></p>
+      <p id="epicNotice" class="remind-notice" hidden></p>
+      <div id="epicList" class="remind-list"></div>
+      <p id="epicNext" class="remind-next" hidden></p>
+    </section>
+
+    <section id="gogWrap" class="remind" role="tabpanel" aria-labelledby="tabGog" hidden>
+      <p class="remind-lead px" data-i18n="gogReminderOnly"></p>
+      <p id="gogNotice" class="remind-notice" hidden></p>
+      <div id="gogList" class="remind-list"></div>
     </section>
 
     <p class="privacy"><i data-pi="lock" data-scale="1.5"></i><span data-i18n="popupPrivacy"></span></p>

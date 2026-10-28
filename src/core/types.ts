@@ -54,6 +54,8 @@ export interface Settings {
   notifications: boolean;
   /** Remind about Epic Games Store giveaways (needs the optional Epic host permission). */
   epic: boolean;
+  /** Remind about GOG giveaways and 100%-off games (needs the optional GOG host permissions). */
+  gog: boolean;
   /** Colours of the chest icon, a personal touch; validated as #rrggbb. */
   chestBody: string;
   chestBand: string;
@@ -66,6 +68,7 @@ export const DEFAULT_SETTINGS: Settings = {
   includeDlc: true,
   notifications: true,
   epic: false,
+  gog: false,
   chestBody: '#2a6f9e',
   chestBand: '#ffcd75',
 };
@@ -84,29 +87,47 @@ export interface RunInfo {
   error: string | null;
   /** Epic offers found, or why the Epic check didn't run; absent when Epic is off. */
   epic?: number | 'no_permission' | 'error';
+  /** The same for GOG. */
+  gog?: number | 'no_permission' | 'error';
 }
 
-export type EpicKind = 'game' | 'addon' | 'bundle' | 'other';
+/** Stores FreeKeep can only remind about: claiming there needs the user's own login on that site. */
+export const REMINDER_STORES = ['epic', 'gog'] as const;
+export type ReminderStore = (typeof REMINDER_STORES)[number];
 
-/** An Epic Games Store giveaway, current or announced. Epic can't be claimed automatically. */
-export interface EpicOffer {
-  /** `${namespace}:${id}` */
+export type OfferKind = 'game' | 'addon' | 'bundle' | 'other';
+
+/** A free game on Epic or GOG, current or announced. */
+export interface Offer {
+  /** Epic: `${namespace}:${id}`; GOG: `giveaway:<slug>` or `deal:<product id>`. */
   id: string;
   title: string;
-  kind: EpicKind;
+  kind: OfferKind;
   url: string;
   image: string | null;
   start: number;
-  end: number;
+  /** null when the store doesn't say (GOG's 100%-off games). */
+  end: number | null;
   upcoming: boolean;
+  /** GOG only: a home page giveaway, or a game discounted to 0 (claimed by checking out). */
+  deal?: 'giveaway' | 'discount';
+  /** GOG only: the product slug, so a game listed both ways is shown once. */
+  slug?: string;
 }
 
-export type EpicStatus = 'new' | 'notified' | 'opened' | 'hidden';
+export type OfferStatus = 'new' | 'notified' | 'opened' | 'hidden';
 
-export interface EpicState extends EpicOffer {
-  status: EpicStatus;
+export interface OfferState extends Offer {
+  status: OfferStatus;
   firstSeen: number;
   lastSeen: number;
 }
 
-export type EpicMap = Record<string, EpicState>;
+export type OfferMap = Record<string, OfferState>;
+
+// Epic's names from before GOG, kept so existing code and tests read naturally.
+export type EpicKind = OfferKind;
+export type EpicOffer = Offer;
+export type EpicStatus = OfferStatus;
+export type EpicState = OfferState;
+export type EpicMap = OfferMap;

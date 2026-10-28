@@ -91,6 +91,28 @@ export function demoEpic(T) {
   };
 }
 
+/** Fictional GOG offers: a home page giveaway ending in two days and a game discounted to 0. */
+export function demoGog(T) {
+  const offer = (id, title, from, to, deal, end, status) => ({
+    id,
+    title,
+    kind: 'game',
+    url: deal === 'giveaway' ? 'https://www.gog.com/en/' : 'https://www.gog.com/en/game/demo',
+    image: capsule(title.toUpperCase(), from, to),
+    start: T,
+    end,
+    upcoming: false,
+    deal,
+    status,
+    firstSeen: T,
+    lastSeen: T,
+  });
+  return {
+    'giveaway:copper-lantern': offer('giveaway:copper-lantern', 'Copper Lantern', '#f97316', '#7c2d12', 'giveaway', T + 2 * 86_400_000, 'notified'),
+    'deal:1': offer('deal:1', 'Dune Courier', '#eab308', '#713f12', 'discount', null, 'notified'),
+  };
+}
+
 /** Extension storage as the popup sees it: logged in, last checked six hours ago, nothing found yet. */
 export function demoSeed(T) {
   return {
@@ -128,6 +150,17 @@ export function demoEpicSeed(T) {
     epic: demoEpic(T),
     runs: [{ ...seed.runs[0], epic: 2 }],
     popupSeenAt: T,
+  };
+}
+
+/** Epic and GOG reminders both on. */
+export function demoRemindersSeed(T) {
+  const seed = demoEpicSeed(T);
+  return {
+    ...seed,
+    settings: { ...seed.settings, gog: true },
+    gog: demoGog(T),
+    runs: [{ ...seed.runs[0], gog: 2 }],
   };
 }
 

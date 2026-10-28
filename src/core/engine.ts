@@ -1,6 +1,6 @@
 import { decide } from './policy';
 import { NO_STORE_ACCESS, type ClaimOutcome, type Owned, type Session, type SessionProbe } from './steam';
-import type { EpicMap, EpicOffer, EpicState, EpicStatus, FreeSub, PromoMap, PromoState, RunInfo, RunReason, Settings } from './types';
+import type { EpicStatus, FreeSub, Offer, OfferMap, OfferState, OfferStatus, PromoMap, PromoState, ReminderStore, RunInfo, RunReason, Settings } from './types';
 
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
@@ -22,9 +22,11 @@ export interface SteamApi {
   renew(): Promise<void>;
 }
 
-export interface EpicApi {
-  freeGames(now: number): Promise<{ current: EpicOffer[]; upcoming: EpicOffer[] }>;
+/** A store FreeKeep only reminds about (Epic, GOG): its free games now, and any announced next. */
+export interface OfferApi {
+  freeGames(now: number): Promise<{ current: Offer[]; upcoming: Offer[] }>;
 }
+export type EpicApi = OfferApi;
 
 /** How a lapsed Steam login was renewed, and how that went. Holds no account data. */
 export interface Renewal {
@@ -82,8 +84,10 @@ export interface Store {
   setMeta(meta: Meta): Promise<void>;
   addRun(run: RunInfo): Promise<void>;
   setRunning(running: boolean): Promise<void>;
-  getEpic(): Promise<EpicMap>;
-  setEpic(epic: EpicMap): Promise<void>;
+  getEpic(): Promise<OfferMap>;
+  setEpic(epic: OfferMap): Promise<void>;
+  getGog(): Promise<OfferMap>;
+  setGog(gog: OfferMap): Promise<void>;
 }
 
 export type MessageKey =
@@ -99,7 +103,10 @@ export type MessageKey =
   | 'notifyFailedTitle'
   | 'notifyFailedBody'
   | 'notifyEpicTitle'
-  | 'notifyEpicBody';
+  | 'notifyEpicBody'
+  | 'notifyGogTitle'
+  | 'notifyGogBody'
+  | 'notifyGogBodyOpen';
 
 export interface Ui {
   notify(id: string, title: string, message: string): Promise<void>;
@@ -116,7 +123,9 @@ export interface Deps {
   now(): number;
   sleep(ms: number): Promise<void>;
   /** Optional Epic reminders: only used when enabled in settings and the host permission is granted. */
-  epic?: { api: EpicApi; allowed(): Promise<boolean> };
+  epic?: { api: OfferApi; allowed(): Promise<boolean> };
+  /** Optional GOG reminders, the same way. */
+  gog?: { api: OfferApi; allowed(): Promise<boolean> };
   /** Whether the optional login.steampowered.com permission for automatic renewal is granted. */
   renewAllowed?(): Promise<boolean>;
   /** Whether the store.steampowered.com permission is still granted (users can turn it off). */
@@ -402,21 +411,36 @@ class Engine {
   }
 }
 
+/** Notification texts per store; the "open" body is for offers without an end date. */
+const REMINDER_TEXT: Record<ReminderStore, { title: MessageKey; body: MessageKey; open: MessageKey }> = {
+  epic: { title: 'notifyEpicTitle', body: 'notifyEpicBody', open: 'notifyEpicBody' },
+  gog: { title: 'notifyGogTitle', body: 'notifyGogBody', open: 'notifyGogBodyOpen' },
+};
+
+function offerStore(d: Deps, store: ReminderStore): { get(): Promise<OfferMap>; set(map: OfferMap): Promise<void> } {
+  return store === 'epic'
+    ? { get: () => d.store.getEpic(), set: (map) => d.store.setEpic(map) }
+    : { get: () => d.store.getGog(), set: (map) => d.store.setGog(map) };
+}
+
 /**
- * Epic giveaways can't be claimed automatically, so FreeKeep only reminds: each giveaway is announced
- * once, when it is live. Announced ("upcoming") ones are kept for the popup without a notification.
+ * Epic and GOG can't be claimed automatically (both need the user's own login there), so FreeKeep
+ * only reminds: each free game is announced once, when it is live. Announced ("upcoming") ones are
+ * kept for the popup without a notification.
  */
-async function checkEpic(d: Deps, settings: Settings): Promise<RunInfo['epic']> {
-  if (!settings.epic || !d.epic) {
-    // Switched off: forget the Epic list too, so nothing about it stays on the device.
-    if (Object.keys(await d.store.getEpic()).length) await d.store.setEpic({});
+async function checkReminders(d: Deps, store: ReminderStore, settings: Settings): Promise<RunInfo['epic']> {
+  const source = d[store];
+  const saved = offerStore(d, store);
+  if (!settings[store] || !source) {
+    // Switched off: forget the list too, so nothing about it stays on the device.
+    if (Object.keys(await saved.get()).length) await saved.set({});
     return undefined;
   }
-  if (!(await d.epic.allowed())) return 'no_permission';
+  if (!(await source.allowed())) return 'no_permission';
 
   const now = d.now();
-  const { current, upcoming } = await d.epic.api.freeGames(now);
-  const state = await d.store.getEpic();
+  const { current, upcoming } = await source.api.freeGames(now);
+  const state = await saved.get();
   for (const offer of [...current, ...upcoming]) {
     const prev = state[offer.id];
     state[offer.id] = prev ? { ...prev, ...offer, lastSeen: now } : { ...offer, status: 'new', firstSeen: now, lastSeen: now };
@@ -426,15 +450,23 @@ async function checkEpic(d: Deps, settings: Settings): Promise<RunInfo['epic']> 
   if (announce.length) {
     for (const o of announce) o.status = 'notified';
     if (settings.notifications) {
-      const until = d.ui.formatDate(Math.min(...announce.map((o) => o.end)));
-      await d.ui.notify(`freekeep-epic-${now}`, d.ui.t('notifyEpicTitle'), d.ui.t('notifyEpicBody', [announce.map((o) => o.title).join(', '), until]));
+      const text = REMINDER_TEXT[store];
+      const names = announce.map((o) => o.title).join(', ');
+      const ends = announce.map((o) => o.end).filter((end): end is number => end !== null);
+      const body =
+        ends.length === announce.length
+          ? d.ui.t(text.body, [names, d.ui.formatDate(Math.min(...ends))])
+          : d.ui.t(text.open, [names]);
+      await d.ui.notify(`freekeep-${store}-${now}`, d.ui.t(text.title), body);
     }
   }
 
+  // Offers without an end date (GOG's 100%-off games) are kept for two weeks after they were last
+  // seen, so one that briefly drops out of the list isn't announced twice.
   for (const [id, o] of Object.entries(state)) {
-    if (now > o.end + DAY || now - o.lastSeen > 14 * DAY) delete state[id];
+    if ((o.end !== null && now > o.end + DAY) || now - o.lastSeen > 14 * DAY) delete state[id];
   }
-  await d.store.setEpic(state);
+  await saved.set(state);
   return current.length;
 }
 
@@ -473,9 +505,12 @@ export function runCheck(d: Deps, reason: RunReason, renewedBy?: TabRenewal): Pr
       Object.assign(run, engine.state);
       await engine.save();
       if (run.error === NO_STORE_ACCESS) await d.ui.setBadge('!', 'warn');
-      // Epic is independent: its failures never affect the Steam result and vice versa.
-      const epic = await checkEpic(d, await d.store.getSettings()).catch((): RunInfo['epic'] => 'error');
-      if (epic !== undefined) run.epic = epic;
+      // Epic and GOG are independent: their failures never affect the Steam result and vice versa.
+      const settings = await d.store.getSettings();
+      for (const store of ['epic', 'gog'] as const) {
+        const result = await checkReminders(d, store, settings).catch((): RunInfo['epic'] => 'error');
+        if (result !== undefined) run[store] = result;
+      }
       await d.store.addRun(run);
       await d.store.setRunning(false);
     }
@@ -503,13 +538,22 @@ export function skip(d: Deps, subid: number): Promise<void> {
   });
 }
 
-/** Records what the user did with an Epic giveaway in the popup. */
-export function setEpicStatus(d: Deps, id: string, status: Extract<EpicStatus, 'opened' | 'hidden'>): Promise<void> {
+/** Records what the user did with an Epic or GOG offer in the popup. */
+export function setOfferStatus(
+  d: Deps,
+  store: ReminderStore,
+  id: string,
+  status: Extract<OfferStatus, 'opened' | 'hidden'>,
+): Promise<void> {
   return exclusive(async () => {
-    const state = await d.store.getEpic();
-    const offer: EpicState | undefined = state[id];
+    const saved = offerStore(d, store);
+    const state = await saved.get();
+    const offer: OfferState | undefined = state[id];
     if (!offer) return;
     offer.status = status;
-    await d.store.setEpic(state);
+    await saved.set(state);
   });
 }
+
+export const setEpicStatus = (d: Deps, id: string, status: Extract<EpicStatus, 'opened' | 'hidden'>) =>
+  setOfferStatus(d, 'epic', id, status);

@@ -52,7 +52,7 @@ Answer in English; the form goes to the review team.
 **Single purpose**
 
 ```
-FreeKeep helps the user keep free games: it automatically claims limited-time free-to-keep promotions on the Steam store, using the Steam store login that already exists in their browser. As an optional, off-by-default extra, it can also remind the user when the Epic Games Store gives a game away (reminder only; the user claims it on Epic's site). It does nothing else.
+FreeKeep helps the user keep free games: it automatically claims limited-time free-to-keep promotions on the Steam store, using the Steam store login that already exists in their browser. As optional, off-by-default extras, it can also remind the user when the Epic Games Store or GOG gives a game away (reminders only; the user claims the game on that store's site). It does nothing else.
 ```
 
 **Permission justifications**
@@ -69,27 +69,29 @@ Runs the check for new free promotions in the background at the interval the use
 
 `notifications`
 ```
-Shows a system notification only when a game was claimed, a claim failed, the user's Steam login expired or is missing, or (only if the user turned on Epic reminders) a new free game starts on the Epic Games Store. Users can turn notifications off on the options page.
+Shows a system notification only when a game was claimed, a claim failed, the user's Steam login expired or is missing, or (only if the user turned on Epic or GOG reminders) a new free game starts on the Epic Games Store or GOG. Users can turn notifications off on the options page.
 ```
 
-Host permissions (one field in the dashboard, max 1,000 characters; it covers the required Steam host and the two optional ones)
+Host permissions (one field in the dashboard, max 1,000 characters; it covers the required Steam host and the optional ones)
 ```
-store.steampowered.com (required): searches the Steam store for 100%-off promotions, reads which games the user owns, the store region and the anti-forgery token (sessionid) from a store page, and claims with the same request as the store's own "Add to Account" button. No content scripts, scripting or cookies permissions; the HttpOnly login cookie is never read.
+store.steampowered.com (required): searches the store for 100%-off promotions, reads which games the user owns, the store region and the anti-forgery token (sessionid) from a store page, and claims with the same request as the store's "Add to Account" button. No content scripts, scripting or cookies permissions; the HttpOnly login cookie is never read.
 
-login.steampowered.com (optional, off by default): only if the user picks automatic renewal of Steam's 24-hour web login. One GET of Steam's own renewal URL (/jwt/refresh), which redirects back to the store, as a normal store visit does. The browser handles the login cookies; FreeKeep only reads the final store page.
-
-store-site-backend-static-ipv4.ak.epicgames.com (optional): only if the user turns on Epic reminders. One anonymous GET of Epic's public free-games feed (no credentials; the only parameter is the language code). No Epic account or user data.
+Optional, off by default, each requested only when the user turns its feature on:
+login.steampowered.com: automatic renewal of Steam's 24-hour web login. One GET of Steam's own renewal URL (/jwt/refresh), which redirects back to the store; the browser handles the cookies.
+store-site-backend-static-ipv4.ak.epicgames.com: Epic reminders. One anonymous GET of Epic's public free-games feed.
+sections.gog.com, catalog.gog.com: GOG reminders. Anonymous GETs of GOG's public home page sections and catalog.
+All optional requests send no credentials, only the language code.
 ```
 
 **Remote code** – *No, I am not using remote code.* All JavaScript is in the package; the popup only
-loads game images from Steam's CDN (and Epic's, when Epic reminders are on).
+loads game images from Steam's CDN (and Epic's or GOG's, when those reminders are on).
 
 **Data usage** – the store asks for anything the extension *handles*, even if it never leaves the
 device:
 
 | Category | Tick? | Why |
 |---|---|---|
-| Website content | ✅ | Reads Steam store pages/JSON, including which games the account owns, and (optional) Epic's public giveaway feed |
+| Website content | ✅ | Reads Steam store pages/JSON, including which games the account owns, and (optional) Epic's and GOG's public giveaway data |
 | Location | ✅ | Reads the Steam store region (country code) to query regional promotions |
 | Authentication information | – | Never reads or stores the password or login cookie; the anti-forgery token is sent back to Steam only, as explained in the host permission justification and privacy policy |
 | Everything else | – | Not handled |
@@ -135,6 +137,16 @@ and the failed notification marks the whole check as failed. 0.3.1 fixes that, s
 in review, cancel it and upload 0.3.1 instead; otherwise upload 0.3.1 as an update. Paste the
 descriptions from `docs/store/` again: the "Verifiable" line now names both browsers. Nothing else in
 the listing or the privacy answers changes.
+
+## Updating to 0.4.0 (GOG reminders)
+
+1. **Privacy practices** – replace *Single purpose*, the `notifications` justification and the host
+   permission justification with the texts above. Data usage answers stay the same.
+2. **Privacy policy** – merge to `main` first, so the URL above already describes GOG reminders.
+3. **Descriptions** – paste `docs/store/<lang>.txt` again: each now lists GOG reminders.
+
+`sections.gog.com` and `catalog.gog.com` are optional permissions, requested only when the user turns
+on GOG reminders, so the update itself shows no new permission warning.
 
 ## Before each release
 

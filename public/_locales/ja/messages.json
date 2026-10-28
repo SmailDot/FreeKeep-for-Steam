@@ -269,7 +269,7 @@
     "message": "保存しました"
   },
   "optPrivacy": {
-    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います（自動更新を有効にした場合はlogin.steampowered.com、Epicの通知を有効にした場合はEpicの公開無料ゲームリストも使います）。パスワードを見ることはなく、あなたのデータをどこにも送信しません。"
+    "message": "FreeKeepはstore.steampowered.comとのみ通信し、このブラウザの既存のSteamログインを使います（自動更新を有効にした場合はlogin.steampowered.com、Epicの通知を有効にした場合はEpicの公開無料ゲームリスト、GOGの通知を有効にした場合はGOGの公開トップページとカタログも使います）。パスワードを見ることはなく、あなたのデータをどこにも送信しません。"
   },
   "popupUntil": {
     "message": "$DATE$ まで無料",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "GOGで無料配布中"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — $DATE$まで無料。クリックでGOGを開きます。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — GOGで現在無料。クリックでGOGを開きます。",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "通知のみ・Epicのサイトで受け取ってください"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "現在、Epicの無料配布はありません。"
   },
+  "gogReminderOnly": {
+    "message": "通知のみ・GOGのサイトで受け取ってください"
+  },
+  "gogGet": {
+    "message": "GOGで受け取る"
+  },
+  "gogGiveaway": {
+    "message": "無料配布"
+  },
+  "gogDeal": {
+    "message": "100%オフ"
+  },
+  "gogHowGiveaway": {
+    "message": "GOGのトップページで受け取れます"
+  },
+  "gogHowDeal": {
+    "message": "カートに入れて0円で購入"
+  },
+  "gogNoPermission": {
+    "message": "GOGの公開トップページとカタログの読み取りをFreeKeepに許可してください。"
+  },
+  "gogError": {
+    "message": "GOGのリストを読み込めませんでした。次回の確認時に再試行します。"
+  },
+  "gogNone": {
+    "message": "現在、GOGの無料配布はありません。"
+  },
   "kind_bundle": {
     "message": "バンドル"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "権限が許可されなかったため、Epicの通知はオフのままです。"
   },
+  "optGog": {
+    "message": "GOGの無料ゲームを通知する"
+  },
+  "optGogHint": {
+    "message": "任意。GOGトップページの無料配布と、0円に値下げされたゲーム（カートに入れて0円で購入すると永久に自分のものになります）が対象です。オンにすると、GOGの公開トップページとカタログの読み取り権限を求めます。GOGアカウントやログインは使いません。"
+  },
+  "optGogDenied": {
+    "message": "権限が許可されなかったため、GOGの通知はオフのままです。"
+  },
   "navClaim": {
     "message": "受け取り"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "通知"
   },
-  "navEpic": {
-    "message": "Epic通知"
+  "navReminders": {
+    "message": "Epic・GOG通知"
+  },
+  "optRemindersHint": {
+    "message": "EpicとGOGのゲームは自動では受け取れません。受け取りには各サイトへのご自身のログインが必要で、FreeKeepはログイン情報に一切触れないためです。FreeKeepは無料のゲームをお知らせし、該当ページを開きます。"
   },
   "navLinks": {
     "message": "接続先"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "Epic通知をオンにしたときのみ"
+  },
+  "hostGog": {
+    "message": "GOG通知をオンにしたときのみ"
   },
   "hostRequired": {
     "message": "必須"

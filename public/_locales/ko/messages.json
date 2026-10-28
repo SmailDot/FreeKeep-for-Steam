@@ -269,7 +269,7 @@
     "message": "저장됨"
   },
   "optPrivacy": {
-    "message": "FreeKeep은 이 브라우저에 이미 로그인된 Steam 계정을 사용해 store.steampowered.com과만 통신합니다(자동 갱신을 켜면 login.steampowered.com, Epic 알림을 켜면 Epic의 공개 무료 게임 목록도 사용합니다). 비밀번호를 볼 수 없으며 사용자 데이터를 어디에도 보내지 않습니다."
+    "message": "FreeKeep은 이 브라우저에 이미 로그인된 Steam 계정을 사용해 store.steampowered.com과만 통신합니다(자동 갱신을 켜면 login.steampowered.com, Epic 알림을 켜면 Epic의 공개 무료 게임 목록, GOG 알림을 켜면 GOG의 공개 홈페이지와 카탈로그도 사용합니다). 비밀번호를 볼 수 없으며 사용자 데이터를 어디에도 보내지 않습니다."
   },
   "popupUntil": {
     "message": "$DATE$까지 무료",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "GOG 무료 배포"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — $DATE$까지 무료. 클릭하면 GOG가 열립니다.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — 지금 GOG에서 무료. 클릭하면 GOG가 열립니다.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "알림 전용 · Epic 사이트에서 받으세요"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "지금은 Epic 무료 게임이 없습니다."
   },
+  "gogReminderOnly": {
+    "message": "알림 전용 · GOG 사이트에서 받으세요"
+  },
+  "gogGet": {
+    "message": "GOG에서 받기"
+  },
+  "gogGiveaway": {
+    "message": "무료 배포"
+  },
+  "gogDeal": {
+    "message": "100% 할인"
+  },
+  "gogHowGiveaway": {
+    "message": "GOG 홈페이지에서 받으세요"
+  },
+  "gogHowDeal": {
+    "message": "장바구니에 담아 0원 결제"
+  },
+  "gogNoPermission": {
+    "message": "FreeKeep이 GOG의 공개 홈페이지와 카탈로그를 읽도록 허용하세요."
+  },
+  "gogError": {
+    "message": "GOG 목록을 불러오지 못했습니다. 다음 확인 때 다시 시도합니다."
+  },
+  "gogNone": {
+    "message": "지금은 GOG 무료 게임이 없습니다."
+  },
   "kind_bundle": {
     "message": "번들"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "권한이 허용되지 않아 Epic 알림이 꺼진 상태로 유지됩니다."
   },
+  "optGog": {
+    "message": "GOG 무료 게임 알림 받기"
+  },
+  "optGogHint": {
+    "message": "선택 기능. GOG 홈페이지의 무료 배포와 0원으로 할인된 게임(장바구니에 담아 0원에 결제하면 영구 소장)을 알려 줍니다. 켜면 GOG의 공개 홈페이지와 카탈로그를 읽을 권한을 요청합니다. GOG 계정이나 로그인은 사용하지 않습니다."
+  },
+  "optGogDenied": {
+    "message": "권한이 허용되지 않아 GOG 알림이 꺼진 상태로 유지됩니다."
+  },
   "navClaim": {
     "message": "받기"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "알림"
   },
-  "navEpic": {
-    "message": "Epic 알림"
+  "navReminders": {
+    "message": "Epic·GOG 알림"
+  },
+  "optRemindersHint": {
+    "message": "Epic과 GOG 게임은 자동으로 받을 수 없습니다. 받으려면 해당 사이트에 직접 로그인해야 하고, FreeKeep은 로그인 정보를 절대 건드리지 않기 때문입니다. FreeKeep은 무료 게임을 알려 주고 해당 페이지를 열어 줍니다."
   },
   "navLinks": {
     "message": "연결 목록"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "Epic 알림을 켠 경우에만"
+  },
+  "hostGog": {
+    "message": "GOG 알림을 켠 경우에만"
   },
   "hostRequired": {
     "message": "필수"

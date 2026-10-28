@@ -269,7 +269,7 @@
     "message": "Enregistré"
   },
   "optPrivacy": {
-    "message": "FreeKeep communique uniquement avec store.steampowered.com, en utilisant la connexion Steam déjà présente dans ce navigateur (et avec login.steampowered.com si vous activez le renouvellement automatique, ainsi qu'avec la liste publique des jeux gratuits d'Epic si vous activez les rappels Epic). Il ne voit jamais votre mot de passe et n'envoie vos données nulle part."
+    "message": "FreeKeep communique uniquement avec store.steampowered.com, en utilisant la connexion Steam déjà présente dans ce navigateur (et avec login.steampowered.com si vous activez le renouvellement automatique, avec la liste publique des jeux gratuits d'Epic si vous activez les rappels Epic, ainsi qu'avec la page d'accueil et le catalogue publics de GOG si vous activez les rappels GOG). Il ne voit jamais votre mot de passe et n'envoie vos données nulle part."
   },
   "popupUntil": {
     "message": "Gratuit jusqu'à : $DATE$",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "Gratuit sur GOG"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — gratuit jusqu'à : $DATE$. Cliquez pour ouvrir GOG.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — gratuit sur GOG en ce moment. Cliquez pour ouvrir GOG.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "Rappel uniquement · à récupérer sur le site d'Epic"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "Rien de gratuit sur Epic pour l'instant."
   },
+  "gogReminderOnly": {
+    "message": "Rappel uniquement · à récupérer sur le site de GOG"
+  },
+  "gogGet": {
+    "message": "Récupérer sur GOG"
+  },
+  "gogGiveaway": {
+    "message": "Offert"
+  },
+  "gogDeal": {
+    "message": "-100 %"
+  },
+  "gogHowGiveaway": {
+    "message": "À récupérer sur la page d'accueil de GOG"
+  },
+  "gogHowDeal": {
+    "message": "Au panier, commande à 0"
+  },
+  "gogNoPermission": {
+    "message": "Autorisez FreeKeep à lire la page d'accueil et le catalogue publics de GOG."
+  },
+  "gogError": {
+    "message": "Impossible de charger la liste de GOG. FreeKeep réessaiera à la prochaine vérification."
+  },
+  "gogNone": {
+    "message": "Rien de gratuit sur GOG pour l'instant."
+  },
   "kind_bundle": {
     "message": "Lot"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "L'autorisation n'a pas été accordée, les rappels Epic restent désactivés."
   },
+  "optGog": {
+    "message": "Me prévenir des jeux gratuits sur GOG"
+  },
+  "optGogHint": {
+    "message": "Facultatif. Couvre les jeux offerts sur la page d'accueil de GOG et les jeux réduits à 0, à récupérer en passant une commande gratuite. L'activation demande l'autorisation de lire la page d'accueil et le catalogue publics de GOG ; aucun compte ni connexion GOG n'est utilisé."
+  },
+  "optGogDenied": {
+    "message": "L'autorisation n'a pas été accordée, les rappels GOG restent désactivés."
+  },
   "navClaim": {
     "message": "Récupération"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "Notifications"
   },
-  "navEpic": {
-    "message": "Rappels Epic"
+  "navReminders": {
+    "message": "Rappels Epic et GOG"
+  },
+  "optRemindersHint": {
+    "message": "Les jeux Epic et GOG ne peuvent pas être récupérés automatiquement : il faut pour cela votre propre connexion sur ces sites, et FreeKeep ne touche jamais aux identifiants. FreeKeep vous dit ce qui est gratuit et ouvre la bonne page."
   },
   "navLinks": {
     "message": "Connexions"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "Uniquement avec les rappels Epic"
+  },
+  "hostGog": {
+    "message": "Uniquement avec les rappels GOG"
   },
   "hostRequired": {
     "message": "Nécessaire"

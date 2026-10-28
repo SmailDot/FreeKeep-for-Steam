@@ -22,9 +22,10 @@ RECURSOS
 • Cuida do login da Steam no navegador, que dura 24 horas: renove com um clique, automaticamente (permissão opcional) ou só receba um lembrete
 • Visual pixel art nas cores da Steam, com um baú nas cores que você escolher
 • Lembretes opcionais da Epic Games Store: informa os jogos grátis da Epic para você resgatar no site da Epic. Desativado por padrão; a lista pública é lida sem login
-• 12 idiomas, cerca de 45 KB de código, sem dependências
+• Lembretes opcionais da GOG: informa os brindes da página inicial da GOG e os jogos com desconto até 0, que você resgata no site da GOG. Desativado por padrão; as páginas públicas da GOG são lidas sem login
+• 12 idiomas, cerca de 55 KB de código, sem dependências
 
 Faça login na loja Steam neste navegador e o FreeKeep funcionará automaticamente.
 
-Não é afiliado à Valve Corporation nem à Epic Games. Steam é uma marca da Valve Corporation.
+Não é afiliado à Valve Corporation, à Epic Games nem à GOG. Steam é uma marca da Valve Corporation.
 Código-fonte e política de privacidade: https://github.com/SmailDot/FreeKeep-for-Steam

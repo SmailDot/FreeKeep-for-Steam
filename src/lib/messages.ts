@@ -1,3 +1,5 @@
+import type { ReminderStore } from '@/core/types';
+
 /** Messages the popup and options page send to the background. */
 export type Command =
   | { type: 'checkNow' }
@@ -5,7 +7,8 @@ export type Command =
   | { type: 'renewLogin'; visible: boolean }
   | { type: 'claim'; subid: number }
   | { type: 'skip'; subid: number }
-  | { type: 'epic'; id: string; status: 'opened' | 'hidden' };
+  /** What the user did with an Epic or GOG offer. */
+  | { type: 'offer'; store: ReminderStore; id: string; status: 'opened' | 'hidden' };
 
 export interface CommandResult {
   ok: boolean;

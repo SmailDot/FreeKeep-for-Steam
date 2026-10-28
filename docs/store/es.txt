@@ -22,9 +22,10 @@ FUNCIONES
 • Gestiona la sesión web de Steam, que dura 24 horas: renuévala con un clic, automáticamente (permiso opcional) o recibe solo un aviso
 • Estilo pixel art con los colores de Steam y un cofre en los colores que elijas
 • Avisos opcionales de Epic Games Store: te informa de los juegos gratis de Epic para que los reclames en su web. Desactivado por defecto; la lista pública se lee sin iniciar sesión
-• 12 idiomas, unos 45 KB de código, sin dependencias
+• Avisos opcionales de GOG: te informa de los regalos de la página de inicio de GOG y de los juegos rebajados a 0, que reclamas en la web de GOG. Desactivado por defecto; las páginas públicas de GOG se leen sin iniciar sesión
+• 12 idiomas, unos 55 KB de código, sin dependencias
 
 Inicia sesión en la tienda de Steam en este navegador y FreeKeep funcionará automáticamente.
 
-No está afiliado a Valve Corporation ni a Epic Games. Steam es una marca de Valve Corporation.
+No está afiliado a Valve Corporation, Epic Games ni GOG. Steam es una marca de Valve Corporation.
 Código fuente y política de privacidad: https://github.com/SmailDot/FreeKeep-for-Steam

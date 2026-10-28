@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { DEFAULT_META, claimNow, runCheck, setEpicStatus, skip, type Deps, type EpicApi, type Meta, type SteamApi } from '@/core/engine';
+import { DEFAULT_META, claimNow, runCheck, setEpicStatus, setOfferStatus, skip, type Deps, type EpicApi, type Meta, type SteamApi } from '@/core/engine';
 import { NO_STORE_ACCESS, type ClaimOutcome, type Session } from '@/core/steam';
-import { DEFAULT_SETTINGS, type EpicMap, type EpicOffer, type FreeSub, type PromoMap, type RunInfo, type Settings } from '@/core/types';
+import { DEFAULT_SETTINGS, type EpicMap, type EpicOffer, type FreeSub, type Offer, type PromoMap, type RunInfo, type Settings } from '@/core/types';
 
 const GAME: FreeSub = { subid: 100, appid: 10, name: 'Game A', kind: 'game', baseAppid: null, baseName: null, capsule: null };
 const DLC: FreeSub = { subid: 200, appid: 20, name: 'DLC B', kind: 'dlc', baseAppid: 99, baseName: 'Base', capsule: null };
@@ -56,6 +56,7 @@ function setup(settings: Partial<Settings> = {}, renewAllowed = false) {
     meta: { ...DEFAULT_META } as Meta,
     runs: [] as RunInfo[],
     epic: {} as EpicMap,
+    gog: {} as EpicMap,
   };
   const notes: { title: string; message: string }[] = [];
   let badge = '';
@@ -72,6 +73,8 @@ function setup(settings: Partial<Settings> = {}, renewAllowed = false) {
       setRunning: async () => {},
       getEpic: async () => structuredClone(db.epic),
       setEpic: async (e) => void (db.epic = structuredClone(e)),
+      getGog: async () => structuredClone(db.gog),
+      setGog: async (g) => void (db.gog = structuredClone(g)),
     },
     ui: {
       notify: async (_id, title, message) => void notes.push({ title, message }),
@@ -468,5 +471,83 @@ describe('Epic reminders', () => {
     };
     const run = await runCheck(t.deps, 'alarm');
     expect(run).toMatchObject({ ok: true, claimed: 1, epic: 'error' });
+  });
+});
+
+describe('GOG reminders', () => {
+  const now = 1_000_000;
+  const giveaway = (): Offer => ({
+    id: 'giveaway:bounty-train', title: 'Bounty Train', kind: 'game', url: 'https://www.gog.com/en/', image: null,
+    start: now, end: now + 2 * DAYMS, upcoming: false, deal: 'giveaway',
+  });
+  const deal = (): Offer => ({
+    id: 'deal:42', title: 'Deal Game', kind: 'game', url: 'https://www.gog.com/en/game/deal_game', image: null,
+    start: now, end: null, upcoming: false, deal: 'discount',
+  });
+
+  function withGog(settings: Partial<Settings> = {}) {
+    const t = setup({ gog: true, ...settings });
+    const feed = { current: [deal()], upcoming: [] as Offer[] };
+    t.deps.gog = { api: { freeGames: async () => structuredClone(feed) }, allowed: async () => true };
+    t.steam.promos = [];
+    return { t, feed };
+  }
+
+  it('announces a 100%-off game once, without a date it doesn’t know', async () => {
+    const { t } = withGog();
+    const run = await runCheck(t.deps, 'alarm');
+    await runCheck(t.deps, 'alarm');
+    expect(run.gog).toBe(1);
+    expect(run.epic).toBeUndefined();
+    expect(t.notes).toEqual([{ title: 'notifyGogTitle', message: 'notifyGogBodyOpen(Deal Game)' }]);
+    expect(t.db.gog['deal:42']!.status).toBe('notified');
+  });
+
+  it('gives the end date when every new offer has one', async () => {
+    const { t, feed } = withGog();
+    feed.current = [giveaway()];
+    await runCheck(t.deps, 'alarm');
+    expect(t.notes).toEqual([
+      { title: 'notifyGogTitle', message: `notifyGogBody(Bounty Train|${new Date(now + 2 * DAYMS).toISOString().slice(0, 10)})` },
+    ]);
+  });
+
+  it('doesn’t announce a deal again when it briefly drops out of the list', async () => {
+    const { t, feed } = withGog();
+    await runCheck(t.deps, 'alarm');
+    feed.current = [];
+    t.advance(DAYMS);
+    await runCheck(t.deps, 'alarm');
+    feed.current = [deal()];
+    t.advance(DAYMS);
+    await runCheck(t.deps, 'alarm');
+    expect(t.notes).toHaveLength(1);
+    // Gone for two weeks: forgotten.
+    feed.current = [];
+    t.advance(15 * DAYMS);
+    await runCheck(t.deps, 'alarm');
+    expect(t.db.gog).toEqual({});
+  });
+
+  it('runs alongside Epic, and a GOG failure affects neither Epic nor Steam', async () => {
+    const { t } = withGog({ epic: true });
+    t.steam.promos = [GAME];
+    t.deps.epic = { api: { freeGames: async () => ({ current: [epicOffer('a', 'Alpha', now - DAYMS, now + DAYMS)], upcoming: [] }) }, allowed: async () => true };
+    t.deps.gog!.api.freeGames = async () => {
+      throw new Error('GOG HTTP 503');
+    };
+    const run = await runCheck(t.deps, 'alarm');
+    expect(run).toMatchObject({ ok: true, claimed: 1, epic: 1, gog: 'error' });
+  });
+
+  it('records hidden offers and forgets everything once switched off', async () => {
+    const { t } = withGog();
+    await runCheck(t.deps, 'alarm');
+    await setOfferStatus(t.deps, 'gog', 'deal:42', 'hidden');
+    expect(t.db.gog['deal:42']!.status).toBe('hidden');
+    t.db.settings = { ...t.db.settings, gog: false };
+    const run = await runCheck(t.deps, 'alarm');
+    expect(run.gog).toBeUndefined();
+    expect(t.db.gog).toEqual({});
   });
 });

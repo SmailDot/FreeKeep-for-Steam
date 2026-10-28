@@ -22,9 +22,10 @@ FONCTIONNALITÉS
 • Gère la connexion web de Steam, valable 24 heures : renouvelez-la en un clic, automatiquement (autorisation facultative) ou recevez simplement un rappel
 • Style pixel art aux couleurs de Steam, avec un coffre aux couleurs de votre choix
 • Rappels Epic Games Store facultatifs : vous informe des jeux gratuits d'Epic, à récupérer sur le site d'Epic. Désactivé par défaut ; la liste publique est lue sans connexion
-• 12 langues, environ 45 Ko de code, aucune dépendance
+• Rappels GOG facultatifs : vous informe des jeux offerts sur la page d'accueil de GOG et des jeux réduits à 0, à récupérer sur le site de GOG. Désactivé par défaut ; les pages publiques de GOG sont lues sans connexion
+• 12 langues, environ 55 Ko de code, aucune dépendance
 
 Connectez-vous au magasin Steam dans ce navigateur, et FreeKeep fonctionne automatiquement.
 
-Non affilié à Valve Corporation ni à Epic Games. Steam est une marque de Valve Corporation.
+Non affilié à Valve Corporation, Epic Games ni GOG. Steam est une marque de Valve Corporation.
 Code source et politique de confidentialité : https://github.com/SmailDot/FreeKeep-for-Steam

@@ -3,8 +3,9 @@ import './style.css';
 import './fx.css';
 import { browser } from 'wxt/browser';
 import { EPIC_ORIGIN } from '@/core/epic';
+import { GOG_ORIGINS } from '@/core/gog';
 import { LOGIN_ORIGIN, NO_STORE_ACCESS, STORE, STORE_ORIGIN } from '@/core/steam';
-import type { EpicState, PromoState, PromoStatus } from '@/core/types';
+import type { OfferState, PromoState, PromoStatus, ReminderStore, RunInfo } from '@/core/types';
 import { chestElement } from '@/lib/chest';
 import { buildDiagnostics } from '@/lib/diagnostics';
 import { t, translatePage } from '@/lib/i18n';
@@ -142,69 +143,102 @@ function card(p: PromoState, loggedIn: boolean | null): HTMLElement {
   ]);
 }
 
-function epicCard(o: EpicState): HTMLElement {
-  const get = el('a', { className: 'pbtn blue', href: o.url, target: '_blank', rel: 'noreferrer', textContent: t('epicGet') });
-  get.addEventListener('click', () => void send({ type: 'epic', id: o.id, status: 'opened' }));
-  const actions = el('div', { className: 'actions' }, [get, actionButton(t('epicHide'), { type: 'epic', id: o.id, status: 'hidden' }, 'ghost')]);
+/** The one line under a reminder's title: its deadline, or how to claim it when GOG gives none. */
+function offerLine(o: OfferState): string {
+  if (o.end !== null) return t('popupUntil', [formatDate(o.end)]);
+  return t(o.deal === 'discount' ? 'gogHowDeal' : 'gogHowGiveaway');
+}
+
+function offerCard(o: OfferState, store: ReminderStore): HTMLElement {
+  const label = t(store === 'epic' ? 'epicGet' : 'gogGet');
+  const get = el('a', { className: 'pbtn blue', href: o.url, target: '_blank', rel: 'noreferrer', textContent: label });
+  get.addEventListener('click', () => void send({ type: 'offer', store, id: o.id, status: 'opened' }));
+  const actions = el('div', { className: 'actions' }, [get, actionButton(t('epicHide'), { type: 'offer', store, id: o.id, status: 'hidden' }, 'ghost')]);
 
   const kind = o.kind === 'addon' ? 'dlc' : o.kind;
   const meta = el('div', { className: 'meta' }, [el('span', { className: 'tag', textContent: t(`kind_${kind}`) })]);
+  if (o.deal) meta.append(el('span', { className: 'tag free', textContent: t(o.deal === 'discount' ? 'gogDeal' : 'gogGiveaway') }));
   if (o.status === 'opened') meta.append(el('span', { className: 'tag got', textContent: t('epicOpened') }));
   const info = el('div', { className: 'info' }, [
     el('div', { className: nameClass(o.title), textContent: o.title, title: o.title }),
     meta,
-    el('div', { className: 'sub', textContent: t('popupUntil', [formatDate(o.end)]) }),
+    el('div', { className: 'sub', textContent: offerLine(o) }),
   ]);
   const capsule = o.image
     ? el('img', { className: 'capsule', src: o.image, alt: '', loading: 'lazy' })
     : el('div', { className: 'capsule placeholder' });
-  return el('article', { className: 'card is-epic' }, [el('div', { className: 'capsule-wrap' }, [capsule]), info, actions]);
+  return el('article', { className: 'card is-offer' }, [el('div', { className: 'capsule-wrap' }, [capsule]), info, actions]);
 }
 
-type Tab = 'steam' | 'epic';
+type Tab = 'steam' | ReminderStore;
+const TABS: Record<Tab, { tab: string; panel: string }> = {
+  steam: { tab: 'tabSteam', panel: 'steamPanel' },
+  epic: { tab: 'tabEpic', panel: 'epicWrap' },
+  gog: { tab: 'tabGog', panel: 'gogWrap' },
+};
 /** Set once the user picks a tab; until then the popup opens on whichever side has something. */
 let chosenTab: Tab | null = null;
 
 function showTab(tab: Tab): void {
-  const epic = tab === 'epic';
-  $('tabSteam').setAttribute('aria-selected', String(!epic));
-  $('tabEpic').setAttribute('aria-selected', String(epic));
-  $('steamPanel').hidden = epic;
-  $('epicWrap').hidden = !epic;
+  for (const [name, ids] of Object.entries(TABS)) {
+    $(ids.tab).setAttribute('aria-selected', String(name === tab));
+    $(ids.panel).hidden = name !== tab;
+  }
 }
 
 function setCount(id: string, n: number): void {
   $(id).textContent = n ? String(n) : '';
 }
 
-/** Returns how many Epic giveaways are live, or -1 when Epic reminders are off. */
-function renderEpic(s: Snapshot): number {
-  if (!s.settings.epic) return -1;
+const COPY: Record<ReminderStore, { noPermission: string; error: string; none: string }> = {
+  epic: { noPermission: 'epicNoPermission', error: 'epicError', none: 'epicNone' },
+  gog: { noPermission: 'gogNoPermission', error: 'gogError', none: 'gogNone' },
+};
+
+/**
+ * The offers to show. Epic's have dates. GOG's 100%-off games don't, so a GOG offer counts as live
+ * when the last GOG check that worked still listed it.
+ */
+function liveOffers(s: Snapshot, store: ReminderStore, now: number): OfferState[] {
+  const offers = Object.values(s[store]).filter((o) => o.status !== 'hidden' && (o.end === null || o.end > now));
+  if (store === 'epic') return offers;
+  const lastCheck = s.runs.find((r) => typeof r.gog === 'number')?.at ?? Infinity;
+  return offers.filter((o) => o.lastSeen >= lastCheck);
+}
+
+/** Returns how many offers are live in a reminder tab, or -1 when its reminders are off. */
+function renderReminders(s: Snapshot, store: ReminderStore): number {
+  if (!s.settings[store]) return -1;
 
   const now = Date.now();
-  const status = s.runs.find((r) => r.epic !== undefined)?.epic;
-  const offers = Object.values(s.epic).filter((o) => o.status !== 'hidden' && o.end > now);
-  const live = offers.filter((o) => !o.upcoming || o.start <= now).sort((a, b) => a.end - b.end);
+  const status: RunInfo['epic'] = s.runs.find((r) => r[store] !== undefined)?.[store];
+  const offers = liveOffers(s, store, now);
+  const live = offers
+    .filter((o) => !o.upcoming || o.start <= now)
+    .sort((a, b) => (a.end ?? Infinity) - (b.end ?? Infinity));
   const next = offers.filter((o) => o.upcoming && o.start > now).sort((a, b) => a.start - b.start);
 
-  const notice = $('epicNotice');
+  const copy = COPY[store];
+  const notice = $(`${store}Notice`);
   notice.hidden = false;
   if (status === 'no_permission') {
     const open = el('button', { type: 'button', className: 'link', textContent: t('openSettings') });
     open.addEventListener('click', () => void browser.runtime.openOptionsPage());
-    notice.replaceChildren(t('epicNoPermission'), ' ', open);
+    notice.replaceChildren(t(copy.noPermission), ' ', open);
   } else if (status === 'error') {
-    notice.textContent = t('epicError');
+    notice.textContent = t(copy.error);
   } else if (live.length === 0 && status !== undefined) {
-    notice.textContent = t('epicNone');
+    notice.textContent = t(copy.none);
   } else {
     notice.hidden = true;
   }
 
-  $('epicList').replaceChildren(...live.map(epicCard));
-  const nextLine = $('epicNext');
-  nextLine.hidden = next.length === 0;
-  if (next.length) nextLine.textContent = t('epicNext', [next.map((o) => o.title).join(', '), formatDate(next[0]!.start)]);
+  $(`${store}List`).replaceChildren(...live.map((o) => offerCard(o, store)));
+  if (store === 'epic') {
+    const nextLine = $('epicNext');
+    nextLine.hidden = next.length === 0;
+    if (next.length) nextLine.textContent = t('epicNext', [next.map((o) => o.title).join(', '), formatDate(next[0]!.start)]);
+  }
   return live.length;
 }
 
@@ -256,8 +290,8 @@ function syncCards(current: PromoState[], loggedIn: boolean | null, seenAt: numb
   const list = $('list');
   const same = next.length === list.children.length && next.every((n, i) => list.children[i] === n);
   if (!same) list.replaceChildren(...next);
-  if (effects.length && chosenTab === 'epic') {
-    chosenTab = 'steam'; // a claim result is more important than the Epic list
+  if (effects.length && chosenTab !== null && chosenTab !== 'steam') {
+    chosenTab = 'steam'; // a claim result is more important than the Epic or GOG list
     showTab('steam');
   }
   // Wait a frame so the cards are laid out before measuring them for the sparks.
@@ -297,14 +331,20 @@ function render(s: Snapshot, seenAt: number): void {
     .sort((a, b) => b.updatedAt - a.updatedAt)
     .slice(0, 5);
 
-  const epicLive = renderEpic(s);
-  const tabs = epicLive >= 0;
+  // A tab per store whose reminders are on; -1 means off.
+  const live = { epic: renderReminders(s, 'epic'), gog: renderReminders(s, 'gog') };
+  $('tabEpic').hidden = live.epic < 0;
+  $('tabGog').hidden = live.gog < 0;
+  const tabs = live.epic >= 0 || live.gog >= 0;
   $('tabs').hidden = !tabs;
+  if (chosenTab && chosenTab !== 'steam' && live[chosenTab] < 0) chosenTab = null; // turned off meanwhile
   if (tabs) {
-    // Count what the user can act on: unhandled Steam games and Epic giveaways running now.
+    // Count what the user can act on: unhandled Steam games and Epic / GOG offers running now.
     setCount('countSteam', current.filter((p) => p.status === 'pending' || p.status === 'failed').length);
-    setCount('countEpic', epicLive);
-    showTab(chosenTab ?? (current.length === 0 && epicLive > 0 ? 'epic' : 'steam'));
+    setCount('countEpic', Math.max(0, live.epic));
+    setCount('countGog', Math.max(0, live.gog));
+    const firstLive = (['epic', 'gog'] as const).find((store) => live[store] > 0);
+    showTab(chosenTab ?? (current.length === 0 && firstLive ? firstLive : 'steam'));
   } else {
     showTab('steam');
   }
@@ -328,8 +368,8 @@ async function main(): Promise<void> {
   $('settings').title = t('popupSettings');
   $('settings').addEventListener('click', () => void browser.runtime.openOptionsPage());
   $('checkNow').addEventListener('click', () => void send({ type: 'checkNow' }));
-  for (const [id, tab] of [['tabSteam', 'steam'], ['tabEpic', 'epic']] as const) {
-    $(id).addEventListener('click', () => {
+  for (const [tab, ids] of Object.entries(TABS) as [Tab, { tab: string }][]) {
+    $(ids.tab).addEventListener('click', () => {
       chosenTab = tab;
       showTab(tab);
     });
@@ -338,6 +378,7 @@ async function main(): Promise<void> {
     const access = {
       store: await browser.permissions.contains(storePermission),
       epic: await browser.permissions.contains({ origins: [EPIC_ORIGIN] }),
+      gog: await browser.permissions.contains({ origins: GOG_ORIGINS }),
       login: await browser.permissions.contains({ origins: [LOGIN_ORIGIN] }),
     };
     const report = buildDiagnostics(await readSnapshot(), access);

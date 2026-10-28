@@ -269,7 +269,7 @@
     "message": "Saved"
   },
   "optPrivacy": {
-    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login (plus login.steampowered.com if you turn on automatic renewal, and Epic's public list of free games if you turn on Epic reminders). It never sees your password and never sends your data anywhere."
+    "message": "FreeKeep only talks to store.steampowered.com, using this browser's existing Steam login (plus login.steampowered.com if you turn on automatic renewal, Epic's public list of free games if you turn on Epic reminders, and GOG's public home page and catalog if you turn on GOG reminders). It never sees your password and never sends your data anywhere."
   },
   "popupUntil": {
     "message": "Free until $DATE$",
@@ -334,6 +334,28 @@
       }
     }
   },
+  "notifyGogTitle": {
+    "message": "Free on GOG"
+  },
+  "notifyGogBody": {
+    "message": "$NAMES$ — free until $DATE$. Click to open GOG.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      },
+      "date": {
+        "content": "$2"
+      }
+    }
+  },
+  "notifyGogBodyOpen": {
+    "message": "$NAMES$ — free on GOG now. Click to open GOG.",
+    "placeholders": {
+      "names": {
+        "content": "$1"
+      }
+    }
+  },
   "epicReminderOnly": {
     "message": "Reminder only · claim it on Epic's site"
   },
@@ -369,6 +391,33 @@
   "epicNone": {
     "message": "Nothing free on Epic right now."
   },
+  "gogReminderOnly": {
+    "message": "Reminder only · claim it on GOG's site"
+  },
+  "gogGet": {
+    "message": "Get on GOG"
+  },
+  "gogGiveaway": {
+    "message": "Giveaway"
+  },
+  "gogDeal": {
+    "message": "100% off"
+  },
+  "gogHowGiveaway": {
+    "message": "Claim it on GOG's home page"
+  },
+  "gogHowDeal": {
+    "message": "Add to cart, check out for free"
+  },
+  "gogNoPermission": {
+    "message": "Allow FreeKeep to read GOG's public home page and catalog."
+  },
+  "gogError": {
+    "message": "Couldn't load GOG's list. FreeKeep will retry on the next check."
+  },
+  "gogNone": {
+    "message": "Nothing free on GOG right now."
+  },
   "kind_bundle": {
     "message": "Bundle"
   },
@@ -381,6 +430,15 @@
   "optEpicDenied": {
     "message": "Permission wasn't granted, so Epic reminders stay off."
   },
+  "optGog": {
+    "message": "Remind me of free games on GOG"
+  },
+  "optGogHint": {
+    "message": "Optional. Covers giveaways on GOG's home page and games discounted to 0, which you get by checking out for free. Turning this on asks for permission to read GOG's public home page and catalog; no GOG account or login is used."
+  },
+  "optGogDenied": {
+    "message": "Permission wasn't granted, so GOG reminders stay off."
+  },
   "navClaim": {
     "message": "Claiming"
   },
@@ -390,8 +448,11 @@
   "navNotify": {
     "message": "Notifications"
   },
-  "navEpic": {
-    "message": "Epic reminders"
+  "navReminders": {
+    "message": "Epic & GOG reminders"
+  },
+  "optRemindersHint": {
+    "message": "Epic and GOG games can't be claimed automatically: claiming there needs your own login, which FreeKeep never touches. FreeKeep tells you what's free and opens the right page."
   },
   "navLinks": {
     "message": "Connections"
@@ -425,6 +486,9 @@
   },
   "hostEpic": {
     "message": "Only with Epic reminders"
+  },
+  "hostGog": {
+    "message": "Only with GOG reminders"
   },
   "hostRequired": {
     "message": "Required"

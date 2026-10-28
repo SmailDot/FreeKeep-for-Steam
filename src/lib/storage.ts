@@ -1,7 +1,7 @@
 import { browser } from 'wxt/browser';
 import { DEFAULT_META, type Meta, type Store } from '@/core/engine';
 import { isHex } from '@/lib/chest';
-import { DEFAULT_SETTINGS, INTERVAL_HOURS, RENEW_MODES, type EpicMap, type PromoMap, type RunInfo, type Settings } from '@/core/types';
+import { DEFAULT_SETTINGS, INTERVAL_HOURS, RENEW_MODES, type OfferMap, type PromoMap, type RunInfo, type Settings } from '@/core/types';
 
 const MAX_RUNS = 20;
 
@@ -12,10 +12,11 @@ export interface Snapshot {
   runs: RunInfo[];
   /** Timestamp of the run in progress, or 0. */
   runningSince: number;
-  epic: EpicMap;
+  epic: OfferMap;
+  gog: OfferMap;
 }
 
-export const KEYS = ['settings', 'promos', 'meta', 'runs', 'runningSince', 'epic'] as const;
+export const KEYS = ['settings', 'promos', 'meta', 'runs', 'runningSince', 'epic', 'gog'] as const;
 
 export function normalizeSettings(raw: Partial<Settings> | undefined): Settings {
   const s = { ...DEFAULT_SETTINGS, ...raw };
@@ -25,6 +26,7 @@ export function normalizeSettings(raw: Partial<Settings> | undefined): Settings 
   if (!isHex(s.chestBody)) s.chestBody = DEFAULT_SETTINGS.chestBody;
   if (!isHex(s.chestBand)) s.chestBand = DEFAULT_SETTINGS.chestBand;
   s.epic = s.epic === true;
+  s.gog = s.gog === true;
   return s;
 }
 
@@ -36,7 +38,8 @@ export async function readSnapshot(): Promise<Snapshot> {
     meta: { ...DEFAULT_META, ...(raw.meta as Partial<Meta>) },
     runs: (raw.runs as RunInfo[]) ?? [],
     runningSince: (raw.runningSince as number) ?? 0,
-    epic: (raw.epic as EpicMap) ?? {},
+    epic: (raw.epic as OfferMap) ?? {},
+    gog: (raw.gog as OfferMap) ?? {},
   };
 }
 
@@ -75,5 +78,11 @@ export const browserStore: Store = {
   },
   async setEpic(epic) {
     await browser.storage.local.set({ epic });
+  },
+  async getGog() {
+    return (await readSnapshot()).gog;
+  },
+  async setGog(gog) {
+    await browser.storage.local.set({ gog });
   },
 };
