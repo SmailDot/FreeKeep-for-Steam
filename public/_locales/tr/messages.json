@@ -431,7 +431,7 @@
     "message": "İzin verilmedi, Epic hatırlatmaları kapalı kalır."
   },
   "optGog": {
-    "message": "GOG'daki ücretsiz oyunları hatırlat"
+    "message": "GOG'daki ücretsiz oyunları hatırlat (beta)"
   },
   "optGogHint": {
     "message": "İsteğe bağlı. GOG ana sayfasındaki hediyeleri ve 0'a indirilmiş, ücretsiz bir siparişle alınan oyunları kapsar. Açıldığında GOG'un herkese açık ana sayfasını ve kataloğunu okuma izni istenir; hiçbir GOG hesabı veya oturumu kullanılmaz."

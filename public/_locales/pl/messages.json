@@ -431,7 +431,7 @@
     "message": "Nie udzielono uprawnienia, przypomnienia Epic pozostają wyłączone."
   },
   "optGog": {
-    "message": "Przypominaj o darmowych grach w GOG"
+    "message": "Przypominaj o darmowych grach w GOG (beta)"
   },
   "optGogHint": {
     "message": "Opcjonalne. Obejmuje rozdawnictwa na stronie głównej GOG i gry przecenione do 0, które dostajesz, składając darmowe zamówienie. Włączenie prosi o uprawnienie do odczytu publicznej strony głównej i katalogu GOG; nie jest używane żadne konto ani logowanie GOG."

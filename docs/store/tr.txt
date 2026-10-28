@@ -22,7 +22,7 @@ BİRÇOK OTOMATİK TOPLAYICI vs FREEKEEP
 • Steam'in 24 saatlik web oturumunu yönetir: tek tıkla, otomatik olarak (isteğe bağlı izin) yenileyin ya da yalnızca hatırlatma alın
 • Steam renklerinde piksel sanatı görünümü, seçtiğiniz renklerde bir sandık simgesi
 • İsteğe bağlı Epic Games Store hatırlatmaları: Epic'teki ücretsiz oyunları bildirir, oyunu Epic sitesinden siz alırsınız. Varsayılan olarak kapalıdır; herkese açık liste oturum açmadan okunur
-• İsteğe bağlı GOG hatırlatmaları: GOG ana sayfasındaki hediyeleri ve 0'a indirilmiş oyunları bildirir, oyunu GOG sitesinden siz alırsınız. Varsayılan olarak kapalıdır; GOG'un herkese açık sayfaları oturum açmadan okunur
+• İsteğe bağlı GOG hatırlatmaları (beta): GOG ana sayfasındaki hediyeleri ve 0'a indirilmiş oyunları bildirir, oyunu GOG sitesinden siz alırsınız. Varsayılan olarak kapalıdır; GOG'un herkese açık sayfaları oturum açmadan okunur
 • 12 dil, yaklaşık 55 KB kod, bağımlılık yok
 
 Bu tarayıcıda Steam mağazasına giriş yapın, FreeKeep otomatik olarak çalışır.

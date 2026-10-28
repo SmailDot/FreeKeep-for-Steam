@@ -78,7 +78,7 @@ For details, see the [privacy policy](PRIVACY.md) and the [architecture notes](d
   fonts are bundled, so nothing is loaded from a font server.
 - **Optional Epic Games Store reminders.** Notifies you when Epic gives a game away, with a link to
   claim it. Off by default; [details below](#epic-games-store-reminders).
-- **Optional GOG reminders.** Notifies you of giveaways on GOG's home page and games discounted to 0,
+- **Optional GOG reminders (beta).** Notifies you of giveaways on GOG's home page and games discounted to 0,
   with a link to claim them. Off by default; [details below](#gog-reminders).
 - **Lightweight and auditable.** About 55 KB of code, no runtime dependencies, written in TypeScript
   with unit tests.
@@ -133,8 +133,12 @@ claim the games on Epic's site.
 
 ### GOG reminders
 
-Turn on **Remind me of free games on GOG** in the settings, and FreeKeep also watches GOG for two
-kinds of free games. Like Epic, this feature **only sends reminders**; you claim the games on GOG's
+> **Beta.** No GOG giveaway has run since this was added, so the first one will be its real test. If
+> one is on and FreeKeep didn't tell you, please [open an issue](../../issues) with **Copy
+> diagnostics** attached.
+
+Turn on **Remind me of free games on GOG (beta)** in the settings, and FreeKeep also watches GOG for
+two kinds of free games. Like Epic, this feature **only sends reminders**; you claim the games on GOG's
 site, and they stay in your GOG library for good:
 
 - **Giveaways** on GOG's home page: claim them with the button on the home page banner while you're

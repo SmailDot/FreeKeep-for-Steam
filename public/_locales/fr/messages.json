@@ -431,7 +431,7 @@
     "message": "L'autorisation n'a pas été accordée, les rappels Epic restent désactivés."
   },
   "optGog": {
-    "message": "Me prévenir des jeux gratuits sur GOG"
+    "message": "Me prévenir des jeux gratuits sur GOG (bêta)"
   },
   "optGogHint": {
     "message": "Facultatif. Couvre les jeux offerts sur la page d'accueil de GOG et les jeux réduits à 0, à récupérer en passant une commande gratuite. L'activation demande l'autorisation de lire la page d'accueil et le catalogue publics de GOG ; aucun compte ni connexion GOG n'est utilisé."

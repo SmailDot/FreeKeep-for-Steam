@@ -62,7 +62,7 @@ Automatically claims limited-time free-to-keep Steam games and DLC in the backgr
 - Handles Steam's 24-hour web login: renew it with one click, automatically (optional permission), or just get a reminder
 - Pixel-art look in Steam colours, with a chest icon in colours you pick
 - Optional Epic Games Store reminders: tells you about Epic's free games so you can claim them on Epic's site. Off by default; the public list is read without signing in
-- Optional GOG reminders: tells you about giveaways on GOG's home page and games discounted to 0, which you claim on GOG's site. Off by default; GOG's public pages are read without signing in
+- Optional GOG reminders (beta): tells you about giveaways on GOG's home page and games discounted to 0, which you claim on GOG's site. Off by default; GOG's public pages are read without signing in
 - 12 languages, about 55 KB of code, no dependencies
 
 Sign in to the Steam store in Firefox and FreeKeep runs on its own.
@@ -92,7 +92,7 @@ Source code: [github.com/SmailDot/FreeKeep-for-Steam](https://github.com/SmailDo
 - 處理 Steam 的 24 小時網頁登入：可選一鍵續期、自動續期（選用權限）或只提醒
 - Steam 配色的像素風介面，寶箱圖示可自訂顏色
 - 選用的 Epic Games Store 限免提醒：通知 Epic 的免費遊戲，由你到 Epic 網站領取。預設關閉，讀取公開清單時不需登入
-- 選用的 GOG 限免提醒：通知 GOG 首頁的限時贈送與折扣到 0 元的遊戲，由你到 GOG 網站領取。預設關閉，讀取公開頁面時不需登入
+- 選用的 GOG 限免提醒（Beta）：通知 GOG 首頁的限時贈送與折扣到 0 元的遊戲，由你到 GOG 網站領取。預設關閉，讀取公開頁面時不需登入
 - 支援 12 種語言、程式碼約 55 KB、無第三方依賴
 
 在 Firefox 登入 Steam 商店後，FreeKeep 就會自動運作。

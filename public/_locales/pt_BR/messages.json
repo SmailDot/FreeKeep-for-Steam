@@ -431,7 +431,7 @@
     "message": "A permissão não foi concedida, então os avisos da Epic continuam desligados."
   },
   "optGog": {
-    "message": "Avisar sobre jogos grátis na GOG"
+    "message": "Avisar sobre jogos grátis na GOG (beta)"
   },
   "optGogHint": {
     "message": "Opcional. Inclui os brindes da página inicial da GOG e jogos com desconto até 0, que você obtém finalizando uma compra grátis. Ao ativar, é pedida permissão para ler a página inicial e o catálogo públicos da GOG; nenhuma conta ou login da GOG é usado."

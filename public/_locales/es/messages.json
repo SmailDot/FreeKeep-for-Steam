@@ -431,7 +431,7 @@
     "message": "No se concedió el permiso, así que los avisos de Epic siguen desactivados."
   },
   "optGog": {
-    "message": "Avisarme de los juegos gratis en GOG"
+    "message": "Avisarme de los juegos gratis en GOG (beta)"
   },
   "optGogHint": {
     "message": "Opcional. Incluye los regalos de la página de inicio de GOG y los juegos rebajados a 0, que se obtienen completando una compra gratuita. Al activarlo se pide permiso para leer la página de inicio y el catálogo públicos de GOG; no se usa ninguna cuenta ni inicio de sesión de GOG."

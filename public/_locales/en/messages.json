@@ -431,7 +431,7 @@
     "message": "Permission wasn't granted, so Epic reminders stay off."
   },
   "optGog": {
-    "message": "Remind me of free games on GOG"
+    "message": "Remind me of free games on GOG (beta)"
   },
   "optGogHint": {
     "message": "Optional. Covers giveaways on GOG's home page and games discounted to 0, which you get by checking out for free. Turning this on asks for permission to read GOG's public home page and catalog; no GOG account or login is used."

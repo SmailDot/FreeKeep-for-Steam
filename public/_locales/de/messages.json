@@ -431,7 +431,7 @@
     "message": "Die Berechtigung wurde nicht erteilt, Epic-Erinnerungen bleiben aus."
   },
   "optGog": {
-    "message": "An Gratisspiele bei GOG erinnern"
+    "message": "An Gratisspiele bei GOG erinnern (Beta)"
   },
   "optGogHint": {
     "message": "Optional. Umfasst Giveaways auf der GOG-Startseite und auf 0 reduzierte Spiele, die du über eine kostenlose Bestellung bekommst. Beim Einschalten wird die Berechtigung angefragt, GOGs öffentliche Startseite und Katalog zu lesen; kein GOG-Konto und kein Login wird verwendet."
