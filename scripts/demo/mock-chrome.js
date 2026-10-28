@@ -30,6 +30,13 @@
       },
     },
     i18n: { getMessage, getUILanguage: () => window.__DEMO_LANG__ },
+    // Every permission granted, as for a user who turned the features on.
+    permissions: {
+      contains: async () => true,
+      request: async () => true,
+      onAdded: event([]),
+      onRemoved: event([]),
+    },
     storage: {
       local: {
         async get(keys) {
